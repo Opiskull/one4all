@@ -44,10 +44,7 @@ module.exports.init = function (server,router) {
     server.get(router.getRoute('/auth/google/callback'),
         passport.authenticate('google', { failureRedirect: '/login' ,session:false}),
         function (req, res) {
-            console.log(JSON.stringify(req.user));
-            // Successful authentication, redirect home.
-            res.header('Location','/');
-            res.send(302);
+            res.json({token:req.user.accessToken});
         });
     server.get(router.getRoute('/logout'),function(req,res){
         req.logout();
