@@ -40,9 +40,9 @@ module.exports.init = function (server,router) {
     server.use(passport.initialize());
 
     server.get(router.getRoute('/auth/google'), passport.authenticate('google',{scope: ['https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email']}));
+        'https://www.googleapis.com/auth/userinfo.email'],session:false}));
     server.get(router.getRoute('/auth/google/callback'),
-        passport.authenticate('google', { failureRedirect: '/login' }),
+        passport.authenticate('google', { failureRedirect: '/login' ,session:false}),
         function (req, res) {
             // Successful authentication, redirect home.
             res.redirect('/');
