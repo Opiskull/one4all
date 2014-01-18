@@ -1,0 +1,40 @@
+<div class="table-responsive">
+<table class="table table-hover">
+    <thead>
+    <tr><th>Title</th><th>Chapter</th><th>Url</th><th style="width: 210px"></th></tr>
+    </thead>
+    <tbody>
+    <tr ng-if="!manga.editable" ng-repeat-start="manga in filtered()" ng-class="{success:manga.finished}">
+        <td>{{manga.title}}</td>
+        <td>{{manga.chapter}}</td>
+        <td><a ng-href="{{getNextChapterUrl(manga)}}">Next Chapter</a></td>
+        <td>
+            <div class="btn-group pull-right">
+                <a class="btn btn-default" ng-class="{active:manga.finished}" ng-click="finished(manga)">finished</a>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a ng-model="manga.editable" btn-checkbox>edit</a></li>
+                            <li><a class="" ng-click="remove(manga)">delete</a></li>
+                        </ul>
+                    </div>
+            </div>
+        </td>
+    </tr>
+    <tr ng-if="manga.editable" ng-repeat-end="">
+        <td><input class="form-control input-sm" type="text" ng-model="manga.title"/></td>
+        <td><input class="form-control input-sm" type="number" ng-model="manga.chapter"/></td>
+        <td><input class="form-control input-sm" type="url" ng-model="manga.url"/></td>
+        <td><div class="btn-group btn-group-justified">
+            <a class="btn btn-default" ng-click="save(manga)">save</a>
+            <a class="btn btn-default" ng-click="cancel(manga)">cancel</a>
+        </div></td>
+    </tr>
+    </tbody>
+    <tfoot>
+        <tr><td colspan="4"><button ng-click="add()" class="btn btn-default">add</button></td></tr>
+    </tfoot>
+</table>
+</div>

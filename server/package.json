@@ -1,0 +1,17 @@
+{
+  "name": "14all",
+  "version": "0.0.1",
+  "dependencies": {
+    "restify": "~2.6.1",
+    "nodemon": "~0.7.10",
+    "mongoose": "~3.8.3",
+    "mongoose-timestamp": "~0.1.1",
+    "passport-google-oauth": "~0.1.5",
+    "passport": "~0.1.18",
+    "passport-http-bearer": "~1.0.1"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-nodemon": "~0.1.2"
+  }
+}
