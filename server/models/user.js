@@ -21,9 +21,6 @@ var userSchema = mongoose.Schema({
     }
 });
 
-userSchema.plugin(timestamps);
-var User = mongoose.model('User', userSchema);
-
 userSchema.statics.findOrCreate = function(profile,callback){
     this.findOne({'googleProfile.id':profile.id},function(err,user){
         if(err){
@@ -42,3 +39,7 @@ userSchema.statics.findOrCreate = function(profile,callback){
         }
     });
 };
+
+userSchema.plugin(timestamps);
+var User = mongoose.model('User', userSchema);
+
