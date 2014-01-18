@@ -46,7 +46,8 @@ module.exports.init = function (server,router) {
         function (req, res) {
             console.log(JSON.stringify(req.user));
             // Successful authentication, redirect home.
-            res.redirect('/');
+            res.header('Location','/');
+            res.send(302);
         });
     server.get(router.getRoute('/logout'),function(req,res){
         req.logout();
