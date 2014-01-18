@@ -44,6 +44,7 @@ module.exports.init = function (server,router) {
     server.get(router.getRoute('/auth/google/callback'),
         passport.authenticate('google', { failureRedirect: '/login' ,session:false}),
         function (req, res) {
+            console.log(JSON.stringify(req.user));
             // Successful authentication, redirect home.
             res.redirect('/');
         });
