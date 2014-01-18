@@ -2,7 +2,7 @@ var restify = require('restify');
 var mongoose = require('mongoose');
 var path = require('path');
 var router = require('./lib/router.js');
-var passport = require('passportjs');
+var passport = require('passport');
 
 var server = restify.createServer({
     name: 'watchlist',
