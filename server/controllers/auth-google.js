@@ -37,7 +37,8 @@ module.exports.init = function (server,router) {
         }
     ));
 
-    server.get(router.getRoute('/auth/google'), passport.authenticate('google',{scope: ['https://peerzone.net']}));
+    server.get(router.getRoute('/auth/google'), passport.authenticate('google',{scope: ['https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/userinfo.email']}));
     server.get(router.getRoute('/auth/google/callback'),
         passport.authenticate('google', { failureRedirect: '/login' }),
         function (req, res) {
