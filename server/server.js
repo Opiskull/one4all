@@ -38,7 +38,7 @@ require("fs").readdirSync(controllerpath).forEach(function(controller){
         console.log('controller not loaded: ' + controller);
 });
 
-server.use(pasport.initialize());
+server.use(passport.initialize());
 
 server.listen(3000, function(){
    console.log('%s listening at %s', server.name, server.url);
