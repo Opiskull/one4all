@@ -25,7 +25,7 @@ userSchema.plugin(timestamps);
 var User = mongoose.model('User', userSchema);
 
 userSchema.statics.findOrCreate = function(profile,callback){
-    return this.findOne({'googleProfile.id':profile.id},function(err,user){
+    this.findOne({'googleProfile.id':profile.id},function(err,user){
         if(err){
             return callback(err,null);
         }
