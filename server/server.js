@@ -2,6 +2,7 @@ var restify = require('restify');
 var mongoose = require('mongoose');
 var path = require('path');
 var router = require('./lib/router.js');
+var passport = require('passportjs');
 
 var server = restify.createServer({
     name: 'watchlist',
@@ -36,6 +37,8 @@ require("fs").readdirSync(controllerpath).forEach(function(controller){
     else
         console.log('controller not loaded: ' + controller);
 });
+
+server.use(pasport.initialize());
 
 server.listen(3000, function(){
    console.log('%s listening at %s', server.name, server.url);
