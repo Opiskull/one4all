@@ -4,13 +4,13 @@ angular.module('auth', ['ngRoute'])
 
         })
     }])
-    .run(['$rootScope', '$location', '$http', 'auth', function ($rootScope, $location, $http, auth) {
+    .run(['$rootScope', '$location', '$http', 'authService', function ($rootScope, $location, $http, authService) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.error = null;
-            if (!auth.authorize(next.access)) {
-                if (auth.isLoggedIn()) $location.path('/');
-                else                  $location.path('/login');
-            }
+//            if (!auth.authorize(next.access)) {
+//                if (auth.isLoggedIn()) $location.path('/');
+//                else $location.path('/login');
+//            }
         });
     }])
     .factory('authService', ['$http', 'restangular', function ($http, restangular) {

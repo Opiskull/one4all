@@ -5,10 +5,10 @@ var Manga = mongoose.model('Manga');
 module.exports.init = function (server,router) {
     var manga = '/manga';
     server.get(router.getRoute(manga), router.isAuthenticated, list);
-    server.post(router.getRoute(manga), create);
-    server.get(router.getRouteId(manga), load, get);
-    server.del(router.getRouteId(manga), load, del);
-    server.put(router.getRouteId(manga), load, update);
+    server.post(router.getRoute(manga), router.isAuthenticated, create);
+    server.get(router.getRouteId(manga),router.isAuthenticated, load, get);
+    server.del(router.getRouteId(manga),router.isAuthenticated, load, del);
+    server.put(router.getRouteId(manga),router.isAuthenticated, load, update);
 };
 
 function load(req, res, next) {
