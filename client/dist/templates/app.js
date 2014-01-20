@@ -21,7 +21,7 @@ angular.module("manga/list.html", []).run(["$templateCache", function($templateC
     "                        </button>\n" +
     "                        <ul class=\"dropdown-menu\" role=\"menu\">\n" +
     "                            <li><a ng-model=\"manga.editable\" btn-checkbox>edit</a></li>\n" +
-    "                            <li><a class=\"\" ng-click=\"delete(manga)\">delete</a></li>\n" +
+    "                            <li><a class=\"\" ng-click=\"remove(manga)\">delete</a></li>\n" +
     "                        </ul>\n" +
     "                    </div>\n" +
     "            </div>\n" +

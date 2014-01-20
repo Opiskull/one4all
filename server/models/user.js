@@ -18,7 +18,8 @@ var userSchema = mongoose.Schema({
         emails: [{
             value: String, type: {type: String}
         }]
-    }
+    },
+    roles:[String]
 });
 
 userSchema.statics.findOrCreate = function(profile,callback){

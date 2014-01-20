@@ -2,17 +2,12 @@ angular.module('manga',['ngRoute'])
     .config(['$routeProvider',function ($routeProvider) {
         $routeProvider.when('/manga', {
             templateUrl: 'manga/list.html',
-            controller: 'MangaListCtrl',
-            resolve:{
-                mangas:['$route','Mangas',function($route,Mangas){
-                    return Mangas.getList().$object;
-                }]
-            }
+            controller: 'MangaListCtrl'
         })
             .otherwise('/manga');
     }])
-    .controller('MangaListCtrl', ['$scope','mangas','Mangas','$location','$filter', function ($scope,mangas,Mangas,$location,$filter) {
-        $scope.mangas = mangas;
+    .controller('MangaListCtrl', ['$scope','Mangas','$location','$filter', function ($scope,Mangas,$location,$filter) {
+        $scope.mangas = Mangas.getList().$object;;
 
         $scope.filtered = function(){
             var filtered = $scope.mangas;

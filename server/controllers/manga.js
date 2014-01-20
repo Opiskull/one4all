@@ -4,7 +4,7 @@ var Manga = mongoose.model('Manga');
 
 module.exports.init = function (server,router) {
     var manga = '/manga';
-    server.get(router.getRoute(manga), list);
+    server.get(router.getRoute(manga), router.isAuthenticated, list);
     server.post(router.getRoute(manga), create);
     server.get(router.getRouteId(manga), load, get);
     server.del(router.getRouteId(manga), load, del);

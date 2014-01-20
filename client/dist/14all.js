@@ -1,32 +1,57 @@
-angular.module('14all', ['ui.bootstrap','resources','manga','templates.app'])
+angular.module('14all', ['ui.bootstrap','resources','manga','auth','templates.app'])
     .config(['RestangularProvider',function(RestangularProvider){
         RestangularProvider.setRestangularFields({
             id: "_id"
         });
         RestangularProvider.setBaseUrl('/api');
+        if(localStorage.getItem('access_token')){
+            RestangularProvider.setDefaultHeaders({'Authorization':'Bearer '+ localStorage.getItem('access_token')});
+        }
     }]);
+
+angular.module('auth',['ngRoute']).factory('authService',['$http','restangular',function($http,restangular){
+    var service = {
+        isLoggedIn: function(user){
+            if(user === undefined)
+                user = currentUser;
+            return user !== undefined;
+        },
+        login : function(){
+            $http.get('https://peerzone.net/api/auth/google')
+                .success(function(data){
+                    localStorage.setItem('access_token',data.access_token);
+            });
+        },
+        logout : function(){
+            $http.get('/api/logout')
+                .success(function(data){
+                    localStorage.removeItem('access_token');
+                });
+        },
+        loggedin : function(){
+            return $http.get('/api/loggedin').success(function(data){
+                return data.loggedin;
+            });
+        },
+        hasaccestoken : function(){
+            if(localStorage.getItem('access_token')){
+                restangular.setDefaultHeaders({'Authorization':'Bearer '+ localStorage.getItem('access_token')});
+            }
+        }
+    };
+    return service;
+}]);
 
 angular.module('manga',['ngRoute'])
     .config(['$routeProvider',function ($routeProvider) {
-
-        var routePrefix = '/manga';
-        var getManga = ['$route','Mangas',function($route,Mangas){
-            return Mangas.get($route.current.params.id);
-        }];
-
         $routeProvider.when('/manga', {
             templateUrl: 'manga/list.html',
-            controller: 'MangaListCtrl',
-            resolve:{
-                mangas:['$route','Mangas',function($route,Mangas){
-                    return Mangas.getList().$object;
-                }]
-            }
+            controller: 'MangaListCtrl'
         })
             .otherwise('/manga');
     }])
-    .controller('MangaListCtrl', ['$scope','mangas','Mangas','$location','$filter', function ($scope,mangas,Mangas,$location,$filter) {
-        $scope.mangas = mangas;
+    .controller('MangaListCtrl', ['$scope','Mangas','$location','$filter', function ($scope,Mangas,$location,$filter) {
+        $scope.mangas = Mangas.getList().$object;;
 
         $scope.filtered = function(){
             var filtered = $scope.mangas;
@@ -37,31 +62,31 @@ angular.module('manga',['ngRoute'])
                 filtered = $filter('filter')(filtered,$scope.search);
             }
             return filtered;
-        }
+        };
 
         function removeManga(manga){
             $scope.mangas.splice($scope.mangas.indexOf(manga),1);
         }
 
-        $scope.delete = function(manga){
+        $scope.remove = function(manga){
             manga.remove().then(function(){
                 removeManga(manga);
                 console.log(manga._id);
             });
-        }
+        };
 
         $scope.update = function(manga){
             manga.put().then(function(updatedManga){
                 manga.editable = false;
                 console.log(updatedManga);
             });
-        }
+        };
 
         $scope.cancel = function(manga){
             manga.editable = false;
             if(!manga._id)
                 removeManga(manga);
-        }
+        };
 
         $scope.save = function(manga){
             if(manga._id){
@@ -69,11 +94,11 @@ angular.module('manga',['ngRoute'])
             }
             else
                 $scope.create(manga);
-        }
+        };
 
         $scope.add = function(){
             mangas.push({editable:true});
-        }
+        };
 
         $scope.create = function(manga){
             Mangas.post(manga).then(function(addedManga){
@@ -83,14 +108,14 @@ angular.module('manga',['ngRoute'])
             },function(response){
                 console.log("Error");
             });
-        }
+        };
 
         $scope.finished = function(manga){
             manga.finished = !manga.finished;
             manga.put().then(function(updatedManga){
                 console.log(updatedManga);
             });
-        }
+        };
 
         $scope.getNextChapterUrl = function(manga){
             if(manga.finished)
@@ -132,7 +157,7 @@ angular.module("manga/list.html", []).run(["$templateCache", function($templateC
     "                        </button>\n" +
     "                        <ul class=\"dropdown-menu\" role=\"menu\">\n" +
     "                            <li><a ng-model=\"manga.editable\" btn-checkbox>edit</a></li>\n" +
-    "                            <li><a class=\"\" ng-click=\"delete(manga)\">delete</a></li>\n" +
+    "                            <li><a class=\"\" ng-click=\"remove(manga)\">delete</a></li>\n" +
     "                        </ul>\n" +
     "                    </div>\n" +
     "            </div>\n" +

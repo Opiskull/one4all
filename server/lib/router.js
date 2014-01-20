@@ -1,5 +1,6 @@
 var path = require('path');
 var config = require('../config/config.json');
+var passport = require('passport');
 
 exports.getRoute = function(route){
     return config.api_prefix + route;
@@ -8,3 +9,5 @@ exports.getRoute = function(route){
 exports.getRouteId = function(route){
     return config.api_prefix + route + "/:id";
 };
+
+exports.isAuthenticated = passport.authenticate('bearer',{session:false});
