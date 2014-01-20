@@ -47,16 +47,23 @@ module.exports.init = function (server,router) {
             res.json({
                 access_token:req.user.accessToken,
                 token_type:"Bearer",
-                expires_in:3600,
-                refresh_token:req.user.refreshToken
+                refresh_token:req.user.refreshToken,
+                user:{
+                    name: req.user.displayName,
+                    roles: req.user.roles
+                }
             });
-//            res.header('Location','/');
-//            res.send(302);
         });
-    server.get(router.getRoute('/logout'),function(req,res){
+    server.post(router.getRoute('/logout'),function(req,res){
         req.logout();
     });
-    server.get(router.getRoute('/loggedin'),function(req,res){
-        res.json({loggedin :req.isAuthenticated()});
+    server.get(router.getRoute('/auth/info'),function(req,res){
+        if(req.isAuthenticated()){
+            res.json({
+                user: req.user
+            });
+        } else{
+            res.json({});
+        }
     });
 };

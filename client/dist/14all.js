@@ -4,43 +4,59 @@ angular.module('14all', ['ui.bootstrap','resources','manga','auth','templates.ap
             id: "_id"
         });
         RestangularProvider.setBaseUrl('/api');
-        if(localStorage.getItem('access_token')){
-            RestangularProvider.setDefaultHeaders({'Authorization':'Bearer '+ localStorage.getItem('access_token')});
-        }
     }]);
 
-angular.module('auth',['ngRoute']).factory('authService',['$http','restangular',function($http,restangular){
-    var service = {
-        isLoggedIn: function(user){
-            if(user === undefined)
-                user = currentUser;
-            return user !== undefined;
-        },
-        login : function(){
-            $http.get('https://peerzone.net/api/auth/google')
-                .success(function(data){
-                    localStorage.setItem('access_token',data.access_token);
-            });
-        },
-        logout : function(){
-            $http.get('/api/logout')
-                .success(function(data){
-                    localStorage.removeItem('access_token');
-                });
-        },
-        loggedin : function(){
-            return $http.get('/api/loggedin').success(function(data){
-                return data.loggedin;
-            });
-        },
-        hasaccestoken : function(){
-            if(localStorage.getItem('access_token')){
-                restangular.setDefaultHeaders({'Authorization':'Bearer '+ localStorage.getItem('access_token')});
+angular.module('auth', ['ngRoute'])
+    .config(['$routeProvider', function ($routeProvider) {
+        $routeProvider.when('/auth/google', {
+
+        })
+    }])
+    .run(['$rootScope', '$location', '$http', 'auth', function ($rootScope, $location, $http, auth) {
+        $rootScope.$on("$routeChangeStart", function (event, next, current) {
+            $rootScope.error = null;
+            if (!auth.authorize(next.access)) {
+                if (auth.isLoggedIn()) $location.path('/');
+                else                  $location.path('/login');
             }
+        });
+    }])
+    .factory('authService', ['$http', 'restangular', function ($http, restangular) {
+        if (localStorage.getItem('access_token')) {
+            restangular.setDefaultHeaders({'Authorization': 'Bearer ' + localStorage.getItem('access_token')});
         }
-    };
-    return service;
-}]);
+
+        var currentUser = restangular.customGet('/auth/info').success(function (data) {
+            return data;
+        }).error(function (err) {
+            console.log(err);
+        });
+        var service = {
+            isLoggedIn: function (user) {
+                if (user === undefined)
+                    user = currentUser;
+                return user !== undefined;
+            },
+            login: function () {
+                $http.get('https://peerzone.net/api/auth/google')
+                    .success(function (data) {
+                        localStorage.setItem('access_token', data.access_token);
+                    });
+            },
+            logout: function () {
+                $http.post('/api/logout')
+                    .success(function (data) {
+                        localStorage.removeItem('access_token');
+                    });
+            },
+            hasaccestoken: function () {
+                if (localStorage.getItem('access_token')) {
+                    restangular.setDefaultHeaders({'Authorization': 'Bearer ' + localStorage.getItem('access_token')});
+                }
+            }
+        };
+        return service;
+    }]);
 
 angular.module('manga',['ngRoute'])
     .config(['$routeProvider',function ($routeProvider) {
