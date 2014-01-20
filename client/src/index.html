@@ -14,7 +14,7 @@
     <script type="text/javascript" src="/static/<%= grunt.config.get('pkg.name') %>.js"></script>
 </head>
 <body>
-<header class="navbar navbar-default navbar-fixed-top" role="banner">
+<header class="navbar navbar-default navbar-fixed-top" role="banner" ng-controller="HeaderCtrl">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">14all</a>
@@ -27,7 +27,7 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="#/auth/google">Login</a>
+                    <a href="#" ng-click="login()">Login</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Settings <b class="caret"></b></a>

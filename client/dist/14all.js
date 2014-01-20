@@ -7,11 +7,6 @@ angular.module('14all', ['ui.bootstrap','resources','manga','auth','templates.ap
     }]);
 
 angular.module('auth', ['ngRoute'])
-    .config(['$routeProvider', function ($routeProvider) {
-        $routeProvider.when('/auth/google', {
-
-        })
-    }])
     .run(['$rootScope', '$location', '$http', 'authService', function ($rootScope, $location, $http, authService) {
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             $rootScope.error = null;
@@ -21,21 +16,19 @@ angular.module('auth', ['ngRoute'])
 //            }
         });
     }])
-    .factory('authService', ['$http', 'restangular', function ($http, restangular) {
-        if (localStorage.getItem('access_token')) {
-            restangular.setDefaultHeaders({'Authorization': 'Bearer ' + localStorage.getItem('access_token')});
+    .factory('authService', ['$http', 'Restangular', function ($http, Restangular) {
+        var token = localStorage.getItem('access_token');
+        if (token) {
+            Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + token});
         }
 
-        var currentUser = restangular.customGet('/auth/info').success(function (data) {
-            return data;
-        }).error(function (err) {
-            console.log(err);
-        });
+        var currentUser = Restangular.oneUrl('/auth/info').get().$object;
+
         var service = {
             isLoggedIn: function (user) {
                 if (user === undefined)
                     user = currentUser;
-                return user !== undefined;
+                return angular.isString(user.displayName);
             },
             login: function () {
                 $http.get('https://peerzone.net/api/auth/google')
@@ -49,11 +42,10 @@ angular.module('auth', ['ngRoute'])
                         localStorage.removeItem('access_token');
                     });
             },
-            hasaccestoken: function () {
-                if (localStorage.getItem('access_token')) {
-                    restangular.setDefaultHeaders({'Authorization': 'Bearer ' + localStorage.getItem('access_token')});
-                }
-            }
+            isAuthorized: function(){
+
+            },
+            currentUser: currentUser
         };
         return service;
     }]);
@@ -144,6 +136,12 @@ angular.module('manga',['ngRoute'])
                 return "";
         }
     }]);
+angular.module('14all').controller('HeaderCtrl',['$scope','authService',function($scope,authService){
+    $scope.login = authService.login;
+    $scope.loggedIn = authService.isLoggedIn;
+    $scope.logout = authService.logout;
+}]);
+
 angular.module('resources', ['restangular'])
     .factory('Mangas',['Restangular',function(restangular){
         var Mangas = restangular.all('manga');
