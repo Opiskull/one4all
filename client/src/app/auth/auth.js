@@ -17,7 +17,6 @@ angular.module('auth', ['ngRoute'])
     }])
     .run(['$rootScope', 'authService', function ($rootScope, authService) {
         authService.authenticate();
-
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
 //            if (!auth.authorize(next.access)) {
 //                if (auth.isLoggedIn()) $location.path('/');
