@@ -10,16 +10,21 @@ angular.module('auth', ['ngRoute'])
     .config(['$routeProvider',function ($routeProvider) {
         $routeProvider.when('/login', {
             templateUrl: 'auth/login.html',
-            controller: ['authService','$routeParams','$location',function(authService,$routeParams,$location){
+            controller: ['authService','$routeParams',function(authService,$routeParams){
                 if($routeParams.token){
-                    authService.loginWithToken($routeParams.token);
-                    $location.path('/');
+                    authService.login($routeParams.token);
                 }
             }]
-        });
+        }).
+        when('/logout',{
+                templateUrl: 'auth/logout.html',
+                controller: ['authService','$location',function(authService,$location){
+                    authService.logout();
+                }]
+            });
     }])
-    .run(['$rootScope', '$location', '$http', 'authService', function ($rootScope, $location, $http, authService) {
-        authService.login();
+    .run(['$rootScope', 'authService', function ($rootScope, authService) {
+        authService.authenticate();
 
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
 //            if (!auth.authorize(next.access)) {
@@ -28,11 +33,11 @@ angular.module('auth', ['ngRoute'])
 //            }
         });
     }])
-    .factory('authService', ['$http', 'Restangular', function ($http, Restangular) {
+    .factory('authService', ['$http', 'Restangular','$location', function ($http, Restangular,$location) {
         var currentUser;
 
         function getUser(){
-            currentUser = Restangular.oneUrl('/auth/info').get().$object;
+            currentUser = Restangular.oneUrl('/api/auth/info').get().$object;
             return currentUser;
         }
 
@@ -40,20 +45,26 @@ angular.module('auth', ['ngRoute'])
             return currentUser && currentUser.displayName;
         }
 
-        function login(){
+        function authenticate(){
             Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + localStorage.getItem('access_token')});
             getUser();
         }
 
         function setToken(access_token){
             localStorage.setItem('access_token',access_token);
-            login();
+            authenticate();
+        }
+
+        function login(access_token){
+            setToken(access_token);
+            $location.url('/');
         }
 
         function logout(){
-            $http.post('/api/logout')
+            $http.post('/api/auth/logout')
                 .success(function (data) {
                     localStorage.removeItem('access_token');
+                    $location.url('/');
                 });
         }
 
@@ -63,8 +74,8 @@ angular.module('auth', ['ngRoute'])
 
         var service = {
             isLoggedIn: isLoggedIn,
-            loginWithToken: setToken,
             login: login,
+            authenticate: authenticate,
             getUser: getUser,
             logout: logout,
             isAuthorized: isAuthorized,
@@ -160,8 +171,7 @@ angular.module('manga',['ngRoute'])
         }
     }]);
 angular.module('14all').controller('HeaderCtrl',['$scope','authService',function($scope,authService){
-    $scope.login = authService.login;
-    $scope.loggedIn = authService.isLoggedIn;
+    $scope.isLoggedIn = authService.isLoggedIn;
     $scope.logout = authService.logout;
 }]);
 
@@ -171,12 +181,19 @@ angular.module('resources', ['restangular'])
         return Mangas;
     }]);
 
-angular.module('templates.app', ['auth/login.html', 'manga/list.html']);
+angular.module('templates.app', ['auth/login.html', 'auth/logout.html', 'manga/list.html']);
 
 angular.module("auth/login.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("auth/login.html",
     "<div>\n" +
     "    Login Success!\n" +
+    "</div>");
+}]);
+
+angular.module("auth/logout.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("auth/logout.html",
+    "<div>\n" +
+    "    Logout success!\n" +
     "</div>");
 }]);
 

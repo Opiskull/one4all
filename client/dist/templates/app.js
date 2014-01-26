@@ -1,9 +1,16 @@
-angular.module('templates.app', ['auth/login.html', 'manga/list.html']);
+angular.module('templates.app', ['auth/login.html', 'auth/logout.html', 'manga/list.html']);
 
 angular.module("auth/login.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("auth/login.html",
     "<div>\n" +
     "    Login Success!\n" +
+    "</div>");
+}]);
+
+angular.module("auth/logout.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("auth/logout.html",
+    "<div>\n" +
+    "    Logout success!\n" +
     "</div>");
 }]);
 
