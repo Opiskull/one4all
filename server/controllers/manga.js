@@ -34,6 +34,7 @@ function get(req, res, next) {
 
 function create(req, res, next) {
     var manga = new Manga(req.params);
+    manga.user = req.user._id;
     manga.save();
     res.json(manga);
     return next();
@@ -60,7 +61,7 @@ function update(req, res, next) {
 }
 
 function list(req, res, next) {
-    Manga.find(function (err, mangas) {
+    Manga.find({user : new mongoose.Types.ObjectId(req.user.id)},function (err, mangas) {
         if (err)
             return next(err);
         res.json(mangas);

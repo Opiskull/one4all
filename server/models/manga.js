@@ -12,7 +12,8 @@ var mangaSchema = mongoose.Schema({
             title: String,
             lang: String
         }
-    ]
+    ],
+    user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 mangaSchema.plugin(timestamps);
