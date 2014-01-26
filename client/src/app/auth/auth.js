@@ -1,7 +1,19 @@
 angular.module('auth', ['ngRoute'])
+    .config(['$routeProvider',function ($routeProvider) {
+        $routeProvider.when('/login', {
+            templateUrl: 'auth/login.html',
+            controller: ['authService','$routeParams','$location',function(authService,$routeParams,$location){
+                if($routeParams.token){
+                    authService.loginWithToken($routeParams.token);
+                    $location.path('/');
+                }
+            }]
+        });
+    }])
     .run(['$rootScope', '$location', '$http', 'authService', function ($rootScope, $location, $http, authService) {
+        authService.login();
+
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
-            $rootScope.error = null;
 //            if (!auth.authorize(next.access)) {
 //                if (auth.isLoggedIn()) $location.path('/');
 //                else $location.path('/login');
@@ -9,34 +21,45 @@ angular.module('auth', ['ngRoute'])
         });
     }])
     .factory('authService', ['$http', 'Restangular', function ($http, Restangular) {
-        var token = localStorage.getItem('access_token');
-        if (token) {
-            Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + token});
+        var currentUser;
+
+        function getUser(){
+            currentUser = Restangular.oneUrl('/auth/info').get().$object;
+            return currentUser;
         }
 
-        var currentUser = Restangular.oneUrl('/auth/info').get().$object;
+        function isLoggedIn(){
+            return currentUser && currentUser.displayName;
+        }
+
+        function login(){
+            Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + localStorage.getItem('access_token')});
+            getUser();
+        }
+
+        function setToken(access_token){
+            localStorage.setItem('access_token',access_token);
+            login();
+        }
+
+        function logout(){
+            $http.post('/api/logout')
+                .success(function (data) {
+                    localStorage.removeItem('access_token');
+                });
+        }
+
+        function isAuthorized(){
+
+        }
 
         var service = {
-            isLoggedIn: function (user) {
-                if (user === undefined)
-                    user = currentUser;
-                return angular.isString(user.displayName);
-            },
-            login: function () {
-                $http.get('https://peerzone.net/api/auth/google')
-                    .success(function (data) {
-                        localStorage.setItem('access_token', data.access_token);
-                    });
-            },
-            logout: function () {
-                $http.post('/api/logout')
-                    .success(function (data) {
-                        localStorage.removeItem('access_token');
-                    });
-            },
-            isAuthorized: function(){
-
-            },
+            isLoggedIn: isLoggedIn,
+            loginWithToken: setToken,
+            login: login,
+            getUser: getUser,
+            logout: logout,
+            isAuthorized: isAuthorized,
             currentUser: currentUser
         };
         return service;

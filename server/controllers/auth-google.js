@@ -44,18 +44,13 @@ module.exports.init = function (server,router) {
     server.get(router.getRoute('/auth/google/callback'),
         passport.authenticate('google', { failureRedirect: '/login' ,session:false}),
         function (req, res) {
-            res.json({
-                access_token:req.user.accessToken,
-                token_type:"Bearer",
-                refresh_token:req.user.refreshToken,
-                user:{
-                    name: req.user.displayName,
-                    roles: req.user.roles
-                }
-            });
+            res.header('Location','/static/index.html/#/login?token='+req.user.accessToken);
+            res.send(302);
         });
-    server.post(router.getRoute('/logout'),function(req,res){
+    server.post(router.getRoute('/auth/logout'),function(req,res){
         req.logout();
+        res.header('Location','/static/index.html');
+        res.send(302);
     });
     server.get(router.getRoute('/auth/info'),function(req,res){
         if(req.isAuthenticated()){
