@@ -1,4 +1,11 @@
-angular.module('templates.app', ['manga/list.html']);
+angular.module('templates.app', ['auth/login.html', 'manga/list.html']);
+
+angular.module("auth/login.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("auth/login.html",
+    "<div>\n" +
+    "    Login Success!\n" +
+    "</div>");
+}]);
 
 angular.module("manga/list.html", []).run(["$templateCache", function($templateCache) {
   $templateCache.put("manga/list.html",
