@@ -27,8 +27,8 @@
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>
-                    <a href="/auth/google">Login</a>
-                    <a ng-click="logout()">Logout</a>
+                    <a ng-if="!isLoggedIn()" href="/auth/google">Login</a>
+                    <a ng-if="isLoggedIn()" ng-click="logout()">Logout</a>
                 </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Settings <b class="caret"></b></a>
