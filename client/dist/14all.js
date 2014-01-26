@@ -15,8 +15,8 @@ angular.module('auth', ['ngRoute'])
                     authService.login($routeParams.token);
                 }
             }]
-        }).
-        when('/logout',{
+        })
+            .when('/logout',{
                 templateUrl: 'auth/logout.html',
                 controller: ['authService','$location',function(authService,$location){
                     authService.logout();
@@ -33,20 +33,20 @@ angular.module('auth', ['ngRoute'])
         });
     }])
     .factory('authService', ['$http', 'Restangular','$location', function ($http, Restangular,$location) {
-        var currentUser;
+        var authInfo;
 
-        function getUser(){
-            currentUser = Restangular.oneUrl('auth/info').get().$object;
-            return currentUser;
+        function getAuthInfo(){
+            authInfo = Restangular.oneUrl('auth/info').get().$object;
+            return authInfo;
         }
 
         function isLoggedIn(){
-            return currentUser && currentUser.displayName;
+            return authInfo && authInfo.user && authInfo.user.displayName;
         }
 
         function authenticate(){
             Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + localStorage.getItem('access_token')});
-            getUser();
+            getAuthInfo();
         }
 
         function setToken(access_token){
@@ -75,10 +75,10 @@ angular.module('auth', ['ngRoute'])
             isLoggedIn: isLoggedIn,
             login: login,
             authenticate: authenticate,
-            getUser: getUser,
+            getAuthInfo: getAuthInfo,
             logout: logout,
             isAuthorized: isAuthorized,
-            currentUser: currentUser
+            authInfo: authInfo
         };
         return service;
     }]);
@@ -138,7 +138,7 @@ angular.module('manga',['ngRoute'])
         };
 
         $scope.add = function(){
-            mangas.push({editable:true});
+            $scope.mangas.push({editable:true});
         };
 
         $scope.create = function(manga){

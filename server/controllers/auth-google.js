@@ -55,7 +55,8 @@ module.exports.init = function (server,router) {
     server.get(router.getRoute('/auth/info'),router.isAuthenticated(),function(req,res){
         if(req.isAuthenticated()){
             res.json({
-                user: req.user
+                user: req.user,
+                roles: req.user.roles
             });
         } else{
             res.json({});

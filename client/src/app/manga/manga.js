@@ -53,7 +53,7 @@ angular.module('manga',['ngRoute'])
         };
 
         $scope.add = function(){
-            mangas.push({editable:true});
+            $scope.mangas.push({editable:true});
         };
 
         $scope.create = function(manga){
