@@ -10,4 +10,4 @@ exports.getRouteId = function(route){
     return config.api_prefix + route + "/:id";
 };
 
-exports.authenticate = passport.authenticate('bearer',{session:false});
+exports.isAuthenticated = function(){return passport.authenticate('bearer',{session:false});};

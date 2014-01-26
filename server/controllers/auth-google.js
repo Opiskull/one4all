@@ -52,7 +52,7 @@ module.exports.init = function (server,router) {
         res.header('Location','/static/index.html');
         res.send(302);
     });
-    server.get(router.getRoute('/auth/info'),router.authenticate,function(req,res){
+    server.get(router.getRoute('/auth/info'),router.isAuthenticated(),function(req,res){
         if(req.isAuthenticated()){
             res.json({
                 user: req.user
