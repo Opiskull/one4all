@@ -29,7 +29,7 @@ angular.module('auth', ['ngRoute'])
         var currentUser;
 
         function getUser(){
-            currentUser = Restangular.oneUrl('/api/auth/info').get().$object;
+            currentUser = Restangular.oneUrl('auth/info').get().$object;
             return currentUser;
         }
 
