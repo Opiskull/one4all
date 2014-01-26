@@ -55,6 +55,7 @@ angular.module('auth', ['ngRoute'])
             $http.post('/api/auth/logout')
                 .success(function (data) {
                     localStorage.removeItem('access_token');
+                    authInfo = {};
                     Restangular.setDefaultHeaders({'Authorization':''});
                     $location.url('/');
                 });
