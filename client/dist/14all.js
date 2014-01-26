@@ -41,7 +41,7 @@ angular.module('auth', ['ngRoute'])
         }
 
         function isLoggedIn(){
-            return authInfo && authInfo.user && authInfo.user.displayName;
+            return authInfo && authInfo.user && authInfo.user.username;
         }
 
         function authenticate(){
