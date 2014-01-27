@@ -32,7 +32,7 @@ angular.module('auth', ['ngRoute'])
 //            }
         });
     }])
-    .factory('authService', ['$http', 'Restangular','$location', function ($http, Restangular,$location) {
+    .factory('authService', ['Restangular','$location', function (Restangular,$location) {
         var authInfo;
 
         function getAuthInfo(){
@@ -60,12 +60,12 @@ angular.module('auth', ['ngRoute'])
         }
 
         function logout(){
-            $http.post('/api/auth/logout')
-                .success(function (data) {
-                    localStorage.removeItem('access_token');
-                    Restangular.setDefaultHeaders({'Authorization':''});
-                    $location.url('/');
-                });
+            Restangular.oneUrl('auth/logout').post().then(function(data){
+                localStorage.removeItem('access_token');
+                authInfo = {};
+                Restangular.setDefaultHeaders({'Authorization':''});
+                $location.url('/');
+            });
         }
 
         function isAuthorized(){
@@ -113,14 +113,12 @@ angular.module('manga',['ngRoute'])
         $scope.remove = function(manga){
             manga.remove().then(function(){
                 removeManga(manga);
-                console.log(manga._id);
             });
         };
 
         $scope.update = function(manga){
             manga.put().then(function(updatedManga){
                 manga.editable = false;
-                console.log(updatedManga);
             });
         };
 
@@ -146,7 +144,6 @@ angular.module('manga',['ngRoute'])
             Mangas.post(manga).then(function(addedManga){
                 removeManga(manga);
                 $scope.mangas.push(addedManga);
-                console.log("id", addedManga);
             },function(response){
                 console.log("Error");
             });
@@ -155,7 +152,7 @@ angular.module('manga',['ngRoute'])
         $scope.finished = function(manga){
             manga.finished = !manga.finished;
             manga.put().then(function(updatedManga){
-                console.log(updatedManga);
+
             });
         };
 
@@ -218,7 +215,7 @@ angular.module("manga/list.html", []).run(["$templateCache", function($templateC
     "                        </button>\n" +
     "                        <ul class=\"dropdown-menu\" role=\"menu\">\n" +
     "                            <li><a ng-model=\"manga.editable\" btn-checkbox>edit</a></li>\n" +
-    "                            <li><a class=\"\" ng-click=\"remove(manga)\">delete</a></li>\n" +
+    "                            <li><a ng-click=\"remove(manga)\">delete</a></li>\n" +
     "                        </ul>\n" +
     "                    </div>\n" +
     "            </div>\n" +

@@ -24,7 +24,7 @@ angular.module('auth', ['ngRoute'])
 //            }
         });
     }])
-    .factory('authService', ['$http', 'Restangular','$location', function ($http, Restangular,$location) {
+    .factory('authService', ['Restangular','$location', function (Restangular,$location) {
         var authInfo;
 
         function getAuthInfo(){
@@ -52,13 +52,12 @@ angular.module('auth', ['ngRoute'])
         }
 
         function logout(){
-            $http.post('/api/auth/logout')
-                .success(function (data) {
-                    localStorage.removeItem('access_token');
-                    authInfo = {};
-                    Restangular.setDefaultHeaders({'Authorization':''});
-                    $location.url('/');
-                });
+            Restangular.oneUrl('auth/logout').post().then(function(data){
+                localStorage.removeItem('access_token');
+                authInfo = {};
+                Restangular.setDefaultHeaders({'Authorization':''});
+                $location.url('/');
+            });
         }
 
         function isAuthorized(){

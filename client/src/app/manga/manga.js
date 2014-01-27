@@ -27,14 +27,12 @@ angular.module('manga',['ngRoute'])
         $scope.remove = function(manga){
             manga.remove().then(function(){
                 removeManga(manga);
-                console.log(manga._id);
             });
         };
 
         $scope.update = function(manga){
             manga.put().then(function(updatedManga){
                 manga.editable = false;
-                console.log(updatedManga);
             });
         };
 
@@ -60,7 +58,6 @@ angular.module('manga',['ngRoute'])
             Mangas.post(manga).then(function(addedManga){
                 removeManga(manga);
                 $scope.mangas.push(addedManga);
-                console.log("id", addedManga);
             },function(response){
                 console.log("Error");
             });
@@ -69,7 +66,7 @@ angular.module('manga',['ngRoute'])
         $scope.finished = function(manga){
             manga.finished = !manga.finished;
             manga.put().then(function(updatedManga){
-                console.log(updatedManga);
+
             });
         };
 
