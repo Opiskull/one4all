@@ -1,23 +1,27 @@
 <div class="table-responsive">
 <table class="table table-hover">
     <thead>
-    <tr><th>Title</th><th>Chapter</th><th>Url</th><th style="width: 210px"></th></tr>
+    <tr><th>Title</th><th style="width: 90px">Chapter</th><th>Url</th><th style="width: 210px"></th></tr>
     </thead>
     <tbody>
     <tr ng-if="!manga.editable" ng-repeat-start="manga in filtered()" ng-class="{success:manga.finished}">
         <td>{{manga.title}}</td>
-        <td>{{manga.chapter}}</td>
+        <td>
+            <a href="" ng-click="decrease(manga)" class="btn btn-default btn-xs pull-left"><span class="glyphicon glyphicon-minus"></span></a>
+            <a href="" ng-click="increase(manga)" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></a>
+         <span class="pull-right">{{manga.chapter}}</span>
+        </td>
         <td><a ng-href="{{getNextChapterUrl(manga)}}">Next Chapter</a></td>
         <td>
             <div class="btn-group pull-right">
-                <a class="btn btn-default" ng-class="{active:manga.finished}" ng-click="finished(manga)">finished</a>
+                <a class="btn btn-default" ng-class="{active:manga.finished}" href="" ng-click="finished(manga)">finished</a>
                     <div class="btn-group">
                         <button type="button" class="btn btn-default dropdown-toggle">
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a ng-model="manga.editable" btn-checkbox>edit</a></li>
-                            <li><a ng-click="remove(manga)">delete</a></li>
+                            <li><a ng-model="manga.editable" btn-checkbox href="">edit</a></li>
+                            <li><a ng-click="remove(manga)" href="">delete</a></li>
                         </ul>
                     </div>
             </div>

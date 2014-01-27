@@ -2,7 +2,8 @@ angular.module('manga',['ngRoute'])
     .config(['$routeProvider',function ($routeProvider) {
         $routeProvider.when('/manga', {
             templateUrl: 'manga/list.html',
-            controller: 'MangaListCtrl'
+            controller: 'MangaListCtrl',
+            needsAuth: true
         })
             .otherwise('/manga');
     }])
@@ -65,6 +66,20 @@ angular.module('manga',['ngRoute'])
 
         $scope.finished = function(manga){
             manga.finished = !manga.finished;
+            manga.put().then(function(updatedManga){
+
+            });
+        };
+
+        $scope.increase = function(manga){
+            manga.chapter +=1;
+            manga.put().then(function(updatedManga){
+
+            });
+        };
+
+        $scope.decrease = function(manga){
+            manga.chapter -=1;
             manga.put().then(function(updatedManga){
 
             });

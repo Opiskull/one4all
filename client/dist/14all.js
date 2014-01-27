@@ -4,32 +4,55 @@ angular.module('14all', ['ui.bootstrap','resources','manga','auth','templates.ap
             id: "_id"
         });
         RestangularProvider.setBaseUrl('/api');
-    }]);
+    }])
+    .controller('AppCtrl',['$scope','authService',function($scope,authService){
+        $scope.isLoggedIn = authService.isLoggedIn;
+        $scope.logout = authService.logout;
+    }]);;
 
 angular.module('auth', ['ngRoute'])
     .config(['$routeProvider',function ($routeProvider) {
         $routeProvider.when('/login', {
-            templateUrl: 'auth/login.html',
-            controller: ['authService','$routeParams',function(authService,$routeParams){
+            templateUrl: 'auth/message.html',
+            controller: ['$scope','authService','$routeParams',function($scope,authService,$routeParams){
                 if($routeParams.token){
                     authService.login($routeParams.token);
+                    $scope.heading = 'Login';
+                    $scope.message='Vour login was a success!';
                 }
             }]
         })
+            .when('/notauthenticated',{
+                templateUrl: 'auth/message.html',
+                controller: ['$scope','authService',function($scope,authService){
+                    $scope.heading='Need Authentication'
+                    $scope.message= 'You need to login to view this page!';
+                }]
+            })
+            .when('/notauthorized',{
+                templateUrl: 'auth/message.html',
+                controller: ['$scope','authService',function($scope,authService){
+                    $scope.heading='Not Authorized'
+                    $scope.message= 'You are not authorized to view this page!';
+                }]
+            })
             .when('/logout',{
-                templateUrl: 'auth/logout.html',
-                controller: ['authService','$location',function(authService,$location){
+                templateUrl: 'auth/message.html',
+                controller: ['$scope','authService',function($scope,authService){
+                    $scope.heading='Logout';
+                    $scope.message= 'Your logout was a success!';
                     authService.logout();
                 }]
             });
     }])
-    .run(['$rootScope', 'authService', function ($rootScope, authService) {
+    .run(['$rootScope', 'authService','$location', function ($rootScope, authService,$location) {
         authService.authenticate();
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
-//            if (!auth.authorize(next.access)) {
-//                if (auth.isLoggedIn()) $location.path('/');
-//                else $location.path('/login');
-//            }
+            if((next.$$route) && (next.$$route.needsAuth)){
+                if(!authService.isLoggedIn()){
+                    $location.path("/notauthenticated");
+                }
+            }
         });
     }])
     .factory('authService', ['Restangular','$location', function (Restangular,$location) {
@@ -88,7 +111,8 @@ angular.module('manga',['ngRoute'])
     .config(['$routeProvider',function ($routeProvider) {
         $routeProvider.when('/manga', {
             templateUrl: 'manga/list.html',
-            controller: 'MangaListCtrl'
+            controller: 'MangaListCtrl',
+            needsAuth: true
         })
             .otherwise('/manga');
     }])
@@ -156,6 +180,20 @@ angular.module('manga',['ngRoute'])
             });
         };
 
+        $scope.increase = function(manga){
+            manga.chapter +=1;
+            manga.put().then(function(updatedManga){
+
+            });
+        };
+
+        $scope.decrease = function(manga){
+            manga.chapter -=1;
+            manga.put().then(function(updatedManga){
+
+            });
+        };
+
         $scope.getNextChapterUrl = function(manga){
             if(manga.finished)
                 return "";
@@ -167,30 +205,21 @@ angular.module('manga',['ngRoute'])
                 return "";
         }
     }]);
-angular.module('14all').controller('HeaderCtrl',['$scope','authService',function($scope,authService){
-    $scope.isLoggedIn = authService.isLoggedIn;
-    $scope.logout = authService.logout;
-}]);
-
 angular.module('resources', ['restangular'])
     .factory('Mangas',['Restangular',function(restangular){
         var Mangas = restangular.all('manga');
         return Mangas;
     }]);
 
-angular.module('templates.app', ['auth/login.html', 'auth/logout.html', 'manga/list.html']);
+angular.module('templates.app', ['auth/message.html', 'manga/list.html']);
 
-angular.module("auth/login.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("auth/login.html",
-    "<div>\n" +
-    "    Login Success!\n" +
-    "</div>");
-}]);
-
-angular.module("auth/logout.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("auth/logout.html",
-    "<div>\n" +
-    "    Logout success!\n" +
+angular.module("auth/message.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("auth/message.html",
+    "<div class=\"jumbotron\">\n" +
+    "    <div class=\"container\">\n" +
+    "    <h1>{{heading}}</h1>\n" +
+    "        <p>{{message}}</p>\n" +
+    "    </div>\n" +
     "</div>");
 }]);
 
@@ -199,23 +228,27 @@ angular.module("manga/list.html", []).run(["$templateCache", function($templateC
     "<div class=\"table-responsive\">\n" +
     "<table class=\"table table-hover\">\n" +
     "    <thead>\n" +
-    "    <tr><th>Title</th><th>Chapter</th><th>Url</th><th style=\"width: 210px\"></th></tr>\n" +
+    "    <tr><th>Title</th><th style=\"width: 90px\">Chapter</th><th>Url</th><th style=\"width: 210px\"></th></tr>\n" +
     "    </thead>\n" +
     "    <tbody>\n" +
     "    <tr ng-if=\"!manga.editable\" ng-repeat-start=\"manga in filtered()\" ng-class=\"{success:manga.finished}\">\n" +
     "        <td>{{manga.title}}</td>\n" +
-    "        <td>{{manga.chapter}}</td>\n" +
+    "        <td>\n" +
+    "            <a href=\"\" ng-click=\"decrease(manga)\" class=\"btn btn-default btn-xs pull-left\"><span class=\"glyphicon glyphicon-minus\"></span></a>\n" +
+    "            <a href=\"\" ng-click=\"increase(manga)\" class=\"btn btn-default btn-xs pull-right\"><span class=\"glyphicon glyphicon-plus\"></span></a>\n" +
+    "         <span class=\"pull-right\">{{manga.chapter}}</span>\n" +
+    "        </td>\n" +
     "        <td><a ng-href=\"{{getNextChapterUrl(manga)}}\">Next Chapter</a></td>\n" +
     "        <td>\n" +
     "            <div class=\"btn-group pull-right\">\n" +
-    "                <a class=\"btn btn-default\" ng-class=\"{active:manga.finished}\" ng-click=\"finished(manga)\">finished</a>\n" +
+    "                <a class=\"btn btn-default\" ng-class=\"{active:manga.finished}\" href=\"\" ng-click=\"finished(manga)\">finished</a>\n" +
     "                    <div class=\"btn-group\">\n" +
     "                        <button type=\"button\" class=\"btn btn-default dropdown-toggle\">\n" +
     "                            <span class=\"caret\"></span>\n" +
     "                        </button>\n" +
     "                        <ul class=\"dropdown-menu\" role=\"menu\">\n" +
-    "                            <li><a ng-model=\"manga.editable\" btn-checkbox>edit</a></li>\n" +
-    "                            <li><a ng-click=\"remove(manga)\">delete</a></li>\n" +
+    "                            <li><a ng-model=\"manga.editable\" btn-checkbox href=\"\">edit</a></li>\n" +
+    "                            <li><a ng-click=\"remove(manga)\" href=\"\">delete</a></li>\n" +
     "                        </ul>\n" +
     "                    </div>\n" +
     "            </div>\n" +

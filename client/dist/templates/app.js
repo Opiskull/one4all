@@ -1,16 +1,12 @@
-angular.module('templates.app', ['auth/login.html', 'auth/logout.html', 'manga/list.html']);
+angular.module('templates.app', ['auth/message.html', 'manga/list.html']);
 
-angular.module("auth/login.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("auth/login.html",
-    "<div>\n" +
-    "    Login Success!\n" +
-    "</div>");
-}]);
-
-angular.module("auth/logout.html", []).run(["$templateCache", function($templateCache) {
-  $templateCache.put("auth/logout.html",
-    "<div>\n" +
-    "    Logout success!\n" +
+angular.module("auth/message.html", []).run(["$templateCache", function($templateCache) {
+  $templateCache.put("auth/message.html",
+    "<div class=\"jumbotron\">\n" +
+    "    <div class=\"container\">\n" +
+    "    <h1>{{heading}}</h1>\n" +
+    "        <p>{{message}}</p>\n" +
+    "    </div>\n" +
     "</div>");
 }]);
 
@@ -19,23 +15,27 @@ angular.module("manga/list.html", []).run(["$templateCache", function($templateC
     "<div class=\"table-responsive\">\n" +
     "<table class=\"table table-hover\">\n" +
     "    <thead>\n" +
-    "    <tr><th>Title</th><th>Chapter</th><th>Url</th><th style=\"width: 210px\"></th></tr>\n" +
+    "    <tr><th>Title</th><th style=\"width: 90px\">Chapter</th><th>Url</th><th style=\"width: 210px\"></th></tr>\n" +
     "    </thead>\n" +
     "    <tbody>\n" +
     "    <tr ng-if=\"!manga.editable\" ng-repeat-start=\"manga in filtered()\" ng-class=\"{success:manga.finished}\">\n" +
     "        <td>{{manga.title}}</td>\n" +
-    "        <td>{{manga.chapter}}</td>\n" +
+    "        <td>\n" +
+    "            <a href=\"\" ng-click=\"decrease(manga)\" class=\"btn btn-default btn-xs pull-left\"><span class=\"glyphicon glyphicon-minus\"></span></a>\n" +
+    "            <a href=\"\" ng-click=\"increase(manga)\" class=\"btn btn-default btn-xs pull-right\"><span class=\"glyphicon glyphicon-plus\"></span></a>\n" +
+    "         <span class=\"pull-right\">{{manga.chapter}}</span>\n" +
+    "        </td>\n" +
     "        <td><a ng-href=\"{{getNextChapterUrl(manga)}}\">Next Chapter</a></td>\n" +
     "        <td>\n" +
     "            <div class=\"btn-group pull-right\">\n" +
-    "                <a class=\"btn btn-default\" ng-class=\"{active:manga.finished}\" ng-click=\"finished(manga)\">finished</a>\n" +
+    "                <a class=\"btn btn-default\" ng-class=\"{active:manga.finished}\" href=\"\" ng-click=\"finished(manga)\">finished</a>\n" +
     "                    <div class=\"btn-group\">\n" +
     "                        <button type=\"button\" class=\"btn btn-default dropdown-toggle\">\n" +
     "                            <span class=\"caret\"></span>\n" +
     "                        </button>\n" +
     "                        <ul class=\"dropdown-menu\" role=\"menu\">\n" +
-    "                            <li><a ng-model=\"manga.editable\" btn-checkbox>edit</a></li>\n" +
-    "                            <li><a ng-click=\"remove(manga)\">delete</a></li>\n" +
+    "                            <li><a ng-model=\"manga.editable\" btn-checkbox href=\"\">edit</a></li>\n" +
+    "                            <li><a ng-click=\"remove(manga)\" href=\"\">delete</a></li>\n" +
     "                        </ul>\n" +
     "                    </div>\n" +
     "            </div>\n" +

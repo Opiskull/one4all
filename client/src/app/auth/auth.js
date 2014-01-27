@@ -1,27 +1,46 @@
 angular.module('auth', ['ngRoute'])
     .config(['$routeProvider',function ($routeProvider) {
         $routeProvider.when('/login', {
-            templateUrl: 'auth/login.html',
-            controller: ['authService','$routeParams',function(authService,$routeParams){
+            templateUrl: 'auth/message.html',
+            controller: ['$scope','authService','$routeParams',function($scope,authService,$routeParams){
                 if($routeParams.token){
                     authService.login($routeParams.token);
+                    $scope.heading = 'Login';
+                    $scope.message='Vour login was a success!';
                 }
             }]
         })
+            .when('/notauthenticated',{
+                templateUrl: 'auth/message.html',
+                controller: ['$scope','authService',function($scope,authService){
+                    $scope.heading='Need Authentication'
+                    $scope.message= 'You need to login to view this page!';
+                }]
+            })
+            .when('/notauthorized',{
+                templateUrl: 'auth/message.html',
+                controller: ['$scope','authService',function($scope,authService){
+                    $scope.heading='Not Authorized'
+                    $scope.message= 'You are not authorized to view this page!';
+                }]
+            })
             .when('/logout',{
-                templateUrl: 'auth/logout.html',
-                controller: ['authService','$location',function(authService,$location){
+                templateUrl: 'auth/message.html',
+                controller: ['$scope','authService',function($scope,authService){
+                    $scope.heading='Logout';
+                    $scope.message= 'Your logout was a success!';
                     authService.logout();
                 }]
             });
     }])
-    .run(['$rootScope', 'authService', function ($rootScope, authService) {
+    .run(['$rootScope', 'authService','$location', function ($rootScope, authService,$location) {
         authService.authenticate();
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
-//            if (!auth.authorize(next.access)) {
-//                if (auth.isLoggedIn()) $location.path('/');
-//                else $location.path('/login');
-//            }
+            if((next.$$route) && (next.$$route.needsAuth)){
+                if(!authService.isLoggedIn()){
+                    $location.path("/notauthenticated");
+                }
+            }
         });
     }])
     .factory('authService', ['Restangular','$location', function (Restangular,$location) {

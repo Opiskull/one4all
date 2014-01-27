@@ -3,12 +3,13 @@ module.exports = function(grunt){
 
     grunt.registerTask('default',['build','watch']);
 
-    grunt.registerTask('build',['clean','less','html2js','concat']);
+    grunt.registerTask('build',['clean','less','html2js','concat','copy']);
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-html2js');
 
 
@@ -33,6 +34,11 @@ module.exports = function(grunt){
                 files: {
                     '<%= distdir %>/<%= pkg.name %>.css': '<%= src.less %>'
                 }
+            }
+        },
+        copy:{
+            fonts: {
+                expand:true, cwd: 'src/assets/fonts/',src:'*',dest:'<%= distdir %>/fonts/',flatten:true,filter:'isFile'
             }
         },
         html2js: {
