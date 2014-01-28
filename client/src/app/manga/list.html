@@ -1,17 +1,23 @@
 <div class="table-responsive">
 <table class="table table-hover">
     <thead>
-    <tr><th>Title</th><th style="width: 90px">Chapter</th><th>Url</th><th style="width: 210px"></th></tr>
+    <tr>
+        <th><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
+        <th style="width: 100px"><a href="" ng-click="predicate = 'chapter'; reverse=!reverse">Chapter</a></th>
+        <th style="width: 160px"><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Modified</a></th>
+        <th style="width: 100px">Url</th>
+        <th style="width: 210px"></th></tr>
     </thead>
     <tbody>
-    <tr ng-if="!manga.editable" ng-repeat-start="manga in filtered()" ng-class="{success:manga.finished}">
+    <tr ng-if="!manga.editable" ng-repeat-start="manga in mangas | isFinished:excludeFinished | filter:search | orderBy:[predicate]:reverse" ng-class="{success:manga.finished,bold:manga.finished}">
         <td>{{manga.title}}</td>
         <td>
-            <a href="" ng-click="decrease(manga)" class="btn btn-default btn-xs pull-left"><span class="glyphicon glyphicon-minus"></span></a>
-            <a href="" ng-click="increase(manga)" class="btn btn-default btn-xs pull-right"><span class="glyphicon glyphicon-plus"></span></a>
+            <a href="" ng-click="decrease(manga)" class="btn btn-default btn-xs pull-left" ng-disabled="manga.finished"><span class="glyphicon glyphicon-minus"></span></a>
+            <a href="" ng-click="increase(manga)" class="btn btn-default btn-xs pull-right" ng-disabled="manga.finished"><span class="glyphicon glyphicon-plus"></span></a>
          <span class="pull-right">{{manga.chapter}}</span>
         </td>
-        <td><a ng-href="{{getNextChapterUrl(manga)}}">Next Chapter</a></td>
+        <td>{{manga.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+        <td><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.finished">Next Chapter</a></td>
         <td>
             <div class="btn-group pull-right">
                 <a class="btn btn-default" ng-class="{active:manga.finished}" href="" ng-click="finished(manga)">finished</a>
@@ -30,15 +36,25 @@
     <tr ng-if="manga.editable" ng-repeat-end="">
         <td><input class="form-control input-sm" type="text" ng-model="manga.title"/></td>
         <td><input class="form-control input-sm" type="number" ng-model="manga.chapter"/></td>
+        <td>{{manga.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td><input class="form-control input-sm" type="url" ng-model="manga.url"/></td>
         <td><div class="btn-group btn-group-justified">
-            <a class="btn btn-default" ng-click="save(manga)">save</a>
+            <a class="btn btn-default" ng-click="update(manga)">save</a>
             <a class="btn btn-default" ng-click="cancel(manga)">cancel</a>
         </div></td>
     </tr>
     </tbody>
     <tfoot>
-        <tr><td colspan="4"><button ng-click="add()" class="btn btn-default">add</button></td></tr>
+    <tr ng-if="newmanga.isnew">
+        <td><input class="form-control input-sm" type="text" ng-model="newmanga.title" placeholder="title"/></td>
+        <td><input class="form-control input-sm" type="number" ng-model="newmanga.chapter"/></td>
+        <td colspan="2"><input class="form-control input-sm" type="url" ng-model="newmanga.url" placeholder="url $$chapter$$ will be replaced with next chapter"/></td>
+        <td><div class="btn-group btn-group-justified">
+            <a class="btn btn-default" ng-click="create(newmanga)">save</a>
+            <a class="btn btn-default" ng-click="cancel(newmanga)">cancel</a>
+        </div></td>
+    </tr>
+        <tr ng-if="!newmanga.isnew"><td colspan="5"><button ng-click="add()" class="btn btn-default">add</button></td></tr>
     </tfoot>
 </table>
 </div>

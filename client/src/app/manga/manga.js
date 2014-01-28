@@ -34,30 +34,24 @@ angular.module('manga',['ngRoute'])
         $scope.update = function(manga){
             manga.put().then(function(updatedManga){
                 manga.editable = false;
+                manga.updatedAt = updatedManga.updatedAt
             });
         };
 
         $scope.cancel = function(manga){
-            manga.editable = false;
-            if(!manga._id)
-                removeManga(manga);
-        };
-
-        $scope.save = function(manga){
-            if(manga._id){
-                $scope.update(manga);
+            if(manga.isnew){
+                $scope.newmanga= {};
             }
-            else
-                $scope.create(manga);
+            manga.editable = false;
         };
 
         $scope.add = function(){
-            $scope.mangas.push({editable:true});
+            $scope.newmanga = {isnew:true};
         };
 
         $scope.create = function(manga){
             Mangas.post(manga).then(function(addedManga){
-                removeManga(manga);
+                $scope.newmanga = {};
                 $scope.mangas.push(addedManga);
             },function(response){
                 console.log("Error");
@@ -67,21 +61,21 @@ angular.module('manga',['ngRoute'])
         $scope.finished = function(manga){
             manga.finished = !manga.finished;
             manga.put().then(function(updatedManga){
-
+                manga.updatedAt = updatedManga.updatedAt
             });
         };
 
         $scope.increase = function(manga){
             manga.chapter +=1;
             manga.put().then(function(updatedManga){
-
+                manga.updatedAt = updatedManga.updatedAt
             });
         };
 
         $scope.decrease = function(manga){
             manga.chapter -=1;
             manga.put().then(function(updatedManga){
-
+                manga.updatedAt = updatedManga.updatedAt;
             });
         };
 

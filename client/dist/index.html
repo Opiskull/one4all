@@ -2,16 +2,16 @@
 <html ng-app="14all">
 <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="/static/14all.css"/>
-    <script type="text/javascript" src="/static/vendor/angular.js"></script>
-    <script type="text/javascript" src="/static/vendor/bootstrap.js"></script>
-    <script type="text/javascript" src="/static/vendor/restangular.js"></script>
-    <script type="text/javascript" src="/static/vendor/underscore.js"></script>
-    <script type="text/javascript" src="/static/vendor/angular-route.js"></script>
+    <link rel="stylesheet" type="text/css" href="/static/14all.css?d37925e"/>
+    <script type="text/javascript" src="/static/vendor/angular.js?d37925e"></script>
+    <script type="text/javascript" src="/static/vendor/bootstrap.js?d37925e"></script>
+    <script type="text/javascript" src="/static/vendor/restangular.js?d37925e"></script>
+    <script type="text/javascript" src="/static/vendor/underscore.js?d37925e"></script>
+    <script type="text/javascript" src="/static/vendor/angular-route.js?d37925e"></script>
     <!--<script type="text/javascript" src="/static/vendor.js"></script>-->
-    <script type="text/javascript" src="/static/templates/app.js"></script>
-    <script type="text/javascript" src="/static/templates/common.js"></script>
-    <script type="text/javascript" src="/static/14all.js"></script>
+    <script type="text/javascript" src="/static/templates/app.js?d37925e"></script>
+    <script type="text/javascript" src="/static/templates/common.js?d37925e"></script>
+    <script type="text/javascript" src="/static/14all.js?d37925e"></script>
 </head>
 <body ng-controller="AppCtrl">
 <header class="navbar navbar-default navbar-fixed-top" role="banner">
@@ -26,15 +26,17 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a ng-if="!isLoggedIn()" ng-href="/api/auth/google">Login</a>
-                    <a ng-if="isLoggedIn()" ng-href="#/logout">Logout</a>
-                </li>
+
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Settings <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><label class="checkbox-inline"><input type="checkbox" ng-model="hideFinished" btn-checkbox>Hide finished</label></li>
+                        <li><label class="checkbox-inline"><input type="checkbox" ng-model="excludeFinished" btn-checkbox>exclude finished</label></li>
                     </ul>
+                </li>
+
+                <li>
+                    <a ng-if="!isLoggedIn()" ng-href="#/login">Login</a>
+                    <a ng-if="isLoggedIn()" ng-href="#/logout">Logout</a>
                 </li>
             </ul>
             <form class="navbar-form navbar-right" role="search">

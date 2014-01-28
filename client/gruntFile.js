@@ -3,7 +3,7 @@ module.exports = function(grunt){
 
     grunt.registerTask('default',['build','watch']);
 
-    grunt.registerTask('build',['clean','less','html2js','concat','copy']);
+    grunt.registerTask('build',['clean','gitinfo','less','html2js','concat','copy']);
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -11,6 +11,7 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-html2js');
+    grunt.loadNpmTasks('grunt-gitinfo');
 
 
     grunt.initConfig({
@@ -108,6 +109,9 @@ module.exports = function(grunt){
                 files: ['!**/node_modules/**','!**/dist/**','src/**/*.*','vendor/**/*.*'],
                 tasks: ['build']
             }
+        },
+        gitinfo:{
+
         }
     });
 

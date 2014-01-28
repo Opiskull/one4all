@@ -1,26 +1,19 @@
 angular.module('auth', ['ngRoute'])
     .config(['$routeProvider',function ($routeProvider) {
         $routeProvider.when('/login', {
-            templateUrl: 'auth/message.html',
+            templateUrl: 'auth/login.html',
             controller: ['$scope','authService','$routeParams',function($scope,authService,$routeParams){
                 if($routeParams.token){
                     authService.login($routeParams.token);
-                    $scope.heading = 'Login';
-                    $scope.message='Vour login was a success!';
                 }
+                $scope.heading = 'Login';
+                $scope.message='You need to login to view this page!';
             }]
         })
-            .when('/notauthenticated',{
-                templateUrl: 'auth/message.html',
-                controller: ['$scope','authService',function($scope,authService){
-                    $scope.heading='Need Authentication'
-                    $scope.message= 'You need to login to view this page!';
-                }]
-            })
             .when('/notauthorized',{
                 templateUrl: 'auth/message.html',
                 controller: ['$scope','authService',function($scope,authService){
-                    $scope.heading='Not Authorized'
+                    $scope.heading='Not Authorized';
                     $scope.message= 'You are not authorized to view this page!';
                 }]
             })
@@ -38,7 +31,7 @@ angular.module('auth', ['ngRoute'])
         $rootScope.$on("$routeChangeStart", function (event, next, current) {
             if((next.$$route) && (next.$$route.needsAuth)){
                 if(!authService.isLoggedIn()){
-                    $location.path("/notauthenticated");
+                    $location.path("/login");
                 }
             }
         });

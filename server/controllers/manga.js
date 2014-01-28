@@ -35,9 +35,12 @@ function get(req, res, next) {
 function create(req, res, next) {
     var manga = new Manga(req.params);
     manga.user = req.user._id;
-    manga.save();
-    res.json(manga);
-    return next();
+    manga.save(function(err){
+        if(err)
+            return next(err);
+        res.json(manga);
+        }
+    );
 }
 
 function del(req, res, next) {
@@ -50,7 +53,6 @@ function del(req, res, next) {
 }
 
 function update(req, res, next) {
-    //delete req.body._id;
     req.model.set(req.body);
     req.model.save(function (err, manga) {
         if (err)
