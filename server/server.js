@@ -20,6 +20,7 @@ server.get(/\/static\/?.*/, restify.serveStatic({
     default: 'index.html'
 }));
 
+server.use(passport.initialize());
 
 var modelpath = './models';
 require("fs").readdirSync(modelpath).forEach(function(model){
@@ -37,6 +38,8 @@ require("fs").readdirSync(controllerpath).forEach(function(controller){
     else
         console.log('controller not loaded: ' + controller);
 });
+
+
 
 
 
