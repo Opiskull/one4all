@@ -1,25 +1,13 @@
-angular.module('manga',['ngRoute'])
+angular.module('manga',['ngRoute','manga.resource'])
     .config(['$routeProvider',function ($routeProvider) {
         $routeProvider.when('/manga', {
             templateUrl: 'manga/list.html',
             controller: 'MangaListCtrl',
-            needsAuth: true
-        })
-            .otherwise('/manga');
+            authRequired: true
+        });
     }])
     .controller('MangaListCtrl', ['$scope','Mangas','$location','$filter', function ($scope,Mangas,$location,$filter) {
         $scope.mangas = Mangas.getList().$object;;
-
-        $scope.filtered = function(){
-            var filtered = $scope.mangas;
-            if($scope.hideFinished){
-                filtered = $filter('filter')(filtered,function(value){return !value.finished;});
-            }
-            if($scope.search){
-                filtered = $filter('filter')(filtered,$scope.search);
-            }
-            return filtered;
-        };
 
         function removeManga(manga){
             $scope.mangas.splice($scope.mangas.indexOf(manga),1);

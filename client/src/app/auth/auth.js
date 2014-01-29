@@ -27,21 +27,25 @@ angular.module('auth', ['ngRoute'])
             });
     }])
     .run(['$rootScope', 'authService','$location', function ($rootScope, authService,$location) {
-        authService.authenticate();
-        $rootScope.$on("$routeChangeStart", function (event, next, current) {
-            if((next.$$route) && (next.$$route.needsAuth)){
-                if(!authService.isLoggedIn()){
-                    $location.path("/login");
+        authService.authenticate().then(function(){
+            $rootScope.$on("$routeChangeStart", function (event, next, current) {
+                if((next.$$route) && (next.$$route.authRequired)){
+                    if(!authService.isLoggedIn()){
+                        $location.path("/login");
+                    }
                 }
-            }
+            });
         });
     }])
     .factory('authService', ['Restangular','$location', function (Restangular,$location) {
         var authInfo;
 
         function getAuthInfo(){
-            authInfo = Restangular.oneUrl('auth/info').get().$object;
-            return authInfo;
+             return Restangular.oneUrl('auth/info').get().then(function(response){
+                authInfo = response;
+            },function(){
+                 authInfo = {};
+             });
         }
 
         function isLoggedIn(){
@@ -50,7 +54,7 @@ angular.module('auth', ['ngRoute'])
 
         function authenticate(){
             Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + localStorage.getItem('access_token')});
-            getAuthInfo();
+            return getAuthInfo();
         }
 
         function setToken(access_token){

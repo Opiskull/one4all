@@ -2,16 +2,24 @@
 <html ng-app="14all">
 <head>
     <title></title>
-    <link rel="stylesheet" type="text/css" href="/static/<%= grunt.config.get('pkg.name') %>.css?<%= gitinfo.local.branch.current.shortSHA %>"/>
-    <script type="text/javascript" src="/static/vendor/angular.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
-    <script type="text/javascript" src="/static/vendor/bootstrap.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
-    <script type="text/javascript" src="/static/vendor/restangular.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
-    <script type="text/javascript" src="/static/vendor/underscore.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
-    <script type="text/javascript" src="/static/vendor/angular-route.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
+    <link rel="stylesheet" type="text/css"
+          href="/static/<%= grunt.config.get('pkg.name') %>.css?<%= gitinfo.local.branch.current.shortSHA %>"/>
+    <script type="text/javascript"
+            src="/static/vendor/angular.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
+    <script type="text/javascript"
+            src="/static/vendor/bootstrap.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
+    <script type="text/javascript"
+            src="/static/vendor/restangular.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
+    <script type="text/javascript"
+            src="/static/vendor/underscore.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
+    <script type="text/javascript"
+            src="/static/vendor/angular-route.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
     <!--<script type="text/javascript" src="/static/vendor.js"></script>-->
     <script type="text/javascript" src="/static/templates/app.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
-    <script type="text/javascript" src="/static/templates/common.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
-    <script type="text/javascript" src="/static/<%= grunt.config.get('pkg.name') %>.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
+    <script type="text/javascript"
+            src="/static/templates/common.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
+    <script type="text/javascript"
+            src="/static/<%= grunt.config.get('pkg.name') %>.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
 </head>
 <body ng-controller="AppCtrl">
 <header class="navbar navbar-default navbar-fixed-top" role="banner">
@@ -23,6 +31,13 @@
             <ul class="nav navbar-nav">
                 <li>
                     <a href="#/manga">Manga</a>
+
+                </li>
+                <li>
+                    <a href="#/movie">Movie</a>
+                </li>
+                <li>
+                    <a href="#/serie">Serie</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -30,7 +45,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Settings <b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><label class="checkbox-inline"><input type="checkbox" ng-model="excludeFinished" btn-checkbox>exclude finished</label></li>
+                        <li><label class="checkbox-inline"><input type="checkbox" ng-model="excludeFinished"
+                                                                  btn-checkbox>exclude finished</label></li>
                     </ul>
                 </li>
 
