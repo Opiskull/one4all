@@ -24,6 +24,13 @@ angular.module('auth', ['ngRoute'])
                     $scope.message= 'Your logout was a success!';
                     authService.logout();
                 }]
+            }).
+        otherwise({
+                templateUrl: 'auth/message.html',
+                controller: ['$scope',function($scope){
+                    $scope.heading = 'Welcome!';
+                    $scope.message='Welcome to 14all! :)';
+                }]
             });
     }])
     .run(['$rootScope', 'authService','$location', function ($rootScope, authService,$location) {
