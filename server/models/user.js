@@ -41,6 +41,14 @@ userSchema.statics.findOrCreate = function(profile,callback){
     });
 };
 
+userSchema.statics.findByAccessToken = function(token,callback){
+    this.findOne({ accessToken: token }, function (err, user) {
+        if (err) { return callback(err); }
+        if (!user) { return callback(null); }
+        return callback(null, user);
+    });
+};
+
 userSchema.plugin(timestamps);
 var User = mongoose.model('User', userSchema);
 

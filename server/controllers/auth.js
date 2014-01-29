@@ -9,17 +9,25 @@ module.exports.init = function (server,router) {
 
     passport.use(new BearerStrategy(
         function(token, done) {
-            User.findOne({ accessToken: token }, function (err, user) {
+            User.findByAccessToken(token, function (err, user) {
                 if (err) { return done(err); }
                 if (!user) { return done(null, false); }
                 return done(null, user, { scope: 'read' });
             });
         }
     ));
-    server.post(router.getRoute('/auth/logout'),function(req,res){
-        req.logout();
-        res.header('Location','/static/index.html');
-        res.send(302);
+    server.post(router.getRoute('/auth/logout'),router.authenticate(),function(req,res){
+        req.user.accessToken = '';
+        req.user.save(function(err){
+            if(err){
+                res.json({
+
+                });
+            }
+            req.logout();
+            res.header('Location','/static/index.html');
+            res.send(302);
+        });
     });
     server.get(router.getRoute('/auth/info'),router.authenticate(),function(req,res){
         if(req.isAuthenticated()){
