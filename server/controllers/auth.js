@@ -25,7 +25,7 @@ module.exports.init = function (server,router) {
                 });
             }
             req.logout();
-            res.header('Location','/static/index.html');
+            res.header('Location','/index.html');
             res.send(302);
         });
     });

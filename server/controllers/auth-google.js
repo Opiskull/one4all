@@ -31,7 +31,7 @@ module.exports.init = function (server,router) {
     server.get(router.getRoute('/auth/google/callback'),
         passport.authenticate('google', { failureRedirect: '/login' ,session:false}),
         function (req, res) {
-            res.header('Location','/static/index.html#/login?token='+req.user.accessToken);
+            res.header('Location','/index.html#/login?token='+req.user.accessToken);
             res.send(302);
         });
 };
