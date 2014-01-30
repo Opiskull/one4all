@@ -3,7 +3,7 @@ module.exports = function(grunt){
 
     grunt.registerTask('default',['build','watch']);
 
-    grunt.registerTask('build',['clean','gitinfo','less','html2js','concat','copy']);
+    grunt.registerTask('build',['clean','gitinfo','less','html2js','uglify','concat','copy']);
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -12,10 +12,12 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-gitinfo');
+    grunt.loadNpmTasks('grunt-contrib-uglify');
 
 
     grunt.initConfig({
         distdir: 'dist',
+        tempdir: 'temp',
         pkg: grunt.file.readJSON('package.json'),
         src: {
             js: ['src/**/*.js'],
@@ -27,9 +29,32 @@ module.exports = function(grunt){
                 common:['src/common/**/*.html']
             }
         },
+        uglify:{
+            options: {
+                mangle: false
+            },
+            vendor:{
+                expand:true,
+                files:
+                    {
+                    '<%= distdir %>/<%= pkg.name %>.vendor.min.js':['vendor/angular/*.js','vendor/angular-route/*.js','vendor/angular-ui/*.js','vendor/restangular/*.js','vendor/underscore/*.js']
+                }
+            },
+            templates:{
+                files:{
+                    '<%= distdir %>/<%= pkg.name %>.templates.min.js':['<%= tempdir %>/*.js']
+                }
+            },
+            application:{
+                files:{
+                    '<%= distdir %>/<%= pkg.name %>.min.js':['src/app/**/*.js','src/common/**/*.js']
+                }
+            }
+        },
         less:{
             compile:{
                 options: {
+                    compress:true,
                     paths: ['vendor/bootstrap','assets']
                 },
                 files: {
@@ -42,65 +67,39 @@ module.exports = function(grunt){
                 expand:true, cwd: 'src/assets/fonts/',src:'*',dest:'<%= distdir %>/fonts/',flatten:true,filter:'isFile'
             }
         },
-        html2js: {
-            app: {
-                options: {
-                    base: 'src/app'
-                },
-                src: ['<%= src.tpl.app %>'],
-                dest: '<%= distdir %>/templates/app.js',
-                module: 'templates.app'
-            },
-            common: {
-                options: {
-                    base: 'src/common'
-                },
-                src: ['<%= src.tpl.common %>'],
-                dest: '<%= distdir %>/templates/common.js',
-                module: 'templates.common'
-            }
-        },
         concat:{
-            dist:{
-                src:['<%= src.js %>', '<%= src.jsTpl %>'],
-                dest:'<%= distdir %>/<%= pkg.name %>.js'
-            },
             index: {
                 src: ['src/index.html'],
                 dest: '<%= distdir %>/index.html',
                 options: {
                     process: true
                 }
+            }
+        },
+        html2js: {
+            app: {
+                options: {
+                    htmlmin: {
+                        collapseBooleanAttributes: true,
+                        collapseWhitespace: true
+                    },
+                    base: 'src/app'
+                },
+                src: ['<%= src.tpl.app %>'],
+                dest: '<%= tempdir %>/app.tpl.js',
+                module: 'templates.app'
             },
-/*            vendor:{
-                src:[
-                    'vendor/angular/angular.js',
-                    'vendor/restangular/restangular.js',
-                    'vendor/angular-ui/ui-bootstrap-tpls-0.7.0.js',
-                    'vendor/underscore/underscore.js',
-                    'vendor/angular-route/angular-route.js'
-                ],
-                dest: '<%= distdir %>/vendor.js'
-            }*/
-            angular: {
-                src:['vendor/angular/angular.js'],
-                dest: '<%= distdir %>/vendor/angular.js'
-            },
-            restangular: {
-                src:['vendor/restangular/restangular.js'],
-                dest: '<%= distdir %>/vendor/restangular.js'
-            },
-            bootstrap: {
-                src:['vendor/angular-ui/ui-bootstrap-tpls-0.10.0.min.js'],
-                dest: '<%= distdir %>/vendor/bootstrap.js'
-            },
-            underscore:{
-                src:['vendor/underscore/underscore.js'],
-                dest: '<%= distdir %>/vendor/underscore.js'
-            },
-            angularroute:{
-                src:['vendor/angular-route/angular-route.js'],
-                dest: '<%= distdir %>/vendor/angular-route.js'
+            common: {
+                options: {
+                    htmlmin: {
+                        collapseBooleanAttributes: true,
+                        collapseWhitespace: true
+                    },
+                    base: 'src/common'
+                },
+                src: ['<%= src.tpl.common %>'],
+                dest: '<%= tempdir %>/common.tpl.js',
+                module: 'templates.common'
             }
         },
         clean: ['<%= distdir %>/*'],
@@ -114,8 +113,4 @@ module.exports = function(grunt){
 
         }
     });
-
-
-
-
 }

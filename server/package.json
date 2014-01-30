@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "grunt": "~0.4.2",
-    "grunt-nodemon": "~0.1.2"
+    "grunt-nodemon": "~0.1.2",
+    "grunt-contrib-uglify": "~0.3.2"
   }
 }
