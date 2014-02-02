@@ -32,7 +32,6 @@ userSchema.statics.findOrCreate = function(profile,callback){
         }
         else{
             var newuser = new User();
-
             if(profile.provider === 'github'){
                 newuser.username = profile.username;
                 newuser.email = profile.emails[0].value;
