@@ -7,7 +7,7 @@ angular.module('serie',['ngRoute','serie.resource'])
         });
     }])
     .controller('SerieListCtrl', ['$scope','Series','$location','$filter','valuesService', function ($scope,Series,$location,$filter,valuesService) {
-        $scope.series = Series.getList().$object;;
+        $scope.series = Series.items;
 
         function removeSerie(serie){
             $scope.series.splice($scope.series.indexOf(serie),1);
