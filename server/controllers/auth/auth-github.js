@@ -13,7 +13,6 @@ module.exports.init = function (server,router) {
             callbackURL: "https://peerzone.net/api/auth/github/callback"
         },
         function (accessToken, refreshToken, profile, done) {
-            console.log(JSON.stringify(profile));
             User.findOrCreate(profile, function (err, user) {
                 if(err) {return done(err);}
                 if(!user){return done(null,false);}
