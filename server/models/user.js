@@ -6,7 +6,7 @@ var userSchema = mongoose.Schema({
     email: String,
     accessToken: String,
     refreshToken: String,
-    googleProfile: {
+    profile: {
         provider: String,
         id: String,
         displayName: String,
@@ -23,7 +23,7 @@ var userSchema = mongoose.Schema({
 });
 
 userSchema.statics.findOrCreate = function(profile,callback){
-    this.findOne({'googleProfile.id':profile.id},function(err,user){
+    this.findOne({'profile.id':profile.id},function(err,user){
         if(err){
             return callback(err,null);
         }
@@ -33,7 +33,7 @@ userSchema.statics.findOrCreate = function(profile,callback){
         else{
             var newuser = new User();
             newuser.username = profile.displayName;
-            newuser.googleProfile = profile;
+            newuser.profile = profile;
             newuser.email = profile.emails[0].value;
             newuser.save();
             return callback(null,newuser);
