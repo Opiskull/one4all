@@ -30,7 +30,7 @@ module.exports.init = function (server,router) {
     });
     server.get(router.getRoute('/auth/info'),router.isAuthenticated,function(req,res){
         if(req.isAuthenticated()){
-            var user = require('util')._extend({},req.user);
+            var user = require('util')._extend({},req.user.toObject());
 
             delete user.roles;
             delete user.accessToken;
