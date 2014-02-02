@@ -39,8 +39,8 @@
     </tr>
     <tr ng-if="serie.editable" ng-repeat-end="">
         <td><input class="form-control input-sm" type="text" ng-model="serie.title"/></td>
-        <td><input class="form-control input-sm" type="number" ng-model="serie.season"/></td>
-        <td><input class="form-control input-sm" type="number" ng-model="serie.episode"/></td>
+        <td><input class="form-control input-sm" type="number" min="0" ng-model="serie.season"/></td>
+        <td><input class="form-control input-sm" type="number" min="0" ng-model="serie.episode"/></td>
         <td>{{serie.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td><div class="btn-group btn-group-justified">
             <a class="btn btn-default" ng-click="update(serie)">save</a>
@@ -51,8 +51,8 @@
     <tfoot>
     <tr ng-if="newserie.isnew">
         <td><input class="form-control input-sm" type="text" ng-model="newserie.title" placeholder="title"/></td>
-        <td><input class="form-control input-sm" type="number" ng-model="newserie.season"/></td>
-        <td><input class="form-control input-sm" type="number" ng-model="newserie.episode"/></td>
+        <td><input class="form-control input-sm" type="number" min="0" ng-model="newserie.season"/></td>
+        <td><input class="form-control input-sm" type="number" min="0" ng-model="newserie.episode"/></td>
         <td><div class="btn-group btn-group-justified">
             <a class="btn btn-default" ng-click="create(newserie)">save</a>
             <a class="btn btn-default" ng-click="cancel(newserie)">cancel</a>

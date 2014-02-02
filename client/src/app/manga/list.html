@@ -35,7 +35,7 @@
     </tr>
     <tr ng-if="manga.editable" ng-repeat-end="">
         <td><input class="form-control input-sm" type="text" ng-model="manga.title"/></td>
-        <td><input class="form-control input-sm" type="number" ng-model="manga.chapter"/></td>
+        <td><input class="form-control input-sm" type="number" min="0" ng-model="manga.chapter"/></td>
         <td>{{manga.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td><input class="form-control input-sm" type="url" ng-model="manga.url"/></td>
         <td><div class="btn-group btn-group-justified">
@@ -47,7 +47,7 @@
     <tfoot>
     <tr ng-if="newmanga.isnew">
         <td><input class="form-control input-sm" type="text" ng-model="newmanga.title" placeholder="title"/></td>
-        <td><input class="form-control input-sm" type="number" ng-model="newmanga.chapter"/></td>
+        <td><input class="form-control input-sm" type="number" min="0" ng-model="newmanga.chapter"/></td>
         <td colspan="2"><input class="form-control input-sm" type="url" ng-model="newmanga.url" placeholder="url $$chapter$$ will be replaced with next chapter"/></td>
         <td><div class="btn-group btn-group-justified">
             <a class="btn btn-default" ng-click="create(newmanga)">save</a>

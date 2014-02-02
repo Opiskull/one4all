@@ -1,0 +1,56 @@
+<div class="table-responsive">
+<table class="table table-hover">
+    <thead>
+    <tr>
+        <th><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
+        <th style="width: 100px"><a href="" ng-click="predicate = 'episode'; reverse=!reverse">Episode</a></th>
+        <th style="width: 160px"><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Modified</a></th>
+        <th style="width: 210px"></th></tr>
+    </thead>
+    <tbody>
+    <tr ng-if="!anime.editable" ng-repeat-start="anime in animes | isFinished:excludeFinished | filter:search | orderBy:[predicate]:reverse" ng-class="{success:anime.finished,bold:anime.finished}">
+        <td>{{anime.title}}</td>
+        <td>
+            <a href="" ng-click="decreaseEp(anime)" class="btn btn-default btn-xs pull-left" ng-disabled="anime.finished"><span class="glyphicon glyphicon-minus"></span></a>
+            <a href="" ng-click="increaseEp(anime)" class="btn btn-default btn-xs pull-right" ng-disabled="anime.finished"><span class="glyphicon glyphicon-plus"></span></a>
+         <span class="pull-right">{{anime.episode}}</span>
+        </td>
+        <td>{{anime.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+        <td>
+            <div class="btn-group pull-right">
+                <a class="btn btn-default" ng-class="{active:anime.finished}" href="" ng-click="finished(anime)">finished</a>
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a ng-model="anime.editable" btn-checkbox href="">edit</a></li>
+                            <li><a ng-click="remove(anime)" href="">delete</a></li>
+                        </ul>
+                    </div>
+            </div>
+        </td>
+    </tr>
+    <tr ng-if="anime.editable" ng-repeat-end="">
+        <td><input class="form-control input-sm" type="text" ng-model="anime.title"/></td>
+        <td><input class="form-control input-sm" type="number" min="0" ng-model="anime.episode"/></td>
+        <td><input class="form-control input-sm" type="url" ng-model="anime.url"/></td>
+        <td><div class="btn-group btn-group-justified">
+            <a class="btn btn-default" ng-click="update(anime)">save</a>
+            <a class="btn btn-default" ng-click="cancel(anime)">cancel</a>
+        </div></td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr ng-if="newanime.isnew">
+        <td  colspan="2"><input class="form-control input-sm" type="text" ng-model="newanime.title" placeholder="title"/></td>
+        <td><input class="form-control input-sm" type="number" min="0" ng-model="newanime.episode"/></td>
+        <td><div class="btn-group btn-group-justified">
+            <a class="btn btn-default" ng-click="create(newanime)">save</a>
+            <a class="btn btn-default" ng-click="cancel(newanime)">cancel</a>
+        </div></td>
+    </tr>
+        <tr ng-if="!newanime.isnew"><td colspan="4"><button ng-click="add()" class="btn btn-default">add</button></td></tr>
+    </tfoot>
+</table>
+</div>

@@ -6,7 +6,7 @@ angular.module('manga',['ngRoute','manga.resource'])
             authRequired: true
         });
     }])
-    .controller('MangaListCtrl', ['$scope','Mangas','$location','$filter', function ($scope,Mangas,$location,$filter) {
+    .controller('MangaListCtrl', ['$scope','Mangas','$location','$filter','valuesService', function ($scope,Mangas,$location,$filter,valuesService) {
         $scope.mangas = Mangas.getList().$object;;
 
         function removeManga(manga){
@@ -20,9 +20,8 @@ angular.module('manga',['ngRoute','manga.resource'])
         };
 
         $scope.update = function(manga){
-            manga.put().then(function(updatedManga){
-                manga.editable = false;
-                manga.updatedAt = updatedManga.updatedAt
+            valuesService.update(manga).then(function(updated){
+                updated.editable = false;
             });
         };
 
@@ -47,24 +46,15 @@ angular.module('manga',['ngRoute','manga.resource'])
         };
 
         $scope.finished = function(manga){
-            manga.finished = !manga.finished;
-            manga.put().then(function(updatedManga){
-                manga.updatedAt = updatedManga.updatedAt
-            });
+            valuesService.finished(manga);
         };
 
         $scope.increase = function(manga){
-            manga.chapter +=1;
-            manga.put().then(function(updatedManga){
-                manga.updatedAt = updatedManga.updatedAt
-            });
+            valuesService.increaseCh(manga);
         };
 
         $scope.decrease = function(manga){
-            manga.chapter -=1;
-            manga.put().then(function(updatedManga){
-                manga.updatedAt = updatedManga.updatedAt;
-            });
+            valuesService.decreaseCh(manga);
         };
 
         $scope.getNextChapterUrl = function(manga){

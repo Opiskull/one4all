@@ -6,7 +6,7 @@ angular.module('serie',['ngRoute','serie.resource'])
             authRequired: true
         });
     }])
-    .controller('SerieListCtrl', ['$scope','Series','$location','$filter', function ($scope,Series,$location,$filter) {
+    .controller('SerieListCtrl', ['$scope','Series','$location','$filter','valuesService', function ($scope,Series,$location,$filter,valuesService) {
         $scope.series = Series.getList().$object;;
 
         function removeSerie(serie){
@@ -20,9 +20,8 @@ angular.module('serie',['ngRoute','serie.resource'])
         };
 
         $scope.update = function(serie){
-            serie.put().then(function(updatedSerie){
-                serie.editable = false;
-                serie.updatedAt = updatedSerie.updatedAt
+            valuesService.then(function(updated){
+                updated.editable = false;
             });
         };
 
@@ -47,37 +46,22 @@ angular.module('serie',['ngRoute','serie.resource'])
         };
 
         $scope.finished = function(serie){
-            serie.finished = !serie.finished;
-            serie.put().then(function(updatedSerie){
-                serie.updatedAt = updatedSerie.updatedAt
-            });
+            valuesService.finished(serie);
         };
 
         $scope.increaseSe = function(serie){
-            serie.season +=1;
-            serie.put().then(function(updatedSerie){
-                serie.updatedAt = updatedSerie.updatedAt
-            });
+            valuesService.increaseSe(serie);
         };
 
         $scope.decreaseSe = function(serie){
-            serie.season -=1;
-            serie.put().then(function(updatedSerie){
-                serie.updatedAt = updatedSerie.updatedAt;
-            });
+            valuesService.decreaseSe(serie);
         };
 
         $scope.increaseEp = function(serie){
-            serie.episode +=1;
-            serie.put().then(function(updatedSerie){
-                serie.updatedAt = updatedSerie.updatedAt
-            });
+            valuesService.increaseEp(serie);
         };
 
         $scope.decreaseEp = function(serie){
-            serie.episode -=1;
-            serie.put().then(function(updatedSerie){
-                serie.updatedAt = updatedSerie.updatedAt;
-            });
+            valuesService.decreaseEp(serie);
         };
     }]);

@@ -6,7 +6,7 @@ angular.module('movie',['ngRoute','movie.resource'])
             authRequired: true
         });
     }])
-    .controller('MovieListCtrl', ['$scope','Movies','$location','$filter', function ($scope,Movies,$location,$filter) {
+    .controller('MovieListCtrl', ['$scope','Movies','$location','$filter','valuesService', function ($scope,Movies,$location,$filter,valuesService) {
         $scope.movies = Movies.getList().$object;;
 
         function removeMovie(movie){
@@ -20,9 +20,8 @@ angular.module('movie',['ngRoute','movie.resource'])
         };
 
         $scope.update = function(movie){
-            movie.put().then(function(updatedMovie){
-                movie.editable = false;
-                movie.updatedAt = updatedMovie.updatedAt
+            valuesService.update(movie).then(function(updated){
+                updated.editable = false;
             });
         };
 
@@ -47,9 +46,6 @@ angular.module('movie',['ngRoute','movie.resource'])
         };
 
         $scope.finished = function(movie){
-            movie.finished = !movie.finished;
-            movie.put().then(function(updatedMovie){
-                movie.updatedAt = updatedMovie.updatedAt
-            });
+            valuesService.finished(movie);
         };
     }]);

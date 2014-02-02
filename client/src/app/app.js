@@ -1,4 +1,4 @@
-angular.module('14all', ['ui.bootstrap','manga','movie','auth','serie','templates.app'])
+angular.module('14all', ['ui.bootstrap','manga','movie','auth','serie','anime','14all.templates'])
     .config(['RestangularProvider',function(RestangularProvider){
         RestangularProvider.setRestangularFields({
             id: "_id"
