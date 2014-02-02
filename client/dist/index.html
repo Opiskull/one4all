@@ -3,7 +3,7 @@
 <head>
     <title></title>
     <link rel="stylesheet" type="text/css"
-          href="14all.css?eaf6ecd"/>
+          href="14all.min.css?ed276d6"/>
 </head>
 <body ng-controller="AppCtrl">
 <header class="navbar navbar-default navbar-fixed-top" role="banner">
@@ -15,7 +15,6 @@
             <ul class="nav navbar-nav">
                 <li>
                     <a href="#/manga">Manga</a>
-
                 </li>
                 <li>
                     <a href="#/movie">Movie</a>
@@ -23,9 +22,11 @@
                 <li>
                     <a href="#/serie">Serie</a>
                 </li>
+                <li>
+                    <a href="#/anime">Anime</a>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle">Settings <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -33,7 +34,6 @@
                                                                   btn-checkbox>exclude finished</label></li>
                     </ul>
                 </li>
-
                 <li>
                     <a ng-if="!isLoggedIn()" ng-href="#/login">Login</a>
                     <a ng-if="isLoggedIn()" ng-href="#/logout">Logout</a>
@@ -52,8 +52,8 @@
     <div ng-view></div>
 </div>
 
-<script type="text/javascript" src="14all.vendor.min.js"></script>
-<script type="text/javascript" src="14all.templates.min.js"></script>
-<script type="text/javascript" src="14all.min.js"></script>
+<script type="text/javascript" src="14all.vendor.min.js?ed276d6"></script>
+<script type="text/javascript" src="14all.templates.min.js?ed276d6"></script>
+<script type="text/javascript" src="14all.min.js?ed276d6"></script>
 </body>
 </html>
