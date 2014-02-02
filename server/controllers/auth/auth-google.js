@@ -3,13 +3,15 @@ var restify = require('restify');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
+var config = require('../../config/config.json');
+
 var User = mongoose.model('User');
 
 module.exports.init = function (server,router) {
 
     passport.use(new GoogleStrategy({
-            clientID: "112130986867.apps.googleusercontent.com",
-            clientSecret: "jGVZxdeFhklZ_5ApegNaa0A-",
+            clientID: config.auth.google.clientID,
+            clientSecret: config.auth.google.clientSecret,
             callbackURL: "https://peerzone.net/api/auth/google/callback"
         },
         function (accessToken, refreshToken, profile, done) {
