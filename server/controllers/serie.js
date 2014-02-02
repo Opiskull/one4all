@@ -4,11 +4,11 @@ var Serie = mongoose.model('Serie');
 
 module.exports.init = function (server,router) {
     var serie = '/serie';
-    server.get(router.getRoute(serie), router.authenticate(), list);
-    server.post(router.getRoute(serie), router.authenticate(), create);
-    server.get(router.getRouteId(serie),router.authenticate(), load, get);
-    server.del(router.getRouteId(serie),router.authenticate(), load, del);
-    server.put(router.getRouteId(serie),router.authenticate(), load, update);
+    server.get(router.getRoute(serie), router.isAuthenticated, list);
+    server.post(router.getRoute(serie), router.isAuthenticated, create);
+    server.get(router.getRouteId(serie),router.isAuthenticated, load, get);
+    server.del(router.getRouteId(serie),router.isAuthenticated, load, del);
+    server.put(router.getRouteId(serie),router.isAuthenticated, load, update);
 };
 
 function load(req, res, next) {

@@ -4,11 +4,11 @@ var Movie = mongoose.model('Movie');
 
 module.exports.init = function (server,router) {
     var movie = '/movie';
-    server.get(router.getRoute(movie), router.authenticate(), list);
-    server.post(router.getRoute(movie), router.authenticate(), create);
-    server.get(router.getRouteId(movie),router.authenticate(), load, get);
-    server.del(router.getRouteId(movie),router.authenticate(), load, del);
-    server.put(router.getRouteId(movie),router.authenticate(), load, update);
+    server.get(router.getRoute(movie), router.isAuthenticated, list);
+    server.post(router.getRoute(movie), router.isAuthenticated, create);
+    server.get(router.getRouteId(movie),router.isAuthenticated, load, get);
+    server.del(router.getRouteId(movie),router.isAuthenticated, load, del);
+    server.put(router.getRouteId(movie),router.isAuthenticated, load, update);
 };
 
 function load(req, res, next) {

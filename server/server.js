@@ -1,48 +1,36 @@
-var restify = require('restify');
-var mongoose = require('mongoose');
-var path = require('path');
+/* modules */
+
+var restify = require('restify'),mongoose = require('mongoose'),path = require('path'),passport = require('passport'), fs = require('fs');
 var router = require('./lib/router.js');
-var passport = require('passport');
+var modules = require('./lib/modules.js');
+
+var config = require('./config/config.json'),packageInfo = require('./package.json');
 
 var server = restify.createServer({
-    name: 'watchlist',
-    version: '1.0.0'
+    name: packageInfo.name,
+    version: packageInfo.version
 });
+
+
+mongoose.connect('mongodb://localhost/test');
 
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
 server.use(restify.bodyParser());
+server.use(passport.initialize());
 
-mongoose.connect('mongodb://localhost/test');
 
 server.get(/\/static\/?.*/, restify.serveStatic({
     directory: path.resolve('../client/dist'),
     default: 'index.html'
 }));
 
-server.use(passport.initialize());
+var modelpath = __dirname + config.models;
+var controllerpath = __dirname + config.controllers;
 
-var modelpath = './models';
-require("fs").readdirSync(modelpath).forEach(function(model){
-    console.log('load model: ' + model);
-    require(modelpath +'/'+ model);
-});
+modules.loadModels(modelpath);
+modules.loadControllers(controllerpath,server);
 
-var controllerpath = './controllers';
-require("fs").readdirSync(controllerpath).forEach(function(controller){
-    var ctrl = require(controllerpath +'/'+ controller);
-    if(ctrl.init){
-        console.log('load controller: ' + controller);
-        ctrl.init(server,router);
-    }
-    else
-        console.log('controller not loaded: ' + controller);
-});
-
-
-
-
-
-server.listen(3000, function(){
+server.listen(config.port,config.host, function(){
    console.log('%s listening at %s', server.name, server.url);
 });
