@@ -1,9 +1,12 @@
 module.exports = function(grunt){
 
 
-    grunt.registerTask('default',['build','watch']);
+    grunt.registerTask('default',['debug','watch']);
 
-    grunt.registerTask('build',['clean','gitinfo','less','html2js','uglify','concat','copy']);
+
+    grunt.registerTask('dist',['clean','gitinfo','less:dist','html2js:dist','uglify','concat:index','copy'])
+
+    grunt.registerTask('debug',['clean','gitinfo','less:debug','html2js:debug','concat','copy']);
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -16,18 +19,18 @@ module.exports = function(grunt){
 
 
     grunt.initConfig({
-        distdir: 'dist',
-        tempdir: 'temp',
         pkg: grunt.file.readJSON('package.json'),
+        dest:{
+            dir: 'dist',
+            pkg: '<%= dest.dir %>/<%= pkg.name %>'
+        },
         src: {
             js: ['src/**/*.js'],
-            jsTpl: ['<%= distdir %>/templates/**/*.js'],
             html: ['src/index.html'],
             less: ['src/assets/main.less'],
-            tpl:{
-                app:['src/app/**/*.html'],
-                common:['src/common/**/*.html']
-            }
+            tpl:['src/app/**/*.html','src/common/**/*.html'],
+            vendor:['vendor/angular/*.js','vendor/angular-route/*.js','vendor/angular-ui/*.js','vendor/restangular/*.js','vendor/underscore/*.js'],
+            fonts:'src/assets/fonts/'
         },
         uglify:{
             options: {
@@ -37,47 +40,66 @@ module.exports = function(grunt){
                 expand:true,
                 files:
                     {
-                    '<%= distdir %>/<%= pkg.name %>.vendor.min.js':['vendor/angular/*.js','vendor/angular-route/*.js','vendor/angular-ui/*.js','vendor/restangular/*.js','vendor/underscore/*.js']
+                    '<%= dest.pkg %>.vendor.min.js':'<%= src.vendor %>'
                 }
             },
-            templates:{
+/*            templates:{
                 files:{
-                    '<%= distdir %>/<%= pkg.name %>.templates.min.js':['<%= tempdir %>/*.js']
+                    '<%= dest.pkg %>.templates.min.js':['<%= tempdir %>*//*.js']
                 }
-            },
+            },*/
             application:{
                 files:{
-                    '<%= distdir %>/<%= pkg.name %>.min.js':['src/app/**/*.js','src/common/**/*.js']
+                    '<%= dest.pkg %>.min.js':'<%= src.js %>'
                 }
             }
         },
         less:{
-            compile:{
+            debug:{
+                options: {
+                    paths: ['vendor/bootstrap','assets']
+                },
+                files: {
+                    '<%= dest.pkg %>.min.css': '<%= src.less %>'
+                }
+            },
+            dist:{
                 options: {
                     compress:true,
                     paths: ['vendor/bootstrap','assets']
                 },
                 files: {
-                    '<%= distdir %>/<%= pkg.name %>.css': '<%= src.less %>'
+                    '<%= dest.pkg %>.min.css': '<%= src.less %>'
                 }
             }
         },
         copy:{
             fonts: {
-                expand:true, cwd: 'src/assets/fonts/',src:'*',dest:'<%= distdir %>/fonts/',flatten:true,filter:'isFile'
+                expand:true, cwd: '<%= src.fonts %>',src:'*',dest:'<%= dest.dir %>/fonts/',flatten:true,filter:'isFile'
             }
         },
         concat:{
             index: {
-                src: ['src/index.html'],
-                dest: '<%= distdir %>/index.html',
+                src: '<%= src.html %>',
+                dest: '<%= dest.dir %>/index.html',
                 options: {
                     process: true
+                }
+            },
+            application: {
+                src: '<%= src.js %>',
+                dest: '<%= dest.pkg %>.min.js'
+            },
+            vendor:{
+                expand:true,
+                files:
+                {
+                    '<%= dest.pkg %>.vendor.min.js':'<%= src.vendor %>'
                 }
             }
         },
         html2js: {
-            app: {
+            dist: {
                 options: {
                     htmlmin: {
                         collapseBooleanAttributes: true,
@@ -85,28 +107,24 @@ module.exports = function(grunt){
                     },
                     base: 'src/app'
                 },
-                src: ['<%= src.tpl.app %>'],
-                dest: '<%= tempdir %>/app.tpl.js',
-                module: 'templates.app'
+                src: ['<%= src.tpl %>'],
+                dest: '<%= dest.pkg %>.templates.min.js',
+                module: '14all.templates'
             },
-            common: {
+            debug: {
                 options: {
-                    htmlmin: {
-                        collapseBooleanAttributes: true,
-                        collapseWhitespace: true
-                    },
-                    base: 'src/common'
+                    base: 'src/app'
                 },
-                src: ['<%= src.tpl.common %>'],
-                dest: '<%= tempdir %>/common.tpl.js',
-                module: 'templates.common'
+                src: ['<%= src.tpl %>'],
+                dest: '<%= dest.pkg %>.templates.min.js',
+                module: '14all.templates'
             }
         },
-        clean: ['<%= distdir %>/*'],
+        clean: ['<%= dest.dir %>/*'],
         watch: {
             scripts: {
                 files: ['!**/node_modules/**','!**/dist/**','src/**/*.*','vendor/**/*.*'],
-                tasks: ['build']
+                tasks: ['debug']
             }
         },
         gitinfo:{
