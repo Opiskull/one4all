@@ -49,11 +49,11 @@ angular.module('manga',['ngRoute','manga.resource'])
             valuesService.finished(manga);
         };
 
-        $scope.increase = function(manga){
+        $scope.increaseCh = function(manga){
             valuesService.increaseCh(manga);
         };
 
-        $scope.decrease = function(manga){
+        $scope.decreaseCh = function(manga){
             valuesService.decreaseCh(manga);
         };
 

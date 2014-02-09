@@ -7,40 +7,23 @@
         <th style="width: 210px"></th></tr>
     </thead>
     <tbody>
-    <tr ng-if="!movie.editable" ng-repeat-start="movie in movies | isFinished:excludeFinished | filter:search | orderBy:[predicate]:reverse" ng-class="{success:movie.finished,bold:movie.finished}">
+    <tr ng-if="!movie.editable" ng-repeat-start="movie in movies | isFinished:settings.excludeFinished | filter:search | orderBy:[predicate]:reverse" ng-class="{success:movie.finished,bold:movie.finished}">
         <td>{{movie.title}}</td>
         <td>{{movie.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td>
-            <div class="btn-group pull-right">
-                <a class="btn btn-default" ng-class="{active:movie.finished}" href="" ng-click="finished(movie)">finished</a>
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle">
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a ng-model="movie.editable" btn-checkbox href="">edit</a></li>
-                            <li><a ng-click="remove(movie)" href="">delete</a></li>
-                        </ul>
-                    </div>
-            </div>
+            <finish-edit-button finished="finished(movie)" remove="remove(movie)" model="movie"></finish-edit-button>
         </td>
     </tr>
     <tr ng-if="movie.editable" ng-repeat-end="">
         <td><input class="form-control input-sm" type="text" ng-model="movie.title"/></td>
         <td>{{movie.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-        <td><div class="btn-group btn-group-justified">
-            <a class="btn btn-default" ng-click="update(movie)">save</a>
-            <a class="btn btn-default" ng-click="cancel(movie)">cancel</a>
-        </div></td>
+        <td><save-cancel-button save="update(movie)" cancel="cancel(movie)"></save-cancel-button></td>
     </tr>
     </tbody>
     <tfoot>
     <tr ng-if="newmovie.isnew">
         <td colspan="2"><input class="form-control input-sm" type="text" ng-model="newmovie.title" placeholder="title"/></td>
-        <td><div class="btn-group btn-group-justified">
-            <a class="btn btn-default" ng-click="create(newmovie)">save</a>
-            <a class="btn btn-default" ng-click="cancel(newmovie)">cancel</a>
-        </div></td>
+        <td><save-cancel-button save="create(newmovie)" cancel="cancel(newmovie)"></save-cancel-button></td>
     </tr>
         <tr ng-if="!newmovie.isnew"><td colspan="3"><button ng-click="add()" class="btn btn-default">add</button></td></tr>
     </tfoot>

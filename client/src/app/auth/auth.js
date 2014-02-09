@@ -44,7 +44,7 @@ angular.module('auth', ['ngRoute'])
             });
         });
     }])
-    .factory('authService', ['Restangular','$location', function (Restangular,$location) {
+    .factory('authService', ['Restangular','$location','$store', function (Restangular,$location,$store) {
         var authInfo;
 
         function getAuthInfo(){
@@ -60,12 +60,12 @@ angular.module('auth', ['ngRoute'])
         }
 
         function authenticate(){
-            Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + localStorage.getItem('access_token')});
+            Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + $store.get('access_token')});
             return getAuthInfo();
         }
 
         function setToken(access_token){
-            localStorage.setItem('access_token',access_token);
+            $store.set('access_token',access_token);
             authenticate();
         }
 
@@ -76,7 +76,7 @@ angular.module('auth', ['ngRoute'])
 
         function logout(){
             Restangular.oneUrl('auth/logout').post().then(function(data){
-                localStorage.removeItem('access_token');
+                $store.removeItem('access_token');
                 authInfo = {};
                 Restangular.setDefaultHeaders({'Authorization':''});
                 $location.url('/');
