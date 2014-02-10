@@ -102,7 +102,7 @@ module.exports = function(grunt){
             dist: {
                 options: {
                     htmlmin: {
-                        collapseBooleanAttributes: true,
+                        //collapseBooleanAttributes: true,
                         collapseWhitespace: true
                     },
                     base: 'src/app'
