@@ -16,7 +16,22 @@ body{padding-top:70px;}
   vertical-align: middle;
 }
 
+.absolute-center{
+  margin: auto;
+  position: absolute !important;
+  opacity: 1;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
 
+.backdrop{
+  -webkit-transition:0.5s linear all;
+  transition:0.5s linear all;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  opacity: 0.5;
+  z-index: 9999;
+  background-color: #000000;
+}
 
 
 #floatingCirclesG{

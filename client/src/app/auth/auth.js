@@ -76,7 +76,7 @@ angular.module('auth', ['ngRoute'])
 
         function logout(){
             Restangular.oneUrl('auth/logout').post().then(function(data){
-                $store.removeItem('access_token');
+                $store.remove('access_token');
                 authInfo = {};
                 Restangular.setDefaultHeaders({'Authorization':''});
                 $location.url('/');

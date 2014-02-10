@@ -22,7 +22,7 @@
     </tbody>
     <tfoot>
     <tr ng-if="newmovie.isnew">
-        <td colspan="2"><input class="form-control input-sm" type="text" ng-model="newmovie.title" placeholder="title"/></td>
+        <td colspan="2"><input class="form-control input-sm" type="text" ng-model="newmovie.title" placeholder="title" focus-me="newmovie.isnew"/></td>
         <td><save-cancel-button save="create(newmovie)" cancel="cancel(newmovie)"></save-cancel-button></td>
     </tr>
         <tr ng-if="!newmovie.isnew"><td colspan="3"><button ng-click="add()" class="btn btn-default">add</button></td></tr>

@@ -32,7 +32,7 @@
     </tbody>
     <tfoot>
     <tr ng-if="newserie.isnew">
-        <td><input class="form-control input-sm" type="text" ng-model="newserie.title" placeholder="title"/></td>
+        <td><input class="form-control input-sm" type="text" ng-model="newserie.title" placeholder="title" focus-me="newserie.isnew"/></td>
         <td><input class="form-control input-sm" type="number" min="0" ng-model="newserie.season"/></td>
         <td><input class="form-control input-sm" type="number" min="0" ng-model="newserie.episode"/></td>
         <td><save-cancel-button save="create(newserie)" cancel="cancel(newserie)"></save-cancel-button></td>
