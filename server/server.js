@@ -12,7 +12,7 @@ var server = restify.createServer({
 });
 
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(config.db_url);
 
 server.use(restify.acceptParser(server.acceptable));
 server.use(restify.queryParser());
@@ -21,7 +21,7 @@ server.use(passport.initialize());
 
 
 server.get(/\/static\/?.*/, restify.serveStatic({
-    directory: path.resolve('../client/dist'),
+    directory: path.resolve('../client/build'),
     default: 'index.html'
 }));
 

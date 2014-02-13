@@ -21,7 +21,7 @@ module.exports = function(grunt){
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         dest:{
-            dir: 'dist',
+            dir: 'build',
             pkg: '<%= dest.dir %>/<%= pkg.name %>'
         },
         src: {
@@ -123,7 +123,7 @@ module.exports = function(grunt){
         clean: ['<%= dest.dir %>/*'],
         watch: {
             scripts: {
-                files: ['!**/node_modules/**','!**/dist/**','src/**/*.*','vendor/**/*.*'],
+                files: ['!**/node_modules/**','!**/build/**','src/**/*.*','vendor/**/*.*'],
                 tasks: ['debug']
             }
         },

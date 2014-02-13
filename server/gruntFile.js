@@ -14,7 +14,7 @@ module.exports = function(grunt){
                 options:{
                     file:'server.js',
                     ignoredFiles: ['node_modules/**'],
-                    watchedFolders: ['../client/dist','controllers','lib','models']
+                    watchedFolders: ['../client/build','controllers','lib','models']
                 }
             }
         }
