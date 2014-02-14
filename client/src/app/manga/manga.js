@@ -9,14 +9,8 @@ angular.module('manga',['ngRoute','manga.resource'])
     .controller('MangaListCtrl', ['$scope','Mangas','$location','$filter','valuesService', function ($scope,Mangas,$location,$filter,valuesService) {
         $scope.mangas = Mangas.items;
 
-        function removeManga(manga){
-            $scope.mangas.splice($scope.mangas.indexOf(manga),1);
-        }
-
         $scope.remove = function(manga){
-            manga.remove().then(function(){
-                removeManga(manga);
-            });
+            valuesService.removeWithDlg('manga',$scope.mangas,manga);
         };
 
         $scope.update = function(manga){

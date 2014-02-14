@@ -9,14 +9,8 @@ angular.module('anime',['ngRoute','anime.resource'])
     .controller('AnimeListCtrl', ['$scope','Animes','$location','$filter','valuesService', function ($scope,Animes,$location,$filter,valuesService) {
         $scope.animes = Animes.items;
 
-        function removeAnime(anime){
-            $scope.animes.splice($scope.animes.indexOf(anime),1);
-        }
-
         $scope.remove = function(anime){
-            anime.remove().then(function(){
-                removeAnime(anime);
-            });
+            valuesService.removeWithDlg('anime',$scope.animes,anime);
         };
 
         $scope.update = function(anime){

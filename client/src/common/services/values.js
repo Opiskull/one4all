@@ -1,4 +1,17 @@
-angular.module('14all').factory('valuesService',[function(){
+angular.module('14all').factory('valuesService',['dialogService',function(dialogService){
+    function removeWithDlg(type,items,item){
+        dialogService.remove(type,item.title).then(function(result){
+            if(result){
+                item.remove().then(function(){
+                    remove(items,item);
+                });
+            }
+        })
+    }
+
+    function remove(items,item){
+        items.splice(items.indexOf(item),1);
+    }
 
     function finished(item){
         item.finished = !item.finished;
@@ -85,7 +98,9 @@ angular.module('14all').factory('valuesService',[function(){
         increaseSe:increaseSe,
         decreaseSe:decreaseSe,
         update: update,
-        finished: finished
+        finished: finished,
+        remove: remove,
+        removeWithDlg:removeWithDlg
     };
 
     return service;

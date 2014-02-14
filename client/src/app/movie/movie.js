@@ -9,14 +9,8 @@ angular.module('movie',['ngRoute','movie.resource'])
     .controller('MovieListCtrl', ['$scope','Movies','$location','$filter','valuesService', function ($scope,Movies,$location,$filter,valuesService) {
         $scope.movies = Movies.items;
 
-        function removeMovie(movie){
-            $scope.movies.splice($scope.movies.indexOf(movie),1);
-        }
-
         $scope.remove = function(movie){
-            movie.remove().then(function(){
-                removeMovie(movie);
-            });
+            valuesService.removeWithDlg('movie',$scope.movies,movie);
         };
 
         $scope.update = function(movie){
