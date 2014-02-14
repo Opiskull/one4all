@@ -9,12 +9,16 @@ angular.module('serie',['ngRoute','serie.resource'])
     .controller('SerieListCtrl', ['$scope','Series','$location','$filter','valuesService', function ($scope,Series,$location,$filter,valuesService) {
         $scope.series = Series.items;
 
+        $scope.dropped = function(item){
+            valuesService.dropped(item)
+        };
+
         $scope.remove = function(serie){
             valuesService.removeWithDlg('serie',$scope.series,serie);
         };
 
         $scope.update = function(serie){
-            valuesService.then(function(updated){
+            valuesService.update(serie).then(function(updated){
                 updated.editable = false;
             });
         };

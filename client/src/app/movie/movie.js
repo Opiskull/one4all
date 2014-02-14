@@ -8,7 +8,9 @@ angular.module('movie',['ngRoute','movie.resource'])
     }])
     .controller('MovieListCtrl', ['$scope','Movies','$location','$filter','valuesService', function ($scope,Movies,$location,$filter,valuesService) {
         $scope.movies = Movies.items;
-
+        $scope.dropped = function(item){
+            valuesService.dropped(item)
+        };
         $scope.remove = function(movie){
             valuesService.removeWithDlg('movie',$scope.movies,movie);
         };

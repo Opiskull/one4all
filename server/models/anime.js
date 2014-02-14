@@ -6,6 +6,7 @@ var animeSchema = mongoose.Schema({
     title: String,
     episode: Number,
     finished: Boolean,
+    dropped: Boolean,
     titles: [
         {
             title: String,

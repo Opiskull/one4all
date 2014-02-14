@@ -11,7 +11,10 @@ angular.module('14all', ['ui.bootstrap','ngAnimate',
         $scope.isLoggedIn = authService.isLoggedIn;
         $scope.logout = authService.logout;
 
-        $scope.settings = $store.bind($scope,'settings',{excludeFinished: false});
+        $scope.settings = $store.bind($scope,'settings',{
+            excludeFinished: false,
+            excludeDropped: false
+        });
 
         $scope.focus  = {search:true};
 

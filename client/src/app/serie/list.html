@@ -6,10 +6,11 @@
         <th><a href="" ng-click="predicate = 'season'; reverse=!reverse">Season</a></th>
         <th><a href="" ng-click="predicate = 'episode'; reverse=!reverse">Episode</a></th>
         <th style="width: 160px"><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Modified</a></th>
-        <th style="width: 210px"></th></tr>
+        <th style="width: 210px"><span class="badge pull-right">{{series.length}}</span></th></tr>
     </thead>
     <tbody>
-    <tr ng-if="!serie.editable" ng-repeat-start="serie in series | isFinished:settings.excludeFinished | filter:search | orderBy:[predicate]:reverse" ng-class="{success:serie.finished,bold:serie.finished}">
+    <tr ng-if="!serie.editable" ng-repeat-start="serie in series | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
+        ng-class="{bold:serie.finished,danger:serie.dropped,success:serie.finished}">
         <td>{{serie.title}}</td>
         <td>
             <up-down-button decrease="decreaseSe(serie)" increase="increaseSe(serie)" value="serie.season" disabled="serie.finished"></up-down-button>
@@ -19,7 +20,7 @@
         </td>
         <td>{{serie.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td>
-            <actions-button finished="finished(serie)" remove="remove(serie)" model="serie"></actions-button>
+            <actions-button finished="finished(serie)" remove="remove(serie)" dropped="dropped(serie)" model="serie"></actions-button>
         </td>
     </tr>
     <tr ng-if="serie.editable" ng-repeat-end="">

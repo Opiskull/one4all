@@ -7,6 +7,7 @@ var serieSchema = mongoose.Schema({
     season: Number,
     episode: Number,
     finished: Boolean,
+    dropped: Boolean,
     titles: [
         {
             title: String,

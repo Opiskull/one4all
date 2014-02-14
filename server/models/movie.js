@@ -5,6 +5,7 @@ var timestamps = require('mongoose-timestamp');
 var movieSchema = mongoose.Schema({
     title: String,
     finished: Boolean,
+    dropped: Boolean,
     titles: [
         {
             title: String,

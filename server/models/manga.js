@@ -7,6 +7,7 @@ var mangaSchema = mongoose.Schema({
     chapter: Number,
     url: String,
     finished: Boolean,
+    dropped: Boolean,
     titles: [
         {
             title: String,

@@ -8,7 +8,9 @@ angular.module('manga',['ngRoute','manga.resource'])
     }])
     .controller('MangaListCtrl', ['$scope','Mangas','$location','$filter','valuesService', function ($scope,Mangas,$location,$filter,valuesService) {
         $scope.mangas = Mangas.items;
-
+        $scope.dropped = function(item){
+            valuesService.dropped(item)
+        };
         $scope.remove = function(manga){
             valuesService.removeWithDlg('manga',$scope.mangas,manga);
         };

@@ -8,7 +8,9 @@ angular.module('anime',['ngRoute','anime.resource'])
     }])
     .controller('AnimeListCtrl', ['$scope','Animes','$location','$filter','valuesService', function ($scope,Animes,$location,$filter,valuesService) {
         $scope.animes = Animes.items;
-
+        $scope.dropped = function(item){
+            valuesService.dropped(item)
+        };
         $scope.remove = function(anime){
             valuesService.removeWithDlg('anime',$scope.animes,anime);
         };

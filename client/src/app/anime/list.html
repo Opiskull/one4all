@@ -5,17 +5,18 @@
         <th><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
         <th><a href="" ng-click="predicate = 'episode'; reverse=!reverse">Episode</a></th>
         <th style="width: 160px"><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Modified</a></th>
-        <th style="width: 210px"></th></tr>
+        <th style="width: 210px"><span class="badge pull-right">{{animes.length}}</span></th></tr>
     </thead>
     <tbody>
-    <tr ng-if="!anime.editable" ng-repeat-start="anime in animes | isFinished:settings.excludeFinished | filter:search | orderBy:[predicate]:reverse" ng-class="{success:anime.finished,bold:anime.finished}">
+    <tr ng-if="!anime.editable" ng-repeat-start="anime in animes | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
+        ng-class="{bold:anime.finished,danger:anime.dropped,success:anime.finished}">
         <td>{{anime.title}}</td>
         <td>
             <up-down-button decrease="decreaseEp(anime)" increase="increaseEp(anime)" value="anime.episode" disabled="anime.finished"></up-down-button>
         </td>
         <td>{{anime.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td>
-            <actions-button finished="finished(anime)" remove="remove(anime)" model="anime"></actions-button>
+            <actions-button finished="finished(anime)" remove="remove(anime)" dropped="dropped(anime)" model="anime"></actions-button>
         </td>
     </tr>
     <tr ng-if="anime.editable" ng-repeat-end="">

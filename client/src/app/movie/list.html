@@ -4,14 +4,15 @@
     <tr>
         <th><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
         <th style="width: 160px"><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Modified</a></th>
-        <th style="width: 210px"></th></tr>
+        <th style="width: 210px"><span class="badge pull-right">{{movies.length}}</span></th></tr>
     </thead>
     <tbody>
-    <tr ng-if="!movie.editable" ng-repeat-start="movie in movies | isFinished:settings.excludeFinished | filter:search | orderBy:[predicate]:reverse" ng-class="{success:movie.finished,bold:movie.finished}">
+    <tr ng-if="!movie.editable" ng-repeat-start="movie in movies | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
+        ng-class="{bold:movie.finished,danger:movie.dropped,success:movie.finished}">
         <td>{{movie.title}}</td>
         <td>{{movie.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td>
-            <actions-button finished="finished(movie)" remove="remove(movie)" model="movie"></actions-button>
+            <actions-button finished="finished(movie)" remove="remove(movie)" dropped="dropped(movie)" model="movie"></actions-button>
         </td>
     </tr>
     <tr ng-if="movie.editable" ng-repeat-end="">

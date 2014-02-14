@@ -6,10 +6,11 @@
         <th><a href="" ng-click="predicate = 'chapter'; reverse=!reverse">Chapter</a></th>
         <th style="width: 160px"><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Modified</a></th>
         <th style="width: 100px">Url</th>
-        <th style="width: 210px"></th></tr>
+        <th style="width: 210px"><span class="badge pull-right">{{mangas.length}}</span></th></tr>
     </thead>
     <tbody>
-    <tr ng-if="!manga.editable" ng-repeat-start="manga in mangas | isFinished:settings.excludeFinished | filter:search | orderBy:[predicate]:reverse" ng-class="{success:manga.finished,bold:manga.finished}">
+    <tr ng-if="!manga.editable" ng-repeat-start="manga in mangas | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
+        ng-class="{bold:manga.finished,danger:manga.dropped,success:manga.finished}">
         <td>{{manga.title}}</td>
         <td>
             <up-down-button decrease="decreaseCh(manga)" increase="increaseCh(manga)" value="manga.chapter" disabled="manga.finished"></up-down-button>
@@ -17,7 +18,7 @@
         <td>{{manga.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.finished">Next Chapter</a></td>
         <td>
-            <actions-button finished="finished(manga)" remove="remove(manga)" model="manga"></actions-button>
+            <actions-button finished="finished(manga)" remove="remove(manga)" dropped="dropped(manga)" model="manga"></actions-button>
         </td>
     </tr>
     <tr ng-if="manga.editable" ng-repeat-end="">
