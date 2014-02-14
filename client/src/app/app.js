@@ -7,7 +7,7 @@ angular.module('14all', ['ui.bootstrap','ngAnimate',
         });
         RestangularProvider.setBaseUrl('/api');
     }])
-    .controller('AppCtrl',['$scope','authService','$store',function($scope,authService,$store){
+    .controller('AppCtrl',['$scope','$location','authService','$store',function($scope,$location,authService,$store){
         $scope.isLoggedIn = authService.isLoggedIn;
         $scope.logout = authService.logout;
 
@@ -22,4 +22,8 @@ angular.module('14all', ['ui.bootstrap','ngAnimate',
         $scope.$on("$routeChangeSuccess",function(event,next,current){
             $scope.focus.search = true;
         });
+
+        $scope.isActive = function(viewLocation){
+            return viewLocation === $location.path();
+        };
     }]);

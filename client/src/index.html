@@ -7,24 +7,24 @@
 </head>
 <body ng-controller="AppCtrl" ng-cloak>
 <loading></loading>
-<header class="navbar navbar-default navbar-fixed-top" role="banner">
-    <div class="container">
+<header class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">14all</a>
             <button class="navbar-toggle" href="#" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed"><i class="glyphicon glyphicon-th-large"></i></button>
         </div>
         <nav collapse="navCollapsed" class="navbar-collapse collapse navbar-responsive-collapse" role="navigation">
             <ul class="nav navbar-nav">
-                <li>
+                <li ng-class="{ active: isActive('/manga')}">
                     <a href="#/manga">Manga</a>
                 </li>
-                <li>
+                <li ng-class="{ active: isActive('/movie')}">
                     <a href="#/movie">Movie</a>
                 </li>
-                <li>
+                <li ng-class="{ active: isActive('/serie')}">
                     <a href="#/serie">Serie</a>
                 </li>
-                <li>
+                <li ng-class="{ active: isActive('/anime')}">
                     <a href="#/anime">Anime</a>
                 </li>
             </ul>
@@ -42,13 +42,14 @@
                         <li><label class="checkbox"><input type="checkbox" ng-model="settings.excludeFinished">exclude finished</label></li>
                     </ul>
                 </li>
-                <li>
+                <li class="dropdown">
                     <a ng-if="!isLoggedIn()" ng-href="#/login" title="login"><i class="glyphicon glyphicon-log-in"></i></a>
                     <a ng-if="isLoggedIn()" ng-href="#/logout" title="logout"><i class="glyphicon glyphicon-log-out"></i></a>
                 </li>
-
+                <li>
+                    <p class="navbar-text"></p>
+                </li>
             </ul>
-
         </nav>
     </div>
 </header>
