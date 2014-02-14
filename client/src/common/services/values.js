@@ -30,12 +30,22 @@ angular.module('14all').factory('valuesService',['dialogService',function(dialog
         });
     }
 
+    function validateNumber(value){
+        if(angular.isNumber){
+            return value;
+        } else{
+            return 0;
+        }
+    }
+
     function increase(value){
+        value = validateNumber(value);
         value +=1;
         return value;
     }
 
     function decrease(value){
+        value = validateNumber(value);
         if(value <= 0){
             value = 0;
         }
@@ -93,6 +103,22 @@ angular.module('14all').factory('valuesService',['dialogService',function(dialog
         }
     }
 
+    function increasePg(item){
+        var page = item.page;
+        item.page = increase(item.page);
+        if(page !== item.page){
+            return update(item);
+        }
+    }
+
+    function decreasePg(item){
+        var page = item.page;
+        item.page = decrease(item.page);
+        if(page !== item.page){
+            return update(item);
+        }
+    }
+
     var service = {
         increase: increase,
         decrease: decrease,
@@ -102,6 +128,8 @@ angular.module('14all').factory('valuesService',['dialogService',function(dialog
         decreaseCh: decreaseCh,
         increaseSe:increaseSe,
         decreaseSe:decreaseSe,
+        increasePg:increasePg,
+        decreasePg:decreasePg,
         update: update,
         finished: finished,
         dropped: dropped,
