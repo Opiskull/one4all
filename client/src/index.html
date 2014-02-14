@@ -5,13 +5,15 @@
     <link rel="stylesheet" type="text/css"
           href="<%= grunt.config.get('pkg.name') %>.min.css?<%= gitinfo.local.branch.current.shortSHA %>"/>
 </head>
-<body ng-controller="AppCtrl">
-<header class="navbar navbar-default navbar-fixed-top" role="banner" ng-cloak>
+<body ng-controller="AppCtrl" ng-cloak>
+<loading></loading>
+<header class="navbar navbar-default navbar-fixed-top" role="banner">
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">14all</a>
+            <button class="navbar-toggle" href="#" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed"><i class="glyphicon glyphicon-th-large"></i></button>
         </div>
-        <nav class="navbar-collapse collapse" role="navigation">
+        <nav collapse="navCollapsed" class="navbar-collapse collapse navbar-responsive-collapse" role="navigation">
             <ul class="nav navbar-nav">
                 <li>
                     <a href="#/manga">Manga</a>
@@ -30,20 +32,19 @@
                 <li>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" ng-model="search" focus-me="focus.search" ng-blur="focus.search=false">
+                            <input type="text" class="form-control" placeholder="Search" ng-model="search.title" focus-me="focus.search" ng-blur="focus.search=false">
                         </div>
                     </form>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle"><i class="glyphicon glyphicon-cog"></i></a>
+                    <a href="#" class="dropdown-toggle" title="settings"><i class="glyphicon glyphicon-cog"></i></a>
                     <ul class="dropdown-menu">
-                        <li><label class="checkbox"><input type="checkbox" ng-model="settings.excludeFinished"
-                                                                  >exclude finished</label></li>
+                        <li><label class="checkbox"><input type="checkbox" ng-model="settings.excludeFinished">exclude finished</label></li>
                     </ul>
                 </li>
                 <li>
-                    <a ng-if="!isLoggedIn()" ng-href="#/login"><i class="glyphicon glyphicon-log-in"></i></a>
-                    <a ng-if="isLoggedIn()" ng-href="#/logout"><i class="glyphicon glyphicon-log-out"></i></a>
+                    <a ng-if="!isLoggedIn()" ng-href="#/login" title="login"><i class="glyphicon glyphicon-log-in"></i></a>
+                    <a ng-if="isLoggedIn()" ng-href="#/logout" title="logout"><i class="glyphicon glyphicon-log-out"></i></a>
                 </li>
 
             </ul>
@@ -53,10 +54,9 @@
 </header>
 
 <div class="container">
-    <div ng-view></div>
+    <div ng-view class="view-animation"></div>
 </div>
 
-<loading></loading>
 
 <script type="text/javascript" src="<%= grunt.config.get('pkg.name') %>.vendor.min.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
 <script type="text/javascript" src="<%= grunt.config.get('pkg.name') %>.templates.min.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>

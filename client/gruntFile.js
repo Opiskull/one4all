@@ -42,6 +42,7 @@ module.exports = function(grunt){
                     'angular',
                     'angular-bootstrap',
                     'angular-route',
+                    'angular-animate',
                     'lodash',
                     'restangular'
                 ],
@@ -149,7 +150,7 @@ module.exports = function(grunt){
         clean: ['<%= dest.dir %>/*'],
         watch: {
             scripts: {
-                files: ['**/bower_components/**','!**/node_modules/**','!**/build/**','src/**/*.*','vendor/**/*.*'],
+                files: ['**/bower_components/**','!**/node_modules/**','!**/build/**','src/**/*.*','gruntFile.js'],
                 tasks: ['debug']
             }
         },

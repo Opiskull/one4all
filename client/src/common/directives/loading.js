@@ -16,9 +16,6 @@ angular.module('14all')
                 if ($rootScope.http.pendingRequests.length < 1) {
                     $rootScope.loading = false;
                 }
-                if (canRecover(rejection)) {
-                    return responseOrNewPromise
-                }
                 return $q.reject(rejection);
             },
             'response': function (response) {
@@ -32,9 +29,6 @@ angular.module('14all')
                 $rootScope.http = $rootScope.http || $injector.get('$http');
                 if ($rootScope.http.pendingRequests.length < 1) {
                     $rootScope.loading = false;
-                }
-                if (canRecover(rejection)) {
-                    return responseOrNewPromise
                 }
                 return $q.reject(rejection);
             }

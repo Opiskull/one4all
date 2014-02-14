@@ -15,7 +15,7 @@
         </td>
         <td>{{anime.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td>
-            <finish-edit-button finished="finished(anime)" remove="remove(anime)" model="anime"></finish-edit-button>
+            <actions-button finished="finished(anime)" remove="remove(anime)" model="anime"></actions-button>
         </td>
     </tr>
     <tr ng-if="anime.editable" ng-repeat-end="">

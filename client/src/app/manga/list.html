@@ -17,7 +17,7 @@
         <td>{{manga.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.finished">Next Chapter</a></td>
         <td>
-            <finish-edit-button finished="finished(manga)" remove="remove(manga)" model="manga"></finish-edit-button>
+            <actions-button finished="finished(manga)" remove="remove(manga)" model="manga"></actions-button>
         </td>
     </tr>
     <tr ng-if="manga.editable" ng-repeat-end="">
