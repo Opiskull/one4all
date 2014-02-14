@@ -1,12 +1,14 @@
+var _ = require('lodash');
+
 module.exports = function(grunt){
 
 
     grunt.registerTask('default',['debug','watch']);
 
 
-    grunt.registerTask('dist',['clean','gitinfo','less:dist','html2js:dist','uglify','concat:index','copy'])
+    grunt.registerTask('dist',['clean','gitinfo','less:dist','html2js:dist','uglify','bower_concat','concat:index','copy'])
 
-    grunt.registerTask('debug',['clean','gitinfo','less:debug','html2js:debug','concat','copy']);
+    grunt.registerTask('debug',['clean','gitinfo','less:debug','html2js:debug','bower_concat','concat','copy']);
 
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -16,6 +18,7 @@ module.exports = function(grunt){
     grunt.loadNpmTasks('grunt-html2js');
     grunt.loadNpmTasks('grunt-gitinfo');
     grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-bower-concat');
 
 
     grunt.initConfig({
@@ -29,20 +32,42 @@ module.exports = function(grunt){
             html: ['src/index.html'],
             less: ['src/assets/main.less'],
             tpl:['src/app/**/*.html','src/common/**/*.html'],
-            vendor:['vendor/angular/*.js','vendor/angular-route/*.js','vendor/angular-ui/*.js','vendor/restangular/*.js','vendor/underscore/*.js'],
-            fonts:'src/assets/fonts/'
+            vendor:[''],
+            fonts:'bower_components/bootstrap-bower/fonts/'
+        },
+        bower_concat: {
+            all: {
+                dest: '<%= dest.pkg %>.vendor.min.js',
+                include:[
+                    'angular',
+                    'angular-bootstrap',
+                    'angular-route',
+                    'lodash',
+                    'restangular'
+                ],
+                callback: function(mainFiles, component) {
+                    return _.map(mainFiles, function(filepath) {
+                        // Use minified files is available
+                        var min = filepath.replace(/\.js$/, '.min.js');
+                        return grunt.file.exists(min) ? min : filepath;
+                    });
+                },
+                bowerOptions: {
+                    relative: false
+                }
+            }
         },
         uglify:{
             options: {
                 //mangle: {toplevel: true}
             },
-            vendor:{
-                expand:true,
-                files:
-                    {
-                    '<%= dest.pkg %>.vendor.min.js':'<%= src.vendor %>'
-                }
-            },
+//            vendor:{
+//                expand:true,
+//                files:
+//                    {
+//                    '<%= dest.pkg %>.vendor.min.js':'<%= src.vendor %>'
+//                }
+//            },
 /*            templates:{
                 files:{
                     '<%= dest.pkg %>.templates.min.js':['<%= tempdir %>*//*.js']
@@ -57,7 +82,7 @@ module.exports = function(grunt){
         less:{
             debug:{
                 options: {
-                    paths: ['vendor/bootstrap','assets']
+                    paths: ['assets']
                 },
                 files: {
                     '<%= dest.pkg %>.min.css': '<%= src.less %>'
@@ -66,7 +91,7 @@ module.exports = function(grunt){
             dist:{
                 options: {
                     compress:true,
-                    paths: ['vendor/bootstrap','assets']
+                    paths: ['assets']
                 },
                 files: {
                     '<%= dest.pkg %>.min.css': '<%= src.less %>'
@@ -89,14 +114,15 @@ module.exports = function(grunt){
             application: {
                 src: '<%= src.js %>',
                 dest: '<%= dest.pkg %>.min.js'
-            },
-            vendor:{
-                expand:true,
-                files:
-                {
-                    '<%= dest.pkg %>.vendor.min.js':'<%= src.vendor %>'
-                }
             }
+//            ,
+//            vendor:{
+//                expand:true,
+//                files:
+//                {
+//                    '<%= dest.pkg %>.vendor.min.js':'<%= src.vendor %>'
+//                }
+//            }
         },
         html2js: {
             dist: {
@@ -123,7 +149,7 @@ module.exports = function(grunt){
         clean: ['<%= dest.dir %>/*'],
         watch: {
             scripts: {
-                files: ['!**/node_modules/**','!**/build/**','src/**/*.*','vendor/**/*.*'],
+                files: ['**/bower_components/**','!**/node_modules/**','!**/build/**','src/**/*.*','vendor/**/*.*'],
                 tasks: ['debug']
             }
         },

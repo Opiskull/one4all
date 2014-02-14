@@ -6,7 +6,7 @@
           href="<%= grunt.config.get('pkg.name') %>.min.css?<%= gitinfo.local.branch.current.shortSHA %>"/>
 </head>
 <body ng-controller="AppCtrl">
-<header class="navbar navbar-default navbar-fixed-top" role="banner">
+<header class="navbar navbar-default navbar-fixed-top" role="banner" ng-cloak>
     <div class="container">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">14all</a>
@@ -42,8 +42,8 @@
                     </ul>
                 </li>
                 <li>
-                    <a ng-if="!isLoggedIn()" ng-href="#/login">Login</a>
-                    <a ng-if="isLoggedIn()" ng-href="#/logout">Logout</a>
+                    <a ng-if="!isLoggedIn()" ng-href="#/login"><i class="glyphicon glyphicon-log-in"></i></a>
+                    <a ng-if="isLoggedIn()" ng-href="#/logout"><i class="glyphicon glyphicon-log-out"></i></a>
                 </li>
 
             </ul>
