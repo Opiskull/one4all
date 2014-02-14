@@ -37,7 +37,7 @@
         <td><input class="form-control input-sm" type="number" min="0" ng-model="newserie.episode"/></td>
         <td><save-cancel-button save="create(newserie)" cancel="cancel(newserie)"></save-cancel-button></td>
     </tr>
-        <tr ng-if="!newserie.isnew"><td colspan="5"><button ng-click="add()" class="btn btn-default">add</button></td></tr>
+        <tr ng-if="!newserie.isnew"><td colspan="5"><add-button add="add()"></add-button></td></tr>
     </tfoot>
 </table>
 </div>

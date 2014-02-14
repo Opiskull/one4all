@@ -35,7 +35,7 @@
         <td colspan="2"><input class="form-control input-sm" type="url" ng-model="newmanga.url" placeholder="url $$chapter$$ will be replaced with next chapter"/></td>
         <td><save-cancel-button save="create(newmanga)" cancel="cancel(newmanga)"></save-cancel-button></td>
     </tr>
-        <tr ng-if="!newmanga.isnew"><td colspan="5"><button ng-click="add()" class="btn btn-default">add</button></td></tr>
+        <tr ng-if="!newmanga.isnew"><td colspan="5"><add-button add="add()"></add-button></td></tr>
     </tfoot>
 </table>
 </div>
