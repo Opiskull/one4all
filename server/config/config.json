@@ -7,12 +7,12 @@
     "db_url":"mongodb://localhost/test",
     "auth": {
         "github":{
-            "clientID":"4972e0999bd071af6f87",
-            "clientSecret": "99157d614d282e844cfee655eb2bee21693d0df0"
+            "clientID":"",
+            "clientSecret": ""
         },
         "google":{
-            "clientID":"112130986867-nd0l9r8q24q27qsfniuk02j6tj8so1ae.apps.googleusercontent.com",
-            "clientSecret":"MxKpmITmMwvmnNLm3kFQvn5D"
+            "clientID":"",
+            "clientSecret":""
         }
     }
 }
