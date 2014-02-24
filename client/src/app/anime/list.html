@@ -9,10 +9,10 @@
     </thead>
     <tbody>
     <tr ng-if="!anime.editable" ng-repeat-start="anime in animes | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
-        ng-class="{bold:anime.finished,danger:anime.dropped,success:anime.finished}">
+        ng-class="{bold:anime.stats.finished,danger:anime.stats.dropped,success:anime.stats.finished}">
         <td>{{anime.title}}</td>
         <td>
-            <up-down-button decrease="decreaseEp(anime)" increase="increaseEp(anime)" value="anime.episode" disabled="anime.finished"></up-down-button>
+            <up-down-button decrease="decreaseEp(anime)" increase="increaseEp(anime)" value="anime.episode" disabled="anime.stats.finished"></up-down-button>
         </td>
         <td>{{anime.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td>

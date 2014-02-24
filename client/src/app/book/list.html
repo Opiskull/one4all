@@ -9,10 +9,10 @@
     </thead>
     <tbody>
     <tr ng-if="!book.editable" ng-repeat-start="book in books | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
-        ng-class="{bold:book.finished,danger:book.dropped,success:book.finished}">
+        ng-class="{bold:book.stats.finished,danger:book.stats.dropped,success:book.stats.finished}">
         <td>{{book.title}}</td>
         <td>
-        <up-down-button decrease="decreasePg(book)" increase="increasePg(book)" value="book.page" disabled="book.finished"></up-down-button>
+        <up-down-button decrease="decreasePg(book)" increase="increasePg(book)" value="book.page" disabled="book.stats.finished"></up-down-button>
     </td>
         <td>{{book.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td>

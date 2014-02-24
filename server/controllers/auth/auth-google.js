@@ -15,6 +15,7 @@ module.exports.init = function (server,router) {
             callbackURL: "https://peerzone.net/api/auth/google/callback"
         },
         function (accessToken, refreshToken, profile, done) {
+            profile.username = profile.displayName;
             User.findOrCreate(profile, function (err, user) {
                 if(err) {return done(err);}
                 if(!user){return done(null,false);}

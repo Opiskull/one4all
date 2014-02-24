@@ -32,16 +32,15 @@ userSchema.statics.findOrCreate = function(profile,callback){
         }
         else{
             var newuser = new User();
-            if(profile.provider === 'github'){
-                newuser.username = profile.username;
-                newuser.email = profile.emails[0].value;
-            }
-            if(profile.provider === 'google'){
-                newuser.username = profile.displayName;
-            }
+            newuser.username = profile.username;
+            newuser.email = profile.email;
             newuser.profile = profile;
-            newuser.save();
-            return callback(null,newuser);
+            newuser.save(function(err){
+                if(err){
+                    return callback(err,null);
+                }
+                return callback(null,newuser);
+            });
         }
     });
 };

@@ -1,12 +1,11 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
+var stats = require('../lib/mongoose-plugins.js').stats;
 
 
 var animeSchema = mongoose.Schema({
     title: String,
     episode: Number,
-    finished: Boolean,
-    dropped: Boolean,
     titles: [
         {
             title: String,
@@ -17,4 +16,5 @@ var animeSchema = mongoose.Schema({
 });
 
 animeSchema.plugin(timestamps);
+animeSchema.plugin(stats);
 mongoose.model('Anime', animeSchema);

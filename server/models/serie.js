@@ -1,13 +1,11 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-
+var stats = require('../lib/mongoose-plugins.js').stats;
 
 var serieSchema = mongoose.Schema({
     title: String,
     season: Number,
     episode: Number,
-    finished: Boolean,
-    dropped: Boolean,
     titles: [
         {
             title: String,
@@ -18,4 +16,5 @@ var serieSchema = mongoose.Schema({
 });
 
 serieSchema.plugin(timestamps);
+serieSchema.plugin(stats);
 mongoose.model('Serie', serieSchema);

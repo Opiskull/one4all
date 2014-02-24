@@ -1,11 +1,9 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-
+var stats = require('../lib/mongoose-plugins.js').stats;
 
 var movieSchema = mongoose.Schema({
     title: String,
-    finished: Boolean,
-    dropped: Boolean,
     titles: [
         {
             title: String,
@@ -16,4 +14,5 @@ var movieSchema = mongoose.Schema({
 });
 
 movieSchema.plugin(timestamps);
+movieSchema.plugin(stats);
 mongoose.model('Movie', movieSchema);

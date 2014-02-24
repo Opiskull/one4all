@@ -10,13 +10,13 @@
     </thead>
     <tbody>
     <tr ng-if="!serie.editable" ng-repeat-start="serie in series | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
-        ng-class="{bold:serie.finished,danger:serie.dropped,success:serie.finished}">
+        ng-class="{bold:serie.stats.finished,danger:serie.stats.dropped,success:serie.stats.finished}">
         <td>{{serie.title}}</td>
         <td>
-            <up-down-button decrease="decreaseSe(serie)" increase="increaseSe(serie)" value="serie.season" disabled="serie.finished"></up-down-button>
+            <up-down-button decrease="decreaseSe(serie)" increase="increaseSe(serie)" value="serie.season" disabled="serie.stats.finished"></up-down-button>
         </td>
         <td>
-            <up-down-button decrease="decreaseEp(serie)" increase="increaseEp(serie)" value="serie.episode" disabled="serie.finished"></up-down-button>
+            <up-down-button decrease="decreaseEp(serie)" increase="increaseEp(serie)" value="serie.episode" disabled="serie.stats.finished"></up-down-button>
         </td>
         <td>{{serie.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td>

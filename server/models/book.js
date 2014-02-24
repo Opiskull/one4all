@@ -1,11 +1,9 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-
+var stats = require('../lib/mongoose-plugins.js').stats;
 
 var bookSchema = mongoose.Schema({
     title: String,
-    finished: Boolean,
-    dropped: Boolean,
     page: Number,
     titles: [
         {
@@ -17,4 +15,5 @@ var bookSchema = mongoose.Schema({
 });
 
 bookSchema.plugin(timestamps);
+bookSchema.plugin(stats);
 mongoose.model('Book', bookSchema);

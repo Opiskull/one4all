@@ -14,12 +14,16 @@ angular.module('14all').factory('valuesService',['dialogService',function(dialog
     }
 
     function finished(item){
-        item.finished = !item.finished;
+        if(!item.stats)
+            item.stats = {};
+        item.stats.finished = !item.stats.finished;
         return update(item);
     }
 
     function dropped(item){
-        item.dropped = !item.dropped;
+        if(!item.stats)
+            item.stats = {};
+        item.stats.dropped = !item.stats.dropped;
         return update(item);
     }
 

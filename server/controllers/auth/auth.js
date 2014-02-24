@@ -19,9 +19,7 @@ module.exports.init = function (server,router) {
         req.user.accessToken = '';
         req.user.save(function(err){
             if(err){
-                res.json({
-
-                });
+                res.json(err);
             }
             req.logout();
             res.header('Location','/index.html');

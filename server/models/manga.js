@@ -1,13 +1,11 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-
+var stats = require('../lib/mongoose-plugins.js').stats;
 
 var mangaSchema = mongoose.Schema({
     title: String,
     chapter: Number,
     url: String,
-    finished: Boolean,
-    dropped: Boolean,
     titles: [
         {
             title: String,
@@ -18,4 +16,5 @@ var mangaSchema = mongoose.Schema({
 });
 
 mangaSchema.plugin(timestamps);
+mangaSchema.plugin(stats);
 mongoose.model('Manga', mangaSchema);

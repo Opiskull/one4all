@@ -15,6 +15,9 @@ module.exports.init = function (server,router) {
             callbackURL: "https://peerzone.net/api/auth/github/callback"
         },
         function (accessToken, refreshToken, profile, done) {
+            profile.username = profile.username;
+            if(profile.emails)
+                profile.email = profile.emails[0].value;
             User.findOrCreate(profile, function (err, user) {
                 if(err) {return done(err);}
                 if(!user){return done(null,false);}
