@@ -8,7 +8,7 @@ angular.module('14all').filter('isFinished',function(){
         }
         var ret = [];
         angular.forEach(input,function(item){
-            if(angular.isUndefined(item.finished) || !item.finished){
+            if(angular.isDefined(item.stats) && (angular.isUndefined(item.stats.finished) || !item.stats.finished)){
                 ret.push(item);
             }
         });

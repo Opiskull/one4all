@@ -8,7 +8,7 @@ angular.module('14all').filter('isDropped',function(){
         }
         var ret = [];
         angular.forEach(input,function(item){
-            if(angular.isUndefined(item.dropped) || !item.dropped){
+            if(angular.isDefined(item.stats) && (angular.isUndefined(item.stats.dropped) || !item.stats.dropped)){
                 ret.push(item);
             }
         });

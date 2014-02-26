@@ -11,7 +11,7 @@ angular.module('14all').filter('objectFilter',function(){
         var ret = [];
         angular.forEach(input,function(item){
             if(filters.excludeFinished || filters.excludeDropped){
-                if(enabledValue(filters.excludeFinished,item.finished) || enabledValue(filters.excludeDropped,item.dropped)){
+                if(item.stats && (enabledValue(filters.excludeFinished,item.stats.finished) || enabledValue(filters.excludeDropped,item.stats.dropped))){
                     ret.push(item);
                 }
             }
