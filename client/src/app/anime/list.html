@@ -8,8 +8,7 @@
         <th style="width: 210px"><span class="badge pull-right">{{animes.length}}</span></th></tr>
     </thead>
     <tbody>
-    <tr ng-if="!anime.editable" ng-repeat-start="anime in animes | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
-        ng-class="{bold:anime.stats.finished,danger:anime.stats.dropped,success:anime.stats.finished}">
+    <tr ng-if="!anime.editable" ng-repeat-start="anime in animes | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse" display-state="anime.stats">
         <td>{{anime.title}}</td>
         <td>
             <up-down-button decrease="decreaseEp(anime)" increase="increaseEp(anime)" value="anime.episode" disabled="anime.stats.finished"></up-down-button>

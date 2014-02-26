@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     <tr ng-if="!manga.editable" ng-repeat-start="manga in mangas | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
-        ng-class="{bold:manga.stats.finished,danger:manga.stats.dropped,success:manga.stats.finished}">
+        display-state="manga.stats">
         <td>{{manga.title}}</td>
         <td>
             <up-down-button decrease="decreaseCh(manga)" increase="increaseCh(manga)" value="manga.chapter" disabled="manga.stats.finished"></up-down-button>

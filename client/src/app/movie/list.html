@@ -8,7 +8,7 @@
     </thead>
     <tbody>
     <tr ng-if="!movie.editable" ng-repeat-start="movie in movies | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
-        ng-class="{bold:movie.stats.finished,danger:movie.stats.dropped,success:movie.stats.finished}">
+        display-state="movie.stats">
         <td>{{movie.title}}</td>
         <td>{{movie.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
         <td>

@@ -15,24 +15,12 @@
         </div>
         <nav collapse="navCollapsed" class="navbar-collapse collapse navbar-responsive-collapse" role="navigation">
             <ul class="nav navbar-nav">
-                <li ng-class="{ active: isActive('/manga')}">
-                    <a href="#/manga">Manga</a>
-                </li>
-                <li ng-class="{ active: isActive('/movie')}">
-                    <a href="#/movie">Movie</a>
-                </li>
-                <li ng-class="{ active: isActive('/serie')}">
-                    <a href="#/serie">Serie</a>
-                </li>
-                <li ng-class="{ active: isActive('/anime')}">
-                    <a href="#/anime">Anime</a>
-                </li>
-                <li ng-class="{ active: isActive('/book')}">
-                    <a href="#/book">Book</a>
-                </li>
-                <li ng-class="{ active: isActive('/game')}">
-                    <a href="#/game">Game</a>
-                </li>
+                <display-active path="#/manga" display-title="Manga"></display-active>
+                <display-active path="#/movie" display-title="Movie"></display-active>
+                <display-active path="#/serie" display-title="Serie"></display-active>
+                <display-active path="#/anime" display-title="Anime"></display-active>
+                <display-active path="#/book" display-title="Book"></display-active>
+                <display-active path="#/game" display-title="Game"></display-active>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li>

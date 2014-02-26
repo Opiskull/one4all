@@ -27,8 +27,4 @@ angular.module('14all', ['ui.bootstrap','ngAnimate',
         $scope.$on("$routeChangeSuccess",function(event,next,current){
             $scope.focus.search = true;
         });
-
-        $scope.isActive = function(viewLocation){
-            return viewLocation === $location.path();
-        };
     }]);
