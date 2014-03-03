@@ -5,23 +5,23 @@
     <link rel="stylesheet" type="text/css"
           href="<%= grunt.config.get('pkg.name') %>.min.css?<%= gitinfo.local.branch.current.shortSHA %>"/>
 </head>
-<body ng-controller="AppCtrl" ng-cloak>
+<body ng-controller="AppCtrl">
 <loading></loading>
-<header class="navbar navbar-default navbar-fixed-top" role="navigation">
+<header ng-cloak class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#">14all</a>
             <button class="navbar-toggle" href="#" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed"><i class="glyphicon glyphicon-th-large"></i></button>
         </div>
         <nav collapse="navCollapsed" class="navbar-collapse collapse navbar-responsive-collapse" role="navigation">
-            <ul class="nav navbar-nav">
-                <display-active path="#/manga" display-title="Manga"></display-active>
-                <display-active path="#/movie" display-title="Movie"></display-active>
-                <display-active path="#/serie" display-title="Serie"></display-active>
-                <display-active path="#/anime" display-title="Anime"></display-active>
-                <display-active path="#/book" display-title="Book"></display-active>
-                <display-active path="#/game" display-title="Game"></display-active>
-            </ul>
+            <menu>
+                <menu-item path="#/manga" display-title="Manga"></menu-item>
+                <menu-item path="#/movie" display-title="Movie"></menu-item>
+                <menu-item path="#/serie" display-title="Serie"></menu-item>
+                <menu-item path="#/anime" display-title="Anime"></menu-item>
+                <menu-item path="#/book" display-title="Book"></menu-item>
+                <menu-item path="#/game" display-title="Game"></menu-item>
+            </menu>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <form class="navbar-form navbar-right" role="search">
@@ -61,7 +61,7 @@
     </div>
 </header>
 
-<div class="container">
+<div ng-cloak class="container">
     <div ng-view class="view-animation"></div>
 </div>
 
