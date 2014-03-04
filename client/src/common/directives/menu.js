@@ -1,11 +1,11 @@
-angular.module('14all').directive('menu',function(){
+angular.module('14all').directive('menu',[function(){
     return {
         restrict: 'E',
         scope:{},
         transclude:true,
         replace: true,
         template : '<ul class="nav navbar-nav" ng-transclude></ul>',
-        controller:function($scope,$element,$attrs,$transclude){
+        controller:['$scope',function($scope){
             $scope.items = [];
 
             this.addItem = function(item){
@@ -21,9 +21,9 @@ angular.module('14all').directive('menu',function(){
                     item.active = item.strippedPath === currentPath;
                 });
             });
-        }
+        }]
     }
-}).directive('menuItem',function(){
+}]).directive('menuItem',[function(){
     return {
         priority: 300,
         require: "^menu",
@@ -42,4 +42,4 @@ angular.module('14all').directive('menu',function(){
             }
         }
     };
-});
+}]);
