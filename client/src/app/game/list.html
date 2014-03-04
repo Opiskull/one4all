@@ -2,12 +2,12 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
-        <th style="width: 160px"><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Modified</a></th>
-        <th style="width: 210px"><span class="badge pull-right">{{games.length}}</span></th></tr>
+        <th><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a></th>
+        <th style="width: 160px"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a></th>
+        <th style="width: 210px"><span class="badge pull-right">{{filtered.length}}</span></th></tr>
     </thead>
     <tbody>
-    <tr ng-if="!game.editable" ng-repeat-start="game in games | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
+    <tr ng-if="!game.editable" ng-repeat-start="game in filtered = (games | multi:settings.filter)"
         display-state="game.stats">
         <td>{{game.title}}</td>
         <td>{{game.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>

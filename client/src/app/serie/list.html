@@ -2,14 +2,14 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
-        <th><a href="" ng-click="predicate = 'season'; reverse=!reverse">Season</a></th>
-        <th><a href="" ng-click="predicate = 'episode'; reverse=!reverse">Episode</a></th>
-        <th style="width: 160px"><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Modified</a></th>
-        <th style="width: 210px"><span class="badge pull-right">{{series.length}}</span></th></tr>
+        <th><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a></th>
+        <th><a href="" ng-click="orderBy.predicate = 'season'; orderBy.reverse=!orderBy.reverse">Season</a></th>
+        <th><a href="" ng-click="orderBy.predicate = 'episode'; orderBy.reverse=!orderBy.reverse">Episode</a></th>
+        <th style="width: 160px"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a></th>
+        <th style="width: 210px"><span class="badge pull-right">{{filtered.length}}</span></th></tr>
     </thead>
     <tbody>
-    <tr ng-if="!serie.editable" ng-repeat-start="serie in series | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
+    <tr ng-if="!serie.editable" ng-repeat-start="serie in filtered = (series | multi:settings.filter)"
         display-state="serie.stats">
         <td>{{serie.title}}</td>
         <td>

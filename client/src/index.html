@@ -26,7 +26,7 @@
                 <li>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            <input type="text" class="form-control" placeholder="Search" ng-model="search.title" focus-me="focus.search" ng-blur="focus.search=false">
+                            <input type="text" class="form-control" placeholder="Search" ng-model="settings.filter.keyword.title" focus-me="focus.search" ng-blur="focus.search=false">
                         </div>
                     </form>
                 </li>
@@ -38,14 +38,14 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="" btn-checkbox ng-model="settings.excludeFinished">
-                                <i class="glyphicon glyphicon-eye-close text-danger" ng-if="settings.excludeFinished"></i>
-                                <i class="glyphicon glyphicon-eye-open text-success" ng-if="!settings.excludeFinished"></i> exclude finished</a>
+                            <a href="" btn-checkbox ng-model="settings.filter.stats.finished">
+                                <i class="glyphicon glyphicon-eye-close text-danger" ng-if="settings.filter.stats.finished"></i>
+                                <i class="glyphicon glyphicon-eye-open text-success" ng-if="!settings.filter.stats.finished"></i> exclude finished</a>
                         </li>
                         <li>
-                            <a href="" btn-checkbox ng-model="settings.excludeDropped">
-                                <i class="glyphicon glyphicon-eye-close text-danger" ng-if="settings.excludeDropped"></i>
-                                <i class="glyphicon glyphicon-eye-open text-success" ng-if="!settings.excludeDropped"></i> exclude dropped</a>
+                            <a href="" btn-checkbox ng-model="settings.filter.stats.dropped">
+                                <i class="glyphicon glyphicon-eye-close text-danger" ng-if="settings.filter.stats.dropped"></i>
+                                <i class="glyphicon glyphicon-eye-open text-success" ng-if="!settings.filter.stats.dropped"></i> exclude dropped</a>
                         </li>
                     </ul>
                 </li>

@@ -10,13 +10,31 @@ angular.module('14all', ['ui.bootstrap','ngAnimate',
         RestangularProvider.setBaseUrl('/api');
     }])
     .controller('AppCtrl',['$scope','$location','authService','$store',function($scope,$location,authService,$store){
+
+
+        // FIX SETTINGS
+        var tempSettings = $store.get('settings');
+        if(angular.isDefined(tempSettings.excludeFinished)){
+            $store.remove('settings');
+        }
+        // FIX SETTINGS
         $scope.isLoggedIn = authService.isLoggedIn;
         $scope.logout = authService.logout;
-
         $scope.settings = $store.bind($scope,'settings',{
-            excludeFinished: false,
-            excludeDropped: false
+            filter:{
+                stats:{
+                    finished: false,
+                    dropped: false
+                },
+                orderBy:{
+                    predicate:'',
+                    reverse:false
+                },
+                keyword:{}
+            }
         });
+
+        $scope.orderBy = $scope.settings.filter.orderBy;
 
         $scope.focus  = {search:true};
 

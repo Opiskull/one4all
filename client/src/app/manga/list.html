@@ -2,14 +2,14 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
-        <th><a href="" ng-click="predicate = 'chapter'; reverse=!reverse">Chapter</a></th>
-        <th style="width: 160px"><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Modified</a></th>
+        <th><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a></th>
+        <th><a href="" ng-click="orderBy.predicate = 'chapter'; orderBy.reverse=!orderBy.reverse">Chapter</a></th>
+        <th style="width: 160px"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a></th>
         <th style="width: 100px">Url</th>
-        <th style="width: 210px"><span class="badge pull-right">{{mangas.length}}</span></th></tr>
+        <th style="width: 210px"><span class="badge pull-right">{{filtered.length}}</span></th></tr>
     </thead>
     <tbody>
-    <tr ng-if="!manga.editable" ng-repeat-start="manga in mangas | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
+    <tr ng-if="!manga.editable" ng-repeat-start="manga in filtered = (mangas | multi:settings.filter)"
         display-state="manga.stats">
         <td>{{manga.title}}</td>
         <td>

@@ -2,13 +2,13 @@
 <table class="table table-hover">
     <thead>
     <tr>
-        <th><a href="" ng-click="predicate = 'title'; reverse=!reverse">Title</a></th>
-        <th><a href="" ng-click="predicate = 'page'; reverse=!reverse">Page</a></th>
-        <th style="width: 160px"><a href="" ng-click="predicate = 'updatedAt'; reverse=!reverse">Last Modified</a></th>
-        <th style="width: 210px"><span class="badge pull-right">{{books.length}}</span></th></tr>
+        <th><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a></th>
+        <th><a href="" ng-click="orderBy.predicate = 'page'; orderBy.reverse=!orderBy.reverse">Page</a></th>
+        <th style="width: 160px"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a></th>
+        <th style="width: 210px"><span class="badge pull-right">{{filtered.length}}</span></th></tr>
     </thead>
     <tbody>
-    <tr ng-if="!book.editable" ng-repeat-start="book in books | isFinished:settings.excludeFinished | isDropped:settings.excludeDropped | filter:search | orderBy:[predicate]:reverse"
+    <tr ng-if="!book.editable" ng-repeat-start="book in filtered = (books | multi:settings.filter)"
         display-state="book.stats">
         <td>{{book.title}}</td>
         <td>
