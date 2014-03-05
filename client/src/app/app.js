@@ -14,7 +14,7 @@ angular.module('14all', ['ui.bootstrap','ngAnimate',
 
         // FIX SETTINGS
         var tempSettings = $store.get('settings');
-        if(angular.isDefined(tempSettings.excludeFinished)){
+        if(angular.isDefined(tempSettings) && angular.isDefined(tempSettings.excludeFinished)){
             $store.remove('settings');
         }
         // FIX SETTINGS
