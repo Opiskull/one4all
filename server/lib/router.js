@@ -5,6 +5,10 @@ var restify = require('restify');
 
 var authenticate = passport.authenticate('bearer',{session:false});
 
+exports.getSearchRoute = function(route){
+    return config.api_prefix + route + "/:search";
+};
+
 exports.getRoute = function(route){
     return config.api_prefix + route;
 };
