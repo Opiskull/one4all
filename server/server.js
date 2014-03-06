@@ -11,7 +11,6 @@ var server = restify.createServer({
     version: packageInfo.version
 });
 
-
 mongoose.connect(config.db_url);
 
 server.use(restify.acceptParser(server.acceptable));
