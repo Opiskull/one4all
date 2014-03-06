@@ -1,0 +1,4 @@
+{
+    "AnimeSearchUrl":"http://myanimelist.net/api/anime/search.xml",
+    "MangaSearchUrl":"http://myanimelist.net/api/manga/search.xml"
+}
