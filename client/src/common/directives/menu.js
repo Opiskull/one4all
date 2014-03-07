@@ -27,12 +27,13 @@ angular.module('14all').directive('menu',[function(){
     return {
         priority: 300,
         require: "^menu",
-        template:'<li ng-class="{ active: active }"><a href="{{path}}">{{displayTitle}}</a></li>',
+        template:'<li ng-class="{ active: active }"><a href="{{path}}" target="{{target}}">{{displayTitle}}</a></li>',
         restrict: 'E',
         replace:true,
         scope:{
             displayTitle: '@',
-            path: '@'
+            path: '@',
+            target:'@'
         },
         link : function($scope,$element,$attrs,menuController){
             menuController.addItem($scope);

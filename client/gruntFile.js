@@ -33,7 +33,8 @@ module.exports = function(grunt){
             less: ['src/assets/main.less'],
             tpl:['src/app/**/*.html','src/common/**/*.html'],
             vendor:[''],
-            fonts:'bower_components/bootstrap-bower/fonts/'
+            fonts:'bower_components/bootstrap-bower/fonts/',
+            favicon: 'src/site_44px.png'
         },
         bower_concat: {
             all: {
@@ -102,6 +103,9 @@ module.exports = function(grunt){
         copy:{
             fonts: {
                 expand:true, cwd: '<%= src.fonts %>',src:'*',dest:'<%= dest.dir %>/fonts/',flatten:true,filter:'isFile'
+            },
+            favicon:{
+                src:'<%= src.favicon %>', dest:'<%= dest.dir %>/site.png'
             }
         },
         concat:{
