@@ -1,32 +1,41 @@
-<div class="table-responsive">
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a></th>
-        <th style="width: 160px"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a></th>
-        <th style="width: 210px"><span class="badge pull-right">{{filtered.length}}</span></th></tr>
-    </thead>
-    <tbody>
-    <tr ng-if="!movie.editable" ng-repeat-start="movie in filtered = (movies | multi:settings.filter)"
-        display-state="movie.stats">
-        <td>{{movie.title}}</td>
-        <td>{{movie.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-        <td>
-            <actions-button finished="finished(movie)" remove="remove(movie)" dropped="dropped(movie)" model="movie"></actions-button>
-        </td>
-    </tr>
-    <tr ng-if="movie.editable" ng-repeat-end="">
-        <td><input class="form-control input-sm" type="text" ng-model="movie.title"/></td>
-        <td>{{movie.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-        <td><save-cancel-button save="update(movie)" cancel="cancel(movie)"></save-cancel-button></td>
-    </tr>
-    </tbody>
-    <tfoot>
-    <tr ng-if="newmovie.isnew">
-        <td colspan="2"><input class="form-control input-sm" type="text" ng-model="newmovie.title" placeholder="title" focus-me="newmovie.isnew"/></td>
-        <td><save-cancel-button save="create(newmovie)" cancel="cancel(newmovie)"></save-cancel-button></td>
-    </tr>
-        <tr ng-if="!newmovie.isnew"><td colspan="3"><add-button add="add()"></add-button></td></tr>
-    </tfoot>
-</table>
+<div class="header-row">
+    <div class="col-sm-2"><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
+    </div>
+    <div class="col-sm-6"></div>
+    <div class="col-sm-1"><a href=""
+                                                  ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
+        Modified</a></div>
+    <div class="col-sm-3"><span class="badge pull-right">{{filtered.length}}</span></div>
+</div>
+<div class="item-row" ng-if="!movie.editable" ng-repeat-start="movie in filtered = (movies | multi:settings.filter)"
+     display-state="movie.stats">
+    <div class="col-sm-2">{{movie.title}}</div>
+    <div class="col-sm-6"></div>
+    <div class="col-sm-1">{{movie.updatedAt | timeAgo}}</div>
+    <div class="col-sm-3">
+        <actions-button finished="finished(movie)" remove="remove(movie)" dropped="dropped(movie)"
+                        model="movie"></actions-button>
+    </div>
+</div>
+<div class="item-row" ng-if="movie.editable" ng-repeat-end="">
+    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="movie.title"/></div>
+    <div class="col-sm-6"></div>
+    <div class="col-sm-1">{{movie.updatedAt | timeAgo}}</div>
+    <div class="col-sm-3">
+        <save-cancel-button save="update(movie)" cancel="cancel(movie)"></save-cancel-button>
+    </div>
+</div>
+<div class="item-row" ng-if="newmovie.isnew">
+    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="newmovie.title"
+                                             placeholder="title" focus-me="newmovie.isnew"/></div>
+    <div class="col-sm-6"></div>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-3">
+        <save-cancel-button save="create(newmovie)" cancel="cancel(newmovie)"></save-cancel-button>
+    </div>
+</div>
+<div class="item-row" ng-if="!newmovie.isnew">
+    <div class="col-sm-12">
+        <add-button add="add()"></add-button>
+    </div>
 </div>

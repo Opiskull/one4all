@@ -2,11 +2,15 @@
 @import "loading.less";
 @import "animate.less";
 
-body{padding-top:70px;}
+@grid-gutter-width:         4px;
+@brand-primary: #ff8400;
+@grid-float-breakpoint: 959px;
 
-.caret.caret-reversed {
-  border-top-width: 0;
-  border-bottom: 4px solid #000000;
+
+
+body{
+  padding-top:60px;
+  padding-bottom:60px;
 }
 
 .bold{
@@ -41,4 +45,46 @@ body{padding-top:70px;}
 
 .navbar-brand{
   padding:3px
+}
+
+.navbar-toggle{
+  margin-top:4px;
+  margin-bottom: 4px;
+}
+
+.bottom-row{
+  .row;
+  position: fixed;
+  bottom:0px;
+}
+
+.header-row{
+  .row;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: @table-border-color;
+  padding: 5px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+  font-weight: bold;
+}
+
+.item-row{
+  .row;
+  border-bottom: solid;
+  border-width: 1px;
+  border-color: @table-border-color;
+  padding: 5px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.item-row:hover{
+  background-color: @state-info-bg !important;
+}
+.item-row.dropped{
+  background-color: @state-danger-bg;
+}
+.item-row.finished{
+  background-color: @state-success-bg;
 }

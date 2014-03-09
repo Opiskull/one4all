@@ -1,44 +1,60 @@
-<div class="table-responsive">
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a></th>
-        <th><a href="" ng-click="orderBy.predicate = 'season'; orderBy.reverse=!orderBy.reverse">Season</a></th>
-        <th><a href="" ng-click="orderBy.predicate = 'episode'; orderBy.reverse=!orderBy.reverse">Episode</a></th>
-        <th style="width: 160px"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a></th>
-        <th style="width: 210px"><span class="badge pull-right">{{filtered.length}}</span></th></tr>
-    </thead>
-    <tbody>
-    <tr ng-if="!serie.editable" ng-repeat-start="serie in filtered = (series | multi:settings.filter)"
-        display-state="serie.stats">
-        <td>{{serie.title}}</td>
-        <td>
-            <up-down-button decrease="decreaseSe(serie)" increase="increaseSe(serie)" value="serie.season" disabled="serie.stats.finished"></up-down-button>
-        </td>
-        <td>
-            <up-down-button decrease="decreaseEp(serie)" increase="increaseEp(serie)" value="serie.episode" disabled="serie.stats.finished"></up-down-button>
-        </td>
-        <td>{{serie.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-        <td>
-            <actions-button finished="finished(serie)" remove="remove(serie)" dropped="dropped(serie)" model="serie"></actions-button>
-        </td>
-    </tr>
-    <tr ng-if="serie.editable" ng-repeat-end="">
-        <td><input class="form-control input-sm" type="text" ng-model="serie.title"/></td>
-        <td><input class="form-control input-sm" type="number" min="0" ng-model="serie.season"/></td>
-        <td><input class="form-control input-sm" type="number" min="0" ng-model="serie.episode"/></td>
-        <td>{{serie.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-        <td><save-cancel-button save="update(serie)" cancel="cancel(serie)"></save-cancel-button></td>
-    </tr>
-    </tbody>
-    <tfoot>
-    <tr ng-if="newserie.isnew">
-        <td><input class="form-control input-sm" type="text" ng-model="newserie.title" placeholder="title" focus-me="newserie.isnew"/></td>
-        <td><input class="form-control input-sm" type="number" min="0" ng-model="newserie.season"/></td>
-        <td><input class="form-control input-sm" type="number" min="0" ng-model="newserie.episode"/></td>
-        <td><save-cancel-button save="create(newserie)" cancel="cancel(newserie)"></save-cancel-button></td>
-    </tr>
-        <tr ng-if="!newserie.isnew"><td colspan="5"><add-button add="add()"></add-button></td></tr>
-    </tfoot>
-</table>
+<div class="header-row">
+    <div class="col-sm-2"><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
+    </div>
+    <div class="col-sm-3"><a href=""
+                             ng-click="orderBy.predicate = 'season'; orderBy.reverse=!orderBy.reverse">Season</a>
+    </div>
+    <div class="col-sm-3"><a href=""
+                             ng-click="orderBy.predicate = 'episode'; orderBy.reverse=!orderBy.reverse">Episode</a>
+    </div>
+    <div class="col-sm-1"><a href=""
+                             ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
+        Modified</a></div>
+    <div class="col-sm-3"><span class="badge pull-right">{{filtered.length}}</span></div>
+</div>
+<div class="item-row" ng-if="!serie.editable"
+     ng-repeat-start="serie in filtered = (series | multi:settings.filter)"
+     display-state="serie.stats">
+    <div class="col-sm-2">{{serie.title}}</div>
+    <div class="col-sm-3">
+        <up-down-button decrease="decreaseSe(serie)" increase="increaseSe(serie)" value="serie.season"
+                        disabled="serie.stats.finished"></up-down-button>
+    </div>
+    <div class="col-sm-3">
+        <up-down-button decrease="decreaseEp(serie)" increase="increaseEp(serie)" value="serie.episode"
+                        disabled="serie.stats.finished"></up-down-button>
+    </div>
+    <div class="col-sm-1">{{serie.updatedAt | timeAgo}}</div>
+    <div class="col-sm-3">
+        <actions-button finished="finished(serie)" remove="remove(serie)" dropped="dropped(serie)"
+                        model="serie"></actions-button>
+    </div>
+</div>
+<div class="item-row" ng-if="serie.editable" ng-repeat-end="">
+    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="serie.title"/></div>
+    <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0" ng-model="serie.season"/>
+    </div>
+    <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0" ng-model="serie.episode"/>
+    </div>
+    <div class="col-sm-1">{{serie.updatedAt | timeAgo}}</div>
+    <div class="col-sm-3">
+        <save-cancel-button save="update(serie)" cancel="cancel(serie)"></save-cancel-button>
+    </div>
+</div>
+<div class="item-row" ng-if="newserie.isnew">
+    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="newserie.title"
+                                 placeholder="title" focus-me="newserie.isnew"/></div>
+    <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0"
+                                 ng-model="newserie.season"/></div>
+    <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0"
+                                 ng-model="newserie.episode"/></div>
+    <div class="col-sm-1"></div>
+    <div class="col-sm-3">
+        <save-cancel-button save="create(newserie)" cancel="cancel(newserie)"></save-cancel-button>
+    </div>
+</div>
+<div class="item-row" ng-if="!newserie.isnew">
+    <div class="col-sm-12">
+        <add-button add="add()"></add-button>
+    </div>
 </div>

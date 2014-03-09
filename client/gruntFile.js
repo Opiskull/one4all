@@ -45,7 +45,8 @@ module.exports = function(grunt){
                     'angular-route',
                     'angular-animate',
                     'lodash',
-                    'restangular'
+                    'restangular',
+                    'momentjs'
                 ],
                 callback: function(mainFiles, component) {
                     return _.map(mainFiles, function(filepath) {

@@ -1,41 +1,55 @@
-<div class="table-responsive">
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a></th>
-        <th><a href="" ng-click="orderBy.predicate = 'episode'; orderBy.reverse=!orderBy.reverse">Episode</a></th>
-        <th style="width: 160px"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a></th>
-        <th style="width: 210px"><span class="badge pull-right">{{filtered.length}}</span></th></tr>
-    </thead>
-    <tbody>
-    <tr ng-if="!anime.editable" ng-repeat-start="anime in filtered = (animes | multi:settings.filter)" display-state="anime.stats">
-        <td>{{anime.title}}</td>
-        <td>
-            <up-down-button decrease="decreaseEp(anime)" increase="increaseEp(anime)" value="anime.episode" disabled="anime.stats.finished"></up-down-button>
-        </td>
-        <td>{{anime.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-        <td>
-            <actions-button finished="finished(anime)" remove="remove(anime)" dropped="dropped(anime)" model="anime"></actions-button>
-        </td>
-    </tr>
-    <tr ng-if="anime.editable" ng-repeat-end="">
-        <td><input class="form-control input-sm" type="text" ng-model="anime.title"/></td>
-        <td><input class="form-control input-sm" type="number" min="0" ng-model="anime.episode"/></td>
-        <td><input class="form-control input-sm" type="url" ng-model="anime.url"/></td>
-        <td>
-            <save-cancel-button save="update(anime)" cancel="cancel(anime)"></save-cancel-button>
-        </td>
-    </tr>
-    </tbody>
-    <tfoot>
-    <tr ng-if="newanime.isnew">
-        <td colspan="2"><input class="form-control input-sm" type="text" ng-model="newanime.title" placeholder="title" focus-me="newanime.isnew"/></td>
-        <td><input class="form-control input-sm" type="number" min="0" ng-model="newanime.episode"/></td>
-        <td>
-            <save-cancel-button save="create(newanime)" cancel="cancel(newanime)"></save-cancel-button>
-        </td>
-    </tr>
-        <tr ng-if="!newanime.isnew"><td colspan="4"><add-button add="add()"></add-button></td></tr>
-    </tfoot>
-</table>
+<div class="header-row">
+    <div class="col-sm-2">
+        <a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
+    </div>
+    <div class="col-sm-6">
+        <a href="" ng-click="orderBy.predicate = 'episode'; orderBy.reverse=!orderBy.reverse">Episode</a>
+    </div>
+    <div class="col-sm-1">
+        <a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a>
+    </div>
+    <div class="col-sm-3">
+        <span class="badge pull-right">{{filtered.length}}</span>
+    </div>
 </div>
+<div class="item-row" ng-if="!anime.editable" ng-repeat-start="anime in filtered = (animes | multi:settings.filter)"
+     display-state="anime.stats">
+    <div class="col-sm-2">{{anime.title}}</div>
+    <div class="col-sm-6">
+        <up-down-button decrease="decreaseEp(anime)" increase="increaseEp(anime)" value="anime.episode"
+                        disabled="anime.stats.finished"></up-down-button>
+    </div>
+    <div class="col-sm-1">{{anime.updatedAt | timeAgo}}</div>
+    <div class="col-sm-3">
+        <actions-button finished="finished(anime)" remove="remove(anime)" dropped="dropped(anime)"
+                        model="anime"></actions-button>
+    </div>
+</div>
+<div class="item-row" ng-if="anime.editable" ng-repeat-end="">
+    <div class="col-sm-2">
+        <input class="form-control input-sm" type="text" ng-model="anime.title"/>
+    </div>
+    <div class="col-sm-6">
+        <input class="form-control input-sm" type="number" min="0" ng-model="anime.episode"/>
+    </div>
+    <div class="col-sm-1">
+        <input class="form-control input-sm" type="url" ng-model="anime.url"/>
+    </div>
+    <div class="col-sm-3">
+        <save-cancel-button save="update(anime)" cancel="cancel(anime)"></save-cancel-button>
+    </div>
+</div>
+<div class="item-row" ng-if="newanime.isnew">
+    <div class="col-sm-3"><input class="form-control input-sm" type="text" ng-model="newanime.title" placeholder="title"
+                                 focus-me="newanime.isnew"/></div>
+    <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0" ng-model="newanime.episode"/></div>
+    <div class="col-sm-6">
+        <save-cancel-button save="create(newanime)" cancel="cancel(newanime)"></save-cancel-button>
+    </div>
+</div>
+<div class="item-row" ng-if="!newanime.isnew">
+    <div class="col-sm-12">
+        <add-button add="add()"></add-button>
+    </div>
+</div>
+

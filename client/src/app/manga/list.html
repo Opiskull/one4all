@@ -1,42 +1,50 @@
-<div class="table-responsive">
-<table class="table table-hover">
-    <thead>
-    <tr>
-        <th><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a></th>
-        <th><a href="" ng-click="orderBy.predicate = 'chapter'; orderBy.reverse=!orderBy.reverse">Chapter</a></th>
-        <th style="width: 160px"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a></th>
-        <th style="width: 100px">Url</th>
-        <th style="width: 210px"><span class="badge pull-right">{{filtered.length}}</span></th></tr>
-    </thead>
-    <tbody>
-    <tr ng-if="!manga.editable" ng-repeat-start="manga in filtered = (mangas | multi:settings.filter)"
-        display-state="manga.stats">
-        <td>{{manga.title}}</td>
-        <td>
-            <up-down-button decrease="decreaseCh(manga)" increase="increaseCh(manga)" value="manga.chapter" disabled="manga.stats.finished"></up-down-button>
-        </td>
-        <td>{{manga.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-        <td><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.stats.finished">Next Chapter</a></td>
-        <td>
-            <actions-button finished="finished(manga)" remove="remove(manga)" dropped="dropped(manga)" model="manga"></actions-button>
-        </td>
-    </tr>
-    <tr ng-if="manga.editable" ng-repeat-end="">
-        <td><input class="form-control input-sm" type="text" ng-model="manga.title"/></td>
-        <td><input class="form-control input-sm" type="number" min="0" ng-model="manga.chapter"/></td>
-        <td>{{manga.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</td>
-        <td><input class="form-control input-sm" type="url" ng-model="manga.url"/></td>
-        <td><save-cancel-button save="update(manga)" cancel="cancel(manga)"></save-cancel-button></td>
-    </tr>
-    </tbody>
-    <tfoot>
-    <tr ng-if="newmanga.isnew">
-        <td><input class="form-control input-sm" type="text" ng-model="newmanga.title" placeholder="title"  focus-me="newmanga.isnew"/></td>
-        <td><input class="form-control input-sm" type="number" min="0" ng-model="newmanga.chapter"/></td>
-        <td colspan="2"><input class="form-control input-sm" type="url" ng-model="newmanga.url" placeholder="url $$chapter$$ will be replaced with next chapter"/></td>
-        <td><save-cancel-button save="create(newmanga)" cancel="cancel(newmanga)"></save-cancel-button></td>
-    </tr>
-        <tr ng-if="!newmanga.isnew"><td colspan="5"><add-button add="add()"></add-button></td></tr>
-    </tfoot>
-</table>
+<div class="header-row">
+    <div class="col-sm-2"><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
+    </div>
+    <div class="col-sm-5"><a href=""
+                             ng-click="orderBy.predicate = 'chapter'; orderBy.reverse=!orderBy.reverse">Chapter</a>
+    </div>
+    <div class="col-sm-1"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
+        Modified</a></div>
+    <div class="col-sm-1">Url</div>
+    <div class="col-sm-3"><span class="badge pull-right">{{filtered.length}}</span></div>
+</div>
+<div class="item-row" ng-if="!manga.editable" ng-repeat-start="manga in filtered = (mangas | multi:settings.filter)"
+     display-state="manga.stats">
+    <div class="col-sm-2">{{manga.title}}</div>
+    <div class="col-sm-5">
+        <up-down-button decrease="decreaseCh(manga)" increase="increaseCh(manga)" value="manga.chapter"
+                        disabled="manga.stats.finished"></up-down-button>
+    </div>
+    <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>
+    <div class="col-sm-1"><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.stats.finished">Next Chapter</a></div>
+    <div class="col-sm-3">
+        <actions-button finished="finished(manga)" remove="remove(manga)" dropped="dropped(manga)"
+                        model="manga"></actions-button>
+    </div>
+</div>
+<div class="item-row" ng-if="manga.editable" ng-repeat-end="">
+    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="manga.title"/></div>
+    <div class="col-sm-5"><input class="form-control input-sm" type="number" min="0" ng-model="manga.chapter"/></div>
+    <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>
+    <div class="col-sm-1"><input class="form-control input-sm" type="url" ng-model="manga.url"/></div>
+    <div class="col-sm-3">
+        <save-cancel-button save="update(manga)" cancel="cancel(manga)"></save-cancel-button>
+    </div>
+</div>
+<div class="item-row" ng-if="newmanga.isnew">
+    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="newmanga.title"
+                                 placeholder="title" focus-me="newmanga.isnew"/></div>
+    <div class="col-sm-5"><input class="form-control input-sm" type="number" min="0" ng-model="newmanga.chapter"/>
+    </div>
+    <div class="col-sm-2"><input class="form-control input-sm" type="url" ng-model="newmanga.url"
+                                 placeholder="url $$chapter$$ will be replaced with next chapter"/></div>
+    <div class="col-sm-3">
+        <save-cancel-button save="create(newmanga)" cancel="cancel(newmanga)"></save-cancel-button>
+    </div>
+</div>
+<div class="item-row" ng-if="!newmanga.isnew">
+    <div class="col-sm-12">
+        <add-button add="add()"></add-button>
+    </div>
 </div>

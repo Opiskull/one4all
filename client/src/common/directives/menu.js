@@ -18,7 +18,7 @@ angular.module('14all').directive('menu',[function(){
                     currentPath = current.$$route.originalPath;
                 }
                 angular.forEach($scope.items,function(item,key){
-                    item.active = item.strippedPath === currentPath;
+                    item.active = item.strippedPath && item.strippedPath === currentPath;
                 });
             });
         }]
@@ -38,7 +38,8 @@ angular.module('14all').directive('menu',[function(){
         link : function($scope,$element,$attrs,menuController){
             menuController.addItem($scope);
             $scope.active = false;
-            if($scope.path){
+            if($scope.path && $scope.path.indexOf('#') === 0){
+
                 $scope.strippedPath = $scope.path.substring(1);
             }
         }

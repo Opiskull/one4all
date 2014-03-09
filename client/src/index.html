@@ -28,7 +28,7 @@
                 <li>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                           <div class="input-group search-box">
+                            <div class="input-group search-box">
                                 <input type="search" class="form-control" placeholder="Search" ng-model="settings.filter.keyword.title" focus-me="focus.search" ng-blur="focus.search=false">
                                 <span class="input-group-btn" ng-if="settings.filter.keyword.title !== ''">
                                     <button class="btn btn-default" type="button" ng-click="settings.filter.keyword.title = ''"><i class="glyphicon glyphicon-remove"></i></button>
@@ -68,10 +68,9 @@
     </div>
 </header>
 
-<div ng-cloak class="container">
+<div ng-cloak class="container-fluid">
     <div ng-view class="view-animation"></div>
 </div>
-
 
 <script type="text/javascript" src="<%= grunt.config.get('pkg.name') %>.vendor.min.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
 <script type="text/javascript" src="<%= grunt.config.get('pkg.name') %>.templates.min.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
