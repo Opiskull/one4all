@@ -1,6 +1,6 @@
 {
   "name": "14all",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "devDependencies": {
     "grunt": "~0.4.2",
     "grunt-contrib-less": "~0.8.3",
