@@ -35,7 +35,7 @@ angular.module('14all').factory('valuesService',['dialogService',function(dialog
     }
 
     function validateNumber(value){
-        if(angular.isNumber){
+        if(angular.isNumber(value)){
             return value;
         } else{
             return 0;
