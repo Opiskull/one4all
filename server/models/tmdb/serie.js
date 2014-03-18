@@ -4,13 +4,13 @@ var helper = require('./helper.js');
 
 var tmdbSerieSchema = mongoose.Schema({
     id:Number,
-    original_name:String,
+    title:String,
+    titles:[{title:String,lang:String}],
     first_air_date:Date,
-    poster_path:String,
-    popularity:Number,
-    name:String,
-    vote_average:Number,
-    vote_count:Number
+    seasons:Number,
+    episodes:Number,
+    status:String,
+    img:String
 });
 
 tmdbSerieSchema.statics.findOrCreate = function(inputSerie,callback){

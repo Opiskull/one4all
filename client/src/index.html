@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html ng-app="14all">
+<html ng-app="14all" ng-controller="AppCtrl">
 <head>
-    <title></title>
+    <title>{{PageTitle}}</title>
     <link rel="stylesheet" type="text/css"
           href="<%= grunt.config.get('pkg.name') %>.min.css?<%= gitinfo.local.branch.current.shortSHA %>"/>
     <link rel="icon" type="image/png" href="site.png">
 </head>
-<body ng-controller="AppCtrl">
+<body>
 <loading></loading>
 <header ng-cloak class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">

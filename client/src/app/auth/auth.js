@@ -45,7 +45,7 @@ angular.module('auth', ['ngRoute'])
         });
     }])
     .factory('authService', ['Restangular','$location','$store', function (Restangular,$location,$store) {
-        var authInfo;
+        var authInfo = {};
 
         function getAuthInfo(){
              return Restangular.oneUrl('auth/info').get().then(function(response){

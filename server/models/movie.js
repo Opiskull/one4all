@@ -4,12 +4,6 @@ var stats = require('../lib/mongoose-plugins.js').stats;
 
 var movieSchema = mongoose.Schema({
     title: String,
-    titles: [
-        {
-            title: String,
-            lang: String
-        }
-    ],
     user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 

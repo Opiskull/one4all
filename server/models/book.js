@@ -5,12 +5,6 @@ var stats = require('../lib/mongoose-plugins.js').stats;
 var bookSchema = mongoose.Schema({
     title: String,
     page: Number,
-    titles: [
-        {
-            title: String,
-            lang: String
-        }
-    ],
     user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 

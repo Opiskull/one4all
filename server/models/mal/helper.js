@@ -9,17 +9,16 @@ function parseDate(input){
     return array.join("-");
 }
 
-function parseMalObject(input,schema,cb){
-    input.start_date = parseDate(input.start_date);
-    input.end_date = parseDate(input.end_date);
-    var synonyms = [];
-    input.synonyms.split(';').forEach(function(item){
-        synonyms.push(item.trim());
+function parseTitles(input){
+    var titles = [];
+    input.split(';').forEach(function(item){
+        var title = {};
+        title.title = item.trim();
+        if(title.title !== '')
+            titles.push(title);
     });
-    input.synonyms = synonyms;
-
-    var malItem = new schema(input);
-    malItem.save(cb);
+    return titles;
 }
 
-exports.parseMalObject = parseMalObject;
+exports.parseTitles = parseTitles;
+exports.parseDate = parseDate;

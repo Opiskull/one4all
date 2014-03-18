@@ -6,12 +6,6 @@ var mangaSchema = mongoose.Schema({
     title: String,
     chapter: Number,
     url: String,
-    titles: [
-        {
-            title: String,
-            lang: String
-        }
-    ],
     user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 

@@ -6,12 +6,6 @@ var serieSchema = mongoose.Schema({
     title: String,
     season: Number,
     episode: Number,
-    titles: [
-        {
-            title: String,
-            lang: String
-        }
-    ],
     user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
