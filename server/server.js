@@ -18,12 +18,6 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(passport.initialize());
 
-
-server.get(/\/static\/?.*/, restify.serveStatic({
-    directory: path.resolve('../client/build'),
-    default: 'index.html'
-}));
-
 var modelpath = __dirname + config.models;
 var controllerpath = __dirname + config.controllers;
 
@@ -33,3 +27,8 @@ modules.loadControllers(controllerpath,server);
 server.listen(config.port,config.host, function(){
    console.log('%s listening at %s', server.name, server.url);
 });
+
+server.get(/\/?.*/, restify.serveStatic({
+    directory: path.resolve('../client/build'),
+    default: 'index.html'
+}));
