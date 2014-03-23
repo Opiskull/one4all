@@ -36,6 +36,12 @@ function getXmlToJsonRequest(options,cb){
     client.get(options, function (err, response, body) {
         if(err)
             return cb(err);
+
+        if(body === "No results")
+        {
+            return cb(null,[]);
+        }
+
         parser.parseString(body,function(err,result){
             if(err)
                 return cb(err);
@@ -55,7 +61,6 @@ function getXmlToJsonRequest(options,cb){
                     return cb(null,[result.manga.entry]);
                 }
             }
-            return cb(null,[]);
         });
     });
 }
