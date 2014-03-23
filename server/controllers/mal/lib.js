@@ -3,6 +3,7 @@ var Anime = mongoose.model('cache_mal_anime');
 var Manga = mongoose.model('cache_mal_manga');
 var request = require('request');
 var xml2js = require('xml2js');
+var util = require('util');
 
 var parser = new xml2js.Parser({
     explicitArray:false,
@@ -16,6 +17,21 @@ var config = require('./config.json');
 
 var client = request.defaults(authConfig);
 
+function parseResult(result,type,cb){
+    var items = [];
+    result.forEach(function(item){
+        type.findOrCreate(item,function(err,item){
+            if(err){
+                cb(err);
+            }
+            items.push(item);
+            if(items.length === result.length){
+                cb(null,items);
+            }
+        });
+    });
+}
+
 function getXmlToJsonRequest(options,cb){
     client.get(options, function (err, response, body) {
         if(err)
@@ -23,7 +39,23 @@ function getXmlToJsonRequest(options,cb){
         parser.parseString(body,function(err,result){
             if(err)
                 return cb(err);
-            cb(null,result);
+
+
+            if(result.anime){
+                if(util.isArray(result.anime.entry))                {
+                    return cb(null,result.anime.entry);
+                } else{
+                    return cb(null,[result.anime.entry]);
+                }
+            }
+            if(result.manga){
+                if(util.isArray(result.manga.entry))                {
+                    return cb(null,result.manga.entry);
+                } else{
+                    return cb(null,[result.manga.entry]);
+                }
+            }
+            return cb(null,[]);
         });
     });
 }
@@ -39,19 +71,7 @@ function searchAnime(search,cb){
     getXmlToJsonRequest(paras,function(err,result){
         if(err)
             return cb(err);
-
-        var animes = [];
-        result.anime.entry.forEach(function(item){
-            Anime.findOrCreate(item,function(err,anime){
-                if(err){
-                    cb(err);
-                }
-                animes.push(anime);
-                if(animes.length === result.anime.entry.length){
-                    cb(null,animes);
-                }
-            });
-        });
+        parseResult(result,Anime,cb);
     });
 }
 
@@ -66,19 +86,7 @@ function searchManga(search,cb){
     getXmlToJsonRequest(paras,function(err,result){
         if(err)
             return cb(err);
-
-        var mangas = [];
-        result.manga.entry.forEach(function(item){
-            Manga.findOrCreate(item,function(err,manga){
-                if(err){
-                    cb(err);
-                }
-                mangas.push(manga);
-                if(result.manga.entry.length === mangas.length){
-                    cb(null,mangas);
-                }
-            });
-        });
+        parseResult(result,Manga,cb);
     });
 }
 
