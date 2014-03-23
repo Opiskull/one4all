@@ -10,10 +10,11 @@ angular.module('14all').controller('confirmDialogCtrl',['$scope','$modalInstance
     };
 }]).
 factory('dialogService',['$modal',function($modal){
-
         var confirm = function(header,msg){
             return $modal.open({
-                template : '<div class="modal-header dialog-header-confirm"><h4 class="modal-title">{{header}}</h4></div><div class="modal-body">{{message}}</div><div class="modal-footer"><button type="button" class="btn btn-default" ng-click="yes()">Yes</button><button type="button" class="btn btn-primary" ng-click="no()">No</button></div>',
+                template : '<div class="modal-header dialog-header-confirm"><h4 class="modal-title">{{header}}</h4></div>' +
+                    '<div class="modal-body">{{message}}</div>' +
+                    '<div class="modal-footer"><button type="button" class="btn btn-default" ng-click="yes()">Yes</button><button type="button" class="btn btn-primary" ng-click="no()">No</button></div>',
                 controller : 'confirmDialogCtrl',
                 resolve:{
                     header:function(){return angular.copy(header);},
@@ -21,8 +22,6 @@ factory('dialogService',['$modal',function($modal){
                 }
             })
         };
-
-
     return{
         confirm: confirm,
         remove: function(type,title){

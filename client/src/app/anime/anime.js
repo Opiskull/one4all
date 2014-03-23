@@ -6,8 +6,14 @@ angular.module('anime',['ngRoute','anime.resource'])
             authRequired: true
         });
     }])
-    .controller('AnimeListCtrl', ['$scope','Animes','$location','$filter','valuesService', function ($scope,Animes,$location,$filter,valuesService) {
+    .controller('AnimeListCtrl', ['$scope','Animes','$location','$filter','valuesService','searchDialogService', function ($scope,Animes,$location,$filter,valuesService,searchDialogService) {
         $scope.animes = Animes.items;
+
+        $scope.search = function(anime){
+            searchDialogService.search(anime).then(function(updated){
+
+            });
+        };
 
         $scope.dropped = function(item){
             valuesService.dropped(item)
