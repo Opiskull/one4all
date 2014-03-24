@@ -3,6 +3,7 @@ angular.module('14all')
     var searchUrl = 'mal/manga/search';
     var service = {
         title:'mal-manga',
+        category:'manga',
         search:function(keyword){
             return restangular.one(searchUrl + '/' +keyword).getList();
         }
@@ -13,6 +14,7 @@ angular.module('14all')
     var searchUrl = 'mal/anime/search';
     var service = {
         title:'mal-anime',
+        category:'anime',
         search:function(keyword){
             return restangular.one(searchUrl + '/' +keyword).getList();
         }

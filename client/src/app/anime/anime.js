@@ -9,8 +9,8 @@ angular.module('anime',['ngRoute','anime.resource'])
     .controller('AnimeListCtrl', ['$scope','Animes','$location','$filter','valuesService','searchDialogService', function ($scope,Animes,$location,$filter,valuesService,searchDialogService) {
         $scope.animes = Animes.items;
 
-        $scope.search = function(anime){
-            searchDialogService.search(anime).then(function(updated){
+        $scope.search = function(title){
+            searchDialogService.search(title).then(function(updated){
 
             });
         };

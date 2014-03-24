@@ -19,6 +19,10 @@ var client = request.defaults(authConfig);
 
 function parseResult(result,type,cb){
     var items = [];
+    if(result.length === 0){
+        return cb(null,items);
+    }
+
     result.forEach(function(item){
         type.findOrCreate(item,function(err,item){
             if(err){
@@ -37,8 +41,7 @@ function getXmlToJsonRequest(options,cb){
         if(err)
             return cb(err);
 
-        if(body === "No results")
-        {
+        if(body === "No results" || body === ''){
             return cb(null,[]);
         }
 

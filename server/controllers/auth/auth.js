@@ -33,8 +33,6 @@ module.exports.init = function (server,router) {
             delete user.roles;
             delete user.accessToken;
             delete user.__v;
-
-
             res.json({
                 user: user,
                 roles: req.user.roles
