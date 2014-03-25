@@ -20,9 +20,10 @@ angular.module('14all').controller('searchDialogCtrl',['$scope','$modalInstance'
             return $modal.open({
                 template : '<div class="modal-header dialog-header-confirm"><h4 class="modal-title">Connect</h4></div>' +
                     '<div class="modal-body"><form role="form" class="form-horizontal">' +
-                    '<list-providers keyword="title" infos="infos"></list-providers>' +
+                    '<list-providers keyword="title" infos="infos" initialprovider="\'mal-anime\'"></list-providers>' +
                     '</form></div>'  +
-                    '<ul><li ng-repeat="info in infos">{{info.title}}</li></ul>'+
+                    '<div ng-repeat="info in infos">' +
+                    '<anime-detail anime="info"></anime-detail></div>'+
                     '<div class="modal-footer"><button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button></div>',
                 controller : 'searchDialogCtrl',
                 resolve:{

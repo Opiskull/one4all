@@ -1,0 +1,26 @@
+<h3>{{anime.title}}</h3>
+<div class="row">
+        <img class="col-sm-3" style="padding:5px" ng-src="{{anime.img}}" />
+    <div class="col-sm-9">
+        <div class="row" ng-if="anime.titles.length > 0">
+            <div class="col-sm-3">Alternate Titles</div>
+            <div class="col-sm-9"><a ng-repeat="title in anime.titles">{{title.title}}<span ng-if="!$last">; </span></a></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Episodes</div>
+            <div class="col-sm-3">{{anime.episodes}}</div>
+            <div class="col-sm-3">State</div>
+            <div class="col-sm-3">{{anime.status}}</div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">Start Date</div>
+            <div class="col-sm-3">{{anime.start_date | date}}</div>
+            <div class="col-sm-3">End Date</div>
+            <div class="col-sm-3">{{anime.end_date | date}}</div>
+        </div>
+        <dl class="row">
+            <dt class="col-sm-12">Description</dt>
+            <dd class="col-sm-12"><more-text text="anime.description"></more-text></dd>
+        </dl>
+    </div>
+</div>

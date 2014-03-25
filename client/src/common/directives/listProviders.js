@@ -14,7 +14,7 @@ angular.module('14all').directive('listProviders',[function(){
             '</ul><a class="btn btn-default" ng-click="search(keyword)">Go</a></div></div></div>',
         controller:['$scope','searchService',function($scope,searchService){
             $scope.providers = searchService.providers;
-            $scope.currentProvider = {};
+            $scope.currentProvider = searchService.getProvider($scope.initialprovider);
             $scope.search = function(keywords){
                 return $scope.currentProvider.search(keywords).then(function(items){
                     $scope.infos = items;

@@ -59,4 +59,12 @@ angular.module('anime',['ngRoute','anime.resource'])
         $scope.decreaseEp = function(anime){
             valuesService.decreaseEp(anime);
         };
+    }]).directive('animeDetail',[function(){
+        return{
+            templateUrl:'anime/detail.html',
+            scope:{
+                anime : "="
+            },
+            restrict :'E'
+        }
     }]);
