@@ -1,7 +1,9 @@
 angular.module('14all').directive('menu',[function(){
     return {
         restrict: 'E',
-        scope:{},
+        scope:{
+            pageTitle:'='
+        },
         transclude:true,
         replace: true,
         template : '<ul class="nav navbar-nav" ng-transclude></ul>',
@@ -17,8 +19,16 @@ angular.module('14all').directive('menu',[function(){
                 if(current.$$route){
                     currentPath = current.$$route.originalPath;
                 }
+
+                $scope.pageTitle = 'Welcome';
+
                 angular.forEach($scope.items,function(item,key){
-                    item.active = item.strippedPath && item.strippedPath === currentPath;
+                    if(item.strippedPath && item.strippedPath === currentPath){
+                        item.active = true;
+                        $scope.pageTitle = item.displayTitle;
+                    } else{
+                        item.active = false;
+                    }
                 });
             });
         }]

@@ -12,6 +12,8 @@ angular.module('14all', ['ui.bootstrap','ngAnimate',
     .controller('AppCtrl',['$scope','$location','authService','$store',function($scope,$location,authService,$store){
 
 
+        $scope.pageTitle = '';
+
         // FIX SETTINGS
         var tempSettings = $store.get('settings');
         if(!!tempSettings && angular.isDefined(tempSettings.excludeFinished)){

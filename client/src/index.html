@@ -2,7 +2,7 @@
 <html ng-app="14all" ng-controller="AppCtrl">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{PageTitle}}</title>
+    <title>{{pageTitle}}</title>
     <link rel="stylesheet" type="text/css"
           href="<%= grunt.config.get('pkg.name') %>.min.css?<%= gitinfo.local.branch.current.shortSHA %>"/>
     <link rel="icon" type="image/png" href="site.png">
@@ -16,7 +16,7 @@
             <button class="navbar-toggle" href="#" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed"><i class="glyphicon glyphicon-th-large"></i></button>
         </div>
         <nav collapse="navCollapsed" class="navbar-collapse collapse navbar-responsive-collapse" role="navigation">
-            <menu>
+            <menu page-title="pageTitle">
                 <menu-item path="#/manga" display-title="Manga"></menu-item>
                 <menu-item path="#/movie" display-title="Movie"></menu-item>
                 <menu-item path="#/serie" display-title="Serie"></menu-item>
