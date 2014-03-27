@@ -7,7 +7,7 @@ angular.module('14all').directive('menu',[function(){
         transclude:true,
         replace: true,
         template : '<ul class="nav navbar-nav" ng-transclude></ul>',
-        controller:['$scope',function($scope){
+        controller:['$scope','$rootScope',function($scope,$rootScope){
             $scope.items = [];
 
             this.addItem = function(item){
@@ -20,12 +20,12 @@ angular.module('14all').directive('menu',[function(){
                     currentPath = current.$$route.originalPath;
                 }
 
-                $scope.pageTitle = 'Welcome';
+                $rootScope.title = 'Welcome';
 
                 angular.forEach($scope.items,function(item,key){
                     if(item.strippedPath && item.strippedPath === currentPath){
                         item.active = true;
-                        $scope.pageTitle = item.displayTitle;
+                        $rootScope.title = item.displayTitle;
                     } else{
                         item.active = false;
                     }

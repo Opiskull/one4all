@@ -2,7 +2,7 @@
 <html ng-app="14all" ng-controller="AppCtrl">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{pageTitle}}</title>
+    <title ng-bind="'peerzone ' + title"></title>
     <link rel="stylesheet" type="text/css"
           href="<%= grunt.config.get('pkg.name') %>.min.css?<%= gitinfo.local.branch.current.shortSHA %>"/>
     <link rel="icon" type="image/png" href="site.png">
