@@ -1,0 +1,24 @@
+<div class="modal-header dialog-header-confirm"><h4 class="modal-title">Connect</h4></div>
+<div class="modal-body">
+    <form role="form" class="form-horizontal">
+        <div class="form-group">
+            <label for="searchItemTitle" class="control-label">Search</label>
+            <div class="input-group"><input class="form-control" id="searchItemTitle" ng-model="keyword" type="text"/>
+                <div class="input-group-btn"><a class="btn btn-default dropdown-toggle">{{currentProvider.title}} <span
+                        class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="" ng-repeat="provider in providers"><a ng-click="selectProvider(provider)" href="">{{provider.title}}</a>
+                        </li>
+                    </ul>
+                    <a class="btn btn-default" ng-click="search(keyword)">Go</a></div>
+            </div>
+        </div>
+    </form>
+    <div ng-repeat="info in infos" ng-include="currentProvider.detailUrl"
+         ng-if="!selectedInfo.id || selectedInfo.id==info.id">
+    </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-disabled="selectedTitle ==''" ng-click="ok()">Ok</button>
+    <button type="button" class="btn btn-default" ng-click="cancel()">Cancel</button>
+</div>

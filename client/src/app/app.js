@@ -2,6 +2,7 @@ angular.module('14all', ['ui.bootstrap','ngAnimate',
     'auth',
     /* Modules */
     'manga','movie','serie','anime','game','book',
+    '14all.providers',
     '14all.templates'])
     .config(['RestangularProvider',function(RestangularProvider){
         RestangularProvider.setRestangularFields({
@@ -44,3 +45,6 @@ angular.module('14all', ['ui.bootstrap','ngAnimate',
             $scope.focus.search = true;
         });
     }]);
+
+
+angular.module('14all.providers',['restangular']);

@@ -9,10 +9,15 @@ angular.module('anime',['ngRoute','anime.resource'])
     .controller('AnimeListCtrl', ['$scope','Animes','$location','$filter','valuesService','searchDialogService', function ($scope,Animes,$location,$filter,valuesService,searchDialogService) {
         $scope.animes = Animes.items;
 
+        $scope.showInfo = function(item){
+            item.open = !!!item.open;
+        };
+
         $scope.search = function(item){
-            searchDialogService.search(item.title,'anime/detail.html','mal-anime').then(function(result){
+            searchDialogService.search(item.title,'mal-anime').then(function(result){
                 item.title = result.title;
                 item.info = result.info;
+                valuesService.update(item);
             });
         };
 
