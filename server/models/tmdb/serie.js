@@ -28,4 +28,4 @@ tmdbSerieSchema.statics.findOrCreate = function(inputSerie,callback){
 };
 
 tmdbSerieSchema.plugin(timestamps);
-var tmdbSerie = mongoose.model('cache_tmdb_serie', tmdbSerieSchema);
+var tmdbSerie = mongoose.model('InfoTmdbSerie', tmdbSerieSchema);

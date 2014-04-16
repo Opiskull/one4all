@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var Serie = mongoose.model('cache_tmdb_serie');
-var Movie = mongoose.model('cache_tmdb_movie');
+var Serie = mongoose.model('InfoTmdbSerie');
+var Movie = mongoose.model('InfoTmdbMovie');
 var request = require('request');
 
 var authConfig = require(require('path').join(require('path').dirname(process.mainModule.filename),'config','config.json')).extapi.themoviedb;

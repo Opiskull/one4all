@@ -60,4 +60,4 @@ malMangaSchema.statics.findOrCreate = function(inputManga,callback){
 };
 
 malMangaSchema.plugin(timestamps);
-var malManga = mongoose.model('cache_mal_manga', malMangaSchema);
+var malManga = mongoose.model('InfoMalManga', malMangaSchema);

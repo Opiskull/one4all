@@ -38,4 +38,4 @@ tmdbMovieSchema.statics.findOrCreate = function(inputMovie,callback){
 };
 
 tmdbMovieSchema.plugin(timestamps);
-var tmdbMovie = mongoose.model('cache_tmdb_movie', tmdbMovieSchema);
+var tmdbMovie = mongoose.model('InfoTmdbMovie', tmdbMovieSchema);

@@ -57,4 +57,4 @@ malAnimeSchema.statics.findOrCreate = function(inputAnime,callback){
 };
 
 malAnimeSchema.plugin(timestamps);
-var malAnime = mongoose.model('cache_mal_anime', malAnimeSchema);
+var malAnime = mongoose.model('InfoMalAnime', malAnimeSchema);
