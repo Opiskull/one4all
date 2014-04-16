@@ -1,0 +1,28 @@
+<div class="item-row">
+    <div class="col-sm-6">
+        <div class="row">
+            <label class="control-label col-sm-2 text-right">title</label>
+            <div class="col-sm-4">
+                <div class="input-group">
+                    <input class="form-control input-sm" type="text" ng-model="anime.title"/>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-sm" type="button" ng-click="search(anime)">
+                            <span class="glyphicon glyphicon-transfer"></span>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <label class="control-label col-sm-2 text-right">episode</label>
+            <div class="col-sm-4">
+                <input class="form-control input-sm" type="number" min="0" ng-model="anime.episode"/>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+    </div>
+    <div class="row">
+        <div class="col-sm-3 col-sm-offset-9">
+            <save-cancel-button save="update(anime)" cancel="cancel(anime)"></save-cancel-button>
+        </div>
+    </div>
+</div>
