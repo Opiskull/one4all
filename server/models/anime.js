@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-var stats = require('../lib/mongoose-plugins.js').stats;
+var plugins = require('../lib/mongoose-plugins.js');
 
 
 var animeSchema = mongoose.Schema({
@@ -10,5 +10,6 @@ var animeSchema = mongoose.Schema({
 });
 
 animeSchema.plugin(timestamps);
-animeSchema.plugin(stats);
+animeSchema.plugin(plugins.stats);
+animeSchema.plugin(plugins.info);
 mongoose.model('Anime', animeSchema);

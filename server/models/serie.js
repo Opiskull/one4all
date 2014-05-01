@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-var stats = require('../lib/mongoose-plugins.js').stats;
+var plugins = require('../lib/mongoose-plugins.js');
 
 var serieSchema = mongoose.Schema({
     title: String,
@@ -10,5 +10,6 @@ var serieSchema = mongoose.Schema({
 });
 
 serieSchema.plugin(timestamps);
-serieSchema.plugin(stats);
+serieSchema.plugin(plugins.stats);
+serieSchema.plugin(plugins.info);
 mongoose.model('Serie', serieSchema);

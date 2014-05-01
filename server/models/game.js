@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-var stats = require('../lib/mongoose-plugins.js').stats;
+var plugins = require('../lib/mongoose-plugins.js');
 
 var gameSchema = mongoose.Schema({
     title: String,
@@ -8,5 +8,6 @@ var gameSchema = mongoose.Schema({
 });
 
 gameSchema.plugin(timestamps);
-gameSchema.plugin(stats);
+gameSchema.plugin(plugins.stats);
+gameSchema.plugin(plugins.info);
 mongoose.model('Game', gameSchema);

@@ -1,3 +1,7 @@
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+
 function statsPlugin(schema,options){
     var statsSchema = {
         stats:
@@ -11,12 +15,25 @@ function statsPlugin(schema,options){
 
 function infoPlugin(schema, options){
     var infoSchema = {
-        info:{
-            titles:[{title:String, lang:String}],
-            description:String,
-            img:String
-        }
+        infos:[Schema.Types.Mixed]
     };
+    schema.virtual('info').get(function(){
+        var info = {};
+        this.infos.forEach(function(element){
+            if(element.default)
+                info = element;
+        });
+        if(!info.id){
+            return this.infos[0];
+        }
+        return info;
+    });
+    schema.set('toJSON', {
+            virtuals:true
+        });
+    schema.set('toObject',{
+        virtuals:true
+    });
     schema.add(infoSchema);
 }
 

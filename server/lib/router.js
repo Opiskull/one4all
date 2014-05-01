@@ -5,17 +5,52 @@ var restify = require('restify');
 
 var authenticate = passport.authenticate('bearer',{session:false});
 
-exports.getSearchRoute = function(route){
-    return config.api_prefix + route + "/:search";
-};
-
-exports.getRoute = function(route){
+function getRoute(route){
     return config.api_prefix + route;
+}
+
+function getRouteAction(route,action){
+    return getRoute(route) +"/"+ action;
+}
+
+function addAction(route,action){
+    return route + "/" + action;
+}
+
+function getRouteId(route, action){
+    var routeId = getRouteAction(route,":id");
+    if(action){
+        return addAction(routeId,action);
+    }
+    return routeId;
+}
+
+function getRouteIdWithAction(route,action,actionid){
+    var parent = getRouteId(parent,action);
+    if(actionid){
+        return addAction(parent,actionid);
+    }
+    return parent;
+}
+
+exports.getSearchRoute = function(route){
+    return getRouteAction(route,":search");
 };
 
-exports.getRouteId = function(route){
-    return config.api_prefix + route + "/:id";
-};
+exports.getRoute = getRoute;
+
+exports.getRouteId = getRouteId;
+
+exports.getRouteIdWithAction = getRouteIdWithAction;
+
+// TODO check for partial info load
+//exports.getInfoId = function(parentRoute){
+//    return getRouteIdWithAction(parentRoute,'infos',':infoid');
+//};
+//
+//exports.getInfo = function(parentRoute){
+//    return getRouteIdWithAction(parentRoute,'infos');
+//};
 
 exports.authenticate = authenticate;
 
@@ -27,4 +62,4 @@ exports.isAuthenticated = [
         }
         return next(new restify.InvalidCredentialsError());
     }
-]
+];
