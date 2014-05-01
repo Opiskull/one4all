@@ -1,4 +1,4 @@
-angular.module('14all').factory('valuesService',['dialogService',function(dialogService){
+angular.module('14all').factory('itemService',['dialogService',function(dialogService){
     function removeWithDlg(type,items,item){
         return dialogService.remove(type,item.title).then(function(result){
             if(result){
@@ -123,6 +123,22 @@ angular.module('14all').factory('valuesService',['dialogService',function(dialog
         }
     }
 
+    function showInfo(item){
+        item.open = !!!item.open;
+    }
+
+    function setInfo(item,selectedInfo){
+        item.info = selectedInfo;
+        var oldInfo = _.find(item.infos,function(info){
+            return info.provider == selectedInfo.provider;
+        });
+        if(oldInfo){
+            item.infos[item.infos.indexOf(oldInfo)] = selectedInfo;
+        } else {
+            item.infos.push(selectedInfo);
+        }
+    }
+
     var service = {
         increase: increase,
         decrease: decrease,
@@ -138,7 +154,9 @@ angular.module('14all').factory('valuesService',['dialogService',function(dialog
         finished: finished,
         dropped: dropped,
         remove: remove,
-        removeWithDlg:removeWithDlg
+        removeWithDlg:removeWithDlg,
+        showInfo:showInfo,
+        setInfo:setInfo
     };
 
     return service;
