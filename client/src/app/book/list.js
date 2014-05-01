@@ -1,22 +1,15 @@
-angular.module('book',['ngRoute','book.resource'])
-    .config(['$routeProvider',function ($routeProvider) {
-        $routeProvider.when('/book', {
-            templateUrl: 'book/list.html',
-            controller: 'BookListCtrl',
-            authRequired: true
-        });
-    }])
-    .controller('BookListCtrl', ['$scope','Books','$location','$filter','valuesService', function ($scope,Books,$location,$filter,valuesService) {
-        $scope.books = Books.items;
+angular.module('book')
+    .controller('BookListCtrl', ['$scope','bookResource','$location','$filter','itemService', function ($scope,bookResource,$location,$filter,itemService) {
+        $scope.books = bookResource.items;
         $scope.dropped = function(item){
-            valuesService.dropped(item)
+            itemService.dropped(item)
         };
         $scope.remove = function(book){
-            valuesService.removeWithDlg('book',$scope.books,book);
+            itemService.removeWithDlg('book',$scope.books,book);
         };
 
         $scope.update = function(book){
-            valuesService.update(book).then(function(updated){
+            itemService.update(book).then(function(updated){
                 updated.editable = false;
             });
         };
@@ -33,7 +26,7 @@ angular.module('book',['ngRoute','book.resource'])
         };
 
         $scope.create = function(book){
-            Books.post(book).then(function(addedBook){
+            bookResource.post(book).then(function(addedBook){
                 $scope.newbook = {};
                 $scope.books.push(addedBook);
             },function(response){
@@ -42,14 +35,14 @@ angular.module('book',['ngRoute','book.resource'])
         };
 
         $scope.increasePg = function(manga){
-            valuesService.increasePg(manga);
+            itemService.increasePg(manga);
         };
 
         $scope.decreasePg = function(manga){
-            valuesService.decreasePg(manga);
+            itemService.decreasePg(manga);
         };
 
         $scope.finished = function(book){
-            valuesService.finished(book);
+            itemService.finished(book);
         };
     }]);

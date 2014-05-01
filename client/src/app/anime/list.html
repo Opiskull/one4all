@@ -15,18 +15,18 @@
 <div class="item-row" ng-if="!anime.editable" ng-repeat-start="anime in filtered = (animes | multi:settings.filter)"
      display-state="anime.stats">
     <div class="col-sm-2">
-        <a href="" ng-click="showInfo(anime)">{{anime.title}}</a>
+        <a href="" ng-click="itemService.showInfo(anime)">{{anime.title}}</a>
     </div>
     <div class="col-sm-6">
-        <up-down-button decrease="decreaseEp(anime)" increase="increaseEp(anime)" value="anime.episode"
+        <up-down-button decrease="itemService.decreaseEp(anime)" increase="itemService.increaseEp(anime)" value="anime.episode"
                         disabled="anime.stats.finished"></up-down-button>
     </div>
     <div class="col-sm-1">{{anime.updatedAt | timeAgo}}</div>
     <div class="col-sm-3">
-        <actions-button finished="finished(anime)" remove="remove(anime)" dropped="dropped(anime)"
+        <actions-button finished="itemService.finished(anime)" remove="remove(anime)" dropped="itemService.dropped(anime)"
                         model="anime"></actions-button>
     </div>
-    <div ng-include="'anime/detail.html'" ng-if="anime.open"></div>
+    <div ng-include="'anime/detail.html'" ng-if="anime.open && anime.info"></div>
 </div>
 <div ng-include="'anime/edit.html'" ng-repeat-end="" ng-if="anime.editable"></div>
 <div class="item-row" ng-if="newanime.isnew">

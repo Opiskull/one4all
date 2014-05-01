@@ -1,22 +1,15 @@
-angular.module('game',['ngRoute','game.resource'])
-    .config(['$routeProvider',function ($routeProvider) {
-        $routeProvider.when('/game', {
-            templateUrl: 'game/list.html',
-            controller: 'GameListCtrl',
-            authRequired: true
-        });
-    }])
-    .controller('GameListCtrl', ['$scope','Games','$location','$filter','valuesService', function ($scope,Games,$location,$filter,valuesService) {
+angular.module('game')
+    .controller('GameListCtrl', ['$scope','gameResource','$location','$filter','itemService', function ($scope,Games,$location,$filter,itemService) {
         $scope.games = Games.items;
         $scope.dropped = function(item){
-            valuesService.dropped(item)
+            itemService.dropped(item)
         };
         $scope.remove = function(game){
-            valuesService.removeWithDlg('game',$scope.games,game);
+            itemService.removeWithDlg('game',$scope.games,game);
         };
 
         $scope.update = function(game){
-            valuesService.update(game).then(function(updated){
+            itemService.update(game).then(function(updated){
                 updated.editable = false;
             });
         };
@@ -42,6 +35,6 @@ angular.module('game',['ngRoute','game.resource'])
         };
 
         $scope.finished = function(game){
-            valuesService.finished(game);
+            itemService.finished(game);
         };
     }]);

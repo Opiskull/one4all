@@ -1,22 +1,15 @@
-angular.module('movie',['ngRoute','movie.resource'])
-    .config(['$routeProvider',function ($routeProvider) {
-        $routeProvider.when('/movie', {
-            templateUrl: 'movie/list.html',
-            controller: 'MovieListCtrl',
-            authRequired: true
-        });
-    }])
-    .controller('MovieListCtrl', ['$scope','Movies','$location','$filter','valuesService', function ($scope,Movies,$location,$filter,valuesService) {
+angular.module('movie')
+    .controller('MovieListCtrl', ['$scope','movieResource','$location','$filter','itemService', function ($scope,Movies,$location,$filter,itemService) {
         $scope.movies = Movies.items;
         $scope.dropped = function(item){
-            valuesService.dropped(item)
+            itemService.dropped(item)
         };
         $scope.remove = function(movie){
-            valuesService.removeWithDlg('movie',$scope.movies,movie);
+            itemService.removeWithDlg('movie',$scope.movies,movie);
         };
 
         $scope.update = function(movie){
-            valuesService.update(movie).then(function(updated){
+            itemService.update(movie).then(function(updated){
                 updated.editable = false;
             });
         };
@@ -42,6 +35,6 @@ angular.module('movie',['ngRoute','movie.resource'])
         };
 
         $scope.finished = function(movie){
-            valuesService.finished(movie);
+            itemService.finished(movie);
         };
     }]);

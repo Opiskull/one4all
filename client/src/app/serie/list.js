@@ -1,24 +1,17 @@
-angular.module('serie',['ngRoute','serie.resource'])
-    .config(['$routeProvider',function ($routeProvider) {
-        $routeProvider.when('/serie', {
-            templateUrl: 'serie/list.html',
-            controller: 'SerieListCtrl',
-            authRequired: true
-        });
-    }])
-    .controller('SerieListCtrl', ['$scope','Series','$location','$filter','valuesService', function ($scope,Series,$location,$filter,valuesService) {
+angular.module('serie')
+    .controller('SerieListCtrl', ['$scope','serieResource','$location','$filter','itemService', function ($scope,Series,$location,$filter,itemService) {
         $scope.series = Series.items;
 
         $scope.dropped = function(item){
-            valuesService.dropped(item)
+            itemService.dropped(item)
         };
 
         $scope.remove = function(serie){
-            valuesService.removeWithDlg('serie',$scope.series,serie);
+            itemService.removeWithDlg('serie',$scope.series,serie);
         };
 
         $scope.update = function(serie){
-            valuesService.update(serie).then(function(updated){
+            itemService.update(serie).then(function(updated){
                 updated.editable = false;
             });
         };
@@ -44,22 +37,22 @@ angular.module('serie',['ngRoute','serie.resource'])
         };
 
         $scope.finished = function(serie){
-            valuesService.finished(serie);
+            itemService.finished(serie);
         };
 
         $scope.increaseSe = function(serie){
-            valuesService.increaseSe(serie);
+            itemService.increaseSe(serie);
         };
 
         $scope.decreaseSe = function(serie){
-            valuesService.decreaseSe(serie);
+            itemService.decreaseSe(serie);
         };
 
         $scope.increaseEp = function(serie){
-            valuesService.increaseEp(serie);
+            itemService.increaseEp(serie);
         };
 
         $scope.decreaseEp = function(serie){
-            valuesService.decreaseEp(serie);
+            itemService.decreaseEp(serie);
         };
     }]);

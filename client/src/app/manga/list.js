@@ -1,22 +1,15 @@
-angular.module('manga',['ngRoute','manga.resource'])
-    .config(['$routeProvider',function ($routeProvider) {
-        $routeProvider.when('/manga', {
-            templateUrl: 'manga/list.html',
-            controller: 'MangaListCtrl',
-            authRequired: true
-        });
-    }])
-    .controller('MangaListCtrl', ['$scope','Mangas','$location','$filter','valuesService', function ($scope,Mangas,$location,$filter,valuesService) {
+angular.module('manga')
+    .controller('MangaListCtrl', ['$scope','mangaResource','$location','$filter','itemService', function ($scope,Mangas,$location,$filter,itemService) {
         $scope.mangas = Mangas.items;
         $scope.dropped = function(item){
-            valuesService.dropped(item)
+            itemService.dropped(item)
         };
         $scope.remove = function(manga){
-            valuesService.removeWithDlg('manga',$scope.mangas,manga);
+            itemService.removeWithDlg('manga',$scope.mangas,manga);
         };
 
         $scope.update = function(manga){
-            valuesService.update(manga).then(function(updated){
+            itemService.update(manga).then(function(updated){
                 updated.editable = false;
             });
         };
@@ -42,15 +35,15 @@ angular.module('manga',['ngRoute','manga.resource'])
         };
 
         $scope.finished = function(manga){
-            valuesService.finished(manga);
+            itemService.finished(manga);
         };
 
         $scope.increaseCh = function(manga){
-            valuesService.increaseCh(manga);
+            itemService.increaseCh(manga);
         };
 
         $scope.decreaseCh = function(manga){
-            valuesService.decreaseCh(manga);
+            itemService.decreaseCh(manga);
         };
 
         $scope.getNextChapterUrl = function(manga){
