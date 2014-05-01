@@ -15,7 +15,9 @@
 <div class="item-row" ng-if="!serie.editable"
      ng-repeat-start="serie in filtered = (series | multi:settings.filter)"
      display-state="serie.stats">
-    <div class="col-sm-2">{{serie.title}}</div>
+    <div class="col-sm-2">
+        <a href="" ng-click="itemService.showInfo(serie)">{{serie.title}}</a>
+    </div>
     <div class="col-sm-3">
         <up-down-button decrease="decreaseSe(serie)" increase="increaseSe(serie)" value="serie.season"
                         disabled="serie.stats.finished"></up-down-button>
@@ -29,18 +31,9 @@
         <actions-button finished="finished(serie)" remove="remove(serie)" dropped="dropped(serie)"
                         model="serie"></actions-button>
     </div>
+    <div ng-include="'serie/detail.html'" ng-if="serie.open && serie.info"></div>
 </div>
-<div class="item-row" ng-if="serie.editable" ng-repeat-end="">
-    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="serie.title"/></div>
-    <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0" ng-model="serie.season"/>
-    </div>
-    <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0" ng-model="serie.episode"/>
-    </div>
-    <div class="col-sm-1">{{serie.updatedAt | timeAgo}}</div>
-    <div class="col-sm-3">
-        <save-cancel-button save="update(serie)" cancel="cancel(serie)"></save-cancel-button>
-    </div>
-</div>
+<div ng-include="'serie/edit.html'" ng-if="serie.editable" ng-repeat-end=""></div>
 <div class="item-row" ng-if="newserie.isnew">
     <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="newserie.title"
                                  placeholder="title" focus-me="newserie.isnew"/></div>

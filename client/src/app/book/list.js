@@ -1,6 +1,8 @@
 angular.module('book')
     .controller('BookListCtrl', ['$scope','bookResource','$location','$filter','itemService', function ($scope,bookResource,$location,$filter,itemService) {
         $scope.books = bookResource.items;
+        $scope.itemService = itemService;
+
         $scope.dropped = function(item){
             itemService.dropped(item)
         };

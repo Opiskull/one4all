@@ -1,0 +1,8 @@
+<div class="item-row">
+    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="movie.title"/></div>
+    <div class="col-sm-6"></div>
+    <div class="col-sm-1">{{movie.updatedAt | timeAgo}}</div>
+    <div class="col-sm-3">
+        <save-cancel-button save="update(movie)" cancel="cancel(movie)"></save-cancel-button>
+    </div>
+</div>

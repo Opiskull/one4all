@@ -8,22 +8,16 @@
 </div>
 <div class="item-row" ng-if="!game.editable" ng-repeat-start="game in filtered = (games | multi:settings.filter)"
      display-state="game.stats">
-    <div class="col-sm-2">{{game.title}}</div>
+    <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(game)">{{game.title}}</a></div>
     <div class="col-sm-6"></div>
     <div class="col-sm-1">{{game.updatedAt | timeAgo}}</div>
     <div class="col-sm-3">
         <actions-button finished="finished(game)" remove="remove(game)" dropped="dropped(game)"
                         model="game"></actions-button>
     </div>
+    <div ng-include="'game/detail.html'" ng-if="game.open && game.info"></div>
 </div>
-<div class="item-row" ng-if="game.editable" ng-repeat-end="">
-    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="game.title"/></div>
-    <div class="col-sm-6"></div>
-    <div class="col-sm-1">{{game.updatedAt | timeAgo}}</div>
-    <div class="col-sm-3">
-        <save-cancel-button save="update(game)" cancel="cancel(game)"></save-cancel-button>
-    </div>
-</div>
+<div ng-include="'game/edit.html'" ng-if="game.editable" ng-repeat-end=""></div>
 <div class="item-row" ng-if="newgame.isnew">
     <div class="col-sm-2" colspan="2"><input class="form-control input-sm" type="text" ng-model="newgame.title"
                                              placeholder="title" focus-me="newgame.isnew"/></div>

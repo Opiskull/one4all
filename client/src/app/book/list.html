@@ -9,7 +9,9 @@
 </div>
 <div class="item-row" ng-if="!book.editable" ng-repeat-start="book in filtered = (books | multi:settings.filter)"
      display-state="book.stats">
-    <div class="col-sm-2">{{book.title}}</div>
+    <div class="col-sm-2">
+        <a href="" ng-click="itemService.showInfo(book)">{{book.title}}</a>
+    </div>
     <div class="col-sm-6">
         <up-down-button decrease="decreasePg(book)" increase="increasePg(book)" value="book.page"
                         disabled="book.stats.finished"></up-down-button>
@@ -19,15 +21,9 @@
         <actions-button finished="finished(book)" remove="remove(book)" dropped="dropped(book)"
                         model="book"></actions-button>
     </div>
+    <div ng-include="'book/detail.html'" ngif="book.open && book.info"></div>
 </div>
-<div class="item-row" ng-if="book.editable" ng-repeat-end="">
-    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="book.title"/></div>
-    <div class="col-sm-6"><input class="form-control input-sm" type="number" min="0" ng-model="book.page"/></div>
-    <div class="col-sm-1">{{book.updatedAt | date:'dd/MM/yyyy HH:mm:ss'}}</div>
-    <div class="col-sm-3">
-        <save-cancel-button save="update(book)" cancel="cancel(book)"></save-cancel-button>
-    </div>
-</div>
+<div ng-include="'book/edit.html'" ng-repeat-end="" ng-if="book.editable"></div>
 <div class="item-row" ng-if="newbook.isnew">
     <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="newbook.title" placeholder="title"
                                  focus-me="newbook.isnew"/></div>

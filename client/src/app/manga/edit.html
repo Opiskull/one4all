@@ -1,0 +1,9 @@
+<div class="item-row">
+    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="manga.title"/></div>
+    <div class="col-sm-5"><input class="form-control input-sm" type="number" min="0" ng-model="manga.chapter"/></div>
+    <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>
+    <div class="col-sm-1"><input class="form-control input-sm" type="url" ng-model="manga.url"/></div>
+    <div class="col-sm-3">
+        <save-cancel-button save="update(manga)" cancel="cancel(manga)"></save-cancel-button>
+    </div>
+</div>

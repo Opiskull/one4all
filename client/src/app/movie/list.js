@@ -1,6 +1,7 @@
 angular.module('movie')
     .controller('MovieListCtrl', ['$scope','movieResource','$location','$filter','itemService', function ($scope,Movies,$location,$filter,itemService) {
         $scope.movies = Movies.items;
+        $scope.itemService = itemService;
         $scope.dropped = function(item){
             itemService.dropped(item)
         };

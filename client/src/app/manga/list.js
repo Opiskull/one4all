@@ -1,6 +1,7 @@
 angular.module('manga')
     .controller('MangaListCtrl', ['$scope','mangaResource','$location','$filter','itemService', function ($scope,Mangas,$location,$filter,itemService) {
         $scope.mangas = Mangas.items;
+        $scope.itemService = itemService;
         $scope.dropped = function(item){
             itemService.dropped(item)
         };

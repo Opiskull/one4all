@@ -2,29 +2,21 @@
     <div class="col-sm-2"><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
     </div>
     <div class="col-sm-6"></div>
-    <div class="col-sm-1"><a href=""
-                                                  ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
-        Modified</a></div>
+    <div class="col-sm-1"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a></div>
     <div class="col-sm-3"><span class="badge pull-right">{{filtered.length}}</span></div>
 </div>
 <div class="item-row" ng-if="!movie.editable" ng-repeat-start="movie in filtered = (movies | multi:settings.filter)"
      display-state="movie.stats">
-    <div class="col-sm-2">{{movie.title}}</div>
+    <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(movie)">{{movie.title}}</a></div>
     <div class="col-sm-6"></div>
     <div class="col-sm-1">{{movie.updatedAt | timeAgo}}</div>
     <div class="col-sm-3">
         <actions-button finished="finished(movie)" remove="remove(movie)" dropped="dropped(movie)"
                         model="movie"></actions-button>
     </div>
+    <div ng-include="'movie/detail.html'" ng-if="movie.open && movie.info"></div>
 </div>
-<div class="item-row" ng-if="movie.editable" ng-repeat-end="">
-    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="movie.title"/></div>
-    <div class="col-sm-6"></div>
-    <div class="col-sm-1">{{movie.updatedAt | timeAgo}}</div>
-    <div class="col-sm-3">
-        <save-cancel-button save="update(movie)" cancel="cancel(movie)"></save-cancel-button>
-    </div>
-</div>
+<div ng-include="'movie/edit.html'" ng-repeat-end="" ng-if="movie.editable"></div>
 <div class="item-row" ng-if="newmovie.isnew">
     <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="newmovie.title"
                                              placeholder="title" focus-me="newmovie.isnew"/></div>

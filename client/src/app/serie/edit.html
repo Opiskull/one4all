@@ -1,0 +1,11 @@
+<div class="item-row">
+    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="serie.title"/></div>
+    <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0" ng-model="serie.season"/>
+    </div>
+    <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0" ng-model="serie.episode"/>
+    </div>
+    <div class="col-sm-1">{{serie.updatedAt | timeAgo}}</div>
+    <div class="col-sm-3">
+        <save-cancel-button save="update(serie)" cancel="cancel(serie)"></save-cancel-button>
+    </div>
+</div>

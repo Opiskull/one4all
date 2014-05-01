@@ -1,6 +1,7 @@
 angular.module('serie')
     .controller('SerieListCtrl', ['$scope','serieResource','$location','$filter','itemService', function ($scope,Series,$location,$filter,itemService) {
         $scope.series = Series.items;
+        $scope.itemService = itemService;
 
         $scope.dropped = function(item){
             itemService.dropped(item)
