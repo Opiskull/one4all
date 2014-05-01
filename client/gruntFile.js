@@ -43,6 +43,7 @@ module.exports = function(grunt){
                     'angular',
                     'angular-bootstrap',
                     'angular-route',
+                    'angular-sanitize',
                     'angular-animate',
                     'lodash',
                     'restangular',

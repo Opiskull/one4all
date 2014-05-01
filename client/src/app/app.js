@@ -1,4 +1,7 @@
-angular.module('14all', ['ui.bootstrap','ngAnimate',
+angular.module('14all', ['ui.bootstrap',
+    'ngAnimate',
+    'ngSanitize',
+    'ngRoute',
     'auth',
     /* Modules */
     'manga','movie','serie','anime','game','book',
