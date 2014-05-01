@@ -47,4 +47,3 @@ angular.module('14all', ['ui.bootstrap','ngAnimate',
     }]);
 
 
-angular.module('14all.providers',['restangular']);

@@ -25,7 +25,7 @@ angular.module('auth', ['ngRoute'])
                     authService.logout();
                 }]
             }).
-        otherwise({
+            otherwise({
                 templateUrl: 'auth/message.html',
                 controller: ['$scope',function($scope){
                     $scope.heading = 'Welcome!';
@@ -43,58 +43,4 @@ angular.module('auth', ['ngRoute'])
                 }
             });
         });
-    }])
-    .factory('authService', ['Restangular','$location','$store', function (Restangular,$location,$store) {
-        var authInfo = {};
-
-        function getAuthInfo(){
-             return Restangular.oneUrl('auth/info').get().then(function(response){
-                authInfo = response;
-            },function(){
-                 authInfo = {};
-             });
-        }
-
-        function isLoggedIn(){
-            return authInfo && authInfo.user && authInfo.user.username;
-        }
-
-        function authenticate(){
-            Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + $store.get('access_token')});
-            return getAuthInfo();
-        }
-
-        function setToken(access_token){
-            $store.set('access_token',access_token);
-            authenticate();
-        }
-
-        function login(access_token){
-            setToken(access_token);
-            $location.url('/');
-        }
-
-        function logout(){
-            Restangular.oneUrl('auth/logout').post().then(function(data){
-                $store.remove('access_token');
-                authInfo = {};
-                Restangular.setDefaultHeaders({'Authorization':''});
-                $location.url('/');
-            });
-        }
-
-        function isAuthorized(){
-
-        }
-
-        var service = {
-            isLoggedIn: isLoggedIn,
-            login: login,
-            authenticate: authenticate,
-            getAuthInfo: getAuthInfo,
-            logout: logout,
-            isAuthorized: isAuthorized,
-            authInfo: authInfo
-        };
-        return service;
     }]);

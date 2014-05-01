@@ -1,0 +1,1 @@
+angular.module('14all.providers',['restangular']);

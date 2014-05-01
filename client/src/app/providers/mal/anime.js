@@ -3,6 +3,7 @@ angular.module('14all.providers').factory('malAnime',['Restangular',function(res
     var detailUrl = 'providers/mal/anime-detail.html';
     var service = {
         title:'mal-anime',
+        display:'My Anime List - Anime',
         category:'anime',
         detailUrl:detailUrl,
         search:function(keyword){

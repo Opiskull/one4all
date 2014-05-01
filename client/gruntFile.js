@@ -28,7 +28,7 @@ module.exports = function(grunt){
             pkg: '<%= dest.dir %>/<%= pkg.name %>'
         },
         src: {
-            js: ['src/**/*.js'],
+            js: ['src/**/_config.js','src/**/*.js'],
             html: ['src/index.html'],
             less: ['src/assets/main.less'],
             tpl:['src/app/**/*.html','src/common/**/*.html'],
