@@ -5,7 +5,6 @@ var pathUtil = require('path');
 
 var excludeExtensions = ['.json'];
 
-
 function loadController(path,module,file,server){
     var ctrl = require(path);
     if(ctrl.init){
@@ -14,13 +13,6 @@ function loadController(path,module,file,server){
     } else{
         server.log.info('file:%s from module:%s not loaded',file,module);
     }
-}
-
-function loadModels(modelpath,server){
-    fs.readdirSync(modelpath).forEach(function(model){
-        server.log.info('load model: ' + model);
-        require(buildPath(modelpath,model));
-    });
 }
 
 function loadControllers(controllerpath,server){
@@ -46,5 +38,17 @@ function buildPath(path,file){
     return path + '/' + file;
 }
 
+
+
+
+
+
 exports.loadControllers = loadControllers;
 exports.loadModels = loadModels;
+
+    function loadModels(modelpath,server){
+        fs.readdirSync(modelpath).forEach(function(model){
+            server.log.info('load model: ' + model);
+            require(buildPath(modelpath,model));
+        });
+    }

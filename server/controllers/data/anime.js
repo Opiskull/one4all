@@ -1,7 +1,6 @@
 var mongoose = require('mongoose');
 var restify = require('restify');
 var Anime = mongoose.model('Anime');
-var Info = require('./info.js');
 
 module.exports.init = function (server,router) {
     var anime = '/anime';

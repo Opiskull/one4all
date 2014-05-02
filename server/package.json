@@ -2,17 +2,18 @@
   "name": "14all",
   "version": "1.0.0",
   "dependencies": {
-    "restify": "^2.6.3",
-    "nodemon": "^0.7.10",
+    "bunyan": "^0.22.3",
+    "grunt-nodemon": "^0.1.2",
     "mongoose": "^3.8.8",
     "mongoose-timestamp": "^0.1.1",
-    "passport-google-oauth": "~0.1.5",
+    "nodemon": "^0.7.10",
     "passport": "^0.1.18",
-    "passport-http-bearer": "~1.0.1",
     "passport-github": "~0.1.5",
-    "xml2js": "~0.4.1",
+    "passport-google-oauth": "~0.1.5",
+    "passport-http-bearer": "~1.0.1",
     "request": "~2.34.0",
-    "bunyan": "^0.22.3"
+    "restify": "^2.6.3",
+    "xml2js": "~0.4.1"
   },
   "devDependencies": {
     "grunt": "^0.4.4",
