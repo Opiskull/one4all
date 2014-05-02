@@ -1,21 +1,24 @@
 
 var router = require('./router.js');
 var fs = require('fs');
+var pathUtil = require('path');
+
+var excludeExtensions = ['.json'];
 
 
 function loadController(path,module,file,server){
     var ctrl = require(path);
     if(ctrl.init){
-        console.log('load module:%s file:%s',module,file);
+        server.log.info('load module:%s file:%s',module,file);
         ctrl.init(server,router);
     } else{
-        console.log('file:%s from module:%s not loaded',file,module);
+        server.log.info('file:%s from module:%s not loaded',file,module);
     }
 }
 
-function loadModels(modelpath){
+function loadModels(modelpath,server){
     fs.readdirSync(modelpath).forEach(function(model){
-        console.log('load model: ' + model);
+        server.log.info('load model: ' + model);
         require(buildPath(modelpath,model));
     });
 }
@@ -31,7 +34,9 @@ function loadControllers(controllerpath,server){
             });
         } else {
             if(stats.isFile()){
-                loadController(path,"controller",module,server);
+                if(excludeExtensions.indexOf(pathUtil.extname(module))==-1){
+                    loadController(path,"controller",module,server);
+                }
             }
         }
     });
