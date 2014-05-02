@@ -3,14 +3,7 @@
         <div class="row">
             <label class="control-label col-sm-2 text-right">title</label>
             <div class="col-sm-4">
-                <div class="input-group">
-                    <input class="form-control input-sm" type="text" ng-model="anime.title"/>
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-sm" type="button" ng-click="search(anime)">
-                            <span class="glyphicon glyphicon-transfer"></span>
-                        </button>
-                    </span>
-                </div>
+                <search-button search="search(anime)" item="anime"></search-button>
             </div>
             <label class="control-label col-sm-2 text-right">episode</label>
             <div class="col-sm-4">

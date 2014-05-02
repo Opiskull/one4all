@@ -1,4 +1,4 @@
-angular.module('14all.providers')
+angular.module('providers')
     .factory('infoService',[function(){
         var service = {
 

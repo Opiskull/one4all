@@ -1,4 +1,4 @@
-angular.module('14all.providers')
+angular.module('providers')
     .controller('searchDialogCtrl', ['$scope', '$modalInstance', 'initialtitle', 'initialprovider', 'searchService', function ($scope, $modalInstance, initialtitle, initialprovider, searchService) {
         $scope.selectedInfo = {};
         $scope.infos = [];

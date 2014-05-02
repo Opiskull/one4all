@@ -1,9 +1,13 @@
 angular.module('manga')
-    .controller('MangaListCtrl', ['$scope','mangaResource','$location','$filter','itemService', function ($scope,Mangas,$location,$filter,itemService) {
+    .controller('MangaListCtrl', ['$scope','mangaResource','$location','$filter','itemService','searchDialogService', function ($scope,Mangas,$location,$filter,itemService,searchDialogService) {
         $scope.mangas = Mangas.items;
         $scope.itemService = itemService;
-        $scope.dropped = function(item){
-            itemService.dropped(item)
+
+        $scope.search = function(item){
+            searchDialogService.search(item.title,'mal-manga').then(function(result){
+                item.title = result.title;
+                itemService.setInfo(item, result.info);
+            });
         };
         $scope.remove = function(manga){
             itemService.removeWithDlg('manga',$scope.mangas,manga);
@@ -33,18 +37,6 @@ angular.module('manga')
             },function(response){
                 console.log("Error");
             });
-        };
-
-        $scope.finished = function(manga){
-            itemService.finished(manga);
-        };
-
-        $scope.increaseCh = function(manga){
-            itemService.increaseCh(manga);
-        };
-
-        $scope.decreaseCh = function(manga){
-            itemService.decreaseCh(manga);
         };
 
         $scope.getNextChapterUrl = function(manga){

@@ -1,4 +1,4 @@
-angular.module('14all.providers').factory('malManga',['Restangular',function(restangular){
+angular.module('providers').factory('malManga',['Restangular',function(restangular){
     var searchUrl = 'mal/manga/search';
     var detailUrl = 'providers/mal/manga-detail.html';
     var service = {

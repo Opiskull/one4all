@@ -13,13 +13,13 @@
      display-state="manga.stats">
     <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(manga)">{{manga.title}}</a></div>
     <div class="col-sm-5">
-        <up-down-button decrease="decreaseCh(manga)" increase="increaseCh(manga)" value="manga.chapter"
+        <up-down-button decrease="itemService.decreaseCh(manga)" increase="itemService.increaseCh(manga)" value="manga.chapter"
                         disabled="manga.stats.finished"></up-down-button>
     </div>
     <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>
     <div class="col-sm-1"><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.stats.finished">Next Chapter</a></div>
     <div class="col-sm-3">
-        <actions-button finished="finished(manga)" remove="remove(manga)" dropped="dropped(manga)"
+        <actions-button finished="itemService.finished(manga)" remove="remove(manga)" dropped="itemService.dropped(manga)"
                         model="manga"></actions-button>
     </div>
     <div ng-include="'manga/detail.html'" ng-if="manga.open && manga.info"></div>

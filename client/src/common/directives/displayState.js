@@ -10,7 +10,7 @@ angular.module('14all').directive('displayState', [function() {
         link : function($scope,$element,$attr){
             $scope.$watch('state',function(state){
                 if(state){
-                    $element.toggleClass('bold finished',isValid(state.finished));
+                    $element.toggleClass('finished',isValid(state.finished));
                     $element.toggleClass('dropped',isValid(state.dropped));
                 }
             },true);

@@ -1,26 +1,4 @@
 <div class="row">
-    <h3 ng-if="!selectedInfo.id">
-        <a href="">
-            <span class="glyphicon glyphicon-ok" ng-click="selectInfo(info)"></span>
-        </a>
-        {{info.title}}
-    </h3>
-    <h3 class="dropdown" ng-if="selectedInfo.id==info.id">
-        <div class="dropdown-toggle">
-            <a href="">
-                <span class="glyphicon glyphicon-remove" ng-click="selectInfo({})"></span>
-            </a>
-            {{selectedTitle}}
-        </div>
-        <ul class="dropdown-menu">
-            <li>
-                <a ng-click="selectTitle(info.title)">{{info.title}}</a>
-            </li>
-            <li ng-repeat="title in info.titles">
-                <a ng-click="selectTitle(title.title)">{{title.title}}</a>
-            </li>
-        </ul>
-    </h3>
     <img class="col-sm-3" style="padding:5px" ng-src="{{info.img}}"/>
     <div class="col-sm-9">
         <div class="row" ng-if="info.titles.length > 0">

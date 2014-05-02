@@ -5,7 +5,7 @@ angular.module('14all', ['ui.bootstrap',
     'auth',
     /* Modules */
     'manga','movie','serie','anime','game','book',
-    '14all.providers',
+    'providers',
     '14all.templates'])
     .config(['RestangularProvider',function(RestangularProvider){
         RestangularProvider.setRestangularFields({
