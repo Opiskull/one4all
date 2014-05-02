@@ -13,6 +13,17 @@ var tmdbSerieSchema = mongoose.Schema({
     img:String
 });
 
+function parseSerie(input,callback){
+    var serie = new tmdbSerie();
+    //movie.id = input.id;
+    serie.id = input.id;
+    serie.title = input.name;
+    //serie.titles.push(input.original_name);
+    serie.first_air_date = helper.parseDate(input.first_air_date);
+    serie.img = input.poster_path;
+    serie.save(callback);
+}
+
 tmdbSerieSchema.statics.findOrCreate = function(inputSerie,callback){
     this.findOne({'id':inputSerie.id},function(err,serie){
         if(err){
@@ -22,7 +33,9 @@ tmdbSerieSchema.statics.findOrCreate = function(inputSerie,callback){
             return callback(null,serie);
         }
         else{
-            helper.parseTmdbObject(inputSerie,tmdbSerie,callback);
+            parseSerie(inputSerie,callback);
+
+            //helper.parseTmdbObject(inputSerie,tmdbSerie,callback);
         }
     });
 };

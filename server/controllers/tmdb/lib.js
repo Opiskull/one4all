@@ -18,6 +18,20 @@ function getRequest(options,cb){
     });
 }
 
+function getConfig(cb){
+    var paras = {
+        qs:{
+            query : search,api_key: authConfig.auth.api_key
+        },
+        url:config.ConfigurationUrl
+    };
+    getRequest(paras,function(err,result){
+        if(err) return cb(err);
+
+        cb(null,result);
+    });
+}
+
 function searchSerie(search,cb){
     var paras = {
         qs:{
@@ -74,3 +88,4 @@ function searchMovie(search,cb){
 
 exports.searchMovie = searchMovie;
 exports.searchSerie = searchSerie;
+exports.getConfig = getConfig;

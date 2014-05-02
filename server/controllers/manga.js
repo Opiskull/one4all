@@ -52,8 +52,9 @@ function del(req, res, next) {
     });
 }
 
+
 function update(req, res, next) {
-    req.model.set(req.body);
+    require('util')._extend(req.model,req.body);
     req.model.save(function (err, manga) {
         if (err)
             return next(err);

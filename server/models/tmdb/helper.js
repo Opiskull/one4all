@@ -15,3 +15,4 @@ function parseTmdbObject(input,schema,cb){
 }
 
 exports.parseTmdbObject = parseTmdbObject;
+exports.parseDate = parseDate;

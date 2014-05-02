@@ -1,4 +1,5 @@
 var lib = require('./lib.js');
+var tmdbConfig = {};
 
 function searchMovie(req, res, next) {
     lib.searchMovie(req.params.search,function(err,result){
@@ -13,6 +14,12 @@ function searchSerie(req,res,next){
         if(err)
             return next();
         return res.json(result);
+    });
+}
+
+function getConfiguration(){
+    lib.getConfig(function(err,result){
+        tmdbConfig = result;
     });
 }
 

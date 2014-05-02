@@ -23,6 +23,16 @@ var tmdbMovieSchema = mongoose.Schema({
     adult:Boolean
 });
 
+function parseMovie(input,callback){
+    var movie = new tmdbMovie();
+    movie.adult = input.adult;
+    movie.id = input.id;
+    movie.title = input.title;
+    movie.release_date = helper.parseDate(input.release_date);
+    movie.img = input.poster_path;
+    movie.save(callback);
+}
+
 tmdbMovieSchema.statics.findOrCreate = function(inputMovie,callback){
     this.findOne({'id':inputMovie.id},function(err,movie){
         if(err){
@@ -32,7 +42,8 @@ tmdbMovieSchema.statics.findOrCreate = function(inputMovie,callback){
             return callback(null,movie);
         }
         else{
-            helper.parseTmdbObject(inputMovie,tmdbMovie,callback);
+            parseMovie(inputMovie, callback);
+            //helper.parseTmdbObject(inputMovie,tmdbMovie,callback);
         }
     });
 };

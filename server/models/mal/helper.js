@@ -20,5 +20,10 @@ function parseTitles(input){
     return titles;
 }
 
+function parseDescription(input){
+    return input.replace(/(\r\n|\n|\r)/gm,"").replace(/<br ?\/?>/g,"<br>");
+}
+
 exports.parseTitles = parseTitles;
 exports.parseDate = parseDate;
+exports.parseDescription = parseDescription;

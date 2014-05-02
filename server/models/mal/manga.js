@@ -40,7 +40,7 @@ function parseManga(input,callback){
     manga.status = input.status;
     manga.start_date = helper.parseDate(input.start_date);
     manga.end_date = helper.parseDate(input.end_date);
-    manga.description = input.synopsis;
+    manga.description = helper.parseDescription(input.synopsis);
     manga.img = input.image;
     manga.save(callback);
 }

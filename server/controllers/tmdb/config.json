@@ -1,4 +1,5 @@
 {
     "SerieSearchUrl":"https://api.themoviedb.org/3/search/tv",
-    "MovieSearchUrl":"https://api.themoviedb.org/3/search/movie"
+    "MovieSearchUrl":"https://api.themoviedb.org/3/search/movie",
+    "ConfigurationUrl":"https://api.themoviedb.org/3/configuration"
 }

@@ -25,7 +25,7 @@ function parseAnime(input,callback){
     anime.status = input.status;
     anime.start_date = helper.parseDate(input.start_date);
     anime.end_date = helper.parseDate(input.end_date);
-    anime.description = input.synopsis;
+    anime.description = helper.parseDescription(input.synopsis);
     anime.img = input.image;
     anime.save(callback);
 }
