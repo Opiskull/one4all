@@ -26,7 +26,7 @@
         <actions-button finished="itemService.finished(anime)" remove="remove(anime)" dropped="itemService.dropped(anime)"
                         model="anime"></actions-button>
     </div>
-    <div ng-include="'anime/detail.html'" ng-if="anime.open && anime.info"></div>
+    <info info="anime.info" ng-if="anime.open"></info>
 </div>
 <div ng-include="'anime/edit.html'" ng-repeat-end="" ng-if="anime.editable"></div>
 <div class="item-row" ng-if="newanime.isnew">

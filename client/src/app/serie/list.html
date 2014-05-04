@@ -31,7 +31,7 @@
         <actions-button finished="finished(serie)" remove="remove(serie)" dropped="dropped(serie)"
                         model="serie"></actions-button>
     </div>
-    <div ng-include="'serie/detail.html'" ng-if="serie.open && serie.info"></div>
+    <info info="serie.info" ng-if="serie.open"></info>
 </div>
 <div ng-include="'serie/edit.html'" ng-if="serie.editable" ng-repeat-end=""></div>
 <div class="item-row" ng-if="newserie.isnew">

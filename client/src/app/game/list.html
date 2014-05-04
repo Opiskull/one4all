@@ -15,7 +15,7 @@
         <actions-button finished="finished(game)" remove="remove(game)" dropped="dropped(game)"
                         model="game"></actions-button>
     </div>
-    <div ng-include="'game/detail.html'" ng-if="game.open && game.info"></div>
+    <info info="game.info" ng-if="game.open"></info>
 </div>
 <div ng-include="'game/edit.html'" ng-if="game.editable" ng-repeat-end=""></div>
 <div class="item-row" ng-if="newgame.isnew">

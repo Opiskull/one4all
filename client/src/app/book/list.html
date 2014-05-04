@@ -21,7 +21,7 @@
         <actions-button finished="finished(book)" remove="remove(book)" dropped="dropped(book)"
                         model="book"></actions-button>
     </div>
-    <div ng-include="'book/detail.html'" ngif="book.open && book.info"></div>
+    <info info="book.info" ng-if="book.open"></info>
 </div>
 <div ng-include="'book/edit.html'" ng-repeat-end="" ng-if="book.editable"></div>
 <div class="item-row" ng-if="newbook.isnew">
