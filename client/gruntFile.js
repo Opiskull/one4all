@@ -33,7 +33,7 @@ module.exports = function(grunt){
             less: ['src/assets/main.less'],
             tpl:['src/app/**/*.html','src/common/**/*.html'],
             vendor:[''],
-            fonts:'bower_components/bootstrap-bower/fonts/',
+            fonts:'bower_components/bootstrap-less/fonts/',
             favicon: 'src/site_44px.png'
         },
         bower_concat: {
