@@ -1,6 +1,8 @@
 <div class="row">
-    <img class="col-sm-3" style="padding:5px" ng-src="{{info.img}}"/>
-    <div class="col-sm-9">
+    <div class="col-lg-1 col-md-2 col-sm-3 hidden-xs">
+        <img class="img-responsive" ng-src="{{info.img}}"/>
+    </div>
+    <div class="col-lg-11 col-md-10 col-sm-9">
         <div class="row" ng-if="info.titles.length > 0">
             <div class="col-sm-3">Alternate Titles</div>
             <div class="col-sm-9"><a ng-repeat="title in info.titles">{{title.title}}<span ng-if="!$last">; </span></a>

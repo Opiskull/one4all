@@ -1,4 +1,4 @@
-angular.module('14all').directive('actionsButton', [function() {
+angular.module('14all').directive('actionsButton', ['itemService',function(itemService) {
     return {
         template:
             '<div class="btn-group pull-right"> \
@@ -15,6 +15,12 @@ angular.module('14all').directive('actionsButton', [function() {
             dropped: '&dropped'
         },
         link : function($scope,$element,$attr){
+            $scope.finished = function(){
+                itemService.finished($scope.model);
+            };
+            $scope.dropped = function(){
+                itemService.dropped($scope.model);
+            };
         }
     };
 }]);

@@ -12,8 +12,7 @@
     <div class="col-sm-6"></div>
     <div class="col-sm-1">{{game.updatedAt | timeAgo}}</div>
     <div class="col-sm-3">
-        <actions-button finished="finished(game)" remove="remove(game)" dropped="dropped(game)"
-                        model="game"></actions-button>
+        <actions-button remove="remove(game)" model="game"></actions-button>
     </div>
     <info info="game.info" ng-if="game.open"></info>
 </div>

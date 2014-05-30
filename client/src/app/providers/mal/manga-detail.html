@@ -1,14 +1,20 @@
 <div class="row">
-    <img class="col-sm-3" style="padding:5px" ng-src="{{info.img}}"/>
-    <div class="col-sm-9">
+    <div class="col-lg-1 col-md-2 col-sm-3 hidden-xs">
+        <img class="img-responsive" ng-src="{{info.img}}"/>
+    </div>
+    <div class="col-lg-11 col-md-10 col-sm-9">
         <div class="row" ng-if="info.titles.length > 0">
             <div class="col-sm-3">Alternate Titles</div>
             <div class="col-sm-9"><a ng-repeat="title in info.titles">{{title.title}}<span ng-if="!$last">; </span></a>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-3">Episodes</div>
-            <div class="col-sm-3">{{info.episodes}}</div>
+            <div class="col-sm-3">Volumes</div>
+            <div class="col-sm-3">{{info.volumes}}</div>
+            <div class="col-sm-3">Chapters</div>
+            <div class="col-sm-3">{{info.chapters}}</div>
+        </div>
+        <div class="row">
             <div class="col-sm-3">State</div>
             <div class="col-sm-3">{{info.status}}</div>
         </div>

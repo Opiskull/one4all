@@ -14,25 +14,29 @@
 </div>
 <div class="item-row" ng-if="!anime.editable" ng-repeat-start="anime in filtered = (animes | multi:settings.filter)"
      display-state="anime.stats">
-    <div class="col-sm-2">
-        <a href="" ng-click="itemService.showInfo(anime)">{{anime.title}}</a>
-    </div>
-    <div class="col-sm-6">
-        <up-down-button decrease="itemService.decreaseEp(anime)" increase="itemService.increaseEp(anime)" value="anime.episode"
-                        disabled="anime.stats.finished"></up-down-button>
-    </div>
-    <div class="col-sm-1">{{anime.updatedAt | timeAgo}}</div>
-    <div class="col-sm-3">
-        <actions-button finished="itemService.finished(anime)" remove="remove(anime)" dropped="itemService.dropped(anime)"
-                        model="anime"></actions-button>
-    </div>
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-2">
+                <a href="" ng-click="itemService.showInfo(anime)">{{anime.title}}</a>
+            </div>
+            <div class="col-sm-6">
+                <up-down-button decrease="itemService.decreaseEp(anime)" increase="itemService.increaseEp(anime)" value="anime.episode"
+                                disabled="anime.stats.finished"></up-down-button>
+            </div>
+            <div class="col-sm-1">{{anime.updatedAt | timeAgo}}</div>
+            <div class="col-sm-3">
+                <actions-button remove="remove(anime)" model="anime"></actions-button>
+            </div>
+        </div>
     <info info="anime.info" ng-if="anime.open"></info>
+    </div>
 </div>
 <div ng-include="'anime/edit.html'" ng-repeat-end="" ng-if="anime.editable"></div>
 <div class="item-row" ng-if="newanime.isnew">
     <div class="col-sm-3">
-        <input class="form-control input-sm" type="text" ng-model="newanime.title" placeholder="title"
-                                 focus-me="newanime.isnew"/>
+        <!--<input class="form-control input-sm" type="text" ng-model="newanime.title" placeholder="title"-->
+                                 <!--focus-me="newanime.isnew"/>-->
+        <search-button search="search(newanime)" item="newanime" ng-model="newanime.title"></search-button>
     </div>
     <div class="col-sm-3">
         <input class="form-control input-sm" type="number" min="0" ng-model="newanime.episode"/>

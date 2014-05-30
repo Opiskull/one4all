@@ -129,6 +129,9 @@ angular.module('14all').factory('itemService',['dialogService',function(dialogSe
 
     function setInfo(item,selectedInfo){
         item.info = selectedInfo;
+        if(!item.infos){
+            item.infos = [];
+        }
         var oldInfo = _.find(item.infos,function(info){
             return info.provider == selectedInfo.provider;
         });

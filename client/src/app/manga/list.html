@@ -19,8 +19,7 @@
     <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>
     <div class="col-sm-1"><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.stats.finished">Next Chapter</a></div>
     <div class="col-sm-3">
-        <actions-button finished="itemService.finished(manga)" remove="remove(manga)" dropped="itemService.dropped(manga)"
-                        model="manga"></actions-button>
+        <actions-button remove="remove(manga)" model="manga"></actions-button>
     </div>
     <info info="manga.info" ng-if="manga.open"></info>
 </div>

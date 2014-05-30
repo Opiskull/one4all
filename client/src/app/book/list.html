@@ -18,8 +18,7 @@
     </div>
     <div class="col-sm-1">{{book.updatedAt | timeAgo}}</div>
     <div class="col-sm-3">
-        <actions-button finished="finished(book)" remove="remove(book)" dropped="dropped(book)"
-                        model="book"></actions-button>
+        <actions-button remove="remove(book)" model="book"></actions-button>
     </div>
     <info info="book.info" ng-if="book.open"></info>
 </div>

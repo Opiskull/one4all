@@ -55,7 +55,8 @@ angular.module('providers')
                     initialprovider: function () {
                         return initalprovider;
                     }
-                }
+                },
+                size: 'lg'
             }).result;
         };
         return{

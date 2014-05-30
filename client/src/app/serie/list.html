@@ -19,24 +19,22 @@
         <a href="" ng-click="itemService.showInfo(serie)">{{serie.title}}</a>
     </div>
     <div class="col-sm-3">
-        <up-down-button decrease="decreaseSe(serie)" increase="increaseSe(serie)" value="serie.season"
+        <up-down-button decrease="itemService.decreaseSe(serie)" increase="itemService.increaseSe(serie)" value="serie.season"
                         disabled="serie.stats.finished"></up-down-button>
     </div>
     <div class="col-sm-3">
-        <up-down-button decrease="decreaseEp(serie)" increase="increaseEp(serie)" value="serie.episode"
+        <up-down-button decrease="itemService.decreaseEp(serie)" increase="itemService.increaseEp(serie)" value="serie.episode"
                         disabled="serie.stats.finished"></up-down-button>
     </div>
     <div class="col-sm-1">{{serie.updatedAt | timeAgo}}</div>
     <div class="col-sm-3">
-        <actions-button finished="finished(serie)" remove="remove(serie)" dropped="dropped(serie)"
-                        model="serie"></actions-button>
+        <actions-button remove="remove(serie)" model="serie"></actions-button>
     </div>
     <info info="serie.info" ng-if="serie.open"></info>
 </div>
 <div ng-include="'serie/edit.html'" ng-if="serie.editable" ng-repeat-end=""></div>
 <div class="item-row" ng-if="newserie.isnew">
-    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="newserie.title"
-                                 placeholder="title" focus-me="newserie.isnew"/></div>
+    <div class="col-sm-2"><search-button search="search(newserie)" item="newserie" ng-model="newserie.title"></search-button></div>
     <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0"
                                  ng-model="newserie.season"/></div>
     <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0"

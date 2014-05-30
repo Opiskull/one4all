@@ -1,10 +1,13 @@
 angular.module('serie')
-    .controller('SerieListCtrl', ['$scope','serieResource','$location','$filter','itemService', function ($scope,Series,$location,$filter,itemService) {
+    .controller('SerieListCtrl', ['$scope','serieResource','$location','$filter','itemService','searchDialogService', function ($scope,Series,$location,$filter,itemService,searchDialogService) {
         $scope.series = Series.items;
         $scope.itemService = itemService;
 
-        $scope.dropped = function(item){
-            itemService.dropped(item)
+        $scope.search = function(item){
+            searchDialogService.search(item.title,'tmdb-serie').then(function(result){
+                item.title = result.title;
+                itemService.setInfo(item, result.info);
+            });
         };
 
         $scope.remove = function(serie){
@@ -35,25 +38,5 @@ angular.module('serie')
             },function(response){
                 console.log("Error");
             });
-        };
-
-        $scope.finished = function(serie){
-            itemService.finished(serie);
-        };
-
-        $scope.increaseSe = function(serie){
-            itemService.increaseSe(serie);
-        };
-
-        $scope.decreaseSe = function(serie){
-            itemService.decreaseSe(serie);
-        };
-
-        $scope.increaseEp = function(serie){
-            itemService.increaseEp(serie);
-        };
-
-        $scope.decreaseEp = function(serie){
-            itemService.decreaseEp(serie);
         };
     }]);
