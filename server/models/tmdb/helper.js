@@ -1,4 +1,7 @@
 function parseDate(input){
+    if(!input){
+        return undefined;
+    }
     var array = input.split("-");
     if(array[0] === '0000')
         return undefined;
