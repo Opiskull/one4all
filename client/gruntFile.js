@@ -6,7 +6,7 @@ module.exports = function(grunt){
     grunt.registerTask('default',['debug','watch']);
 
 
-    grunt.registerTask('dist',['clean','gitinfo','less:dist','html2js:dist','uglify','bower_concat','concat:index','copy'])
+    grunt.registerTask('dist',['clean','gitinfo','less:dist','html2js:dist','uglify','bower_concat','concat:index','copy']);
 
     grunt.registerTask('debug',['clean','gitinfo','less:debug','html2js:debug','bower_concat','concat','copy']);
 
@@ -33,7 +33,7 @@ module.exports = function(grunt){
             less: ['src/assets/main.less'],
             tpl:['src/app/**/*.html','src/common/**/*.html'],
             vendor:[''],
-            fonts:'bower_components/bootstrap-less/fonts/',
+            fonts:'bower_components/bootstrap-bower/fonts/',
             favicon: 'src/site_44px.png'
         },
         bower_concat: {
