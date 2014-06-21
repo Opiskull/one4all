@@ -8,11 +8,16 @@
 </div>
 <div class="item-row" ng-if="!game.editable" ng-repeat-start="game in filtered = (games | multi:settings.filter)"
      display-state="game.stats">
-    <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(game)">{{game.title}}</a></div>
-    <div class="col-sm-6"></div>
-    <div class="col-sm-1">{{game.updatedAt | timeAgo}}</div>
-    <div class="col-sm-3">
-        <actions-button remove="remove(game)" model="game"></actions-button>
+
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(game)">{{game.title}}</a></div>
+            <div class="col-sm-6"></div>
+            <div class="col-sm-1">{{game.updatedAt | timeAgo}}</div>
+            <div class="col-sm-3">
+                <actions-button remove="remove(game)" model="game"></actions-button>
+            </div>
+        </div>
     </div>
     <info info="game.info" ng-if="game.open"></info>
 </div>

@@ -2,22 +2,29 @@
     <div class="col-sm-2"><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
     </div>
     <div class="col-sm-6"></div>
-    <div class="col-sm-1"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a></div>
+    <div class="col-sm-1"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
+        Modified</a></div>
     <div class="col-sm-3"><span class="badge pull-right">{{filtered.length}}</span></div>
 </div>
 <div class="item-row" ng-if="!movie.editable" ng-repeat-start="movie in filtered = (movies | multi:settings.filter)"
      display-state="movie.stats">
-    <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(movie)">{{movie.title}}</a></div>
-    <div class="col-sm-6"></div>
-    <div class="col-sm-1">{{movie.updatedAt | timeAgo}}</div>
-    <div class="col-sm-3">
-        <actions-button remove="remove(movie)" model="movie"></actions-button>
+    <div class="col-sm-12">
+        <div class="row">
+            <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(movie)">{{movie.title}}</a></div>
+            <div class="col-sm-6"></div>
+            <div class="col-sm-1">{{movie.updatedAt | timeAgo}}</div>
+            <div class="col-sm-3">
+                <actions-button remove="remove(movie)" model="movie"></actions-button>
+            </div>
+        </div>
     </div>
     <info info="movie.info" ng-if="movie.open"></info>
 </div>
 <div ng-include="'movie/edit.html'" ng-repeat-end="" ng-if="movie.editable"></div>
 <div class="item-row" ng-if="newmovie.isnew">
-    <div class="col-sm-2"><search-button search="search(newmovie)" item="newmovie" ng-model="newmovie.title"></search-button></div>
+    <div class="col-sm-2">
+        <search-button search="search(newmovie)" item="newmovie" ng-model="newmovie.title"></search-button>
+    </div>
     <div class="col-sm-6"></div>
     <div class="col-sm-1"></div>
     <div class="col-sm-3">
