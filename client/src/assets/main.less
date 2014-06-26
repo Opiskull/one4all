@@ -3,8 +3,11 @@
 @import "animate.less";
 @import "info.less";
 
+@myorange: #ff8400;
+
+
 @grid-gutter-width:         4px;
-@brand-primary: #ff8400;
+@brand-primary: @myorange;
 
 
 .nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
@@ -88,4 +91,12 @@ body{
 }
 .item-row.finished{
   background-color: @state-success-bg;
+}
+
+.select-info{
+  color: @myorange;
+  cursor: pointer;
+}
+.select-info:hover{
+  color: darken(@myorange,10%);
 }

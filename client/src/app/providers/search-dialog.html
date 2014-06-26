@@ -18,9 +18,9 @@
             </div>
         </div>
     </form>
-    <div ng-repeat="info in infos" ng-if="!selectedInfo.id || selectedInfo.id==info.id">
-        <div ng-include="'providers/select-title.html'"></div>
-        <div ng-include="currentProvider.detailUrl"></div>
+    <div ng-repeat="info in infos" ng-if="!selectedInfo.id || selectedInfo.id==info.id" class="display-table">
+        <div ng-include="'providers/select-title.html'" class="display-table-row"></div>
+        <div ng-include="currentProvider.detailUrl" class="display-table-row"></div>
     </div>
 </div>
 <div class="modal-footer">
