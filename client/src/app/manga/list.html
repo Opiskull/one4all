@@ -31,8 +31,7 @@
 </div>
 <div ng-include="'manga/edit.html'" ng-if="manga.editable" ng-repeat-end=""></div>
 <div class="item-row" ng-if="newmanga.isnew">
-    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="newmanga.title"
-                                 placeholder="title" focus-me="newmanga.isnew"/></div>
+    <div class="col-sm-2"><search-button search="search(newmanga)" item="newmanga"></search-button></div>
     <div class="col-sm-5"><input class="form-control input-sm" type="number" min="0" ng-model="newmanga.chapter"/>
     </div>
     <div class="col-sm-2"><input class="form-control input-sm" type="url" ng-model="newmanga.url"

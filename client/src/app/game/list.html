@@ -23,8 +23,7 @@
 </div>
 <div ng-include="'game/edit.html'" ng-if="game.editable" ng-repeat-end=""></div>
 <div class="item-row" ng-if="newgame.isnew">
-    <div class="col-sm-2" colspan="2"><input class="form-control input-sm" type="text" ng-model="newgame.title"
-                                             placeholder="title" focus-me="newgame.isnew"/></div>
+    <div class="col-sm-2" colspan="2"><search-button search="search(newgame)" item="newgame"></search-button></div>
     <div class="col-sm-6"></div>
     <div class="col-sm-1"></div>
     <div class="col-sm-3">

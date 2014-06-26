@@ -35,9 +35,7 @@
 <div ng-include="'anime/edit.html'" ng-repeat-end="" ng-if="anime.editable"></div>
 <div class="item-row" ng-if="newanime.isnew">
     <div class="col-sm-3">
-        <!--<input class="form-control input-sm" type="text" ng-model="newanime.title" placeholder="title"-->
-        <!--focus-me="newanime.isnew"/>-->
-        <search-button search="search(newanime)" item="newanime" ng-model="newanime.title"></search-button>
+        <search-button search="search(newanime)" item="newanime"></search-button>
     </div>
     <div class="col-sm-3">
         <input class="form-control input-sm" type="number" min="0" ng-model="newanime.episode"/>

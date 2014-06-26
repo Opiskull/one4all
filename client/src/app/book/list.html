@@ -9,7 +9,6 @@
 </div>
 <div class="item-row" ng-if="!book.editable" ng-repeat-start="book in filtered = (books | multi:settings.filter)"
      display-state="book.stats">
-
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2">
@@ -29,8 +28,7 @@
 </div>
 <div ng-include="'book/edit.html'" ng-repeat-end="" ng-if="book.editable"></div>
 <div class="item-row" ng-if="newbook.isnew">
-    <div class="col-sm-2"><input class="form-control input-sm" type="text" ng-model="newbook.title" placeholder="title"
-                                 focus-me="newbook.isnew"/></div>
+    <div class="col-sm-2"><search-button search="search(newbook)" item="newbook"></search-button></div>
     <div class="col-sm-6"><input class="form-control input-sm" type="number" min="0" ng-model="book.page"/></div>
     <div class="col-sm-1"></div>
     <div class="col-sm-3">

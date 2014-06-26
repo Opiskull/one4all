@@ -1,0 +1,52 @@
+@infowidth : 125px;
+@infoimgwidth : 150px;
+
+.info-container{
+  width: 100%;
+}
+
+.info-img{
+  width: @infoimgwidth;
+  float:left;
+  padding: 5px;
+}
+
+.info-rows{
+  width: auto;
+  display: table;
+  padding: 5px;
+}
+
+.info-row{
+  float:left;
+  display: table;
+}
+
+.info-title{
+  width: @infowidth;
+  font-weight: bold;
+  float:left;
+  display: table-cell;
+}
+
+.info-text{
+  width: @infowidth;
+  float: left;
+  display: table-cell;
+}
+
+.info-row-100{
+  .info-row;
+  width: 100%;
+}
+
+.info-title-100{
+  .info-title;
+  width: 100%;
+}
+
+.info-text-100{
+  .info-text;
+  width: auto;
+}
+

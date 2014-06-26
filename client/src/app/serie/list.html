@@ -41,7 +41,7 @@
 <div ng-include="'serie/edit.html'" ng-if="serie.editable" ng-repeat-end=""></div>
 <div class="item-row" ng-if="newserie.isnew">
     <div class="col-sm-2">
-        <search-button search="search(newserie)" item="newserie" ng-model="newserie.title"></search-button>
+        <search-button search="search(newserie)" item="newserie"></search-button>
     </div>
     <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0"
                                  ng-model="newserie.season"/></div>

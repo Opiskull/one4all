@@ -1,34 +1,33 @@
-<div class="row">
-    <div class="col-lg-1 col-md-2 col-sm-3 hidden-xs">
-        <info-image info="info"></info-image>
-    </div>
-    <div class="col-lg-11 col-md-10 col-sm-9">
-        <div class="row" ng-if="info.titles.length > 0">
-            <div class="col-sm-3">Alternate Titles</div>
-            <div class="col-sm-9"><a ng-repeat="title in info.titles">{{title.title}}<span ng-if="!$last">; </span></a>
-            </div>
+<div class="info-container">
+    <info-image info="info"></info-image>
+    <div class="info-rows">
+        <div class="info-row" ng-if="info.titles.length > 0">
+            <div class="info-title">Alternate Titles</div>
+            <div class="info-text-100"><a ng-repeat="title in info.titles">{{title.title}}<span ng-if="!$last">; </span></a></div>
         </div>
-        <div class="row">
-            <div class="col-sm-3">Volumes</div>
-            <div class="col-sm-3">{{info.volumes}}</div>
-            <div class="col-sm-3">Chapters</div>
-            <div class="col-sm-3">{{info.chapters}}</div>
+        <div class="info-row">
+            <div class="info-title">Volumes</div>
+            <div class="info-text">{{info.volumes}}</div>
         </div>
-        <div class="row">
-            <div class="col-sm-3">State</div>
-            <div class="col-sm-3">{{info.status}}</div>
+        <div class="info-row">
+            <div class="info-title">Chapters</div>
+            <div class="info-text">{{info.chapters}}</div>
         </div>
-        <div class="row">
-            <div class="col-sm-3">Start Date</div>
-            <div class="col-sm-3">{{info.start_date | date}}</div>
-            <div class="col-sm-3">End Date</div>
-            <div class="col-sm-3">{{info.end_date | date}}</div>
+        <div class="info-row">
+            <div class="info-title">State</div>
+            <div class="info-text">{{info.status}}</div>
         </div>
-        <dl class="row">
-            <dt class="col-sm-12">Description</dt>
-            <dd class="col-sm-12">
-                <more-text text="info.description"></more-text>
-            </dd>
-        </dl>
+        <div class="info-row">
+            <div class="info-title">Start Date</div>
+            <div class="info-text">{{info.start_date | date}}</div>
+        </div>
+        <div class="info-row">
+            <div class="info-title">End Date</div>
+            <div class="info-text">{{info.end_date | date}}</div>
+        </div>
+        <div class="info-row-100">
+            <div class="info-title-100">Description</div>
+            <div class="info-text-100"><more-text text="info.description"></more-text></div>
+        </div>
     </div>
 </div>
