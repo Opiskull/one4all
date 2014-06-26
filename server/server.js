@@ -31,6 +31,11 @@ server.pre(function(req,res,next){
     return next();
 });
 
+server.on('uncaughtException', function(req,res,route,err){
+    req.log.error(err);
+    res.send(new restify.InternalError('Internal server error'));
+});
+
 mongoose.connect(config.db.url);
 
 mongoose.connection.on('error', function(err){

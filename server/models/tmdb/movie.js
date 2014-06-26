@@ -20,17 +20,19 @@ var tmdbMovieSchema = mongoose.Schema({
     titles:[{title:String,lang:String}],
     release_date:Date,
     img:String,
-    adult:Boolean
+    adult:Boolean,
+    description: String,
+    status: String
 });
 
-function parseMovie(input,callback){
-    var movie = new tmdbMovie();
-    movie.adult = input.adult;
-    movie.id = input.id;
-    movie.title = input.title;
-    movie.release_date = helper.parseDate(input.release_date);
-    movie.img = input.poster_path;
-    movie.save(callback);
+function parseMovie(output,input,callback){
+    output.adult = input.adult;
+    output.id = input.id;
+    output.title = input.title;
+    output.release_date = helper.parseDate(input.release_date);
+    output.img = input.poster_path;
+    output.description = input.overview;
+    output.status = input.status;
 }
 
 tmdbMovieSchema.statics.findOrCreate = function(inputMovie,callback){
@@ -42,8 +44,9 @@ tmdbMovieSchema.statics.findOrCreate = function(inputMovie,callback){
             return callback(null,movie);
         }
         else{
-            parseMovie(inputMovie, callback);
-            //helper.parseTmdbObject(inputMovie,tmdbMovie,callback);
+            var movie = new tmdbMovie();
+            parseMovie(movie,inputMovie, callback);
+            movie.save(callback);
         }
     });
 };

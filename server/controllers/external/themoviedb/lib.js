@@ -59,6 +59,21 @@ function searchSerie(search,cb){
     });
 }
 
+function getMovie(id,cb){
+    var paras = {
+        qs:{
+            api_key:authConfig.auth.api_key,
+            append_to_response: 'alternative_titles'
+        },
+        url:config.MovieByIdUrl + id
+    };
+    getRequest(paras, function(err,result){
+        if(err) return cb(err);
+
+        cb(null,result);
+    });
+}
+
 function searchMovie(search,cb){
     var paras = {
         qs:{
@@ -73,14 +88,16 @@ function searchMovie(search,cb){
 
         var movies = [];
         result.results.forEach(function(item){
-            Movie.findOrCreate(item,function(err,movie){
-                if(err){
-                    cb(err);
-                }
-                movies.push(movie);
-                if(result.results.length === movies.length){
-                    cb(null,movies);
-                }
+            getMovie(item.id,function(err,info){
+                Movie.findOrCreate(info,function(err,movie){
+                    if(err){
+                        cb(err);
+                    }
+                    movies.push(movie);
+                    if(result.results.length === movies.length){
+                        cb(null,movies);
+                    }
+                });
             });
         });
     });
@@ -89,3 +106,4 @@ function searchMovie(search,cb){
 exports.searchMovie = searchMovie;
 exports.searchSerie = searchSerie;
 exports.getConfig = getConfig;
+exports.getMovie = getMovie;
