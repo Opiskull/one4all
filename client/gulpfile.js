@@ -37,8 +37,14 @@ var paths = {
     "templatemodule" : pkg.name + ".templates"
 };
 
-gulp.task('default',['clean','fonts','images','app','templates','vendor','css','index'],function(){
+gulp.task('default',['build'],function(){
     gulp.start('watch');
+});
+
+gulp.task('build',['clean'], function(){
+    gulp.start('fonts');
+    gulp.start('images');
+    gulp.start('index');
 });
 
 gulp.task('watch', function(){
@@ -50,8 +56,8 @@ gulp.task('clean', function(){
         .pipe(clean());
 });
 
-gulp.task('index', function(){
-    gulp.src('./src/index.html')
+gulp.task('index',['app','templates','vendor','css'], function(){
+    return gulp.src('./src/index.html')
         .pipe(
         inject(
             gulp.src([
@@ -110,12 +116,9 @@ gulp.task('images:watch', function(){
 });
 
 gulp.task('app', function(){
-    var pipe = gulp.src(paths.src.app)
-        .pipe(concat(paths.filenames.app));
-    if(true){
-        pipe.pipe(uglify());
-    }
-        pipe
+    return gulp.src(paths.src.app)
+        .pipe(concat(paths.filenames.app))
+        .pipe(uglify())
         .pipe(gulp.dest(paths.build));
 });
 
@@ -155,7 +158,7 @@ gulp.task('templates', function(){
 });
 
 gulp.task('vendor', function(){
-    gulpBowerFiles()
+    return gulpBowerFiles()
         .pipe(concat(paths.filenames.vendor))
         .pipe(uglify())
         .pipe(gulp.dest(paths.build))
