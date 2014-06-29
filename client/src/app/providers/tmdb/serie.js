@@ -7,7 +7,7 @@ angular.module('providers').factory('tmdbSerie', ['Restangular', function (resta
         category: 'serie',
         detailUrl: detailUrl,
         search: function (keyword) {
-            return restangular.one(searchUrl + '/' + keyword).getList().then(function (items) {
+            return restangular.one(searchUrl + '?search=' + keyword).getList().then(function (items) {
                 return restangular.stripRestangular(items);
             }, function () {
 

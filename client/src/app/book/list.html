@@ -28,7 +28,7 @@
 </div>
 <div ng-include="'book/edit.html'" ng-repeat-end="" ng-if="book.editable"></div>
 <div class="item-row" ng-if="newbook.isnew">
-    <div class="col-sm-2"><search-button search="search(newbook)" item="newbook"></search-button></div>
+    <div class="col-sm-2"><search-button  default-provider="defaultProvider" item="newbook"></search-button></div>
     <div class="col-sm-6"><input class="form-control input-sm" type="number" min="0" ng-model="book.page"/></div>
     <div class="col-sm-1"></div>
     <div class="col-sm-3">

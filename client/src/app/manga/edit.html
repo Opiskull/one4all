@@ -1,6 +1,6 @@
 <div class="item-row">
     <div class="col-sm-2">
-        <search-button search="search(manga)" item="manga"></search-button>
+        <search-button  default-provider="defaultProvider" item="manga"></search-button>
     </div>
     <div class="col-sm-5"><input class="form-control input-sm" type="number" min="0" ng-model="manga.chapter"/></div>
     <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>

@@ -7,7 +7,7 @@ angular.module('providers').factory('tmdbMovie', ['Restangular', function (resta
         category: 'movie',
         detailUrl: detailUrl,
         search: function (keyword) {
-            return restangular.one(searchUrl + '/' + keyword).getList().then(function (items) {
+            return restangular.one(searchUrl + '?search=' + keyword).getList().then(function (items) {
                 return restangular.stripRestangular(items);
             }, function () {
 

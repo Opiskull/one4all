@@ -2,13 +2,7 @@ angular.module('serie')
     .controller('SerieListCtrl', ['$scope', 'serieResource', '$location', '$filter', 'itemService', 'searchDialogService', function ($scope, Series, $location, $filter, itemService, searchDialogService) {
         $scope.series = Series.items;
         $scope.itemService = itemService;
-
-        $scope.search = function (item) {
-            searchDialogService.search(item.title, 'tmdb-serie').then(function (result) {
-                item.title = result.title;
-                itemService.setInfo(item, result.info);
-            });
-        };
+        $scope.defaultProvider = 'tmdb-serie';
 
         $scope.remove = function (serie) {
             itemService.removeWithDlg('serie', $scope.series, serie);

@@ -2,13 +2,8 @@ angular.module('movie')
     .controller('MovieListCtrl', ['$scope', 'movieResource', '$location', '$filter', 'itemService', 'searchDialogService', function ($scope, Movies, $location, $filter, itemService, searchDialogService) {
         $scope.movies = Movies.items;
         $scope.itemService = itemService;
+        $scope.defaultProvider = 'tmdb-movie';
 
-        $scope.search = function (item) {
-            searchDialogService.search(item.title, 'tmdb-movie').then(function (result) {
-                item.title = result.title;
-                itemService.setInfo(item, result.info);
-            });
-        };
         $scope.remove = function (movie) {
             itemService.removeWithDlg('movie', $scope.movies, movie);
         };

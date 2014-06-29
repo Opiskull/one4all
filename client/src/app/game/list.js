@@ -2,6 +2,8 @@ angular.module('game')
     .controller('GameListCtrl', ['$scope', 'gameResource', '$location', '$filter', 'itemService', function ($scope, Games, $location, $filter, itemService) {
         $scope.games = Games.items;
         $scope.itemService = itemService;
+        $scope.defaultProvider = '';
+
         $scope.dropped = function (item) {
             itemService.dropped(item)
         };

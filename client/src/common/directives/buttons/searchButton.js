@@ -1,4 +1,4 @@
-angular.module('14all').directive('searchButton', [function() {
+angular.module('14all').directive('searchButton', ['searchDialogService','itemService',function(searchDialogService,itemService) {
     return {
         template:
             '<div class="input-group"> \
@@ -11,10 +11,16 @@ angular.module('14all').directive('searchButton', [function() {
             </div>',
         restrict: 'E',
         scope: {
-            search: '&search',
+            defaultProvider: '=',
             item: '='
         },
         link : function($scope,$element,$attr){
+            $scope.search = function (item) {
+                searchDialogService.search(item.title, $scope.defaultProvider).then(function (result) {
+                    item.title = result.title;
+                    itemService.setInfo(item, result.info);
+                });
+            };
         }
     };
 }]);

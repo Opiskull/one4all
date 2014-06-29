@@ -2,13 +2,7 @@ angular.module('anime')
     .controller('AnimeListCtrl', ['$scope', 'animeResource', 'itemService', 'searchDialogService', function ($scope, Animes, itemService, searchDialogService) {
         $scope.animes = Animes.items;
         $scope.itemService = itemService;
-
-        $scope.search = function (item) {
-            searchDialogService.search(item.title, 'mal-anime').then(function (result) {
-                item.title = result.title;
-                itemService.setInfo(item, result.info);
-            });
-        };
+        $scope.defaultProvider = 'mal-anime';
 
         $scope.remove = function (anime) {
             itemService.removeWithDlg('anime', $scope.animes, anime);
@@ -39,24 +33,4 @@ angular.module('anime')
                 console.log("Error");
             });
         };
-
-//        $scope.showInfo = function(item){
-//            item.open = !!!item.open;
-//        };
-
-//        $scope.dropped = function(item){
-//            itemService.dropped(item)
-//        };
-
-//        $scope.finished = function(anime){
-//            itemService.finished(anime);
-//        };
-
-//        $scope.increaseEp = function(anime){
-//            itemService.increaseEp(anime);
-//        };
-//
-//        $scope.decreaseEp = function(anime){
-//            itemService.decreaseEp(anime);
-//        };
     }]);

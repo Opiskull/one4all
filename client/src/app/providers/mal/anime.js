@@ -7,7 +7,7 @@ angular.module('providers').factory('malAnime', ['Restangular', function (restan
         category: 'anime',
         detailUrl: detailUrl,
         search: function (keyword) {
-            return restangular.one(searchUrl + '/' + keyword).getList().then(function (items) {
+            return restangular.one(searchUrl + '?search=' + keyword).getList().then(function (items) {
                 return restangular.stripRestangular(items);
             }, function () {
 

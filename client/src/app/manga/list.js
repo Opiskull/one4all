@@ -2,13 +2,8 @@ angular.module('manga')
     .controller('MangaListCtrl', ['$scope', 'mangaResource', '$location', '$filter', 'itemService', 'searchDialogService', function ($scope, Mangas, $location, $filter, itemService, searchDialogService) {
         $scope.mangas = Mangas.items;
         $scope.itemService = itemService;
+        $scope.defaultProvider = 'mal-manga';
 
-        $scope.search = function (item) {
-            searchDialogService.search(item.title, 'mal-manga').then(function (result) {
-                item.title = result.title;
-                itemService.setInfo(item, result.info);
-            });
-        };
         $scope.remove = function (manga) {
             itemService.removeWithDlg('manga', $scope.mangas, manga);
         };
