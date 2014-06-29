@@ -46,14 +46,19 @@ function searchSerie(search,cb){
 
         var series = [];
         result.results.forEach(function(item){
-            Serie.findOrCreate(item,function(err,serie){
-                if(err){
-                    cb(err);
+            getSerie(item.id, function(err,info){
+                if(info.poster_path && info.poster_path != null){
+                    info.poster_path = config.ImageBaseUrl + config.ImagePosterSize + info.poster_path;
                 }
-                series.push(serie);
-                if(series.length === result.results.length){
-                    cb(null,series);
-                }
+                Serie.findOrCreate(info,function(err,serie){
+                    if(err){
+                        cb(err);
+                    }
+                    series.push(serie);
+                    if(series.length === result.results.length){
+                        cb(null,series);
+                    }
+                });
             });
         });
     });
@@ -66,6 +71,21 @@ function getMovie(id,cb){
             append_to_response: 'alternative_titles'
         },
         url:config.MovieByIdUrl + id
+    };
+    getRequest(paras, function(err,result){
+        if(err) return cb(err);
+
+        cb(null,result);
+    });
+}
+
+function getSerie(id,cb){
+    var paras = {
+        qs:{
+            api_key:authConfig.auth.api_key,
+            append_to_response: ''
+        },
+        url:config.SerieByIdUrl + id
     };
     getRequest(paras, function(err,result){
         if(err) return cb(err);
@@ -89,6 +109,9 @@ function searchMovie(search,cb){
         var movies = [];
         result.results.forEach(function(item){
             getMovie(item.id,function(err,info){
+                if(info.poster_path && info.poster_path != null){
+                    info.poster_path = config.ImageBaseUrl + config.ImagePosterSize + info.poster_path;
+                }
                 Movie.findOrCreate(info,function(err,movie){
                     if(err){
                         cb(err);

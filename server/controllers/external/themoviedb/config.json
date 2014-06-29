@@ -2,5 +2,8 @@
     "SerieSearchUrl":"https://api.themoviedb.org/3/search/tv",
     "MovieSearchUrl":"https://api.themoviedb.org/3/search/movie",
     "ConfigurationUrl":"https://api.themoviedb.org/3/configuration",
-    "MovieByIdUrl":"https://api.themoviedb.org/3/movie/"
+    "MovieByIdUrl":"https://api.themoviedb.org/3/movie/",
+    "SerieByIdUrl":"https://api.themoviedb.org/3/tv/",
+    "ImageBaseUrl":"http://image.tmdb.org/t/p/",
+    "ImagePosterSize":"w185"
 }

@@ -34,7 +34,8 @@ function getRouteIdWithAction(route,action,actionid){
 }
 
 exports.getSearchRoute = function(route){
-    return getRouteAction(route,":search");
+    //return getRouteAction(route,":search");,
+    return getRoute(route);
 };
 
 exports.getRoute = getRoute;

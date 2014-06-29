@@ -10,18 +10,19 @@ var tmdbSerieSchema = mongoose.Schema({
     seasons:Number,
     episodes:Number,
     status:String,
-    img:String
+    img:String,
+    description: String
 });
 
-function parseSerie(input,callback){
-    var serie = new tmdbSerie();
-    //movie.id = input.id;
-    serie.id = input.id;
-    serie.title = input.name;
-    //serie.titles.push(input.original_name);
-    serie.first_air_date = helper.parseDate(input.first_air_date);
-    serie.img = input.poster_path;
-    serie.save(callback);
+function parseSerie(output,input,callback){
+    output.id = input.id;
+    output.title = input.name;
+    output.first_air_date = helper.parseDate(input.first_air_date);
+    output.img = input.poster_path;
+    output.seasons = input.number_of_seasons;
+    output.episodes = input.number_of_episodes;
+    output.status = input.status;
+    output.description = input.overview;
 }
 
 tmdbSerieSchema.statics.findOrCreate = function(inputSerie,callback){
@@ -29,14 +30,11 @@ tmdbSerieSchema.statics.findOrCreate = function(inputSerie,callback){
         if(err){
             return callback(err,null);
         }
-        if(serie){
-            return callback(null,serie);
+        if(!serie){
+            serie = new tmdbSerie();
         }
-        else{
-            parseSerie(inputSerie,callback);
-
-            //helper.parseTmdbObject(inputSerie,tmdbSerie,callback);
-        }
+        parseSerie(serie,inputSerie,callback);
+        return callback(null,serie);
     });
 };
 

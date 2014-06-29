@@ -22,7 +22,8 @@ var tmdbMovieSchema = mongoose.Schema({
     img:String,
     adult:Boolean,
     description: String,
-    status: String
+    status: String,
+    imdb_id: String
 });
 
 function parseMovie(output,input,callback){
@@ -33,6 +34,8 @@ function parseMovie(output,input,callback){
     output.img = input.poster_path;
     output.description = input.overview;
     output.status = input.status;
+    output.imdb_id = input.imdb_id;
+    output.titles = helper.parseTitles(input.alternative_titles)
 }
 
 tmdbMovieSchema.statics.findOrCreate = function(inputMovie,callback){
@@ -40,14 +43,11 @@ tmdbMovieSchema.statics.findOrCreate = function(inputMovie,callback){
         if(err){
             return callback(err,null);
         }
-        if(movie){
-            return callback(null,movie);
+        if(!movie) {
+            movie = new tmdbMovie();
         }
-        else{
-            var movie = new tmdbMovie();
-            parseMovie(movie,inputMovie, callback);
-            movie.save(callback);
-        }
+        parseMovie(movie,inputMovie,callback);
+        return movie.save(callback);
     });
 };
 

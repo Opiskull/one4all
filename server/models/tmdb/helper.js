@@ -12,6 +12,23 @@ function parseDate(input){
     return array.join("-");
 }
 
+function parseTitle(input){
+    var output = {};
+    output.title = input.title;
+    output.lang = input.iso_3166_1;
+    return output;
+}
+
+function parseTitles(input){
+    var output = [];
+    if(input.titles) {
+        input.titles.forEach(function (item) {
+            output.push(parseTitle(item));
+        });
+    }
+    return output;
+}
+
 function parseTmdbObject(input,schema,cb){
     var tvdbItem = new schema(input);
     tvdbItem.save(cb);
@@ -19,3 +36,4 @@ function parseTmdbObject(input,schema,cb){
 
 exports.parseTmdbObject = parseTmdbObject;
 exports.parseDate = parseDate;
+exports.parseTitles = parseTitles;
