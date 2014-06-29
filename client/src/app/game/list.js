@@ -1,5 +1,5 @@
 angular.module('game')
-    .controller('GameListCtrl', ['$scope', 'gameResource', '$location', '$filter', 'itemService', function ($scope, Games, $location, $filter, itemService) {
+    .controller('GameListCtrl', ['$scope', 'gameResource', 'itemService', function ($scope, Games, itemService) {
         $scope.games = Games.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = '';

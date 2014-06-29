@@ -1,5 +1,5 @@
 angular.module('movie')
-    .controller('MovieListCtrl', ['$scope', 'movieResource', '$location', '$filter', 'itemService', 'searchDialogService', function ($scope, Movies, $location, $filter, itemService, searchDialogService) {
+    .controller('MovieListCtrl', ['$scope', 'movieResource', 'itemService', function ($scope, Movies, itemService) {
         $scope.movies = Movies.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = 'tmdb-movie';

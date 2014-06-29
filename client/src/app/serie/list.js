@@ -1,5 +1,5 @@
 angular.module('serie')
-    .controller('SerieListCtrl', ['$scope', 'serieResource', '$location', '$filter', 'itemService', 'searchDialogService', function ($scope, Series, $location, $filter, itemService, searchDialogService) {
+    .controller('SerieListCtrl', ['$scope', 'serieResource', 'itemService', function ($scope, Series, itemService) {
         $scope.series = Series.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = 'tmdb-serie';

@@ -1,5 +1,5 @@
 angular.module('book')
-    .controller('BookListCtrl', ['$scope', 'bookResource', '$location', '$filter', 'itemService', function ($scope, bookResource, $location, $filter, itemService) {
+    .controller('BookListCtrl', ['$scope', 'bookResource', 'itemService', function ($scope, bookResource, itemService) {
         $scope.books = bookResource.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = '';

@@ -1,5 +1,5 @@
 angular.module('manga')
-    .controller('MangaListCtrl', ['$scope', 'mangaResource', '$location', '$filter', 'itemService', 'searchDialogService', function ($scope, Mangas, $location, $filter, itemService, searchDialogService) {
+    .controller('MangaListCtrl', ['$scope', 'mangaResource', 'itemService', function ($scope, Mangas, itemService) {
         $scope.mangas = Mangas.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = 'mal-manga';

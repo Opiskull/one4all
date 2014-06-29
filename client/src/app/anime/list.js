@@ -1,5 +1,5 @@
 angular.module('anime')
-    .controller('AnimeListCtrl', ['$scope', 'animeResource', 'itemService', 'searchDialogService', function ($scope, Animes, itemService, searchDialogService) {
+    .controller('AnimeListCtrl', ['$scope', 'animeResource', 'itemService', function ($scope, Animes, itemService) {
         $scope.animes = Animes.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = 'mal-anime';
