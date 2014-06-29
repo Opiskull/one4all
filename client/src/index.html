@@ -3,8 +3,9 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title ng-bind="'PeerZone ' + title"></title>
-    <link rel="stylesheet" type="text/css"
-          href="<%= grunt.config.get('pkg.name') %>.min.css?<%= gitinfo.local.branch.current.shortSHA %>"/>
+    <!-- inject:css -->
+
+    <!-- endinject -->
     <link rel="icon" type="image/png" href="site.png">
 </head>
 <body>
@@ -73,8 +74,8 @@
     <div ng-view class="view-animation"></div>
 </div>
 
-<script type="text/javascript" src="<%= grunt.config.get('pkg.name') %>.vendor.min.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
-<script type="text/javascript" src="<%= grunt.config.get('pkg.name') %>.templates.min.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
-<script type="text/javascript" src="<%= grunt.config.get('pkg.name') %>.min.js?<%= gitinfo.local.branch.current.shortSHA %>"></script>
+<!-- inject:js -->
+
+<!-- endinject -->
 </body>
 </html>
