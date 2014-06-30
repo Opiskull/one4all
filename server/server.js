@@ -64,9 +64,11 @@ server.use(passport.initialize());
 
 var modelpath = __dirname + config.models;
 var controllerpath = __dirname + config.controllers;
+var modulespath = __dirname + config.modules;
 
 modules.loadModels(modelpath,server);
-modules.loadControllers(controllerpath,server);
+modules.loadControllers(controllerpath, server);
+modules.loadModules(modulespath, server);
 
 server.listen(config.port,config.host, function(){
    server.log.info('%s listening at %s', server.name, server.url);

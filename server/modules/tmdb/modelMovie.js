@@ -2,18 +2,6 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var helper = require('./helper.js');
 
-//var tmdbMovieSchema = mongoose.Schema({
-//    adult:Boolean,
-//    id:Number,
-//    original_title:String,
-//    release_date:Date,
-//    poster_path:String,
-//    popularity:Number,
-//    title:String,
-//    vote_average:Number,
-//    vote_count:Number
-//});
-
 var tmdbMovieSchema = mongoose.Schema({
     id:Number,
     title:String,

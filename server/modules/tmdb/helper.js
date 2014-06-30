@@ -29,11 +29,5 @@ function parseTitles(input){
     return output;
 }
 
-function parseTmdbObject(input,schema,cb){
-    var tvdbItem = new schema(input);
-    tvdbItem.save(cb);
-}
-
-exports.parseTmdbObject = parseTmdbObject;
 exports.parseDate = parseDate;
 exports.parseTitles = parseTitles;

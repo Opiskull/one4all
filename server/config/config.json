@@ -4,6 +4,7 @@
     "host":"localhost",
     "models":"/models",
     "controllers":"/controllers",
+    "modules":"/modules",
     "db_url":"mongodb://localhost/test",
     "auth": {
         "github":{

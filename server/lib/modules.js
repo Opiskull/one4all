@@ -38,11 +38,7 @@ function buildPath(path,file){
     return path + '/' + file;
 }
 
-
-
-
-
-
+exports.loadModules = loadModules;
 exports.loadControllers = loadControllers;
 exports.loadModels = loadModels;
 
@@ -52,3 +48,22 @@ exports.loadModels = loadModels;
             require(buildPath(modelpath,model));
         });
     }
+
+function loadModules(modulepath,server){
+    fs.readdirSync(modulepath).forEach(function(module){
+        var path = buildPath(modulepath,module);
+        var stats = fs.statSync(path);
+        if(stats.isDirectory()){
+            fs.readdirSync(path).forEach(function(moduleFile){
+                var modulePath = buildPath(path,moduleFile);
+                loadController(modulePath,module,moduleFile,server)
+            });
+        } else {
+            if(stats.isFile()){
+                if(excludeExtensions.indexOf(pathUtil.extname(module))==-1){
+                    loadController(path,"controller",module,server);
+                }
+            }
+        }
+    });
+}

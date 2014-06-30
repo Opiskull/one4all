@@ -36,7 +36,7 @@ function parseResult(result,type,cb){
     });
 }
 
-function getXmlToJsonRequest(options,cb){
+function parseXmlToJson(options,cb){
     client.get(options, function (err, response, body) {
         if(err)
             return cb(err);
@@ -76,9 +76,8 @@ function searchAnime(search,cb){
         url:config.AnimeSearchUrl
     };
 
-    getXmlToJsonRequest(paras,function(err,result){
-        if(err)
-            return cb(err);
+    parseXmlToJson(paras,function(err,result){
+        if(err) return cb(err);
         parseResult(result,Anime,cb);
     });
 }
@@ -91,9 +90,8 @@ function searchManga(search,cb){
         url:config.MangaSearchUrl
     };
 
-    getXmlToJsonRequest(paras,function(err,result){
-        if(err)
-            return cb(err);
+    parseXmlToJson(paras,function(err,result){
+        if(err) return cb(err);
         parseResult(result,Manga,cb);
     });
 }

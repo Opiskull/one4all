@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-var helper = require('./helper.js');
+var helper = require('./models/helper.js');
 
 //var malAnimeSchema = mongoose.Schema({
 //    id:Number,

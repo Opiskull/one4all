@@ -1,3 +1,6 @@
+require('./modelMovie.js');
+require('./modelSerie.js');
+
 var lib = require('./lib.js');
 var tmdbConfig = {};
 
