@@ -52,17 +52,13 @@ exports.loadModels = loadModels;
 function loadModules(modulepath,server){
     fs.readdirSync(modulepath).forEach(function(module){
         var path = buildPath(modulepath,module);
-        var stats = fs.statSync(path);
-        if(stats.isDirectory()){
-            fs.readdirSync(path).forEach(function(moduleFile){
-                var modulePath = buildPath(path,moduleFile);
-                loadController(modulePath,module,moduleFile,server)
-            });
-        } else {
-            if(stats.isFile()){
-                if(excludeExtensions.indexOf(pathUtil.extname(module))==-1){
-                    loadController(path,"controller",module,server);
-                }
+        if(excludeExtensions.indexOf(pathUtil.extname(module))==-1){
+            var ctrl = require(path);
+            if(ctrl.init){
+                server.log.info('load module:%s',module);
+                ctrl.init(server,router);
+            } else{
+                server.log.info('module:%s not loaded',module);
             }
         }
     });

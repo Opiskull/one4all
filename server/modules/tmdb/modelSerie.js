@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-var helper = require('./helper.js');
+var parser = require('./parser.js');
 
 var tmdbSerieSchema = mongoose.Schema({
     id:Number,
@@ -14,17 +14,6 @@ var tmdbSerieSchema = mongoose.Schema({
     description: String
 });
 
-function parseSerie(output,input,callback){
-    output.id = input.id;
-    output.title = input.name;
-    output.first_air_date = helper.parseDate(input.first_air_date);
-    output.img = input.poster_path;
-    output.seasons = input.number_of_seasons;
-    output.episodes = input.number_of_episodes;
-    output.status = input.status;
-    output.description = input.overview;
-}
-
 tmdbSerieSchema.statics.findOrCreate = function(inputSerie,callback){
     this.findOne({'id':inputSerie.id},function(err,serie){
         if(err){
@@ -33,7 +22,7 @@ tmdbSerieSchema.statics.findOrCreate = function(inputSerie,callback){
         if(!serie){
             serie = new tmdbSerie();
         }
-        parseSerie(serie,inputSerie,callback);
+        parser.parseSerie(serie,inputSerie);
         return callback(null,serie);
     });
 };
