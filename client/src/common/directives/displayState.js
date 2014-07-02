@@ -12,6 +12,7 @@ angular.module('14all').directive('displayState', [function() {
                 if(state){
                     $element.toggleClass('finished',isValid(state.finished));
                     $element.toggleClass('dropped',isValid(state.dropped));
+                    $element.toggleClass('paused',isValid(state.paused));
                 }
             },true);
         }

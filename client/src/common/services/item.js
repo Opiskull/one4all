@@ -4,6 +4,8 @@ angular.module('14all').factory('itemService',['dialogService',function(dialogSe
             if(result){
                 item.remove().then(function(){
                     remove(items,item);
+                }).catch(function(err){
+                    console.log(err);
                 });
             }
         });
@@ -11,6 +13,13 @@ angular.module('14all').factory('itemService',['dialogService',function(dialogSe
 
     function remove(items,item){
         items.splice(items.indexOf(item),1);
+    }
+
+    function paused(item){
+        if(!item.stats)
+            item.stats = {};
+        item.stats.paused = !item.stats.paused;
+        return update(item);
     }
 
     function finished(item){
@@ -31,6 +40,8 @@ angular.module('14all').factory('itemService',['dialogService',function(dialogSe
         return item.put().then(function(updated){
             item.updatedAt = updated.updatedAt;
             return item;
+        }).catch(function(err){
+            console.log(err);
         });
     }
 
@@ -142,25 +153,24 @@ angular.module('14all').factory('itemService',['dialogService',function(dialogSe
         }
     }
 
-    var service = {
+    return {
         increase: increase,
         decrease: decrease,
         increaseEp: increaseEp,
         decreaseEp: decreaseEp,
         increaseCh: increaseCh,
         decreaseCh: decreaseCh,
-        increaseSe:increaseSe,
-        decreaseSe:decreaseSe,
-        increasePg:increasePg,
-        decreasePg:decreasePg,
+        increaseSe: increaseSe,
+        decreaseSe: decreaseSe,
+        increasePg: increasePg,
+        decreasePg: decreasePg,
         update: update,
         finished: finished,
         dropped: dropped,
+        paused: paused,
         remove: remove,
-        removeWithDlg:removeWithDlg,
-        showInfo:showInfo,
-        setInfo:setInfo
+        removeWithDlg: removeWithDlg,
+        showInfo: showInfo,
+        setInfo: setInfo
     };
-
-    return service;
 }]);
