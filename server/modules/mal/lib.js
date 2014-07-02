@@ -25,12 +25,10 @@ function parseResult(result,type,cb){
 
     result.forEach(function(item){
         type.findOrCreate(item,function(err,item){
-            if(err){
-                cb(err);
-            }
+            if(err) return cb(err);
             items.push(item);
             if(items.length === result.length){
-                cb(null,items);
+                return cb(null,items);
             }
         });
     });
@@ -38,8 +36,7 @@ function parseResult(result,type,cb){
 
 function parseXmlToJson(options,cb){
     client.get(options, function (err, response, body) {
-        if(err)
-            return cb(err);
+        if(err) return cb(err);
 
         if(body === "No results" || body === ''){
             return cb(null,[]);

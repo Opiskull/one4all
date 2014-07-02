@@ -7,7 +7,9 @@ function statsPlugin(schema,options){
         stats:
         {
             finished: Boolean,
-            dropped: Boolean
+            dropped: Boolean,
+            paused: Boolean,
+            owned: Boolean
         }
     };
     schema.add(statsSchema);
