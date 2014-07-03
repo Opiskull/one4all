@@ -2,6 +2,8 @@
   "name": "14all",
   "version": "1.0.0",
   "devDependencies": {
+    "cheerio": "^0.17.0",
+    "event-stream": "^3.1.5",
     "gulp": "^3.8.5",
     "gulp-bower-files": "^0.2.5",
     "gulp-clean": "^0.3.1",
