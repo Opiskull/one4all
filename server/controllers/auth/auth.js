@@ -4,20 +4,21 @@ var passport = require('passport');
 var BearerStrategy = require('passport-http-bearer').Strategy;
 
 var User = mongoose.model('User');
+var AccessToken = mongoose.model('AccessToken');
 
 module.exports.init = function (server,router) {
     passport.use(new BearerStrategy(
         function(token, done) {
-            User.findByAccessToken(token, function (err, user) {
+            AccessToken.findUserByToken(token,function(err, user){
+//            User.findByAccessToken(token, function (err, user) {
                 if (err) { return done(err); }
                 if (!user) { return done(null, false); }
-                return done(null, user, { scope: 'read' });
+                return done(null, user, { scope: 'read' , token: token});
             });
         }
     ));
     server.post(router.getRoute('/auth/logout'),router.isAuthenticated,function(req,res){
-        req.user.accessToken = '';
-        req.user.save(function(err){
+        AccessToken.removeWithToken(req.authInfo.token, function(err){
             if(err){
                 res.json(err);
             }

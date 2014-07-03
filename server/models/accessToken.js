@@ -1,60 +1,45 @@
-/*
+
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 
-var userSchema = mongoose.Schema({
-    username: String,
-    email: String,
+var accessTokenSchema = mongoose.Schema({
+    lastLogin: {type: Date, default: Date.now},
     accessToken: String,
     refreshToken: String,
-    profile: {
-        provider: String,
-        id: String,
-        displayName: String,
-        name: {
-            familyName : String,
-            givenName: String,
-            middleName: String
-        },
-        emails: [{
-            value: String, type: {type: String}
-        }]
-    },
-    roles:[String]
+    user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
-userSchema.statics.findOrCreate = function(profile,callback){
-    this.findOne({'profile.id':profile.id},function(err,user){
-        if(err){
-            return callback(err,null);
-        }
-        if(user){
-            return callback(null,user);
-        }
-        else{
-            var newuser = new User();
-            newuser.username = profile.username;
-            newuser.email = profile.email;
-            newuser.profile = profile;
-            newuser.save(function(err){
-                if(err){
-                    return callback(err,null);
-                }
-                return callback(null,newuser);
-            });
-        }
+
+
+accessTokenSchema.statics.findUserByToken = function(token,callback){
+    var User = mongoose.model('User');
+    this.findOne({ accessToken: token })
+        .exec(function (err, accessToken) {
+            if (err) { return callback(err); }
+            if (!accessToken) { return callback(null); }
+            return User.findOne({_id: accessToken.user},callback);
+        });
+};
+
+accessTokenSchema.statics.findByToken = function(token,callback){
+    this.findOne({ accessToken: token}, function(err,accessToken){
+        if(err) return callback(err);
+        if(!accessToken) return callback(null);
+        return callback(null,accessToken);
     });
 };
 
-userSchema.statics.findByAccessToken = function(token,callback){
-    this.findOne({ accessToken: token }, function (err, user) {
-        if (err) { return callback(err); }
-        if (!user) { return callback(null); }
-        return callback(null, user);
+accessTokenSchema.statics.removeWithToken = function(token, callback){
+    this.findByToken(token, function(err, accessToken){
+        accessToken.remove(function(err){
+            callback(err);
+        });
     });
 };
 
-userSchema.plugin(timestamps);
-var User = mongoose.model('User', userSchema);
+var AccessToken = mongoose.model('AccessToken', accessTokenSchema);
 
-*/
+
+
+exports.schema = accessTokenSchema;
+exports.model = AccessToken;

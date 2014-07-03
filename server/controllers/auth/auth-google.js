@@ -6,6 +6,7 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var config = require('../../config/config.json');
 
 var User = mongoose.model('User');
+var AccessToken = mongoose.model('AccessToken');
 
 module.exports.init = function (server,router) {
 
@@ -19,11 +20,10 @@ module.exports.init = function (server,router) {
             User.findOrCreate(profile, function (err, user) {
                 if(err) {return done(err);}
                 if(!user){return done(null,false);}
-                user.accessToken = accessToken;
-                user.refreshToken = refreshToken;
-                user.save(function(err){
+                var token = {accessToken: accessToken, user: user._id, refreshToken: refreshToken};
+                AccessToken.create(token, function(err, aToken){
                     if(err) {return done(err);}
-                    return done(null, user);
+                    return done(null, user, {token:aToken.accessToken});
                 });
             });
         }
@@ -34,7 +34,7 @@ module.exports.init = function (server,router) {
     server.get(router.getRoute('/auth/google/callback'),
         passport.authenticate('google', { failureRedirect: '/login' ,session:false}),
         function (req, res) {
-            res.header('Location','/index.html#/login?token='+req.user.accessToken);
+            res.header('Location','/index.html#/login?token='+req.authInfo.token);
             res.send(302);
         });
 };
