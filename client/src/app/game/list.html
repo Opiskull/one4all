@@ -19,7 +19,9 @@
             </div>
         </div>
     </div>
-    <info info="game.info" ng-if="game.open"></info>
+    <div collapse="!game.open">
+        <info info="game.info"></info>
+    </div>
 </div>
 <div ng-include="'game/edit.html'" ng-if="game.editable" ng-repeat-end=""></div>
 <div class="item-row" ng-if="newgame.isnew">

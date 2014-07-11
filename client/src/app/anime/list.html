@@ -12,7 +12,7 @@
         <span class="badge pull-right">{{filtered.length}}</span>
     </div>
 </div>
-<div class="item-row" ng-if="!anime.editable" ng-repeat-start="anime in filtered = (animes | multi:settings.filter)"
+<div class="item-row" ng-if="!anime.editable" ng-repeat-start="anime in filtered = (animes | multi:settings.filter) track by anime._id"
      display-state="anime.stats">
     <div class="col-sm-12">
         <div class="row">
@@ -29,7 +29,9 @@
                 <actions-button remove="remove(anime)" model="anime"></actions-button>
             </div>
         </div>
-        <info info="anime.info" ng-if="anime.open"></info>
+        <div collapse="!anime.open">
+            <info info="anime.info"></info>
+        </div>
     </div>
 </div>
 <div ng-include="'anime/edit.html'" ng-repeat-end="" ng-if="anime.editable"></div>

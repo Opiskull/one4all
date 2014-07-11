@@ -43,24 +43,32 @@
                     <a href="#" class="dropdown-toggle" title="settings"><i class="glyphicon glyphicon-cog"></i></a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a href="">Filters</a>
+                            <a>Filters</a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="" btn-checkbox ng-model="settings.filter.stats.finished">
+                            <a btn-checkbox ng-model="settings.filter.stats.finished">
                                 <i class="glyphicon glyphicon-eye-close text-danger" ng-if="settings.filter.stats.finished"></i>
                                 <i class="glyphicon glyphicon-eye-open text-success" ng-if="!settings.filter.stats.finished"></i> exclude finished</a>
                         </li>
                         <li>
-                            <a href="" btn-checkbox ng-model="settings.filter.stats.dropped">
+                            <a btn-checkbox ng-model="settings.filter.stats.dropped">
                                 <i class="glyphicon glyphicon-eye-close text-danger" ng-if="settings.filter.stats.dropped"></i>
                                 <i class="glyphicon glyphicon-eye-open text-success" ng-if="!settings.filter.stats.dropped"></i> exclude dropped</a>
                         </li>
                     </ul>
                 </li>
-                <li class="dropdown">
-                    <a ng-if="!isLoggedIn()" ng-href="#/login" title="login"><i class="glyphicon glyphicon-log-in"></i></a>
-                    <a ng-if="isLoggedIn()" ng-href="#/logout" title="logout"><i class="glyphicon glyphicon-log-out"></i></a>
+                <li class="dropdown" ng-if="!authInfo.isLoggedIn">
+                    <a ng-href="#/login" title="login"><i class="glyphicon glyphicon-log-in"></i> login</a>
+                </li>
+
+                <li class="dropdown" ng-if="authInfo.isLoggedIn">
+                    <a class="dropdown-toggle">{{authInfo.user.username}}</a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a ng-href="#/logout" title="logout"> <i class="glyphicon glyphicon-log-out"></i> logout</a>
+                        </li>
+                    </ul>
                 </li>
                 <li>
                     <p class="navbar-text"></p>

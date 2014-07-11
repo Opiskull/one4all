@@ -37,7 +37,8 @@ angular.module('auth', ['ngRoute'])
         authService.authenticate().then(function () {
             $rootScope.$on("$routeChangeStart", function (event, next, current) {
                 if ((next.$$route) && (next.$$route.authRequired)) {
-                    if (!authService.isLoggedIn()) {
+                    if (!authService.authInfo.isLoggedIn) {
+                        event.preventDefault();
                         $location.path("/login");
                     }
                 }

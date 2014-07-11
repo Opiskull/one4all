@@ -20,7 +20,7 @@ angular.module('14all', ['ui.bootstrap',
             $store.remove('settings');
         }
         // FIX SETTINGS
-        $scope.isLoggedIn = authService.isLoggedIn;
+        $scope.authInfo = authService.authInfo;
         $scope.logout = authService.logout;
         $scope.settings = $store.bind($scope, 'settings', {
             filter: {

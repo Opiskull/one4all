@@ -16,6 +16,10 @@ var minifyhtml = require('gulp-minify-html');
 var inject = require('gulp-inject');
 var appendRev = require('./gulp-append-rev.js');
 var pkg = require('./package.json');
+var gulpif = require('gulp-if');
+var argv = require('yargs').argv;
+
+var debug = argv.debug;
 
 var paths = {
     "filenames" : {
@@ -114,7 +118,7 @@ gulp.task('images:watch', function(){
 gulp.task('app', function(){
     return gulp.src(paths.src.app)
         .pipe(concat(paths.filenames.app))
-        .pipe(uglify())
+        .pipe(gulpif(!debug,uglify()))
         .pipe(gulp.dest(paths.build));
 });
 
@@ -128,23 +132,23 @@ gulp.task('templates:watch', function(){
 
 gulp.task('templates', function(){
     return gulp.src(paths.src.template)
-        .pipe(minifyhtml({
+        .pipe(gulpif(!debug,minifyhtml({
             empty: true,
             spare: true,
             quotes: true
-        }))
+        })))
         .pipe(html2js({
             moduleName: paths.templatemodule
         }))
         .pipe(concat(paths.filenames.template))
-        .pipe(uglify())
+        .pipe(gulpif(!debug,uglify()))
         .pipe(gulp.dest(paths.build));
 });
 
 gulp.task('vendor', function(){
     return gulpBowerFiles()
         .pipe(concat(paths.filenames.vendor))
-        .pipe(uglify())
+        .pipe(gulpif(!debug,uglify()))
         .pipe(gulp.dest(paths.build))
         .on('error', gutil.log);
 });

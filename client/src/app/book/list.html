@@ -24,7 +24,9 @@
             </div>
         </div>
     </div>
-    <info info="book.info" ng-if="book.open"></info>
+    <div collapse="!book.open">
+        <info info="book.info"></info>
+    </div>
 </div>
 <div ng-include="'book/edit.html'" ng-repeat-end="" ng-if="book.editable"></div>
 <div class="item-row" ng-if="newbook.isnew">

@@ -8,6 +8,7 @@
     "gulp-bower-files": "^0.2.5",
     "gulp-clean": "^0.3.1",
     "gulp-concat": "^2.2.0",
+    "gulp-if": "^1.2.2",
     "gulp-inject": "^0.4.1",
     "gulp-less": "^1.2.4",
     "gulp-minify-html": "^0.1.4",
@@ -15,6 +16,7 @@
     "gulp-rename": "^1.2.0",
     "gulp-uglify": "^0.3.1",
     "gulp-util": "^2.2.19",
-    "gulp-watch": "^0.6.8"
+    "gulp-watch": "^0.6.8",
+    "yargs": "^1.2.6"
   }
 }

@@ -1,6 +1,13 @@
 angular.module('auth')
     .factory('authService', ['Restangular', '$location', '$store', function (Restangular, $location, $store) {
+        var authInfoDefault = {
+            isLoggedIn : false,
+            user : {},
+            roles : []
+        };
+
         var authInfo = {};
+
 
         /**
          * returns the authinfo from the user
@@ -8,19 +15,13 @@ angular.module('auth')
          */
         function getAuthInfo() {
             return Restangular.oneUrl('auth/info').get().then(function (response) {
-                authInfo = response;
+                angular.extend(authInfo, authInfoDefault);
+                authInfo.user = response.user;
+                authInfo.roles = response.roles;
+                authInfo.isLoggedIn = true;
             }, function () {
-                authInfo = {};
+                angular.extend(authInfo, authInfoDefault);
             });
-        }
-
-        /**
-         * returns true if the user is authenticated
-         * or false when not
-         * @returns {{}|*}
-         */
-        function isLoggedIn() {
-            return authInfo && authInfo.user && authInfo.user.username;
         }
 
         /**
@@ -56,7 +57,7 @@ angular.module('auth')
         function logout() {
             Restangular.oneUrl('auth/logout').post().then(function (data) {
                 $store.remove('access_token');
-                authInfo = {};
+                angular.extend(authInfo, authInfoDefault);
                 Restangular.setDefaultHeaders({'Authorization': ''});
                 $location.url('/');
             });
@@ -67,7 +68,6 @@ angular.module('auth')
         }
 
         var service = {
-            isLoggedIn: isLoggedIn,
             login: login,
             authenticate: authenticate,
             getAuthInfo: getAuthInfo,

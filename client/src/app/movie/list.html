@@ -18,7 +18,9 @@
             </div>
         </div>
     </div>
-    <info info="movie.info" ng-if="movie.open"></info>
+    <div collapse="!movie.open">
+        <info info="movie.info"></info>
+    </div>
 </div>
 <div ng-include="'movie/edit.html'" ng-repeat-end="" ng-if="movie.editable"></div>
 <div class="item-row" ng-if="newmovie.isnew">

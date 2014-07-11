@@ -36,7 +36,9 @@
             </div>
         </div>
     </div>
-    <info info="serie.info" ng-if="serie.open"></info>
+    <div collapse="!serie.open">
+        <info info="serie.info"></info>
+    </div>
 </div>
 <div ng-include="'serie/edit.html'" ng-if="serie.editable" ng-repeat-end=""></div>
 <div class="item-row" ng-if="newserie.isnew">
