@@ -23,9 +23,9 @@
                 <actions-button remove="remove(book)" model="book"></actions-button>
             </div>
         </div>
-    </div>
-    <div collapse="!book.open">
-        <info info="book.info"></info>
+        <div collapse="!book.open">
+            <info info="book.info"></info>
+        </div>
     </div>
 </div>
 <div ng-include="'book/edit.html'" ng-repeat-end="" ng-if="book.editable"></div>

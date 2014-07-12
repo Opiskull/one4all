@@ -17,9 +17,9 @@
                 <actions-button remove="remove(movie)" model="movie"></actions-button>
             </div>
         </div>
-    </div>
-    <div collapse="!movie.open">
-        <info info="movie.info"></info>
+        <div collapse="!movie.open">
+            <info info="movie.info"></info>
+        </div>
     </div>
 </div>
 <div ng-include="'movie/edit.html'" ng-repeat-end="" ng-if="movie.editable"></div>

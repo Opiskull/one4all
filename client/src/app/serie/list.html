@@ -35,9 +35,9 @@
                 <actions-button remove="remove(serie)" model="serie"></actions-button>
             </div>
         </div>
-    </div>
-    <div collapse="!serie.open">
-        <info info="serie.info"></info>
+        <div collapse="!serie.open">
+            <info info="serie.info"></info>
+        </div>
     </div>
 </div>
 <div ng-include="'serie/edit.html'" ng-if="serie.editable" ng-repeat-end=""></div>

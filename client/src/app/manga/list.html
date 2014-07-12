@@ -26,9 +26,9 @@
                 <actions-button remove="remove(manga)" model="manga"></actions-button>
             </div>
         </div>
-    </div>
-    <div collapse="!manga.open">
-        <info info="manga.info"></info>
+        <div collapse="!manga.open">
+            <info info="manga.info"></info>
+        </div>
     </div>
 </div>
 <div ng-include="'manga/edit.html'" ng-if="manga.editable" ng-repeat-end=""></div>
