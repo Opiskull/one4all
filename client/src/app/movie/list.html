@@ -1,8 +1,8 @@
 <div class="header-row">
-    <div class="col-sm-2"><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
+    <div class="col-sm-2"><a ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
     </div>
     <div class="col-sm-6"></div>
-    <div class="col-sm-1"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
+    <div class="col-sm-1"><a ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
         Modified</a></div>
     <div class="col-sm-3"><span class="badge pull-right">{{filtered.length}}</span></div>
 </div>
@@ -10,16 +10,15 @@
      display-state="movie.stats">
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(movie)">{{movie.title}}</a></div>
+            <div class="col-sm-2"><a ng-click="itemService.showInfo(movie)">{{movie.title}}</a></div>
             <div class="col-sm-6"></div>
             <div class="col-sm-1">{{movie.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
+                <stats-button model="movie" stats="enabledStats"></stats-button>
                 <actions-button remove="remove(movie)" model="movie"></actions-button>
             </div>
         </div>
-        <div collapse="!movie.open">
-            <info info="movie.info"></info>
-        </div>
+        <info item="movie"></info>
     </div>
 </div>
 <div ng-include="'movie/edit.html'" ng-repeat-end="" ng-if="movie.editable"></div>

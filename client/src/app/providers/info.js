@@ -1,15 +1,16 @@
 angular.module('providers').directive('info', ['searchService', function (searchService) {
     return {
         restrict: 'E',
-        template: '<div ng-include="detailTemplate" ng-if="info"></div>',
+        template: '<div ng-if="item.open"><div ng-include="detailTemplate" ng-if="info"></div></div>',
         link: function (scope, element, attrs) {
-            if (scope.info) {
-                var provider = searchService.getProvider(scope.info.provider)
+            if (scope.item.info) {
+                var provider = searchService.getProvider(scope.item.info.provider)
                 scope.detailTemplate = provider.detailUrl;
+                scope.info = scope.item.info;
             }
         },
         scope: {
-            info: '='
+            item: '='
         }
     };
 }]);

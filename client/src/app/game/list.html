@@ -18,9 +18,7 @@
                 <actions-button remove="remove(game)" model="game"></actions-button>
             </div>
         </div>
-        <div collapse="!game.open">
-            <info info="game.info"></info>
-        </div>
+        <info item="game"></info>
     </div>
 </div>
 <div ng-include="'game/edit.html'" ng-if="game.editable" ng-repeat-end=""></div>

@@ -3,6 +3,7 @@ angular.module('movie')
         $scope.movies = Movies.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = 'tmdb-movie';
+        $scope.enabledStats = ['finished'];
 
         $scope.remove = function (movie) {
             itemService.removeWithDlg('movie', $scope.movies, movie);

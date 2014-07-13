@@ -2,9 +2,9 @@ angular.module('14all').directive('upDownButton', [function() {
     return {
         template:
             '<div class="input-group" style="width: 115px"> \
-                <a href="" ng-click="decrease()" class="btn btn-default" ng-disabled="disabled" title="decrease"><i class="glyphicon glyphicon-minus"></i></a> \
+                <a ng-click="decrease()" class="btn btn-default" ng-disabled="disabled" title="decrease"><i class="glyphicon glyphicon-minus"></i></a> \
                 <div class="middle-vertical text-right" style="width:35px">{{value}}</div> \
-                <a href="" ng-click="increase()" class="btn btn-default" ng-disabled="disabled" title="increase"><i class="glyphicon glyphicon-plus"></i></a> \
+                <a ng-click="increase()" class="btn btn-default" ng-disabled="disabled" title="increase"><i class="glyphicon glyphicon-plus"></i></a> \
             </div>',
         restrict: 'E',
         scope: {

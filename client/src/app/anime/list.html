@@ -20,18 +20,18 @@
                 <a href="" ng-click="itemService.showInfo(anime)">{{anime.title}}</a>
             </div>
             <div class="col-sm-6">
-                <up-down-button decrease="itemService.decreaseEp(anime)" increase="itemService.increaseEp(anime)"
+                <up-down-button decrease="itemService.decreaseEp(anime)"
+                                increase="itemService.increaseEp(anime)"
                                 value="anime.episode"
                                 disabled="anime.stats.finished"></up-down-button>
             </div>
             <div class="col-sm-1">{{anime.updatedAt | timeAgo}}</div>
-            <div class="col-sm-3">
+            <div class="col-sm-3 pull-right">
+                <stats-button model="anime"></stats-button>
                 <actions-button remove="remove(anime)" model="anime"></actions-button>
             </div>
         </div>
-        <div collapse="!anime.open">
-            <info info="anime.info"></info>
-        </div>
+        <info item="anime"></info>
     </div>
 </div>
 <div ng-include="'anime/edit.html'" ng-repeat-end="" ng-if="anime.editable"></div>

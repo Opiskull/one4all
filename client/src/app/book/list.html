@@ -15,7 +15,9 @@
                 <a href="" ng-click="itemService.showInfo(book)">{{book.title}}</a>
             </div>
             <div class="col-sm-6">
-                <up-down-button decrease="decreasePg(book)" increase="increasePg(book)" value="book.page"
+                <up-down-button decrease="decreasePg(book)"
+                                increase="increasePg(book)"
+                                value="book.page"
                                 disabled="book.stats.finished"></up-down-button>
             </div>
             <div class="col-sm-1">{{book.updatedAt | timeAgo}}</div>
@@ -23,9 +25,7 @@
                 <actions-button remove="remove(book)" model="book"></actions-button>
             </div>
         </div>
-        <div collapse="!book.open">
-            <info info="book.info"></info>
-        </div>
+        <info item="book"></info>
     </div>
 </div>
 <div ng-include="'book/edit.html'" ng-repeat-end="" ng-if="book.editable"></div>

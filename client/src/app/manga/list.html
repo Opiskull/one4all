@@ -15,7 +15,8 @@
         <div class="row">
             <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(manga)">{{manga.title}}</a></div>
             <div class="col-sm-5">
-                <up-down-button decrease="itemService.decreaseCh(manga)" increase="itemService.increaseCh(manga)"
+                <up-down-button decrease="itemService.decreaseCh(manga)"
+                                increase="itemService.increaseCh(manga)"
                                 value="manga.chapter"
                                 disabled="manga.stats.finished"></up-down-button>
             </div>
@@ -26,9 +27,7 @@
                 <actions-button remove="remove(manga)" model="manga"></actions-button>
             </div>
         </div>
-        <div collapse="!manga.open">
-            <info info="manga.info"></info>
-        </div>
+        <info item="manga"></info>
     </div>
 </div>
 <div ng-include="'manga/edit.html'" ng-if="manga.editable" ng-repeat-end=""></div>

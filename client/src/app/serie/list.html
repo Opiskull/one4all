@@ -18,15 +18,17 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2">
-                <a href="" ng-click="itemService.showInfo(serie)">{{serie.title}}</a>
+                <a ng-click="itemService.showInfo(serie)">{{serie.title}}</a>
             </div>
             <div class="col-sm-3">
-                <up-down-button decrease="itemService.decreaseSe(serie)" increase="itemService.increaseSe(serie)"
+                <up-down-button decrease="itemService.decreaseSe(serie)"
+                                increase="itemService.increaseSe(serie)"
                                 value="serie.season"
                                 disabled="serie.stats.finished"></up-down-button>
             </div>
             <div class="col-sm-3">
-                <up-down-button decrease="itemService.decreaseEp(serie)" increase="itemService.increaseEp(serie)"
+                <up-down-button decrease="itemService.decreaseEp(serie)"
+                                increase="itemService.increaseEp(serie)"
                                 value="serie.episode"
                                 disabled="serie.stats.finished"></up-down-button>
             </div>
@@ -35,9 +37,7 @@
                 <actions-button remove="remove(serie)" model="serie"></actions-button>
             </div>
         </div>
-        <div collapse="!serie.open">
-            <info info="serie.info"></info>
-        </div>
+        <info item="serie"></info>
     </div>
 </div>
 <div ng-include="'serie/edit.html'" ng-if="serie.editable" ng-repeat-end=""></div>

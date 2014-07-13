@@ -6,7 +6,8 @@ angular.module('14all', ['ui.bootstrap',
     /* Modules */
     'manga', 'movie', 'serie', 'anime', 'game', 'book',
     'providers',
-    '14all.templates'])
+    '14all.templates',
+    'pasvaz.bindonce'])
     .config(['RestangularProvider', function (RestangularProvider) {
         RestangularProvider.setRestangularFields({
             id: "_id"
