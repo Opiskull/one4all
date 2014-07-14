@@ -24,6 +24,7 @@
             <div class="col-sm-1"><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.stats.finished">Next Chapter</a>
             </div>
             <div class="col-sm-3">
+				<stats-button model="manga"></stats-button>
                 <actions-button remove="remove(manga)" model="manga"></actions-button>
             </div>
         </div>
