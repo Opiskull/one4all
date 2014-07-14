@@ -22,6 +22,7 @@
             </div>
             <div class="col-sm-1">{{book.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
+		<stats-button model="book"></stats-button>
                 <actions-button remove="remove(book)" model="book"></actions-button>
             </div>
         </div>

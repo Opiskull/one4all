@@ -15,6 +15,7 @@
             <div class="col-sm-6"></div>
             <div class="col-sm-1">{{game.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
+				<stats-button model="game"></stats-button>
                 <actions-button remove="remove(game)" model="game"></actions-button>
             </div>
         </div>
