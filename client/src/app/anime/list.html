@@ -1,29 +1,26 @@
 <div class="header-row">
     <div class="col-sm-2">
-        <a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
+        <a ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
     </div>
     <div class="col-sm-6">
-        <a href="" ng-click="orderBy.predicate = 'episode'; orderBy.reverse=!orderBy.reverse">Episode</a>
+        <a ng-click="orderBy.predicate = 'episode'; orderBy.reverse=!orderBy.reverse">Episode</a>
     </div>
     <div class="col-sm-1">
-        <a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a>
+        <a ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a>
     </div>
     <div class="col-sm-3">
-        <span class="badge pull-right">{{filtered.length}}</span>
+        <span class="badge pull-right">{{animes.length}}</span>
     </div>
 </div>
-<div class="item-row" ng-if="!anime.editable" ng-repeat-start="anime in filtered = (animes | multi:settings.filter) track by anime._id"
+<div class="item-row" ng-if="!anime.editable" ng-repeat-start="anime in filtered = (animes | multi:settings.filter) | pagination:pagination track by anime._id"
      display-state="anime.stats">
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2">
-                <a href="" ng-click="itemService.showInfo(anime)">{{anime.title}}</a>
+                <a ng-click="itemService.showInfo(anime)">{{anime.title}}</a>
             </div>
             <div class="col-sm-6">
-                <up-down-button decrease="itemService.decreaseEp(anime)"
-                                increase="itemService.increaseEp(anime)"
-                                value="anime.episode"
-                                disabled="anime.stats.finished"></up-down-button>
+                <up-down-button disabled="anime.stats.finished" item="anime" property="'episode'"></up-down-button>
             </div>
             <div class="col-sm-1">{{anime.updatedAt | timeAgo}}</div>
             <div class="col-sm-3 pull-right">
@@ -35,19 +32,17 @@
     </div>
 </div>
 <div ng-include="'anime/edit.html'" ng-repeat-end="" ng-if="anime.editable"></div>
-<div class="item-row" ng-if="newanime.isnew">
-    <div class="col-sm-3">
-        <search-button default-provider="defaultProvider" item="newanime"></search-button>
-    </div>
-    <div class="col-sm-3">
-        <input class="form-control input-sm" type="number" min="0" ng-model="newanime.episode"/>
-    </div>
-    <div class="col-sm-6">
-        <save-cancel-button save="create(newanime)" cancel="cancel(newanime)"></save-cancel-button>
-    </div>
-</div>
-<div class="item-row" ng-if="!newanime.isnew">
-    <div class="col-sm-12">
-        <add-button add="add()"></add-button>
+<div class="navbar-fixed-bottom navbar-default navbar">
+    <div class="bottom-row">
+        <div class="col-sm-12">
+            <add-button add="add()" ng-if="!newanime.isnew"></add-button>
+            <div ng-include="'anime/add.html'" ng-if="newanime.isnew"></div>
+            <pagination total-items="filtered.length" ng-model="pagination.currentPage"
+                        items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
+                        class="pull-right pagination-sm" boundary-links="true"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        </div>
     </div>
 </div>
+
+

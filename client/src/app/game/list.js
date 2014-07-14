@@ -3,10 +3,8 @@ angular.module('game')
         $scope.games = Games.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = '';
+        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
 
-        $scope.dropped = function (item) {
-            itemService.dropped(item)
-        };
         $scope.remove = function (game) {
             itemService.removeWithDlg('game', $scope.games, game);
         };
@@ -35,9 +33,5 @@ angular.module('game')
             }, function (response) {
                 console.log("Error");
             });
-        };
-
-        $scope.finished = function (game) {
-            itemService.finished(game);
         };
     }]);

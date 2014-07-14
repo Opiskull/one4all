@@ -3,6 +3,7 @@ angular.module('anime')
         $scope.animes = Animes.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = 'mal-anime';
+        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
 
         $scope.remove = function (anime) {
             itemService.removeWithDlg('anime', $scope.animes, anime);

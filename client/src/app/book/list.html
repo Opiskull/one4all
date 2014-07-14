@@ -5,9 +5,9 @@
     </div>
     <div class="col-sm-1"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
         Modified</a></div>
-    <div class="col-sm-3"><span class="badge pull-right">{{filtered.length}}</span></div>
+    <div class="col-sm-3"><span class="badge pull-right">{{books.length}}</span></div>
 </div>
-<div class="item-row" ng-if="!book.editable" ng-repeat-start="book in filtered = (books | multi:settings.filter)"
+<div class="item-row" ng-if="!book.editable" ng-repeat-start="book in filtered = (books | multi:settings.filter) | pagination:pagination track by book._id"
      display-state="book.stats">
     <div class="col-sm-12">
         <div class="row">
@@ -15,10 +15,7 @@
                 <a href="" ng-click="itemService.showInfo(book)">{{book.title}}</a>
             </div>
             <div class="col-sm-6">
-                <up-down-button decrease="decreasePg(book)"
-                                increase="increasePg(book)"
-                                value="book.page"
-                                disabled="book.stats.finished"></up-down-button>
+                <up-down-button disabled="book.stats.finished" item="book" property="'page'"></up-down-button>
             </div>
             <div class="col-sm-1">{{book.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
@@ -30,16 +27,16 @@
     </div>
 </div>
 <div ng-include="'book/edit.html'" ng-repeat-end="" ng-if="book.editable"></div>
-<div class="item-row" ng-if="newbook.isnew">
-    <div class="col-sm-2"><search-button  default-provider="defaultProvider" item="newbook"></search-button></div>
-    <div class="col-sm-6"><input class="form-control input-sm" type="number" min="0" ng-model="book.page"/></div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-3">
-        <save-cancel-button save="create(newbook)" cancel="cancel(newbook)"></save-cancel-button>
-    </div>
-</div>
-<div class="item-row" ng-if="!newbook.isnew">
-    <div class="col-sm-12">
-        <add-button add="add()"></add-button>
+
+<div class="navbar-fixed-bottom navbar-default navbar">
+    <div class="bottom-row">
+        <div class="col-sm-12">
+            <add-button add="add()" ng-if="!newbook.isnew"></add-button>
+            <div ng-include="'book/add.html" ng-if="newbook.isnew"></div>
+            <pagination total-items="filtered.length" ng-model="pagination.currentPage"
+                        items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
+                        class="pull-right pagination-sm" boundary-links="true"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        </div>
     </div>
 </div>

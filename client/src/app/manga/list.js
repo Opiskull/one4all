@@ -3,6 +3,7 @@ angular.module('manga')
         $scope.mangas = Mangas.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = 'mal-manga';
+        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
 
         $scope.remove = function (manga) {
             itemService.removeWithDlg('manga', $scope.mangas, manga);

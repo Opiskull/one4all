@@ -3,10 +3,8 @@ angular.module('book')
         $scope.books = bookResource.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = '';
+        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
 
-        $scope.dropped = function (item) {
-            itemService.dropped(item)
-        };
         $scope.remove = function (book) {
             itemService.removeWithDlg('book', $scope.books, book);
         };
@@ -35,17 +33,5 @@ angular.module('book')
             }, function (response) {
                 console.log("Error");
             });
-        };
-
-        $scope.increasePg = function (manga) {
-            itemService.increasePg(manga);
-        };
-
-        $scope.decreasePg = function (manga) {
-            itemService.decreasePg(manga);
-        };
-
-        $scope.finished = function (book) {
-            itemService.finished(book);
         };
     }]);

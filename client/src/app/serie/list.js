@@ -3,6 +3,7 @@ angular.module('serie')
         $scope.series = Series.items;
         $scope.itemService = itemService;
         $scope.defaultProvider = 'tmdb-serie';
+        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
 
         $scope.remove = function (serie) {
             itemService.removeWithDlg('serie', $scope.series, serie);

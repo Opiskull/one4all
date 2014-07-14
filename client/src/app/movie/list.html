@@ -4,9 +4,9 @@
     <div class="col-sm-6"></div>
     <div class="col-sm-1"><a ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
         Modified</a></div>
-    <div class="col-sm-3"><span class="badge pull-right">{{filtered.length}}</span></div>
+    <div class="col-sm-3"><span class="badge pull-right">{{movies.length}}</span></div>
 </div>
-<div class="item-row" ng-if="!movie.editable" ng-repeat-start="movie in filtered = (movies | multi:settings.filter)"
+<div class="item-row" ng-if="!movie.editable" ng-repeat-start="movie in filtered = (movies | multi:settings.filter) | pagination:pagination track by movie._id"
      display-state="movie.stats">
     <div class="col-sm-12">
         <div class="row">
@@ -22,18 +22,16 @@
     </div>
 </div>
 <div ng-include="'movie/edit.html'" ng-repeat-end="" ng-if="movie.editable"></div>
-<div class="item-row" ng-if="newmovie.isnew">
-    <div class="col-sm-2">
-        <search-button  default-provider="defaultProvider" item="newmovie"></search-button>
-    </div>
-    <div class="col-sm-6"></div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-3">
-        <save-cancel-button save="create(newmovie)" cancel="cancel(newmovie)"></save-cancel-button>
-    </div>
-</div>
-<div class="item-row" ng-if="!newmovie.isnew">
-    <div class="col-sm-12">
-        <add-button add="add()"></add-button>
+
+<div class="navbar-fixed-bottom navbar-default navbar">
+    <div class="bottom-row">
+        <div class="col-sm-12">
+            <add-button add="add()" ng-if="!newmovie.isnew"></add-button>
+            <div ng-include="'movie/add.html" ng-if="newmovie.isnew"></div>
+            <pagination total-items="filtered.length" ng-model="pagination.currentPage"
+                        items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
+                        class="pull-right pagination-sm" boundary-links="true"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        </div>
     </div>
 </div>

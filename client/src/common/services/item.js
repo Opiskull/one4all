@@ -15,27 +15,6 @@ angular.module('14all').factory('itemService',['dialogService',function(dialogSe
         items.splice(items.indexOf(item),1);
     }
 
-    function paused(item){
-        if(!item.stats)
-            item.stats = {};
-        item.stats.paused = !item.stats.paused;
-        return update(item);
-    }
-
-    function finished(item){
-        if(!item.stats)
-            item.stats = {};
-        item.stats.finished = !item.stats.finished;
-        return update(item);
-    }
-
-    function dropped(item){
-        if(!item.stats)
-            item.stats = {};
-        item.stats.dropped = !item.stats.dropped;
-        return update(item);
-    }
-
     function update(item){
         return item.put().then(function(updated){
             item.updatedAt = updated.updatedAt;
@@ -64,72 +43,23 @@ angular.module('14all').factory('itemService',['dialogService',function(dialogSe
         if(value <= 0){
             value = 0;
         }
-        else{
+        else {
             value -=1;
         }
         return value;
     }
 
-    function increaseEp(item){
-        var episode = item.episode;
-        item.episode = increase(item.episode);
-        if(episode !== item.episode){
+    function incProp(item, property){
+        var value = item[property];
+        item[property] = increase(value);
+        if(value !== item[property])
             return update(item);
-        }
     }
 
-    function decreaseEp(item){
-        var episode = item.episode;
-        item.episode = decrease(item.episode);
-        if(episode !== item.episode){
-            return update(item);
-        }
-    }
-
-    function increaseCh(item){
-        var chapter = item.chapter;
-        item.chapter = increase(item.chapter);
-        if(chapter !== item.chapter){
-            return update(item);
-        }
-    }
-
-    function decreaseCh(item){
-        var chapter = item.chapter;
-        item.chapter = decrease(item.chapter);
-        if(chapter !== item.chapter){
-            return update(item);
-        }
-    }
-
-    function increaseSe(item){
-        var season = item.season;
-        item.season = increase(item.season);
-        if(season !== item.season){
-            return update(item);
-        }
-    }
-
-    function decreaseSe(item){
-        var season = item.season;
-        item.season = decrease(item.season);
-        if(season !== item.season){
-            return update(item);
-        }
-    }
-
-    function increasePg(item){
-        var page = item.page;
-        item.page = increase(item.page);
-        if(page !== item.page){
-            return update(item);
-        }
-    }
-
-    function decreasePg(item){
-        var page = item.page;
-        item.page = decrease(item.page);
-        if(page !== item.page){
+    function decProp(item, property){
+        var value = item[property];
+        item[property] = decrease(value);
+        if(value !== item[property]){
             return update(item);
         }
     }
@@ -156,21 +86,12 @@ angular.module('14all').factory('itemService',['dialogService',function(dialogSe
     return {
         increase: increase,
         decrease: decrease,
-        increaseEp: increaseEp,
-        decreaseEp: decreaseEp,
-        increaseCh: increaseCh,
-        decreaseCh: decreaseCh,
-        increaseSe: increaseSe,
-        decreaseSe: decreaseSe,
-        increasePg: increasePg,
-        decreasePg: decreasePg,
         update: update,
-        finished: finished,
-        dropped: dropped,
-        paused: paused,
         remove: remove,
         removeWithDlg: removeWithDlg,
         showInfo: showInfo,
-        setInfo: setInfo
+        setInfo: setInfo,
+        incProp: incProp,
+        decProp: decProp
     };
 }]);

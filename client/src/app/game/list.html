@@ -4,9 +4,9 @@
     <div class="col-sm-6"></div>
     <div class="col-sm-1"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
         Modified</a></div>
-    <div class="col-sm-3"><span class="badge pull-right">{{filtered.length}}</span></div>
+    <div class="col-sm-3"><span class="badge pull-right">{{games.length}}</span></div>
 </div>
-<div class="item-row" ng-if="!game.editable" ng-repeat-start="game in filtered = (games | multi:settings.filter)"
+<div class="item-row" ng-if="!game.editable" ng-repeat-start="game in filtered = (games | multi:settings.filter) | pagination:pagination track by game._id"
      display-state="game.stats">
 
     <div class="col-sm-12">
@@ -23,16 +23,16 @@
     </div>
 </div>
 <div ng-include="'game/edit.html'" ng-if="game.editable" ng-repeat-end=""></div>
-<div class="item-row" ng-if="newgame.isnew">
-    <div class="col-sm-2" colspan="2"><search-button  default-provider="defaultProvider" item="newgame"></search-button></div>
-    <div class="col-sm-6"></div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-3">
-        <save-cancel-button save="create(newgame)" cancel="cancel(newgame)"></save-cancel-button>
-    </div>
-</div>
-<div class="item-row" ng-if="!newgame.isnew">
-    <div class="col-sm-12">
-        <add-button add="add()"></add-button>
+
+<div class="navbar-fixed-bottom navbar-default navbar">
+    <div class="bottom-row">
+        <div class="col-sm-12">
+            <add-button add="add()"  ng-if="!newgame.isnew"></add-button>
+            <div ng-include="'game/add.html'" ng-if="newgame.isnew"></div>
+            <pagination total-items="filtered.length" ng-model="pagination.currentPage"
+                        items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
+                        class="pull-right pagination-sm" boundary-links="true"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        </div>
     </div>
 </div>

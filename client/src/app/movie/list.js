@@ -4,6 +4,7 @@ angular.module('movie')
         $scope.itemService = itemService;
         $scope.defaultProvider = 'tmdb-movie';
         $scope.enabledStats = ['finished'];
+        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
 
         $scope.remove = function (movie) {
             itemService.removeWithDlg('movie', $scope.movies, movie);

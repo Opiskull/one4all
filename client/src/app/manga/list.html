@@ -7,18 +7,15 @@
     <div class="col-sm-1"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
         Modified</a></div>
     <div class="col-sm-1">Url</div>
-    <div class="col-sm-3"><span class="badge pull-right">{{filtered.length}}</span></div>
+    <div class="col-sm-3"><span class="badge pull-right">{{mangas.length}}</span></div>
 </div>
-<div class="item-row" ng-if="!manga.editable" ng-repeat-start="manga in filtered = (mangas | multi:settings.filter)"
+<div class="item-row" ng-if="!manga.editable" ng-repeat-start="manga in filtered = (mangas | multi:settings.filter) | pagination:pagination track by manga._id"
      display-state="manga.stats">
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(manga)">{{manga.title}}</a></div>
             <div class="col-sm-5">
-                <up-down-button decrease="itemService.decreaseCh(manga)"
-                                increase="itemService.increaseCh(manga)"
-                                value="manga.chapter"
-                                disabled="manga.stats.finished"></up-down-button>
+                <up-down-button disabled="manga.stats.finished"  item="manga" property="'chapter'"></up-down-button>
             </div>
             <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>
             <div class="col-sm-1"><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.stats.finished">Next Chapter</a>
@@ -32,18 +29,16 @@
     </div>
 </div>
 <div ng-include="'manga/edit.html'" ng-if="manga.editable" ng-repeat-end=""></div>
-<div class="item-row" ng-if="newmanga.isnew">
-    <div class="col-sm-2"><search-button  default-provider="defaultProvider" item="newmanga"></search-button></div>
-    <div class="col-sm-5"><input class="form-control input-sm" type="number" min="0" ng-model="newmanga.chapter"/>
-    </div>
-    <div class="col-sm-2"><input class="form-control input-sm" type="url" ng-model="newmanga.url"
-                                 placeholder="url $$chapter$$ will be replaced with next chapter"/></div>
-    <div class="col-sm-3">
-        <save-cancel-button save="create(newmanga)" cancel="cancel(newmanga)"></save-cancel-button>
-    </div>
-</div>
-<div class="item-row" ng-if="!newmanga.isnew">
-    <div class="col-sm-12">
-        <add-button add="add()"></add-button>
+
+<div class="navbar-fixed-bottom navbar-default navbar">
+    <div class="bottom-row">
+        <div class="col-sm-12">
+            <div ng-include="'manga/add.html'" ng-if="newmanga.isnew"></div>
+            <add-button add="add()" ng-if="!newmanga.isnew"></add-button>
+            <pagination total-items="filtered.length" ng-model="pagination.currentPage"
+                        items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
+                        class="pull-right pagination-sm" boundary-links="true"
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+        </div>
     </div>
 </div>

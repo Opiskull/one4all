@@ -9,6 +9,10 @@
 @brand-primary: @myorange;
 
 
+.pagination{
+  margin: 0px 0;
+}
+
 a{ cursor: pointer;}
 
 body{
@@ -55,12 +59,6 @@ body{
   margin-bottom: 4px;
 }
 
-.bottom-row{
-  .row;
-  position: fixed;
-  bottom:0px;
-}
-
 .header-row{
   .row;
   /*border-bottom: solid;
@@ -73,6 +71,16 @@ body{
 }
 
 .item-row{
+  .row;
+  border-top: solid;
+  border-width: 1px;
+  border-color: @table-border-color;
+  padding: 5px !important;
+  margin-left: 0px !important;
+  margin-right: 0px !important;
+}
+
+.bottom-row{
   .row;
   border-top: solid;
   border-width: 1px;
