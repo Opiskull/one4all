@@ -6,16 +6,14 @@ var tmdbConfig = {};
 
 function searchMovie(req, res, next) {
     lib.searchMovie(req.params.search,function(err,result){
-        if(err)
-            return next();
+        next.ifError(err);
         return res.json(result);
     });
 }
 
 function searchSerie(req,res,next){
     lib.searchSerie(req.params.search,function(err,result){
-        if(err)
-            return next();
+        next.ifError(err);
         return res.json(result);
     });
 }

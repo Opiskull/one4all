@@ -27,5 +27,9 @@ tmdbMovieSchema.statics.findOrCreate = function(inputMovie,callback){
     });
 };
 
+tmdbMovieSchema.statics.findWithId = function(id,callback){
+    return this.findOne({'id':id},callback);
+};
+
 tmdbMovieSchema.plugin(timestamps);
 var tmdbMovie = mongoose.model('InfoTmdbMovie', tmdbMovieSchema);

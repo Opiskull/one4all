@@ -23,8 +23,12 @@ tmdbSerieSchema.statics.findOrCreate = function(inputSerie,callback){
             serie = new tmdbSerie();
         }
         parser.parseSerie(serie,inputSerie);
-        return callback(null,serie);
+        return serie.save(callback);
     });
+};
+
+tmdbSerieSchema.statics.findWithId = function(id,callback){
+    return this.findOne({'id':id},callback);
 };
 
 tmdbSerieSchema.plugin(timestamps);

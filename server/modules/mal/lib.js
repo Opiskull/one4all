@@ -4,6 +4,7 @@ var Manga = mongoose.model('InfoMalManga');
 var request = require('request');
 var xml2js = require('xml2js');
 var util = require('util');
+var async = require('async');
 
 var parser = new xml2js.Parser({
     explicitArray:false,
@@ -17,62 +18,48 @@ var config = require('./config.json');
 
 var client = request.defaults(authConfig);
 
-function parseResult(result,type,cb){
-    var items = [];
-    if(result.length === 0){
-        return cb(null,items);
-    }
+function createRequestParameters(url, search){
+    return {
+        qs:{
+            q : search
+        },
+        url: url
+    };
+}
 
-    result.forEach(function(item){
-        type.findOrCreate(item,function(err,item){
-            if(err) return cb(err);
-            items.push(item);
-            if(items.length === result.length){
-                return cb(null,items);
-            }
-        });
+function parseResult(result,type,cb){
+    if(result.length === 0) return cb(null,[]);
+    async.concat(result, type.findOrCreate.bind(type), function(err, items){
+        if(err) return cb(err);
+        if(items) return cb(null,items);
     });
+}
+
+function objectExists(object,cb){
+    if(util.isArray(object.entry)) return cb(null,object.entry);
+    else return cb(null,[object.entry]);
 }
 
 function parseXmlToJson(options,cb){
     client.get(options, function (err, response, body) {
         if(err) return cb(err);
-
         if(body === "No results" || body === ''){
             return cb(null,[]);
         }
-
         parser.parseString(body,function(err,result){
-            if(err)
-                return cb(err);
-
-
+            if(err) return cb(err);
             if(result.anime){
-                if(util.isArray(result.anime.entry))                {
-                    return cb(null,result.anime.entry);
-                } else{
-                    return cb(null,[result.anime.entry]);
-                }
+                objectExists(result.anime,cb);
             }
             if(result.manga){
-                if(util.isArray(result.manga.entry))                {
-                    return cb(null,result.manga.entry);
-                } else{
-                    return cb(null,[result.manga.entry]);
-                }
+                objectExists(result.manga,cb);
             }
         });
     });
 }
 
 function searchAnime(search,cb){
-    var paras = {
-        qs:{
-            q : search
-        },
-        url:config.AnimeSearchUrl
-    };
-
+    var paras = createRequestParameters(config.AnimeSearchUrl,search);
     parseXmlToJson(paras,function(err,result){
         if(err) return cb(err);
         parseResult(result,Anime,cb);
@@ -80,13 +67,7 @@ function searchAnime(search,cb){
 }
 
 function searchManga(search,cb){
-    var paras = {
-        qs:{
-            q : search
-        },
-        url:config.MangaSearchUrl
-    };
-
+    var paras = createRequestParameters(config.MangaSearchUrl,search);
     parseXmlToJson(paras,function(err,result){
         if(err) return cb(err);
         parseResult(result,Manga,cb);
