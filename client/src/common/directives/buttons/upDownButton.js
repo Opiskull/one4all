@@ -8,9 +8,6 @@ angular.module('14all').directive('upDownButton', ['itemService',function(itemSe
             </div>',
         restrict: 'E',
         scope: {
-//            decrease: '&decrease',
-//            increase: '&increase',
-//            value: '=value',
             disabled: '=disabled',
             item: '=',
             property: '='

@@ -7,6 +7,7 @@ function parseBook(output,input){
         output.publishedDate = input.volumeInfo.publishedDate;
         output.description = input.volumeInfo.description;
         output.page_count = input.volumeInfo.pageCount;
+        output.language = input.volumeInfo.language;
         if(input.volumeInfo.imageLinks){
             output.img = input.volumeInfo.imageLinks.thumbnail;
         }
@@ -15,7 +16,7 @@ function parseBook(output,input){
             output.isbn_10 = parseISBN10(input.volumeInfo.industryIdentifiers);
         }
     }
-    output.language = input.language;
+
 }
 
 function parseISBN13(items){

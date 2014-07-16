@@ -2,7 +2,7 @@ angular.module('book')
     .controller('BookListCtrl', ['$scope', 'bookResource', 'itemService', function ($scope, bookResource, itemService) {
         $scope.books = bookResource.items;
         $scope.itemService = itemService;
-        $scope.defaultProvider = '';
+        $scope.defaultProvider = 'google-books';
         $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
 
         $scope.remove = function (book) {

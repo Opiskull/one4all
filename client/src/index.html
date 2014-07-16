@@ -61,12 +61,11 @@
                 <li class="dropdown" ng-if="!authInfo.isLoggedIn">
                     <a ng-href="#/login" title="login"><i class="glyphicon glyphicon-log-in"></i> login</a>
                 </li>
-
                 <li class="dropdown" ng-if="authInfo.isLoggedIn">
                     <a class="dropdown-toggle">{{authInfo.user.username}}</a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a ng-href="#/logout" title="logout"> <i class="glyphicon glyphicon-log-out"></i> logout</a>
+                            <a ng-href="#/logout" title="logout"><i class="glyphicon glyphicon-log-out"></i> logout</a>
                         </li>
                     </ul>
                 </li>

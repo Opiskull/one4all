@@ -1,10 +1,11 @@
 angular.module('providers')
-    .factory('searchService', ['Restangular', 'malAnime', 'malManga', 'tmdbMovie', 'tmdbSerie', function (restangular, malAnime, malManga, tmdbMovie, tmdbSerie) {
+    .factory('searchService', ['Restangular', 'malAnime', 'malManga', 'tmdbMovie', 'tmdbSerie','googleBooks', function (restangular, malAnime, malManga, tmdbMovie, tmdbSerie, googleBooks) {
         var providers = [
             malAnime,
             malManga,
             tmdbMovie,
-            tmdbSerie
+            tmdbSerie,
+            googleBooks
         ];
         var service = {
             getProvider: function (title) {
