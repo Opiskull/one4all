@@ -31,7 +31,7 @@ var paths = {
     },
     "src" :{
         "fonts": 'src/assets/fonts/*.*',
-        "img": 'src/site_44px.png',
+        "img": ['src/*.png','src/*.jpg'],
         "app" : 'src/**/*.js',
         "template": ['src/app/**/*.html','src/common/**/*.html'],
         "css" : 'src/assets/main.less',
@@ -107,7 +107,7 @@ gulp.task('fonts:watch', function(){
 
 gulp.task('images', function(){
     return gulp.src(paths.src.img)
-        .pipe(rename(paths.filenames.img))
+        //.pipe(rename(paths.filenames.img))
         .pipe(gulp.dest(paths.build));
 });
 
