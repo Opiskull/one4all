@@ -27,7 +27,7 @@
     <div class="bottom-row">
         <div class="col-sm-12">
             <add-button add="add()" ng-if="!newmovie.isnew"></add-button>
-            <div ng-include="'movie/add.html" ng-if="newmovie.isnew"></div>
+            <div ng-include="'movie/add.html'" ng-if="newmovie.isnew"></div>
             <pagination total-items="filtered.length" ng-model="pagination.currentPage"
                         items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
                         class="pull-right pagination-sm" boundary-links="true"
