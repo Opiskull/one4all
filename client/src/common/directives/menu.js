@@ -1,4 +1,4 @@
-angular.module('14all').directive('menu',[function(){
+angular.module('14all').directive('menu',['$document',function($document){
     return {
         restrict: 'E',
         scope:{
@@ -7,29 +7,26 @@ angular.module('14all').directive('menu',[function(){
         transclude:true,
         replace: true,
         template : '<ul class="nav navbar-nav" ng-transclude></ul>',
-        controller:['$scope','$rootScope',function($scope,$rootScope){
+        controller:['$scope',function($scope){
             $scope.items = [];
-
             this.addItem = function(item){
                 $scope.items.push(item);
             };
-
             $scope.$on("$routeChangeSuccess",function(event,current,previous){
                 var currentPath = '';
                 if(current.$$route){
                     currentPath = current.$$route.originalPath;
                 }
-
-                $rootScope.title = 'Welcome';
-
+                var title = 'Welcome';
                 angular.forEach($scope.items,function(item,key){
                     if(item.strippedPath && item.strippedPath === currentPath){
                         item.active = true;
-                        $rootScope.title = item.displayTitle;
+                        title = $scope.pageTitle + item.displayTitle;
                     } else{
                         item.active = false;
                     }
                 });
+                $document[0].title = title;
             });
         }]
     }
@@ -37,7 +34,7 @@ angular.module('14all').directive('menu',[function(){
     return {
         priority: 300,
         require: "^menu",
-        template:'<li ng-class="{ active: active }"><a href="{{path}}" target="{{target}}">{{displayTitle}}</a></li>',
+        template:'<li ng-class="{ active: active }"><a href="{{::path}}" target="{{::target}}">{{::displayTitle}}</a></li>',
         restrict: 'E',
         replace:true,
         scope:{
@@ -49,7 +46,6 @@ angular.module('14all').directive('menu',[function(){
             menuController.addItem($scope);
             $scope.active = false;
             if($scope.path && $scope.path.indexOf('#') === 0){
-
                 $scope.strippedPath = $scope.path.substring(1);
             }
         }
