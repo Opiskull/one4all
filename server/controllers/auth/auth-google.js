@@ -35,6 +35,6 @@ module.exports.init = function (server,router) {
         passport.authenticate('google', { failureRedirect: '/login' ,session:false}),
         function (req, res) {
             res.header('Location','/index.html#/login?token='+req.authInfo.token);
-            res.send(302);
+                res.send(302);
         });
 };
