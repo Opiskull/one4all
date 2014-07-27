@@ -1,19 +1,16 @@
 <div class="header-row">
-    <div class="col-sm-2"><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
+    <div class="col-sm-2"><a ng-click="orderBy('title')">Title</a>
     </div>
-    <div class="col-sm-3"><a href=""
-                             ng-click="orderBy.predicate = 'season'; orderBy.reverse=!orderBy.reverse">Season</a>
+    <div class="col-sm-3"><a ng-click="orderBy('season')">Season</a>
     </div>
-    <div class="col-sm-3"><a href=""
-                             ng-click="orderBy.predicate = 'episode'; orderBy.reverse=!orderBy.reverse">Episode</a>
+    <div class="col-sm-3"><a ng-click="orderBy('episode')">Episode</a>
     </div>
-    <div class="col-sm-1"><a href=""
-                             ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
+    <div class="col-sm-1"><a ng-click="orderBy('updatedAt')">Last
         Modified</a></div>
-    <div class="col-sm-3"><span class="badge pull-right">{{series.length}}</span></div>
+    <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
 <div class="item-row" ng-if="!serie.editable"
-     ng-repeat-start="serie in filtered = (series | multi:settings.filter) | pagination:pagination track by serie._id"
+     ng-repeat-start="serie in filtered = items track by serie._id"
      display-state="serie.stats">
     <div class="col-sm-12">
         <div class="row">
@@ -42,9 +39,9 @@
         <div class="col-sm-12">
             <div ng-include="'serie/add.html'"  ng-if="newserie.isnew"></div>
             <add-button add="add()"  ng-if="!newserie.isnew"></add-button>
-            <pagination total-items="filtered.length" ng-model="pagination.currentPage"
+            <pagination total-items="pagination.filteredItems" ng-model="pagination.currentPage"
                         items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
-                        class="pull-right pagination-sm" boundary-links="true"
+                        class="pull-right pagination-sm" boundary-links="true" ng-change="filter()"
                         previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
         </div>
     </div>

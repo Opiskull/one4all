@@ -1,9 +1,9 @@
 angular.module('manga')
-    .controller('MangaListCtrl', ['$scope', 'mangaResource', 'itemService', function ($scope, Mangas, itemService) {
-        $scope.mangas = Mangas.items;
+    .controller('MangaListCtrl', ['$scope', 'mangaResource', 'itemService','filterService', function ($scope, Mangas, itemService,filterService) {
+        filterService.register($scope, Mangas);
         $scope.itemService = itemService;
         $scope.defaultProvider = 'mal-manga';
-        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
+
 
         $scope.remove = function (manga) {
             itemService.removeWithDlg('manga', $scope.mangas, manga);

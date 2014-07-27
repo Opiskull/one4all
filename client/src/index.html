@@ -2,10 +2,8 @@
 <html ng-app="14all" ng-controller="AppCtrl">
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title ng-bind="'PeerZone ' + title"></title>
-    <!-- inject:css -->
-
-    <!-- endinject -->
+    <title>Peerzone</title>
+    <!-- inject:css --><!-- endinject -->
     <link rel="icon" type="image/png" href="site.png">
 </head>
 <body>
@@ -14,10 +12,10 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#"><img src="site.png" /></a>
-            <button class="navbar-toggle" href="#" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed"><i class="glyphicon glyphicon-th-large"></i></button>
+            <button class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed"><i class="glyphicon glyphicon-th-large"></i></button>
         </div>
         <nav collapse="navCollapsed" class="navbar-collapse collapse navbar-responsive-collapse" role="navigation">
-            <menu page-title="pageTitle">
+            <menu page-title="'Peerzone '">
                 <menu-item path="#/manga" display-title="Manga"></menu-item>
                 <menu-item path="#/movie" display-title="Movie"></menu-item>
                 <menu-item path="#/serie" display-title="Serie"></menu-item>
@@ -31,9 +29,9 @@
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <div class="input-group search-box">
-                                <input type="search" class="form-control" placeholder="Search" ng-model="settings.filter.keyword.title" focus-me="focus.search" ng-blur="focus.search=false">
-                                <span class="input-group-btn" ng-if="settings.filter.keyword.title !== ''">
-                                    <button class="btn btn-default" type="button" ng-click="settings.filter.keyword.title = ''"><i class="glyphicon glyphicon-remove"></i></button>
+                                <input type="search" class="form-control" placeholder="Search" ng-model="keyword" focus-me="focus.search" ng-blur="focus.search=false">
+                                <span class="input-group-btn" ng-if="keyword !== ''">
+                                    <button class="btn btn-default" type="button" ng-click="clearKeyword()"><i class="glyphicon glyphicon-remove"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -47,14 +45,19 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a btn-checkbox ng-model="settings.filter.stats.finished">
-                                <i class="glyphicon glyphicon-eye-close text-danger" ng-if="settings.filter.stats.finished"></i>
-                                <i class="glyphicon glyphicon-eye-open text-success" ng-if="!settings.filter.stats.finished"></i> exclude finished</a>
+                            <a ng-click="settings.filters.stats.finished = !settings.filters.stats.finished; filterItems()">
+                                <i class="glyphicon " ng-class="settings.filters.stats.finished ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i> exclude finished
+                            </a>
                         </li>
                         <li>
-                            <a btn-checkbox ng-model="settings.filter.stats.dropped">
-                                <i class="glyphicon glyphicon-eye-close text-danger" ng-if="settings.filter.stats.dropped"></i>
-                                <i class="glyphicon glyphicon-eye-open text-success" ng-if="!settings.filter.stats.dropped"></i> exclude dropped</a>
+                            <a ng-click="settings.filters.stats.dropped = !settings.filters.stats.dropped;filterItems()">
+                                <i class="glyphicon " ng-class="settings.filters.stats.dropped ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i> exclude dropped
+                            </a>
+                        </li>
+                        <li>
+                            <a ng-click="settings.filters.stats.paused = !settings.filters.stats.paused;filterItems()">
+                                <i class="glyphicon " ng-class="settings.filters.stats.paused ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i> exclude paused
+                            </a>
                         </li>
                     </ul>
                 </li>
@@ -81,8 +84,6 @@
     <div ng-view class="view-animation"></div>
 </div>
 
-<!-- inject:js -->
-
-<!-- endinject -->
+<!-- inject:js --><!-- endinject -->
 </body>
 </html>

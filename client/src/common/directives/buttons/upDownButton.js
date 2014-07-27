@@ -8,11 +8,11 @@ angular.module('14all').directive('upDownButton', ['itemService',function(itemSe
             </div>',
         restrict: 'E',
         scope: {
-            disabled: '=disabled',
-            item: '=',
-            property: '='
+            disabled: '=',
+            item: '='
         },
         link : function($scope,$element,$attr){
+            $scope.property = $scope.$eval($attr.property);
             $scope.decrease = function(){
                 itemService.decProp($scope.item, $scope.property);
             };

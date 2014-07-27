@@ -1,9 +1,8 @@
 angular.module('game')
-    .controller('GameListCtrl', ['$scope', 'gameResource', 'itemService', function ($scope, Games, itemService) {
-        $scope.games = Games.items;
+    .controller('GameListCtrl', ['$scope', 'gameResource', 'itemService','filterService', function ($scope, Games, itemService, filterService) {
+        filterService.register($scope, Games);
         $scope.itemService = itemService;
         $scope.defaultProvider = '';
-        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
 
         $scope.remove = function (game) {
             itemService.removeWithDlg('game', $scope.games, game);

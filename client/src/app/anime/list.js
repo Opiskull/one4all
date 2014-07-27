@@ -1,12 +1,12 @@
 angular.module('anime')
-    .controller('AnimeListCtrl', ['$scope', 'animeResource', 'itemService', function ($scope, Animes, itemService) {
-        $scope.animes = Animes.items;
+    .controller('AnimeListCtrl', ['$scope', 'animeResource', 'itemService', 'filterService', function ($scope, Animes, itemService, filterService) {
+        filterService.register($scope,Animes);
+
         $scope.itemService = itemService;
         $scope.defaultProvider = 'mal-anime';
-        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
 
         $scope.remove = function (anime) {
-            itemService.removeWithDlg('anime', $scope.animes, anime);
+            itemService.removeWithDlg('anime', $scope.items, anime);
         };
 
         $scope.update = function (anime) {
@@ -29,7 +29,7 @@ angular.module('anime')
         $scope.create = function (anime) {
             Animes.post(anime).then(function (addedAnime) {
                 $scope.newanime = {};
-                $scope.animes.push(addedAnime);
+                $scope.items.push(addedAnime);
             }, function (response) {
                 console.log("Error");
             });

@@ -1,30 +1,30 @@
 <div class="header-row">
     <div class="col-sm-2">
-        <a ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
+        <a ng-click="orderBy('title')">Title</a>
     </div>
     <div class="col-sm-6">
-        <a ng-click="orderBy.predicate = 'episode'; orderBy.reverse=!orderBy.reverse">Episode</a>
+        <a ng-click="orderBy('episode')">Episode</a>
     </div>
     <div class="col-sm-1">
-        <a ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last Modified</a>
+        <a ng-click="orderBy('updatedAt')">Last Modified</a>
     </div>
     <div class="col-sm-3">
-        <span class="badge pull-right">{{animes.length}}</span>
+        <span class="badge pull-right">{{items.length}}</span>
     </div>
 </div>
-<div class="item-row" ng-if="!anime.editable" ng-repeat-start="anime in filtered = (animes | multi:settings.filter) | pagination:pagination track by anime._id"
+<div class="item-row" ng-if="!anime.editable" ng-repeat-start="anime in filtered track by anime._id"
      display-state="anime.stats">
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2">
-                <a ng-click="itemService.showInfo(anime)">{{anime.title}}</a>
+                <a ng-click="itemService.showInfo(anime)">{{::anime.title}}</a>
             </div>
             <div class="col-sm-6">
                 <up-down-button disabled="anime.stats.finished" item="anime" property="'episode'"></up-down-button>
             </div>
             <div class="col-sm-1">{{anime.updatedAt | timeAgo}}</div>
             <div class="col-sm-3 pull-right">
-                <stats-button model="anime"></stats-button>
+                <stats-button model="anime" stats="enabledStats"></stats-button>
                 <actions-button remove="remove(anime)" model="anime"></actions-button>
             </div>
         </div>
@@ -37,9 +37,9 @@
         <div class="col-sm-12">
             <add-button add="add()" ng-if="!newanime.isnew"></add-button>
             <div ng-include="'anime/add.html'" ng-if="newanime.isnew"></div>
-            <pagination total-items="filtered.length" ng-model="pagination.currentPage"
+            <pagination total-items="pagination.filteredItems" ng-model="pagination.currentPage"
                         items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
-                        class="pull-right pagination-sm" boundary-links="true"
+                        class="pull-right pagination-sm" boundary-links="true" ng-change="filter()"
                         previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
         </div>
     </div>

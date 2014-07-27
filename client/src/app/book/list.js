@@ -1,9 +1,8 @@
 angular.module('book')
-    .controller('BookListCtrl', ['$scope', 'bookResource', 'itemService', function ($scope, bookResource, itemService) {
-        $scope.books = bookResource.items;
+    .controller('BookListCtrl', ['$scope', 'bookResource', 'itemService','filterService', function ($scope, bookResource, itemService, filterService) {
+        filterService.register($scope, bookResource);
         $scope.itemService = itemService;
         $scope.defaultProvider = 'google-books';
-        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
 
         $scope.remove = function (book) {
             itemService.removeWithDlg('book', $scope.books, book);

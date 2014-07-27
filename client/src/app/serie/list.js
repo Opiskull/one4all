@@ -1,9 +1,9 @@
 angular.module('serie')
-    .controller('SerieListCtrl', ['$scope', 'serieResource', 'itemService', function ($scope, Series, itemService) {
-        $scope.series = Series.items;
+    .controller('SerieListCtrl', ['$scope', 'serieResource', 'itemService','filterService', function ($scope, Series, itemService,filterService) {
+        filterService.register($scope,Series);
         $scope.itemService = itemService;
         $scope.defaultProvider = 'tmdb-serie';
-        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
+
 
         $scope.remove = function (serie) {
             itemService.removeWithDlg('serie', $scope.series, serie);

@@ -1,10 +1,9 @@
 angular.module('movie')
-    .controller('MovieListCtrl', ['$scope', 'movieResource', 'itemService', function ($scope, Movies, itemService) {
-        $scope.movies = Movies.items;
+    .controller('MovieListCtrl', ['$scope', 'movieResource', 'itemService','filterService', function ($scope, Movies, itemService,filterService) {
+        filterService.register($scope,Movies);
         $scope.itemService = itemService;
         $scope.defaultProvider = 'tmdb-movie';
         $scope.enabledStats = ['finished'];
-        $scope.pagination = { currentPage : 1, itemsPerPage: 20, maxSize: 5};
 
         $scope.remove = function (movie) {
             itemService.removeWithDlg('movie', $scope.movies, movie);

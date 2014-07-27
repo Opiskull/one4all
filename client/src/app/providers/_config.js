@@ -1,1 +1,1 @@
-angular.module('providers', ['restangular','pasvaz.bindonce']);
+angular.module('providers', ['restangular']);

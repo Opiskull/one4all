@@ -3,7 +3,6 @@
         <span class="glyphicon glyphicon-ok select-info" ng-click="selectInfo(info)"></span>
         {{info.title}}
     </h3>
-
     <h3 class="dropdown" ng-if="selectedInfo.id==info.id">
         <div class="dropdown-toggle">
             <span class="glyphicon glyphicon-remove select-info" ng-click="selectInfo({})"></span>
@@ -11,8 +10,8 @@
         </div>
         <ul class="dropdown-menu">
             <li><a ng-click="selectTitle(info.title)">{{info.title}}</a></li>
-            <li ng-repeat="title in info.titles">
-                <a ng-click="selectTitle(title.title)">{{title.title}}</a>
+            <li ng-repeat="title in ::info.titles">
+                <a ng-click="selectTitle(title.title)">{{::title.title}}</a>
             </li>
         </ul>
     </h3>

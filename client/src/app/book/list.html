@@ -1,13 +1,13 @@
 <div class="header-row">
-    <div class="col-sm-2"><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
+    <div class="col-sm-2"><a ng-click="orderBy('title')">Title</a>
     </div>
-    <div class="col-sm-6"><a href="" ng-click="orderBy.predicate = 'page'; orderBy.reverse=!orderBy.reverse">Page</a>
+    <div class="col-sm-6"><a ng-click="orderBy('page')">Page</a>
     </div>
-    <div class="col-sm-1"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
+    <div class="col-sm-1"><a ng-click="orderBy('updatedAt')">Last
         Modified</a></div>
-    <div class="col-sm-3"><span class="badge pull-right">{{books.length}}</span></div>
+    <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
-<div class="item-row" ng-if="!book.editable" ng-repeat-start="book in filtered = (books | multi:settings.filter) | pagination:pagination track by book._id"
+<div class="item-row" ng-if="!book.editable" ng-repeat-start="book in filtered track by book._id"
      display-state="book.stats">
     <div class="col-sm-12">
         <div class="row">
@@ -33,9 +33,9 @@
         <div class="col-sm-12">
             <add-button add="add()" ng-if="!newbook.isnew"></add-button>
             <div ng-include="'book/add.html'" ng-if="newbook.isnew"></div>
-            <pagination total-items="filtered.length" ng-model="pagination.currentPage"
+            <pagination total-items="pagination.filteredItems" ng-model="pagination.currentPage"
                         items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
-                        class="pull-right pagination-sm" boundary-links="true"
+                        class="pull-right pagination-sm" boundary-links="true" ng-change="filter()"
                         previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
         </div>
     </div>

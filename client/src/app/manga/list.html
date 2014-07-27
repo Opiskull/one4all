@@ -1,15 +1,14 @@
 <div class="header-row">
-    <div class="col-sm-2"><a href="" ng-click="orderBy.predicate = 'title'; orderBy.reverse=!orderBy.reverse">Title</a>
+    <div class="col-sm-2"><a ng-click="orderBy('title')">Title</a>
     </div>
-    <div class="col-sm-5"><a href=""
-                             ng-click="orderBy.predicate = 'chapter'; orderBy.reverse=!orderBy.reverse">Chapter</a>
+    <div class="col-sm-5"><a ng-click="orderBy('chapter')">Chapter</a>
     </div>
-    <div class="col-sm-1"><a href="" ng-click="orderBy.predicate = 'updatedAt'; orderBy.reverse=!orderBy.reverse">Last
+    <div class="col-sm-1"><a ng-click="orderBy('updatedAt')">Last
         Modified</a></div>
     <div class="col-sm-1">Url</div>
-    <div class="col-sm-3"><span class="badge pull-right">{{mangas.length}}</span></div>
+    <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
-<div class="item-row" ng-if="!manga.editable" ng-repeat-start="manga in filtered = (mangas | multi:settings.filter) | pagination:pagination track by manga._id"
+<div class="item-row" ng-if="!manga.editable" ng-repeat-start="manga in filtered track by manga._id"
      display-state="manga.stats">
     <div class="col-sm-12">
         <div class="row">
@@ -35,9 +34,9 @@
         <div class="col-sm-12">
             <div ng-include="'manga/add.html'" ng-if="newmanga.isnew"></div>
             <add-button add="add()" ng-if="!newmanga.isnew"></add-button>
-            <pagination total-items="filtered.length" ng-model="pagination.currentPage"
+            <pagination total-items="pagination.filteredItems" ng-model="pagination.currentPage"
                         items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
-                        class="pull-right pagination-sm" boundary-links="true"
+                        class="pull-right pagination-sm" boundary-links="true" ng-change="filter()"
                         previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
         </div>
     </div>
