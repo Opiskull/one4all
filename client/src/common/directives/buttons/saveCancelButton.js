@@ -1,7 +1,6 @@
-angular.module('14all').directive('saveCancelButton', [function() {
+angular.module('14all').directive('saveCancelButton', [function () {
     return {
-        template:
-            '<div class="btn-group pull-right"> \
+        template: '<div class="btn-group pull-right"> \
                 <a class="btn btn-default" ng-click="save()" title="save"><i class="glyphicon glyphicon-floppy-disk"></i></a> \
                 <a class="btn btn-default" ng-click="cancel()"  title="cancel"><i class="glyphicon glyphicon-floppy-remove"></i></a> \
             </div>',
@@ -10,7 +9,7 @@ angular.module('14all').directive('saveCancelButton', [function() {
             save: '&save',
             cancel: '&cancel'
         },
-        link : function($scope,$element,$attr){
+        link: function ($scope, $element, $attr) {
         }
     };
 }]);

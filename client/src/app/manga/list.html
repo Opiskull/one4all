@@ -12,15 +12,15 @@
      display-state="manga.stats">
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(manga)">{{manga.title}}</a></div>
+            <div class="col-sm-2"><a ng-click="showInfo(manga)">{{manga.title}}</a></div>
             <div class="col-sm-5">
-                <up-down-button disabled="manga.stats.finished"  item="manga" property="'chapter'"></up-down-button>
+                <up-down-button disabled="manga.stats.finished" item="manga" property="'chapter'"></up-down-button>
             </div>
             <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>
             <div class="col-sm-1"><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.stats.finished">Next Chapter</a>
             </div>
             <div class="col-sm-3">
-				<stats-button model="manga"></stats-button>
+                <stats-button model="manga"></stats-button>
                 <actions-button remove="remove(manga)" model="manga"></actions-button>
             </div>
         </div>
@@ -32,12 +32,13 @@
 <div class="navbar-fixed-bottom navbar-default navbar">
     <div class="bottom-row">
         <div class="col-sm-12">
-            <div ng-include="'manga/add.html'" ng-if="newmanga.isnew"></div>
-            <add-button add="add()" ng-if="!newmanga.isnew"></add-button>
+            <div ng-include="'manga/add.html'" ng-if="newitem.isnew"></div>
+            <add-button add="add()" ng-if="!newitem.isnew"></add-button>
             <pagination total-items="pagination.filteredItems" ng-model="pagination.currentPage"
                         items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
                         class="pull-right pagination-sm" boundary-links="true" ng-change="filter()"
-                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                        last-text="&raquo;"></pagination>
         </div>
     </div>
 </div>

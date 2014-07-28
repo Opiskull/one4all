@@ -1,13 +1,12 @@
-angular.module('14all').directive('addButton', [function() {
+angular.module('14all').directive('addButton', [function () {
     return {
-        template:
-            '<button ng-click="add()" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>',
+        template: '<button ng-click="add()" class="btn btn-default"><i class="glyphicon glyphicon-plus"></i></button>',
         restrict: 'E',
-        replace:true,
+        replace: true,
         scope: {
             add: '&add'
         },
-        link : function($scope,$element,$attr){
+        link: function ($scope, $element, $attr) {
         }
     };
 }]);

@@ -1,8 +1,11 @@
 <div class="item-row">
-    <div class="col-sm-2"><search-button  default-provider="defaultProvider" item="newbook" placeholder="book name"></search-button></div>
-    <div class="col-sm-6"><input class="form-control input-sm" type="number" min="0" ng-model="book.page" placeholder="page"/></div>
+    <div class="col-sm-2">
+        <search-button default-provider="defaultProvider" item="newitem" placeholder="book name"></search-button>
+    </div>
+    <div class="col-sm-6"><input class="form-control input-sm" type="number" min="0" ng-model="book.page"
+                                 placeholder="page"/></div>
     <div class="col-sm-1"></div>
     <div class="col-sm-3">
-        <save-cancel-button save="create(newbook)" cancel="cancel(newbook)"></save-cancel-button>
+        <save-cancel-button save="create(newitem)" cancel="cancel(newitem)"></save-cancel-button>
     </div>
 </div>

@@ -1,10 +1,10 @@
-angular.module('14all').factory('settingsService',['$rootScope','$store',function($rootScope,$store){
+angular.module('14all').factory('settingsService', ['$rootScope', '$store', function ($rootScope, $store) {
     var defaultStats = {
         finished: false,
         dropped: false,
         paused: false
     };
-    var defaultOrderBy ={
+    var defaultOrderBy = {
         predicate: 'title',
         reverse: false
     };
@@ -18,6 +18,6 @@ angular.module('14all').factory('settingsService',['$rootScope','$store',functio
     // FIX SETTINGS
     $store.remove('settings');
     var storedSettings = {};
-    var settings = angular.extend(defaultSettings,storedSettings);
+    var settings = angular.extend(defaultSettings, storedSettings);
     return { settings: settings };
 }]);

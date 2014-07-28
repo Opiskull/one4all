@@ -1,7 +1,6 @@
-angular.module('14all').directive('searchButton', ['searchDialogService','itemService',function(searchDialogService,itemService) {
+angular.module('14all').directive('searchButton', ['searchDialogService', 'itemService', function (searchDialogService, itemService) {
     return {
-        template:
-            '<div class="input-group"> \
+        template: '<div class="input-group"> \
                 <input class="form-control input-sm" type="text" ng-model="item.title" focus-me="item.isnew" placeholder="{{::placeholder}}"/> \
                 <span class="input-group-btn"> \
                     <button class="btn btn-default btn-sm" type="button" ng-click="search(item)"> \
@@ -14,7 +13,7 @@ angular.module('14all').directive('searchButton', ['searchDialogService','itemSe
             defaultProvider: '=',
             item: '='
         },
-        link : function($scope,$element,$attr){
+        link: function ($scope, $element, $attr) {
             $scope.placeholder = $attr.placeholder || '';
             $scope.search = function (item) {
                 searchDialogService.search(item.title, $scope.defaultProvider).then(function (result) {

@@ -1,5 +1,5 @@
 // http://blog.kacinskas.eu/blog/2013/06/05/learning-angularjs-and-local-storage
-angular.module('14all').factory("$store",['$parse',function($parse){
+angular.module('14all').factory("$store", ['$parse', function ($parse) {
     /**
      * Global Vars
      */
@@ -12,23 +12,23 @@ angular.module('14all').factory("$store",['$parse',function($parse){
          * @param res - a string that will be parsed for type
          * @returns {*} - whatever the real type of stored value was
          */
-        parseValue: function(res) {
+        parseValue: function (res) {
             var val;
             try {
                 val = JSON.parse(res);
-                if (typeof val == 'undefined'){
+                if (typeof val == 'undefined') {
                     val = res;
                 }
-                if (val == 'true'){
+                if (val == 'true') {
                     val = true;
                 }
-                if (val == 'false'){
+                if (val == 'false') {
                     val = false;
                 }
-                if (parseFloat(val) == val && !angular.isObject(val) ){
+                if (parseFloat(val) == val && !angular.isObject(val)) {
                     val = parseFloat(val);
                 }
-            } catch(e){
+            } catch (e) {
                 val = res;
             }
             return val;
@@ -41,12 +41,12 @@ angular.module('14all').factory("$store",['$parse',function($parse){
          * @param value - the value of the localStorage item
          * @returns {*} - will return whatever it is you've stored in the local storage
          */
-        set: function(key,value){
-            if (!supported){
+        set: function (key, value) {
+            if (!supported) {
                 try {
                     $.cookie(key, value);
                     return value;
-                } catch(e){
+                } catch (e) {
                     console.log('Local Storage not supported, make sure you have the $.cookie supported.');
                 }
             }
@@ -59,11 +59,11 @@ angular.module('14all').factory("$store",['$parse',function($parse){
          * @param key - the string that you set as accessor for the pair
          * @returns {*} - Object,String,Float,Boolean depending on what you stored
          */
-        get: function(key){
-            if (!supported){
+        get: function (key) {
+            if (!supported) {
                 try {
                     return privateMethods.parseValue($.cookie(key));
-                } catch(e){
+                } catch (e) {
                     return null;
                 }
             }
@@ -75,12 +75,12 @@ angular.module('14all').factory("$store",['$parse',function($parse){
          * @param key - the accessor value
          * @returns {boolean} - if everything went as planned
          */
-        remove: function(key) {
-            if (!supported){
+        remove: function (key) {
+            if (!supported) {
                 try {
                     $.cookie(key, null);
                     return true;
-                } catch(e){
+                } catch (e) {
                     return false;
                 }
             }

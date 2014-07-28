@@ -5,61 +5,68 @@
 
 @myorange: #ff8400;
 
-@grid-gutter-width:         4px;
+@grid-gutter-width: 4px;
 @brand-primary: @myorange;
 
-
-.pagination{
+.pagination {
   margin: 0px 0;
 }
 
-a{ cursor: pointer;}
-
-body{
-  padding-top:60px;
-  padding-bottom:60px;
+a {
+  cursor: pointer;
 }
 
-.bold{
-  font-weight:bold;
+body {
+  padding-top: 60px;
+  padding-bottom: 60px;
 }
 
-.middle-vertical{
+.bold {
+  font-weight: bold;
+}
+
+.middle-vertical {
   display: table-cell;
   vertical-align: middle;
 }
 
-.absolute-center{
+.absolute-center {
   margin: auto;
   position: absolute !important;
   opacity: 1;
-  top: 0; left: 0; bottom: 0; right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
-.backdrop{
-  -webkit-transition:0.5s linear all;
-  transition:0.5s linear all;
+.backdrop {
+  -webkit-transition: 0.5s linear all;
+  transition: 0.5s linear all;
   position: absolute;
-  top: 0; left: 0; bottom: 0; right: 0;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
   opacity: 0.5;
   z-index: 9999;
   background-color: #000000;
 }
 
-.search-box{
-  width:220px;
+.search-box {
+  width: 220px;
 }
 
-.navbar-brand{
-  padding:3px
+.navbar-brand {
+  padding: 3px
 }
 
-.navbar-toggle{
-  margin-top:4px;
+.navbar-toggle {
+  margin-top: 4px;
   margin-bottom: 4px;
 }
 
-.header-row{
+.header-row {
   .row;
   /*border-bottom: solid;
   border-width: 1px;
@@ -70,7 +77,7 @@ body{
   font-weight: bold;
 }
 
-.item-row{
+.item-row {
   .row;
   border-top: solid;
   border-width: 1px;
@@ -80,7 +87,7 @@ body{
   margin-right: 0px !important;
 }
 
-.bottom-row{
+.bottom-row {
   .row;
   border-top: solid;
   border-width: 1px;
@@ -90,27 +97,30 @@ body{
   margin-right: 0px !important;
 }
 
-.item-row:hover{
+.item-row:hover {
   background-color: @state-info-bg !important;
 }
-.item-row.dropped{
+
+.item-row.dropped {
   background-color: @state-danger-bg;
 }
-.item-row.finished{
+
+.item-row.finished {
   background-color: @state-success-bg;
 }
-.item-row.paused{
+
+.item-row.paused {
   background-color: @state-warning-bg;
 }
 
-.select-info{
+.select-info {
   color: @myorange;
   cursor: pointer;
 }
-.select-info:hover{
-  color: darken(@myorange,10%);
-}
 
+.select-info:hover {
+  color: darken(@myorange, 10%);
+}
 
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;

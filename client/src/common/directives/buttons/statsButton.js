@@ -1,24 +1,23 @@
-angular.module('14all').directive('statsButton', ['itemService','$compile','$parse',function(itemService,$compile,$parse) {
+angular.module('14all').directive('statsButton', ['itemService', '$compile', '$parse', function (itemService, $compile, $parse) {
     return {
         priority: 1100,
-        template:
-            '',
+        template: '',
         restrict: 'E',
         scope: {
             item: '=model'
         },
-        link : function($scope,$element,$attr) {
+        link: function ($scope, $element, $attr) {
             var defaultStats = ['finished', 'dropped', 'paused'];
             var enabledStats = $scope.$eval($attr.stats);
             if (!enabledStats) {
                 enabledStats = defaultStats;
             }
             var group = angular.element('<div class="btn-group"></div>');
-            if(statEnabled('finished'))
+            if (statEnabled('finished'))
                 group.append('<a class="btn btn-default" title="finished" ng-click="setStats(\'finished\')"><i class="glyphicon glyphicon-ok"></i></a>');
-            if(statEnabled('paused'))
+            if (statEnabled('paused'))
                 group.append('<a class="btn btn-default" title="paused" ng-click="setStats(\'paused\')"><i class="glyphicon glyphicon-pause"></i></a>');
-            if(statEnabled('dropped'))
+            if (statEnabled('dropped'))
                 group.append('<a class="btn btn-default" title="dropped" ng-click="setStats(\'dropped\')"><i class="glyphicon glyphicon-ban-circle"></i></a>');
             $compile(group)($scope);
             $element.append(group);

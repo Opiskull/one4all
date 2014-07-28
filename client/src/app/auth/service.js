@@ -1,13 +1,12 @@
 angular.module('auth')
     .factory('authService', ['Restangular', '$location', '$store', function (Restangular, $location, $store) {
         var authInfoDefault = {
-            isLoggedIn : false,
-            user : {},
-            roles : []
+            isLoggedIn: false,
+            user: {},
+            roles: []
         };
 
         var authInfo = {};
-
 
         /**
          * returns the authinfo from the user

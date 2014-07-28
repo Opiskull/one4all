@@ -4,9 +4,9 @@ angular.module('providers').directive('infoImage', [function () {
         replace: true,
         template: '<img class="info-img" ng-src="{{src}}"/>',
         link: function (scope, element, attrs) {
-            if(scope.info.img){
+            if (scope.info.img) {
                 scope.src = scope.info.img;
-            } else{
+            } else {
                 scope.src = "no_image.jpg";
             }
         },

@@ -1,36 +1,7 @@
 angular.module('book')
-    .controller('BookListCtrl', ['$scope', 'bookResource', 'itemService','filterService', function ($scope, bookResource, itemService, filterService) {
+    .controller('BookListCtrl', ['$scope', 'bookResource', 'filterService', 'listService', function ($scope, bookResource, filterService, listService) {
         filterService.register($scope, bookResource);
-        $scope.itemService = itemService;
+        listService.register($scope, bookResource);
         $scope.defaultProvider = 'google-books';
-
-        $scope.remove = function (book) {
-            itemService.removeWithDlg('book', $scope.books, book);
-        };
-
-        $scope.update = function (book) {
-            itemService.update(book).then(function (updated) {
-                updated.editable = false;
-            });
-        };
-
-        $scope.cancel = function (book) {
-            if (book.isnew) {
-                $scope.newbook = {};
-            }
-            book.editable = false;
-        };
-
-        $scope.add = function () {
-            $scope.newbook = {isnew: true};
-        };
-
-        $scope.create = function (book) {
-            bookResource.post(book).then(function (addedBook) {
-                $scope.newbook = {};
-                $scope.books.push(addedBook);
-            }, function (response) {
-                console.log("Error");
-            });
-        };
+        $scope.title = 'book';
     }]);

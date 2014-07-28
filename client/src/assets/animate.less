@@ -1,33 +1,36 @@
-.ng-enter{
+.ng-enter {
   .fadeIn;
 }
 
-.ng-enter.ng-enter-active{
+.ng-enter.ng-enter-active {
   .fadeInComplete;
 }
 
-.fadeIn{
+.fadeIn {
   -webkit-transition: 0.5s linear all;
   transition: 0.5s linear all;
   opacity: 0;
 }
-.fadeInComplete{
+
+.fadeInComplete {
   opacity: 1;
 }
 
-.ng-leave{
+.ng-leave {
   .fadeOut;
 }
 
-.ng-leave.ng-leave-active{
+.ng-leave.ng-leave-active {
   .fadeOutComplete;
 }
-.fadeOut{
+
+.fadeOut {
   -webkit-transition: 0.5s linear all;
   transition: 0.5s linear all;
   opacity: 1;
 }
-.fadeOutComplete{
+
+.fadeOutComplete {
   opacity: 0;
   display: none;
 }

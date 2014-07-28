@@ -11,8 +11,9 @@
 <header ng-cloak class="navbar navbar-default navbar-fixed-top" role="navigation">
     <div class="container-fluid">
         <div class="navbar-header">
-            <a class="navbar-brand" href="#"><img src="site.png" /></a>
-            <button class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed"><i class="glyphicon glyphicon-th-large"></i></button>
+            <a class="navbar-brand" href="#"><img src="site.png"/></a>
+            <button class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed"><i
+                    class="glyphicon glyphicon-th-large"></i></button>
         </div>
         <nav collapse="navCollapsed" class="navbar-collapse collapse navbar-responsive-collapse" role="navigation">
             <menu page-title="'Peerzone '">
@@ -22,16 +23,19 @@
                 <menu-item path="#/anime" display-title="Anime"></menu-item>
                 <menu-item path="#/book" display-title="Book"></menu-item>
                 <menu-item path="#/game" display-title="Game"></menu-item>
-                <menu-item path="https://github.com/Opiskull/14all/issues" display-title="Issues" target="_blank"></menu-item>
+                <menu-item path="https://github.com/Opiskull/14all/issues" display-title="Issues"
+                           target="_blank"></menu-item>
             </menu>
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
                             <div class="input-group search-box">
-                                <input type="search" class="form-control" placeholder="Search" ng-model="keyword" focus-me="focus.search" ng-blur="focus.search=false">
+                                <input type="search" class="form-control" placeholder="Search" ng-model="keyword"
+                                       focus-me="focus.search" ng-blur="focus.search=false">
                                 <span class="input-group-btn" ng-if="keyword !== ''">
-                                    <button class="btn btn-default" type="button" ng-click="clearKeyword()"><i class="glyphicon glyphicon-remove"></i></button>
+                                    <button class="btn btn-default" type="button" ng-click="clearKeyword()"><i
+                                            class="glyphicon glyphicon-remove"></i></button>
                                 </span>
                             </div>
                         </div>
@@ -46,17 +50,23 @@
                         <li class="divider"></li>
                         <li>
                             <a ng-click="settings.filters.stats.finished = !settings.filters.stats.finished; filterItems()">
-                                <i class="glyphicon " ng-class="settings.filters.stats.finished ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i> exclude finished
+                                <i class="glyphicon "
+                                   ng-class="settings.filters.stats.finished ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i>
+                                exclude finished
                             </a>
                         </li>
                         <li>
                             <a ng-click="settings.filters.stats.dropped = !settings.filters.stats.dropped;filterItems()">
-                                <i class="glyphicon " ng-class="settings.filters.stats.dropped ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i> exclude dropped
+                                <i class="glyphicon "
+                                   ng-class="settings.filters.stats.dropped ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i>
+                                exclude dropped
                             </a>
                         </li>
                         <li>
                             <a ng-click="settings.filters.stats.paused = !settings.filters.stats.paused;filterItems()">
-                                <i class="glyphicon " ng-class="settings.filters.stats.paused ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i> exclude paused
+                                <i class="glyphicon "
+                                   ng-class="settings.filters.stats.paused ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i>
+                                exclude paused
                             </a>
                         </li>
                     </ul>

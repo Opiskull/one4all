@@ -1,14 +1,14 @@
 /**
  * Created by Christian on 28.01.14.
  */
-angular.module('14all').filter('multi',['$filter',function($filter){
+angular.module('14all').filter('multi', ['$filter', function ($filter) {
 
-    function buildOptions(settings){
+    function buildOptions(settings) {
         var options = {
         };
-        angular.forEach(settings.stats,function(enabled,statKey){
-            if(enabled){
-                if(!options.stats){
+        angular.forEach(settings.stats, function (enabled, statKey) {
+            if (enabled) {
+                if (!options.stats) {
                     options.stats = {};
                 }
                 options.stats[statKey] = !!false;
@@ -17,9 +17,9 @@ angular.module('14all').filter('multi',['$filter',function($filter){
 
         options.keyword = settings.keyword;
 
-        if(settings.orderBy){
+        if (settings.orderBy) {
             options.orderBy = {};
-            if(settings.orderBy.predicate){
+            if (settings.orderBy.predicate) {
                 options.orderBy.predicate = settings.orderBy.predicate;
             }
             options.orderBy.reverse = !!settings.orderBy.reverse;
@@ -28,14 +28,14 @@ angular.module('14all').filter('multi',['$filter',function($filter){
         return options;
     }
 
-    function matchStats(options){
-        return function(item){
-            if(!item.stats){
+    function matchStats(options) {
+        return function (item) {
+            if (!item.stats) {
                 return true;
             }
             var result = true;
-            angular.forEach(options.stats,function(stat,statKey){
-                if(item.stats[statKey]){
+            angular.forEach(options.stats, function (stat, statKey) {
+                if (item.stats[statKey]) {
                     result = !item.stats[statKey];
                 }
             });
@@ -43,16 +43,16 @@ angular.module('14all').filter('multi',['$filter',function($filter){
         }
     }
 
-    return function(input,settings){
+    return function (input, settings) {
         var retItems = [];
         var options = buildOptions(settings);
 
-        retItems = $filter('filter')(input,options.keyword);
+        retItems = $filter('filter')(input, options.keyword);
 
-        if(options.stats)
-            retItems = $filter('filter')(retItems,matchStats(options));
+        if (options.stats)
+            retItems = $filter('filter')(retItems, matchStats(options));
 
-        if(options.orderBy)
+        if (options.orderBy)
             retItems = $filter('orderBy')(retItems, options.orderBy.predicate, options.orderBy.reverse);
 
         return retItems;

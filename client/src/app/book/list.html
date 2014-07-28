@@ -12,14 +12,14 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2">
-                <a href="" ng-click="itemService.showInfo(book)">{{book.title}}</a>
+                <a ng-click="showInfo(book)">{{book.title}}</a>
             </div>
             <div class="col-sm-6">
                 <up-down-button disabled="book.stats.finished" item="book" property="'page'"></up-down-button>
             </div>
             <div class="col-sm-1">{{book.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
-		<stats-button model="book"></stats-button>
+                <stats-button model="book"></stats-button>
                 <actions-button remove="remove(book)" model="book"></actions-button>
             </div>
         </div>
@@ -31,12 +31,13 @@
 <div class="navbar-fixed-bottom navbar-default navbar">
     <div class="bottom-row">
         <div class="col-sm-12">
-            <add-button add="add()" ng-if="!newbook.isnew"></add-button>
-            <div ng-include="'book/add.html'" ng-if="newbook.isnew"></div>
+            <add-button add="add()" ng-if="!newitem.isnew"></add-button>
+            <div ng-include="'book/add.html'" ng-if="newitem.isnew"></div>
             <pagination total-items="pagination.filteredItems" ng-model="pagination.currentPage"
                         items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
                         class="pull-right pagination-sm" boundary-links="true" ng-change="filter()"
-                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                        last-text="&raquo;"></pagination>
         </div>
     </div>
 </div>

@@ -1,37 +1,7 @@
 angular.module('serie')
-    .controller('SerieListCtrl', ['$scope', 'serieResource', 'itemService','filterService', function ($scope, Series, itemService,filterService) {
-        filterService.register($scope,Series);
-        $scope.itemService = itemService;
+    .controller('SerieListCtrl', ['$scope', 'serieResource', 'filterService', 'listService', function ($scope, Series, filterService, listService) {
+        filterService.register($scope, Series);
+        listService.register($scope, Series);
         $scope.defaultProvider = 'tmdb-serie';
-
-
-        $scope.remove = function (serie) {
-            itemService.removeWithDlg('serie', $scope.series, serie);
-        };
-
-        $scope.update = function (serie) {
-            itemService.update(serie).then(function (updated) {
-                updated.editable = false;
-            });
-        };
-
-        $scope.cancel = function (serie) {
-            if (serie.isnew) {
-                $scope.newserie = {};
-            }
-            serie.editable = false;
-        };
-
-        $scope.add = function () {
-            $scope.newserie = {isnew: true};
-        };
-
-        $scope.create = function (serie) {
-            Series.post(serie).then(function (addedSerie) {
-                $scope.newserie = {};
-                $scope.series.push(addedSerie);
-            }, function (response) {
-                console.log("Error");
-            });
-        };
+        $scope.title = 'serie';
     }]);

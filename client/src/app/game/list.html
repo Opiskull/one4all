@@ -11,11 +11,11 @@
 
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-sm-2"><a href="" ng-click="itemService.showInfo(game)">{{game.title}}</a></div>
+            <div class="col-sm-2"><a ng-click="showInfo(game)">{{game.title}}</a></div>
             <div class="col-sm-6"></div>
             <div class="col-sm-1">{{game.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
-				<stats-button model="game"></stats-button>
+                <stats-button model="game"></stats-button>
                 <actions-button remove="remove(game)" model="game"></actions-button>
             </div>
         </div>
@@ -27,12 +27,13 @@
 <div class="navbar-fixed-bottom navbar-default navbar">
     <div class="bottom-row">
         <div class="col-sm-12">
-            <add-button add="add()"  ng-if="!newgame.isnew"></add-button>
-            <div ng-include="'game/add.html'" ng-if="newgame.isnew"></div>
+            <add-button add="add()" ng-if="!newitem.isnew"></add-button>
+            <div ng-include="'game/add.html'" ng-if="newitem.isnew"></div>
             <pagination total-items="pagination.filteredItems" ng-model="pagination.currentPage"
                         items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
                         class="pull-right pagination-sm" boundary-links="true" ng-change="filter()"
-                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                        last-text="&raquo;"></pagination>
         </div>
     </div>
 </div>

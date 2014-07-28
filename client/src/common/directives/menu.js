@@ -1,28 +1,28 @@
-angular.module('14all').directive('menu',['$document',function($document){
+angular.module('14all').directive('menu', ['$document', function ($document) {
     return {
         restrict: 'E',
-        scope:{
-            pageTitle:'='
+        scope: {
+            pageTitle: '='
         },
-        transclude:true,
+        transclude: true,
         replace: true,
-        template : '<ul class="nav navbar-nav" ng-transclude></ul>',
-        controller:['$scope',function($scope){
+        template: '<ul class="nav navbar-nav" ng-transclude></ul>',
+        controller: ['$scope', function ($scope) {
             $scope.items = [];
-            this.addItem = function(item){
+            this.addItem = function (item) {
                 $scope.items.push(item);
             };
-            $scope.$on("$routeChangeSuccess",function(event,current,previous){
+            $scope.$on("$routeChangeSuccess", function (event, current, previous) {
                 var currentPath = '';
-                if(current.$$route){
+                if (current.$$route) {
                     currentPath = current.$$route.originalPath;
                 }
                 var title = 'Welcome';
-                angular.forEach($scope.items,function(item,key){
-                    if(item.strippedPath && item.strippedPath === currentPath){
+                angular.forEach($scope.items, function (item, key) {
+                    if (item.strippedPath && item.strippedPath === currentPath) {
                         item.active = true;
                         title = $scope.pageTitle + item.displayTitle;
-                    } else{
+                    } else {
                         item.active = false;
                     }
                 });
@@ -30,22 +30,22 @@ angular.module('14all').directive('menu',['$document',function($document){
             });
         }]
     }
-}]).directive('menuItem',[function(){
+}]).directive('menuItem', [function () {
     return {
         priority: 300,
         require: "^menu",
-        template:'<li ng-class="{ active: active }"><a href="{{::path}}" target="{{::target}}">{{::displayTitle}}</a></li>',
+        template: '<li ng-class="{ active: active }"><a href="{{::path}}" target="{{::target}}">{{::displayTitle}}</a></li>',
         restrict: 'E',
-        replace:true,
-        scope:{
+        replace: true,
+        scope: {
             displayTitle: '@',
             path: '@',
-            target:'@'
+            target: '@'
         },
-        link : function($scope,$element,$attrs,menuController){
+        link: function ($scope, $element, $attrs, menuController) {
             menuController.addItem($scope);
             $scope.active = false;
-            if($scope.path && $scope.path.indexOf('#') === 0){
+            if ($scope.path && $scope.path.indexOf('#') === 0) {
                 $scope.strippedPath = $scope.path.substring(1);
             }
         }

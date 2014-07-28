@@ -17,7 +17,7 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2">
-                <a ng-click="itemService.showInfo(anime)">{{::anime.title}}</a>
+                <a ng-click="showInfo(anime)">{{::anime.title}}</a>
             </div>
             <div class="col-sm-6">
                 <up-down-button disabled="anime.stats.finished" item="anime" property="'episode'"></up-down-button>
@@ -35,12 +35,13 @@
 <div class="navbar-fixed-bottom navbar-default navbar">
     <div class="bottom-row">
         <div class="col-sm-12">
-            <add-button add="add()" ng-if="!newanime.isnew"></add-button>
-            <div ng-include="'anime/add.html'" ng-if="newanime.isnew"></div>
+            <add-button add="add()" ng-if="!newitem.isnew"></add-button>
+            <div ng-include="'anime/add.html'" ng-if="newitem.isnew"></div>
             <pagination total-items="pagination.filteredItems" ng-model="pagination.currentPage"
                         items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
                         class="pull-right pagination-sm" boundary-links="true" ng-change="filter()"
-                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></pagination>
+                        previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;"
+                        last-text="&raquo;"></pagination>
         </div>
     </div>
 </div>
