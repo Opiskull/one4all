@@ -54,8 +54,9 @@ function watchFilesAndStartTask(files,task){
 
 gulp.task('changelog',function(){
     require('conventional-changelog')({
-        repository: 'https://github.com/opiskull/14all',
-        version: require('./package.json').version
+        repository: 'https://github.com/Opiskull/14all',
+        version: require('./package.json').version,
+        file: '../CHANGELOG.md'
     }, function (err, log) {
         require('fs').writeFile('../CHANGELOG.md',log);
     });
