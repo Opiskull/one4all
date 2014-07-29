@@ -5,6 +5,7 @@ var plugins = require('../lib/mongoose-plugins.js');
 var bookSchema = mongoose.Schema({
     title: String,
     page: Number,
+    author: String,
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
