@@ -9,44 +9,50 @@ var userSchema = mongoose.Schema({
         id: String,
         displayName: String,
         name: {
-            familyName : String,
+            familyName: String,
             givenName: String,
             middleName: String
         },
-        emails: [{
-            value: String, type: {type: String}
-        }]
+        emails: [
+            {
+                value: String, type: {type: String}
+            }
+        ]
     },
-    roles:[String]
+    roles: [String]
 });
 
-userSchema.statics.findOrCreate = function(profile,callback){
-    this.findOne({'profile.id':profile.id},function(err,user){
-        if(err){
-            return callback(err,null);
+userSchema.statics.findOrCreate = function (profile, callback) {
+    this.findOne({'profile.id': profile.id}, function (err, user) {
+        if (err) {
+            return callback(err, null);
         }
-        if(user){
-            return callback(null,user);
+        if (user) {
+            return callback(null, user);
         }
-        else{
+        else {
             var newuser = new User();
             newuser.username = profile.username;
             newuser.email = profile.email;
             newuser.profile = profile;
-            newuser.save(function(err){
-                if(err){
-                    return callback(err,null);
+            newuser.save(function (err) {
+                if (err) {
+                    return callback(err, null);
                 }
-                return callback(null,newuser);
+                return callback(null, newuser);
             });
         }
     });
 };
 
-userSchema.statics.findByAccessToken = function(token,callback){
+userSchema.statics.findByAccessToken = function (token, callback) {
     this.findOne({ accessToken: token }, function (err, user) {
-        if (err) { return callback(err); }
-        if (!user) { return callback(null); }
+        if (err) {
+            return callback(err);
+        }
+        if (!user) {
+            return callback(null);
+        }
         return callback(null, user);
     });
 };

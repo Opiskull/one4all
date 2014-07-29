@@ -4,7 +4,7 @@ var plugins = require('../lib/mongoose-plugins.js');
 
 var gameSchema = mongoose.Schema({
     title: String,
-    user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 gameSchema.plugin(timestamps);

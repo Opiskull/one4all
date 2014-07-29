@@ -2,27 +2,27 @@ require('./modelMovie.js');
 require('./modelSerie.js');
 
 var lib = require('./lib.js');
-var tmdbConfig = {};
+//var tmdbConfig = {};
 
 function searchMovie(req, res, next) {
-    lib.searchMovie(req.params.search,function(err,result){
+    lib.searchMovie(req.params.search, function (err, result) {
         next.ifError(err);
         return res.json(result);
     });
 }
 
-function searchSerie(req,res,next){
-    lib.searchSerie(req.params.search,function(err,result){
+function searchSerie(req, res, next) {
+    lib.searchSerie(req.params.search, function (err, result) {
         next.ifError(err);
         return res.json(result);
     });
 }
 
-function getConfiguration(){
-    lib.getConfig(function(err,result){
-        tmdbConfig = result;
-    });
-}
+//function getConfiguration() {
+//    lib.getConfig(function (err, result) {
+//        tmdbConfig = result;
+//    });
+//}
 
 module.exports.init = function (server, router) {
     server.get(router.getSearchRoute('/tmdb/serie/search'), searchSerie);

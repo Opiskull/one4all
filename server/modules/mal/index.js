@@ -4,14 +4,14 @@ require('./modelManga.js');
 var lib = require('./lib.js');
 
 function searchAnime(req, res, next) {
-    lib.searchAnime(req.params.search,function(err,result){
+    lib.searchAnime(req.params.search, function (err, result) {
         next.ifError(err);
         return res.json(result);
     });
 }
 
-function searchManga(req,res,next){
-    lib.searchManga(req.params.search,function(err,result){
+function searchManga(req, res, next) {
+    lib.searchManga(req.params.search, function (err, result) {
         next.ifError(err);
         return res.json(result);
     });

@@ -3,26 +3,28 @@ var timestamps = require('mongoose-timestamp');
 var parser = require('./parser.js');
 
 var malAnimeSchema = mongoose.Schema({
-    id:Number,
-    title:String,
-    titles:[{title:String, lang:String}],
-    episodes:Number,
+    id: Number,
+    title: String,
+    titles: [
+        {title: String, lang: String}
+    ],
+    episodes: Number,
     status: String,
-    start_date:Date,
-    end_date:Date,
-    description:String,
-    img:String
+    start_date: Date,
+    end_date: Date,
+    description: String,
+    img: String
 });
 
-malAnimeSchema.statics.findOrCreate = function(inputAnime,callback){
-    this.findOne({'id':inputAnime.id},function(err,anime){
-        if(err){
-            return callback(err,null);
+malAnimeSchema.statics.findOrCreate = function (inputAnime, callback) {
+    this.findOne({'id': inputAnime.id}, function (err, anime) {
+        if (err) {
+            return callback(err, null);
         }
-        if(!anime){
+        if (!anime) {
             anime = new malAnime();
         }
-        parser.parseAnime(anime,inputAnime);
+        parser.parseAnime(anime, inputAnime);
         return anime.save(callback);
     });
 };

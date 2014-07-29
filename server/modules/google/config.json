@@ -1,5 +1,5 @@
 {
-    "BooksSearchUrl" : "https://www.googleapis.com/books/v1/volumes",
-    "Books" : "https://www.googleapis.com/books/v1/volumes/",
+    "BooksSearchUrl": "https://www.googleapis.com/books/v1/volumes",
+    "Books": "https://www.googleapis.com/books/v1/volumes/",
     "BooksFields": "items(id,volumeInfo(authors,categories,description,imageLinks/thumbnail,industryIdentifiers,language,mainCategory,pageCount,printedPageCount,publishedDate,publisher,subtitle,title)),totalItems"
 }

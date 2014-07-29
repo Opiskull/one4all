@@ -6,7 +6,7 @@ var serieSchema = mongoose.Schema({
     title: String,
     season: Number,
     episode: Number,
-    user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 serieSchema.plugin(timestamps);

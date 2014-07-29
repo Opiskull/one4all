@@ -1,6 +1,6 @@
-function parseBook(output,input){
+function parseBook(output, input) {
     output.id = input.id;
-    if(input.volumeInfo){
+    if (input.volumeInfo) {
         output.title = input.volumeInfo.title;
         output.authors = input.volumeInfo.authors;
         output.publisher = input.volumeInfo.publisher;
@@ -8,10 +8,10 @@ function parseBook(output,input){
         output.description = input.volumeInfo.description;
         output.page_count = input.volumeInfo.pageCount;
         output.language = input.volumeInfo.language;
-        if(input.volumeInfo.imageLinks){
+        if (input.volumeInfo.imageLinks) {
             output.img = input.volumeInfo.imageLinks.thumbnail;
         }
-        if(input.volumeInfo.industryIdentifiers){
+        if (input.volumeInfo.industryIdentifiers) {
             output.isbn_13 = parseISBN13(input.volumeInfo.industryIdentifiers);
             output.isbn_10 = parseISBN10(input.volumeInfo.industryIdentifiers);
         }
@@ -19,21 +19,21 @@ function parseBook(output,input){
 
 }
 
-function parseISBN13(items){
-    return parseISBN(items,'ISBN_13');
+function parseISBN13(items) {
+    return parseISBN(items, 'ISBN_13');
 }
 
-function parseISBN(items,type){
-    var value;
-    items.forEach(function(item){
-        if(item.type === type)
+function parseISBN(items, type) {
+    var value = '';
+    items.forEach(function (item) {
+        if (item.type === type)
             value = item.identifier;
     });
     return value;
 }
 
-function parseISBN10(items){
-    return parseISBN(items,'ISBN_10');
+function parseISBN10(items) {
+    return parseISBN(items, 'ISBN_10');
 }
 
 exports.parseBook = parseBook;

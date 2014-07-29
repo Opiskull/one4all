@@ -22,66 +22,66 @@ var argv = require('yargs').argv;
 var debug = argv.debug;
 
 var paths = {
-    "filenames" : {
+    "filenames": {
         "app": pkg.name + ".js",
         "css": pkg.name + ".css",
         "template": pkg.name + ".templates.js",
         "vendor": pkg.name + ".vendor.js",
         "img": 'site.png'
     },
-    "src" :{
+    "src": {
         "fonts": 'src/assets/fonts/*.*',
-        "img": ['src/*.png','src/*.jpg'],
-        "app" : 'src/**/*.js',
-        "template": ['src/app/**/*.html','src/common/**/*.html'],
-        "css" : 'src/assets/main.less',
-        "index" : 'src/index.html'
+        "img": ['src/*.png', 'src/*.jpg'],
+        "app": 'src/**/*.js',
+        "template": ['src/app/**/*.html', 'src/common/**/*.html'],
+        "css": 'src/assets/main.less',
+        "index": 'src/index.html'
     },
-    "name" : pkg.name,
-    "build" : "build/",
-    "templatemodule" : pkg.name + ".templates"
+    "name": pkg.name,
+    "build": "build/",
+    "templatemodule": pkg.name + ".templates"
 };
 
-function watchFilesAndStartTask(files,task){
+function watchFilesAndStartTask(files, task) {
     watch({
         glob: files,
         emit: 'one',
         emitOnGlob: false
-    },function(files){
+    }, function (files) {
         gulp.start(task);
     });
 }
 
-gulp.task('changelog',function(){
+gulp.task('changelog', function () {
     require('conventional-changelog')({
         repository: 'https://github.com/Opiskull/14all',
         version: require('./package.json').version,
         file: '../CHANGELOG.md'
     }, function (err, log) {
-        require('fs').writeFile('../CHANGELOG.md',log);
+        require('fs').writeFile('../CHANGELOG.md', log);
     });
 });
 
-gulp.task('default',['build'],function(){
+gulp.task('default', ['build'], function () {
     gulp.start('watch');
 });
 
-gulp.task('build',['clean'], function(){
+gulp.task('build', ['clean'], function () {
     gulp.start('fonts');
     gulp.start('images');
     gulp.start('index');
 });
 
-gulp.task('watch', function(){
-    gulp.start('fonts:watch','images:watch','app:watch','templates:watch','vendor:watch','css:watch','index:watch');
+gulp.task('watch', function () {
+    gulp.start('fonts:watch', 'images:watch', 'app:watch', 'templates:watch', 'vendor:watch', 'css:watch', 'index:watch');
 });
 
-gulp.task('clean', function(){
+gulp.task('clean', function () {
     return gulp.src(paths.build, {read: false})
         .pipe(clean());
 });
 
-gulp.task('index',['app','templates','vendor','css'], function(){
+gulp.task('index', ['app', 'templates', 'vendor', 'css'], function () {
     return gulp.src('./src/index.html')
         .pipe(
         inject(
@@ -90,9 +90,9 @@ gulp.task('index',['app','templates','vendor','css'], function(){
                     paths.build + paths.filenames.app,
                     paths.build + paths.filenames.css,
                     paths.build + paths.filenames.template
-            ], {read:false}),
+            ], {read: false}),
             {
-                ignorePath:paths.build,addRootSlash:false
+                ignorePath: paths.build, addRootSlash: false
             }
         )
     )
@@ -100,47 +100,47 @@ gulp.task('index',['app','templates','vendor','css'], function(){
         .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('index:watch', function(){
-    watchFilesAndStartTask(paths.src.index,'index');
+gulp.task('index:watch', function () {
+    watchFilesAndStartTask(paths.src.index, 'index');
 });
 
-gulp.task('fonts', function(){
+gulp.task('fonts', function () {
     return gulp.src(paths.src.fonts)
         .pipe(gulp.dest('build/fonts'));
 });
 
-gulp.task('fonts:watch', function(){
-    watchFilesAndStartTask(paths.src.fonts,'fonts');
+gulp.task('fonts:watch', function () {
+    watchFilesAndStartTask(paths.src.fonts, 'fonts');
 });
 
-gulp.task('images', function(){
+gulp.task('images', function () {
     return gulp.src(paths.src.img)
         //.pipe(rename(paths.filenames.img))
         .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('images:watch', function(){
-    watchFilesAndStartTask(paths.src.img,'images');
+gulp.task('images:watch', function () {
+    watchFilesAndStartTask(paths.src.img, 'images');
 });
 
-gulp.task('app', function(){
+gulp.task('app', function () {
     return gulp.src(paths.src.app)
         .pipe(concat(paths.filenames.app))
-        .pipe(gulpif(!debug,uglify()))
+        .pipe(gulpif(!debug, uglify()))
         .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('app:watch', function(){
-    watchFilesAndStartTask(paths.src.app,'app');
+gulp.task('app:watch', function () {
+    watchFilesAndStartTask(paths.src.app, 'app');
 });
 
-gulp.task('templates:watch', function(){
-    watchFilesAndStartTask(paths.src.template,'templates');
+gulp.task('templates:watch', function () {
+    watchFilesAndStartTask(paths.src.template, 'templates');
 });
 
-gulp.task('templates', function(){
+gulp.task('templates', function () {
     return gulp.src(paths.src.template)
-        .pipe(gulpif(!debug,minifyhtml({
+        .pipe(gulpif(!debug, minifyhtml({
             empty: true,
             spare: true,
             quotes: true
@@ -149,30 +149,30 @@ gulp.task('templates', function(){
             moduleName: paths.templatemodule
         }))
         .pipe(concat(paths.filenames.template))
-        .pipe(gulpif(!debug,uglify()))
+        .pipe(gulpif(!debug, uglify()))
         .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('vendor', function(){
+gulp.task('vendor', function () {
     return gulpBowerFiles()
         .pipe(concat(paths.filenames.vendor))
-        .pipe(gulpif(!debug,uglify()))
+        .pipe(gulpif(!debug, uglify()))
         .pipe(gulp.dest(paths.build))
         .on('error', gutil.log);
 });
 
-gulp.task('vendor:watch', function(){
-    watchFilesAndStartTask('bower_components/**/*.js','vendor');
+gulp.task('vendor:watch', function () {
+    watchFilesAndStartTask('bower_components/**/*.js', 'vendor');
 });
 
-gulp.task('css', function(){
+gulp.task('css', function () {
     return gulp.src(paths.src.css)
         .pipe(less())
         .pipe(rename(paths.filenames.css))
         .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('css:watch', function(){
-    watchFilesAndStartTask('src/assets/**/*.less','css');
+gulp.task('css:watch', function () {
+    watchFilesAndStartTask('src/assets/**/*.less', 'css');
 });
 

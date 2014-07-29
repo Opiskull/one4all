@@ -5,7 +5,7 @@ var plugins = require('../lib/mongoose-plugins.js');
 var bookSchema = mongoose.Schema({
     title: String,
     page: Number,
-    user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 bookSchema.plugin(timestamps);

@@ -1,9 +1,9 @@
-angular.module('14all').factory('itemService', ['dialogService','$q', function (dialogService,$q) {
+angular.module('14all').factory('itemService', ['dialogService', '$q', function (dialogService, $q) {
     function removeWithDlg(type, items, item) {
         var deferred = $q.defer();
         dialogService.remove(type, item.title).then(function (result) {
             if (result) {
-                return remove(items,item).then(function(removed){
+                return remove(items, item).then(function () {
                     deferred.resolve(true);
                 });
             } else {
@@ -14,7 +14,7 @@ angular.module('14all').factory('itemService', ['dialogService','$q', function (
     }
 
     function remove(items, item) {
-        return item.remove().then(function(){
+        return item.remove().then(function () {
             items.splice(items.indexOf(item), 1);
         });
     }
@@ -69,7 +69,7 @@ angular.module('14all').factory('itemService', ['dialogService','$q', function (
     }
 
     function showInfo(item) {
-        item.open = !!!item.open;
+        item.open = !item.open;
     }
 
     function setInfo(item, selectedInfo) {

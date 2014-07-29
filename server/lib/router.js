@@ -3,37 +3,37 @@ var passport = require('passport');
 var restify = require('restify');
 
 
-var authenticate = passport.authenticate('bearer',{session:false});
+var authenticate = passport.authenticate('bearer', {session: false});
 
-function getRoute(route){
+function getRoute(route) {
     return config.api_prefix + route;
 }
 
-function getRouteAction(route,action){
-    return getRoute(route) +"/"+ action;
+function getRouteAction(route, action) {
+    return getRoute(route) + "/" + action;
 }
 
-function addAction(route,action){
+function addAction(route, action) {
     return route + "/" + action;
 }
 
-function getRouteId(route, action){
-    var routeId = getRouteAction(route,":id");
-    if(action){
-        return addAction(routeId,action);
+function getRouteId(route, action) {
+    var routeId = getRouteAction(route, ":id");
+    if (action) {
+        return addAction(routeId, action);
     }
     return routeId;
 }
 
-function getRouteIdWithAction(route,action,actionid){
-    var parent = getRouteId(parent,action);
-    if(actionid){
-        return addAction(parent,actionid);
+function getRouteIdWithAction(route, action, actionid) {
+    var parent = getRouteId(parent, action);
+    if (actionid) {
+        return addAction(parent, actionid);
     }
     return parent;
 }
 
-exports.getSearchRoute = function(route){
+exports.getSearchRoute = function (route) {
     //return getRouteAction(route,":search");,
     return getRoute(route);
 };
@@ -57,8 +57,8 @@ exports.authenticate = authenticate;
 
 exports.isAuthenticated = [
     authenticate,
-    function(req,res,next){
-        if(req.isAuthenticated()){
+    function (req, res, next) {
+        if (req.isAuthenticated()) {
             next();
         }
         return next(new restify.InvalidCredentialsError());

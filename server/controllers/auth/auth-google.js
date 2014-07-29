@@ -8,7 +8,7 @@ var config = require('../../config/config.json');
 var User = mongoose.model('User');
 var AccessToken = mongoose.model('AccessToken');
 
-module.exports.init = function (server,router) {
+module.exports.init = function (server, router) {
 
     passport.use(new GoogleStrategy({
             clientID: config.auth.google.clientID,
@@ -18,23 +18,29 @@ module.exports.init = function (server,router) {
         function (accessToken, refreshToken, profile, done) {
             profile.username = profile.displayName;
             User.findOrCreate(profile, function (err, user) {
-                if(err) {return done(err);}
-                if(!user){return done(null,false);}
+                if (err) {
+                    return done(err);
+                }
+                if (!user) {
+                    return done(null, false);
+                }
                 var token = {accessToken: accessToken, user: user._id, refreshToken: refreshToken};
-                AccessToken.create(token, function(err, aToken){
-                    if(err) {return done(err);}
-                    return done(null, user, {token:aToken.accessToken});
+                AccessToken.create(token, function (err, aToken) {
+                    if (err) {
+                        return done(err);
+                    }
+                    return done(null, user, {token: aToken.accessToken});
                 });
             });
         }
     ));
 
-    server.get(router.getRoute('/auth/google'), passport.authenticate('google',{scope: ['https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email'],session:false}));
+    server.get(router.getRoute('/auth/google'), passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/userinfo.profile',
+        'https://www.googleapis.com/auth/userinfo.email'], session: false}));
     server.get(router.getRoute('/auth/google/callback'),
-        passport.authenticate('google', { failureRedirect: '/login' ,session:false}),
+        passport.authenticate('google', { failureRedirect: '/login', session: false}),
         function (req, res) {
-            res.header('Location','/index.html#/login?token='+req.authInfo.token);
-                res.send(302);
+            res.header('Location', '/index.html#/login?token=' + req.authInfo.token);
+            res.send(302);
         });
 };

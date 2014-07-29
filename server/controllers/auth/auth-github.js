@@ -8,7 +8,7 @@ var config = require('../../config/config.json');
 var User = mongoose.model('User');
 var AccessToken = mongoose.model('AccessToken');
 
-module.exports.init = function (server,router) {
+module.exports.init = function (server, router) {
 
     passport.use(new GitHubStrategy({
             clientID: config.auth.github.clientID,
@@ -17,25 +17,31 @@ module.exports.init = function (server,router) {
         },
         function (accessToken, refreshToken, profile, done) {
             profile.username = profile.username;
-            if(profile.emails)
+            if (profile.emails)
                 profile.email = profile.emails[0].value;
             User.findOrCreate(profile, function (err, user) {
-                if(err) {return done(err);}
-                if(!user){return done(null,false);}
+                if (err) {
+                    return done(err);
+                }
+                if (!user) {
+                    return done(null, false);
+                }
                 var token = {accessToken: accessToken, user: user._id, refreshToken: refreshToken};
-                AccessToken.create(token, function(err, aToken){
-                    if(err) {return done(err);}
-                    return done(null, user, {token:aToken.accessToken});
+                AccessToken.create(token, function (err, aToken) {
+                    if (err) {
+                        return done(err);
+                    }
+                    return done(null, user, {token: aToken.accessToken});
                 });
             });
         }
     ));
 
-    server.get(router.getRoute('/auth/github'), passport.authenticate('github',{session:false}));
+    server.get(router.getRoute('/auth/github'), passport.authenticate('github', {session: false}));
     server.get(router.getRoute('/auth/github/callback'),
-        passport.authenticate('github', { failureRedirect: '/login' ,session:false}),
+        passport.authenticate('github', { failureRedirect: '/login', session: false}),
         function (req, res) {
-            res.header('Location','/index.html#/login?token='+req.authInfo.token);
+            res.header('Location', '/index.html#/login?token=' + req.authInfo.token);
             res.send(302);
         });
 };

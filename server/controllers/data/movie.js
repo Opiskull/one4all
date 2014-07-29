@@ -2,13 +2,13 @@ var mongoose = require('mongoose');
 var restify = require('restify');
 var Movie = mongoose.model('Movie');
 
-module.exports.init = function (server,router) {
+module.exports.init = function (server, router) {
     var movie = '/movie';
     server.get(router.getRoute(movie), router.isAuthenticated, list);
     server.post(router.getRoute(movie), router.isAuthenticated, create);
-    server.get(router.getRouteId(movie),router.isAuthenticated, load, get);
-    server.del(router.getRouteId(movie),router.isAuthenticated, load, del);
-    server.put(router.getRouteId(movie),router.isAuthenticated, load, update);
+    server.get(router.getRouteId(movie), router.isAuthenticated, load, get);
+    server.del(router.getRouteId(movie), router.isAuthenticated, load, del);
+    server.put(router.getRouteId(movie), router.isAuthenticated, load, update);
 };
 
 function load(req, res, next) {
@@ -35,10 +35,10 @@ function get(req, res, next) {
 function create(req, res, next) {
     var movie = new Movie(req.params);
     movie.user = req.user._id;
-    movie.save(function(err){
-        if(err)
-            return next(err);
-        res.json(movie);
+    movie.save(function (err) {
+            if (err)
+                return next(err);
+            res.json(movie);
         }
     );
 }
@@ -53,7 +53,7 @@ function del(req, res, next) {
 }
 
 function update(req, res, next) {
-    require('util')._extend(req.model,req.body);
+    require('util')._extend(req.model, req.body);
     req.model.save(function (err, movie) {
         if (err)
             return next(err);
@@ -63,7 +63,7 @@ function update(req, res, next) {
 }
 
 function list(req, res, next) {
-    Movie.find({user : new mongoose.Types.ObjectId(req.user.id)},function (err, movies) {
+    Movie.find({user: new mongoose.Types.ObjectId(req.user.id)}, function (err, movies) {
         if (err)
             return next(err);
         res.json(movies);

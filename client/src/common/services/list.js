@@ -4,7 +4,7 @@ angular.module('14all').factory('listService', ['settingsService', 'itemService'
         scope.showInfo = itemService.showInfo;
 
         scope.remove = function (item) {
-            itemService.removeWithDlg(scope.title, scope.items, item).finally(function(){
+            itemService.removeWithDlg(scope.title, scope.items, item).finally(function () {
                 $rootScope.$emit('filter');
             });
         };
@@ -34,13 +34,12 @@ angular.module('14all').factory('listService', ['settingsService', 'itemService'
                 $rootScope.$emit('filter');
             }, function (response) {
                 console.log("Error");
+                console.log(response);
             });
         };
     }
 
-    var service = {
+    return {
         register: register
     };
-
-    return service;
 }]);

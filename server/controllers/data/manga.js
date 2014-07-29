@@ -2,13 +2,13 @@ var mongoose = require('mongoose');
 var restify = require('restify');
 var Manga = mongoose.model('Manga');
 
-module.exports.init = function (server,router) {
+module.exports.init = function (server, router) {
     var manga = '/manga';
     server.get(router.getRoute(manga), router.isAuthenticated, list);
     server.post(router.getRoute(manga), router.isAuthenticated, create);
-    server.get(router.getRouteId(manga),router.isAuthenticated, load, get);
-    server.del(router.getRouteId(manga),router.isAuthenticated, load, del);
-    server.put(router.getRouteId(manga),router.isAuthenticated, load, update);
+    server.get(router.getRouteId(manga), router.isAuthenticated, load, get);
+    server.del(router.getRouteId(manga), router.isAuthenticated, load, del);
+    server.put(router.getRouteId(manga), router.isAuthenticated, load, update);
 };
 
 function load(req, res, next) {
@@ -35,10 +35,10 @@ function get(req, res, next) {
 function create(req, res, next) {
     var manga = new Manga(req.params);
     manga.user = req.user._id;
-    manga.save(function(err){
-        if(err)
-            return next(err);
-        res.json(manga);
+    manga.save(function (err) {
+            if (err)
+                return next(err);
+            res.json(manga);
         }
     );
 }
@@ -54,7 +54,7 @@ function del(req, res, next) {
 
 
 function update(req, res, next) {
-    require('util')._extend(req.model,req.body);
+    require('util')._extend(req.model, req.body);
     req.model.save(function (err, manga) {
         if (err)
             return next(err);
@@ -64,7 +64,7 @@ function update(req, res, next) {
 }
 
 function list(req, res, next) {
-    Manga.find({user : new mongoose.Types.ObjectId(req.user.id)},function (err, mangas) {
+    Manga.find({user: new mongoose.Types.ObjectId(req.user.id)}, function (err, mangas) {
         if (err)
             return next(err);
         res.json(mangas);

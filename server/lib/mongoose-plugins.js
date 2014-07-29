@@ -2,10 +2,9 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 
-function statsPlugin(schema,options){
+function statsPlugin(schema) {
     var statsSchema = {
-        stats:
-        {
+        stats: {
             finished: Boolean,
             dropped: Boolean,
             paused: Boolean,
@@ -15,26 +14,26 @@ function statsPlugin(schema,options){
     schema.add(statsSchema);
 }
 
-function infoPlugin(schema, options){
+function infoPlugin(schema) {
     var infoSchema = {
-        infos:[Schema.Types.Mixed]
+        infos: [Schema.Types.Mixed]
     };
-    schema.virtual('info').get(function(){
+    schema.virtual('info').get(function () {
         var info = {};
-        this.infos.forEach(function(element){
-            if(element.default)
+        this.infos.forEach(function (element) {
+            if (element.default)
                 info = element;
         });
-        if(!info.id){
+        if (!info.id) {
             return this.infos[0];
         }
         return info;
     });
     schema.set('toJSON', {
-            virtuals:true
-        });
-    schema.set('toObject',{
-        virtuals:true
+        virtuals: true
+    });
+    schema.set('toObject', {
+        virtuals: true
     });
     schema.add(infoSchema);
 }

@@ -2,13 +2,13 @@ var mongoose = require('mongoose');
 var restify = require('restify');
 var Anime = mongoose.model('Anime');
 
-module.exports.init = function (server,router) {
+module.exports.init = function (server, router) {
     var anime = '/anime';
     server.get(router.getRoute(anime), router.isAuthenticated, list);
     server.post(router.getRoute(anime), router.isAuthenticated, create);
-    server.get(router.getRouteId(anime),router.isAuthenticated, load, get);
-    server.del(router.getRouteId(anime),router.isAuthenticated, load, del);
-    server.put(router.getRouteId(anime),router.isAuthenticated, load, update);
+    server.get(router.getRouteId(anime), router.isAuthenticated, load, get);
+    server.del(router.getRouteId(anime), router.isAuthenticated, load, del);
+    server.put(router.getRouteId(anime), router.isAuthenticated, load, update);
 };
 
 function load(req, res, next) {
@@ -35,10 +35,10 @@ function get(req, res, next) {
 function create(req, res, next) {
     var anime = new Anime(req.params);
     anime.user = req.user._id;
-    anime.save(function(err){
-        if(err)
-            return next(err);
-        res.json(anime);
+    anime.save(function (err) {
+            if (err)
+                return next(err);
+            res.json(anime);
             return next();
         }
     );
@@ -54,7 +54,7 @@ function del(req, res, next) {
 }
 
 function update(req, res, next) {
-    require('util')._extend(req.model,req.body);
+    require('util')._extend(req.model, req.body);
     req.model.save(function (err, anime) {
         if (err)
             return next(err);
@@ -64,7 +64,7 @@ function update(req, res, next) {
 }
 
 function list(req, res, next) {
-    Anime.find({user : new mongoose.Types.ObjectId(req.user.id)},function (err, animes) {
+    Anime.find({user: new mongoose.Types.ObjectId(req.user.id)}, function (err, animes) {
         if (err)
             return next(err);
         res.json(animes);

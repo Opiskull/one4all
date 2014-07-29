@@ -6,7 +6,7 @@ var plugins = require('../lib/mongoose-plugins.js');
 var animeSchema = mongoose.Schema({
     title: String,
     episode: Number,
-    user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 animeSchema.plugin(timestamps);

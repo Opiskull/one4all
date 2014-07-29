@@ -3,28 +3,28 @@ var timestamps = require('mongoose-timestamp');
 var parser = require('./parser.js');
 
 var bookSchema = mongoose.Schema({
-    id:String,
-    title:String,
+    id: String,
+    title: String,
     authors: [String],
     publisher: String,
     published_date: Date,
-    description:String,
+    description: String,
     page_count: Number,
-    img:String,
-    isbn_13:String,
-    isbn_10:String,
+    img: String,
+    isbn_13: String,
+    isbn_10: String,
     language: String
 });
 
-bookSchema.statics.findOrCreate = function(inputBook,callback){
-    this.findOne({'id':inputBook.id},function(err,book){
-        if(err){
-            return callback(err,null);
+bookSchema.statics.findOrCreate = function (inputBook, callback) {
+    this.findOne({'id': inputBook.id}, function (err, book) {
+        if (err) {
+            return callback(err, null);
         }
-        if(!book){
+        if (!book) {
             book = new googleBook();
         }
-        parser.parseBook(book,inputBook);
+        parser.parseBook(book, inputBook);
         return book.save(callback);
     });
 };

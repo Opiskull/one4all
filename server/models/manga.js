@@ -6,7 +6,7 @@ var mangaSchema = mongoose.Schema({
     title: String,
     chapter: Number,
     url: String,
-    user: {type:mongoose.Schema.Types.ObjectId, ref: 'User'}
+    user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 mangaSchema.plugin(timestamps);

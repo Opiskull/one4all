@@ -1,39 +1,39 @@
 {
-    "api_prefix" : "/api",
-    "port" : 3000,
-    "host":"localhost",
-    "models":"/models",
-    "modules":"/modules",
-    "controllers":"/controllers",
-    "db":{
-        "url":"mongodb://localhost/test",
-        "reconnect":true,
-        "reconnectTimeout":5000
+    "api_prefix": "/api",
+    "port": 3000,
+    "host": "localhost",
+    "models": "/models",
+    "modules": "/modules",
+    "controllers": "/controllers",
+    "db": {
+        "url": "mongodb://localhost/test",
+        "reconnect": true,
+        "reconnectTimeout": 5000
     },
-    "log":{
-        "requests":false,
-        "file":"14all.log"
+    "log": {
+        "requests": false,
+        "file": "14all.log"
     },
     "auth": {
-        "github":{
-            "clientID":"",
+        "github": {
+            "clientID": "",
             "clientSecret": ""
         },
-        "google":{
-            "clientID":"",
-            "clientSecret":""
+        "google": {
+            "clientID": "",
+            "clientSecret": ""
         }
     },
-    "extapi":{
-        "mal":{
-            "auth":{
-                "user" : "",
-                "pass":""
+    "extapi": {
+        "mal": {
+            "auth": {
+                "user": "",
+                "pass": ""
             }
         },
-        "themoviedb":{
-            "auth":{
-                "api_key":""
+        "themoviedb": {
+            "auth": {
+                "api_key": ""
             }
         }
     }

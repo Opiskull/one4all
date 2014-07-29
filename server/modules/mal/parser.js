@@ -1,30 +1,30 @@
-function parseDate(input){
+function parseDate(input) {
     var array = input.split("-");
-    if(array[0] === '0000')
+    if (array[0] === '0000')
         return undefined;
-    if(array[1]=== '00')
+    if (array[1] === '00')
         array[1] = '01';
-    if(array[2]==='00')
-        array[2]='01';
+    if (array[2] === '00')
+        array[2] = '01';
     return array.join("-");
 }
 
-function parseTitles(input){
+function parseTitles(input) {
     var titles = [];
-    input.split(';').forEach(function(item){
+    input.split(';').forEach(function (item) {
         var title = {};
         title.title = item.trim();
-        if(title.title !== '')
+        if (title.title !== '')
             titles.push(title);
     });
     return titles;
 }
 
-function parseDescription(input){
-    return input.replace(/(\r\n|\n|\r)/gm,"").replace(/<br ?\/?>/g,"<br>");
+function parseDescription(input) {
+    return input.replace(/(\r\n|\n|\r)/gm, "").replace(/<br ?\/?>/g, "<br>");
 }
 
-function parseAnime(output,input){
+function parseAnime(output, input) {
     output.id = input.id;
     output.title = input.title;
     output.titles = parseTitles(input.synonyms);
@@ -36,7 +36,7 @@ function parseAnime(output,input){
     output.img = input.image;
 }
 
-function parseManga(output,input){
+function parseManga(output, input) {
     output.id = input.id;
     output.title = input.title;
     output.titles = parseTitles(input.synonyms);
