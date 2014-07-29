@@ -15,6 +15,7 @@ var html2js = require('gulp-ng-html2js');
 var minifyhtml = require('gulp-minify-html');
 var inject = require('gulp-inject');
 var appendRev = require('./gulp-append-rev.js');
+var writeChangelog = require('./gulp-write-changelog.js');
 var pkg = require('./package.json');
 var gulpif = require('gulp-if');
 var argv = require('yargs').argv;
@@ -52,7 +53,14 @@ function watchFilesAndStartTask(files,task){
     });
 }
 
-
+gulp.task('changelog',function(){
+    require('conventional-changelog')({
+        repository: 'https://github.com/opiskull/14all',
+        version: require('./package.json').version
+    }, function (err, log) {
+        require('fs').writeFile('../CHANGELOG.md',log);
+    });
+});
 
 gulp.task('default',['build'],function(){
     gulp.start('watch');
