@@ -1,12 +1,7 @@
-@import "bootstrap/bootstrap.less";
 @import "loading.less";
 @import "animate.less";
 @import "info.less";
-
-@myorange: #ff8400;
-
-@grid-gutter-width: 4px;
-@brand-primary: @myorange;
+@import "bootstrap.less";
 
 .pagination {
   margin: 0px 0;
@@ -114,12 +109,12 @@ body {
 }
 
 .select-info {
-  color: @myorange;
+  color: @brand-primary;
   cursor: pointer;
 }
 
 .select-info:hover {
-  color: darken(@myorange, 10%);
+  color: darken(@brand-primary, 10%);
 }
 
 [ng\:cloak], [ng-cloak], .ng-cloak {

@@ -36,6 +36,7 @@ var paths = {
         "template": ['src/app/**/*.html', 'src/common/**/*.html'],
         "css": 'src/assets/main.less',
         "index": 'src/index.html'
+        //"bootstrap": 'src/assets/bootstrap.less'
     },
     "name": pkg.name,
     "build": "build/",
