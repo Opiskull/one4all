@@ -38,19 +38,10 @@ angular.module('14all')
     .directive('loading', ['$rootScope', function ($rootScope) {
         return {
             restrict: 'E',
-            template: '<div class="" ng-show="loading">' +
-                '<div id="floatingCirclesG" class="absolute-center"><div class="f_circleG" id="frotateG_01"></div><div class="f_circleG" id="frotateG_02"></div><div class="f_circleG" id="frotateG_03"></div>' +
-                '<div class="f_circleG" id="frotateG_04"></div><div class="f_circleG" id="frotateG_05"></div><div class="f_circleG" id="frotateG_06"></div>' +
-                '<div class="f_circleG" id="frotateG_07"></div><div class="f_circleG" id="frotateG_08"></div></div></div></div>',
+            template:
+                '<div ng-show="loading" class="loading-backdrop"><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>',
             scope: true,
             link: function (scope, element, attrs) {
-                $rootScope.$watch('loading', function (newValue, oldValue) {
-                    if (scope.loading === newValue)
-                        return;
-                    else {
-                        scope.loading = newValue;
-                    }
-                });
             }
         };
     }]);
