@@ -66,11 +66,6 @@ angular.module('14all').factory('filterService', ['settingsService', '$filter', 
     }
 
     function register(scope, Resource) {
-        Resource.getList().then(function (items) {
-            scope.items = items;
-            scope.filtered = applyFilter(items, scope.pagination);
-        });
-
         scope.pagination = { currentPage: 1, itemsPerPage: 20, maxSize: 5, totalItems: 0};
 
         scope.filter = function () {
@@ -92,6 +87,20 @@ angular.module('14all').factory('filterService', ['settingsService', '$filter', 
         var remove = $rootScope.$on('filter', function () {
             scope.filter();
         });
+
+        function setItems(items){
+            scope.items = items;
+            scope.filtered = applyFilter(items, scope.pagination);
+        }
+
+        if(!Resource.items){
+            Resource.getList().then(function (items) {
+                Resource.items = items;
+                setItems(items);
+            });
+        } else {
+            setItems(Resource.items);
+        }
     }
 
     var service = {
