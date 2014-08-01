@@ -14,7 +14,7 @@ angular.module('14all', ['ui.bootstrap',
         });
         RestangularProvider.setBaseUrl('/api');
     }])
-    .controller('AppCtrl', ['$scope', '$location', 'authService', 'settingsService', '$rootScope', function ($scope, $location, authService, settingsService, $rootScope) {
+    .controller('AppCtrl', ['$scope', 'authService', 'settingsService', '$rootScope','$timeout', function ($scope, authService, settingsService, $rootScope, $timeout) {
         $scope.authInfo = authService.authInfo;
         $scope.logout = authService.logout;
         $scope.settings = settingsService.settings;
@@ -28,13 +28,15 @@ angular.module('14all', ['ui.bootstrap',
         };
 
         $scope.filterItems = function () {
-            $rootScope.$emit('filter');
+            $timeout(function(){
+                $rootScope.$emit('filter');
+            });
         };
 
         $scope.$watch('keyword', _.debounce(function (newValue) {
             $scope.$apply(function () {
                 settingsService.settings.filters.keyword = newValue;
-                $rootScope.$emit('filter');
+                $scope.filterItems();
             });
         }, 250));
 

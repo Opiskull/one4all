@@ -1,59 +1,61 @@
 angular.module('14all').factory('filterService', ['settingsService', '$filter', '$rootScope', function (settingsService, $filter, $rootScope) {
     var settings = settingsService.settings;
 
-    function isKeyword() {
+    function hasKeyword() {
         return settings.filters.keyword !== '';
     }
 
-    function isStats() {
-        var enabled = false;
-        angular.forEach(settings.filters.stats, function (stat, statKey) {
-            if (settings.filters.stats[statKey])
-                enabled = true;
+    function hasStats() {
+        return _.some(settings.filters.stats, function(item){
+            return item;
         });
-        return enabled;
     }
 
-    function filterKeyword(items) {
-        //if(isKeyword()) return $filter('filter')(items, {title:settings.filters.keyword});
+    function itemHasStats(item){
+        if(!item.stats) return false;
+        return _.some(item.stats, function(stat){
+            return stat;
+        });
+    }
+
+    function filterByKeyword(items) {
         return _.filter(items, function (item) {
             return _.contains(item.title.toLowerCase(), settings.filters.keyword.toLowerCase());
         });
     }
 
-    function filterStats(items) {
-        //if(isStats()) return $filter('filter')(items,filterItemStats);
-        return _.filter(items, filterItemStats);
+    function filterByStats(items) {
+        return _.filter(items, filterItemByStats);
     }
 
-    function filterItemStats(item) {
-        if (!item.stats) return true;
-        var result = true;
-        angular.forEach(settings.filters.stats, function (stat, statKey) {
-            if (stat) {
-                if (item.stats[statKey]) {
-                    result = false;
+    function filterItemByStats(item) {
+        var result = false;
+        if(itemHasStats(item)){
+            angular.forEach(settings.filters.stats, function (stat, statKey) {
+                if (stat) {
+                    if (item.stats[statKey]) {
+                        result = true;
+                    }
                 }
+            });
+        } else {
+            if(settings.filters.stats.none){
+                result = true;
             }
-        });
-        return result;
-//        return _.some(settings.filters.stats,function(stat,key){ return item.stats[key];})
+        }
+        return settings.filters.exclude ? !result : result;
     }
 
     function orderItems(items) {
         items = _.sortBy(items, settings.orderBy.predicate);
-        if (settings.orderBy.reverse)
-            items.reverse();
-        return items;
-        //return $filter('orderBy')(items,settings.orderBy.predicate,settings.orderBy.reverse);
+        return settings.orderBy.reverse ? items.reverse() : items;
     }
 
     function applyFilter(items, pagination) {
         pagination.totalItems = items.length;
-        if (isKeyword())
-            items = filterKeyword(items);
-        if (isStats())
-            items = filterStats(items);
+        if (hasKeyword())
+            items = filterByKeyword(items);
+        items = filterByStats(items);
         items = orderItems(items);
         return applyPagination(items, pagination);
     }

@@ -11,6 +11,7 @@ angular.module('14all').factory('settingsService', ['$rootScope', '$store', func
     var defaultSettings = {
         filters: {
             stats: defaultStats,
+            exclude: true,
             keyword: ''
         },
         orderBy: defaultOrderBy

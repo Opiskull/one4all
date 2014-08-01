@@ -12,10 +12,10 @@
     <div class="container-fluid">
         <div class="navbar-header">
             <a class="navbar-brand" href="#"><img src="site.png"/></a>
-            <button class="navbar-toggle" ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed"><i
+            <button class="navbar-toggle" ng-init="collapsed.nav = true" ng-click="collapsed.nav = !collapsed.nav"><i
                     class="glyphicon glyphicon-th-large"></i></button>
         </div>
-        <nav collapse="navCollapsed" class="navbar-collapse collapse navbar-responsive-collapse" role="navigation">
+        <nav collapse="collapsed.nav" class="navbar-collapse collapse navbar-responsive-collapse" role="navigation">
             <menu page-title="'Peerzone '">
                 <menu-item path="#/manga" display-title="Manga"></menu-item>
                 <menu-item path="#/movie" display-title="Movie"></menu-item>
@@ -23,10 +23,8 @@
                 <menu-item path="#/anime" display-title="Anime"></menu-item>
                 <menu-item path="#/book" display-title="Book"></menu-item>
                 <menu-item path="#/game" display-title="Game"></menu-item>
-                <menu-item path="https://github.com/Opiskull/14all/issues" display-title="Issues"
-                           target="_blank"></menu-item>
-                <menu-item path="https://github.com/Opiskull/14all/blob/master/CHANGELOG.md" display-title="Changelog"
-                           target="_blank"></menu-item>
+                <menu-item path="https://github.com/Opiskull/14all/issues" display-title="Issues" target="_blank"></menu-item>
+                <menu-item path="https://github.com/Opiskull/14all/blob/master/CHANGELOG.md" display-title="Changelog" target="_blank"></menu-item>
             </menu>
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown" ng-if="!authInfo.isLoggedIn">
@@ -54,41 +52,32 @@
                         </div>
                     </form>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" title="settings"><i class="glyphicon glyphicon-cog"></i></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a>Filters</a>
-                        </li>
-                        <li class="divider"></li>
-                        <li>
-                            <a ng-click="settings.filters.stats.finished = !settings.filters.stats.finished; filterItems()">
-                                <i class="glyphicon "
-                                   ng-class="settings.filters.stats.finished ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i>
-                                exclude finished
-                            </a>
-                        </li>
-                        <li>
-                            <a ng-click="settings.filters.stats.dropped = !settings.filters.stats.dropped;filterItems()">
-                                <i class="glyphicon "
-                                   ng-class="settings.filters.stats.dropped ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i>
-                                exclude dropped
-                            </a>
-                        </li>
-                        <li>
-                            <a ng-click="settings.filters.stats.paused = !settings.filters.stats.paused;filterItems()">
-                                <i class="glyphicon "
-                                   ng-class="settings.filters.stats.paused ? 'glyphicon-eye-close text-danger' : 'glyphicon-eye-open text-success'"></i>
-                                exclude paused
-                            </a>
-                        </li>
-                    </ul>
-                </li>
+                <li ng-class="{ active : collapsed.filter}"><a title="filters" ng-click="collapsed.filter = !collapsed.filter"><i class="glyphicon glyphicon-filter"></i></a></li>
+                <!--<li class="dropdown">-->
+                    <!--<a class="dropdown-toggle" title="settings"><i class="glyphicon glyphicon-cog"></i></a>-->
+                    <!--<ul class="dropdown-menu">-->
+                    <!--</ul>-->
+                <!--</li>-->
             </ul>
         </nav>
     </div>
 </header>
-
+<div ng-cloak class="filters" collapse="!collapsed.filter">
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="settings.filters.exclude" btn-radio="true" ng-click="filterItems()">Exclude</label>
+        <label class="btn btn-primary" ng-model="settings.filters.exclude" btn-radio="false" ng-click="filterItems()">Include</label>
+    </div>
+    <div class="btn-group">
+        <label class="btn btn-default" ng-model="settings.filters.stats.paused" btn-checkbox ng-click="filterItems()">paused</label>
+        <label class="btn btn-default" ng-model="settings.filters.stats.dropped" btn-checkbox ng-click="filterItems()">dropped</label>
+        <label class="btn btn-default" ng-model="settings.filters.stats.finished" btn-checkbox ng-click="filterItems()">finished</label>
+        <label class="btn btn-default" ng-model="settings.filters.stats.none" btn-checkbox ng-click="filterItems()">none</label>
+    </div>
+    <div class="btn-group">
+        <label class="btn btn-default" ng-click="settings.filters.stats.paused=true;settings.filters.stats.dropped=true;settings.filters.stats.finished=true;settings.filters.stats.none=true;filterItems()">select all</label>
+        <label class="btn btn-default" ng-click="settings.filters.stats.paused=false;settings.filters.stats.dropped=false;settings.filters.stats.finished=false;settings.filters.stats.none=false;filterItems()">deselect all</label>
+    </div>
+</div>
 <div ng-cloak class="container-fluid">
     <div ng-view class="view-animation"></div>
 </div>
