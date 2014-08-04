@@ -10,7 +10,7 @@
     <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
 <div class="item-row" ng-if="!serie.editable"
-     ng-repeat-start="serie in filtered = items track by serie._id"
+     ng-repeat-start="serie in filtered = filtered track by serie._id"
      display-state="serie.stats">
     <div class="col-sm-12">
         <div class="row">
