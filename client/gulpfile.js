@@ -14,7 +14,8 @@ var watch = require('gulp-watch');
 var html2js = require('gulp-ng-html2js');
 var minifyhtml = require('gulp-minify-html');
 var inject = require('gulp-inject');
-var appendRev = require('./gulp-append-rev.js');
+var appendRev = require('./gulp-append-rev.js').appendRev;
+var appendAppInfo = require('./gulp-append-rev.js').appendAppInfo;
 var pkg = require('./package.json');
 var gulpif = require('gulp-if');
 var argv = require('yargs').argv;
@@ -98,6 +99,7 @@ gulp.task('index', ['app', 'templates', 'vendor', 'css'], function () {
         )
     )
         .pipe(appendRev())
+        .pipe(appendAppInfo())
         .pipe(gulp.dest(paths.build));
 });
 

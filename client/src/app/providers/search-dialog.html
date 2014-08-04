@@ -3,14 +3,12 @@
     <form role="form" class="form-horizontal">
         <div class="form-group">
             <label for="searchItemTitle" class="control-label">Search</label>
-
             <div class="input-group"><input class="form-control" id="searchItemTitle" ng-model="keyword" type="text"/>
-
                 <div class="input-group-btn" dropdown><a
                         class="btn btn-default dropdown-toggle">{{currentProvider.display}} <span
                         class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li class="" ng-repeat="provider in providers"><a ng-click="selectProvider(provider)" href="">{{provider.display}}</a>
+                        <li ng-repeat="provider in ::providers"><a ng-click="selectProvider(provider)" href="">{{provider.display}}</a>
                         </li>
                     </ul>
                     <a class="btn btn-default" ng-click="search(keyword)">Go</a>

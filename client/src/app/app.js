@@ -20,6 +20,7 @@ angular.module('14all', ['ui.bootstrap',
         $scope.settings = settingsService.settings;
         $scope.orderBy = $scope.settings.orderBy;
         $scope.keyword = '';
+        $scope.appInfo = appInfo;
 
         $scope.focus = {search: true};
 

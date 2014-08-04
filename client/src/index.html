@@ -3,6 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Peerzone</title>
+    <!-- inject:head:version --><!-- endinject -->
     <!-- inject:css --><!-- endinject -->
     <link rel="icon" type="image/png" href="site.png">
 </head>
@@ -53,11 +54,12 @@
                     </form>
                 </li>
                 <li ng-class="{ active : collapsed.filter}"><a title="filters" ng-click="collapsed.filter = !collapsed.filter"><i class="glyphicon glyphicon-filter"></i></a></li>
-                <!--<li class="dropdown">-->
-                    <!--<a class="dropdown-toggle" title="settings"><i class="glyphicon glyphicon-cog"></i></a>-->
-                    <!--<ul class="dropdown-menu">-->
-                    <!--</ul>-->
-                <!--</li>-->
+                <li class="dropdown">
+                    <a class="dropdown-toggle" title="settings"><i class="glyphicon glyphicon-cog"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a>Version: {{appInfo.version}}</a></li>
+                    </ul>
+                </li>
             </ul>
         </nav>
     </div>
