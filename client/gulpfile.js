@@ -5,7 +5,7 @@
 var gulp = require('gulp');
 var clean = require('gulp-clean');
 var concat = require('gulp-concat');
-var gulpBowerFiles = require('gulp-bower-files');
+var mainBowerFiles = require('main-bower-files');
 var uglify = require('gulp-uglify');
 var gutil = require('gulp-util');
 var less = require('gulp-less');
@@ -157,7 +157,7 @@ gulp.task('templates', function () {
 });
 
 gulp.task('vendor', function () {
-    return gulpBowerFiles()
+    return gulp.src(mainBowerFiles())
         .pipe(concat(paths.filenames.vendor))
         .pipe(gulpif(!debug, uglify()))
         .pipe(gulp.dest(paths.build))
