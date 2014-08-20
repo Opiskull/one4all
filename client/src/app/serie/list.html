@@ -37,8 +37,7 @@
 <div class="navbar-fixed-bottom navbar-default navbar">
     <div class="bottom-row">
         <div class="col-sm-12">
-            <div ng-include="'serie/add.html'" ng-if="newitem.isnew"></div>
-            <add-button add="add()" ng-if="!newitem.isnew"></add-button>
+            <add-button add="add()"></add-button>
             <pagination total-items="pagination.filteredItems" ng-model="pagination.currentPage"
                         items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
                         class="pull-right pagination-sm" boundary-links="true" ng-change="filter()"

@@ -1,11 +1,10 @@
-<div class="item-row">
-    <div class="col-sm-4">
-        <search-button default-provider="defaultProvider" item="newitem" placeholder="anime name"></search-button>
+<form role="form">
+    <div class="form-group">
+        <label>Title</label>
+        <search-button default-provider="defaultProvider" item="item" placeholder="anime name"></search-button>
     </div>
-    <div class="col-sm-4">
-        <input class="form-control input-sm" type="number" min="0" ng-model="newitem.episode" placeholder="episode"/>
+    <div class="form-group">
+        <label>Episode</label>
+        <input class="form-control input-sm" type="number" min="0" ng-model="item.episode" placeholder="episode"/>
     </div>
-    <div class="col-sm-4">
-        <save-cancel-button save="create(newitem)" cancel="cancel(newitem)"></save-cancel-button>
-    </div>
-</div>
+</form>

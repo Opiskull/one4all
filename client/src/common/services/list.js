@@ -1,5 +1,4 @@
-angular.module('14all').factory('listService', ['settingsService', 'itemService', '$rootScope', function (settingsService, itemService, $rootScope) {
-
+angular.module('14all').factory('listService', ['settingsService', 'itemService', '$rootScope','dialogService', function (settingsService, itemService, $rootScope,dialogService) {
     function register(scope, Resource) {
         scope.showInfo = itemService.showInfo;
 
@@ -17,14 +16,15 @@ angular.module('14all').factory('listService', ['settingsService', 'itemService'
         };
 
         scope.cancel = function (item) {
-            if (item.isnew) {
-                scope.newitem = {};
-            }
             item.editable = false;
         };
 
         scope.add = function () {
-            scope.newitem = {isnew: true};
+            dialogService.addItem(scope.title + '/add.html', scope.title, scope.defaultProvider).result.then(function(result){
+                if(result){
+                    scope.create(result);
+                }
+            });
         };
 
         scope.create = function (item) {

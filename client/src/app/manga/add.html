@@ -1,13 +1,16 @@
-<div class="item-row">
-    <div class="col-sm-2">
-        <search-button default-provider="defaultProvider" item="newitem" placeholder="manga name"></search-button>
+<form role="form">
+    <div class="form-group">
+        <label>Title</label>
+        <search-button default-provider="defaultProvider" item="item" placeholder="manga name"></search-button>
     </div>
-    <div class="col-sm-5"><input class="form-control input-sm" type="number" min="0" ng-model="newitem.chapter"
-                                 placeholder="chapter"/>
+    <div class="form-group">
+        <label>Chapter</label>
+        <input class="form-control input-sm" type="number" min="0" ng-model="item.chapter"
+               placeholder="chapter"/>
     </div>
-    <div class="col-sm-2"><input class="form-control input-sm" type="url" ng-model="newitem.url"
-                                 placeholder="url $$chapter$$ will be replaced with next chapter"/></div>
-    <div class="col-sm-3">
-        <save-cancel-button save="create(newitem)" cancel="cancel(newitem)"></save-cancel-button>
+    <div class="form-group">
+        <label>Chapter Url</label>
+        <input class="form-control input-sm" type="url" ng-model="item.url"
+               placeholder="url $$chapter$$ will be replaced with next chapter"/>
     </div>
-</div>
+</form>
