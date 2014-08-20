@@ -6,6 +6,7 @@ angular.module('14all', ['ui.bootstrap',
     /* Modules */
     'manga', 'movie', 'serie', 'anime', 'game', 'book',
     'providers',
+    'dialogs',
     '14all.templates',
     'pasvaz.bindonce'])
     .config(['RestangularProvider', function (RestangularProvider) {
@@ -47,7 +48,6 @@ angular.module('14all', ['ui.bootstrap',
 
         $scope.$on("$routeChangeSuccess", function (event, next, current) {
             $scope.focus.search = true;
-            $scope.keyword = '';
         });
     }]);
 
