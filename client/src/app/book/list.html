@@ -9,7 +9,7 @@
         Modified</a></div>
     <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
-<div class="item-row" ng-if="!book.editable" ng-repeat-start="book in filtered track by book._id"
+<div class="item-row" ng-repeat="book in filtered track by book._id"
      display-state="book.stats">
     <div class="col-sm-12">
         <div class="row">
@@ -23,14 +23,12 @@
             <div class="col-sm-1">{{book.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
                 <stats-button model="book"></stats-button>
-                <actions-button remove="remove(book)" model="book"></actions-button>
+                <actions-button remove="remove(book)" edit="edit(book)"></actions-button>
             </div>
         </div>
         <info item="book"></info>
     </div>
 </div>
-<div ng-include="'book/edit.html'" ng-repeat-end="" ng-if="book.editable"></div>
-
 <div class="navbar-fixed-bottom navbar-default navbar">
     <div class="bottom-row">
         <div class="col-sm-12">

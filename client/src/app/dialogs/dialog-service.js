@@ -45,7 +45,7 @@ angular.module('dialogs').
                 return item;
             };
             return $modal.open({
-                template: 'dialogs/dialog-edit-item.html',
+                templateUrl: 'dialogs/dialog-edit-item.html',
                 controller:'editDialogCtrl',
                 resolve: resolvedParameters,
                 backdrop: 'static'
@@ -55,11 +55,7 @@ angular.module('dialogs').
         return{
             confirm: confirm,
             remove: function (type, title) {
-                return confirm('Delete?', "Delete " + type + " '" + title + "'?").result.then(function (result) {
-                    return result === 'yes';
-                }, function (result) {
-                    return false;
-                });
+                return confirm('Delete?', "Delete " + type + " '" + title + "'?");
             },
             addItem: addItem,
             editItem: editItem

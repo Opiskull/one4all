@@ -12,12 +12,12 @@
         <span class="badge pull-right">{{items.length}}</span>
     </div>
 </div>
-<div class="item-row" ng-if="!anime.editable" ng-repeat-start="anime in filtered track by anime._id"
+<div class="item-row" ng-repeat="anime in filtered track by anime._id"
      display-state="anime.stats">
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2">
-                <a ng-click="showInfo(anime)">{{::anime.title}}</a>
+                <a ng-click="showInfo(anime)">{{anime.title}}</a>
             </div>
             <div class="col-sm-6">
                 <up-down-button disabled="anime.stats.finished" item="anime" property="'episode'"></up-down-button>
@@ -25,13 +25,12 @@
             <div class="col-sm-1">{{anime.updatedAt | timeAgo}}</div>
             <div class="col-sm-3 pull-right">
                 <stats-button model="anime" stats="enabledStats"></stats-button>
-                <actions-button remove="remove(anime)" model="anime"></actions-button>
+                <actions-button remove="remove(anime)" edit="edit(anime)"></actions-button>
             </div>
         </div>
         <info item="anime"></info>
     </div>
 </div>
-<div ng-include="'anime/edit.html'" ng-repeat-end="" ng-if="anime.editable"></div>
 <div class="navbar-fixed-bottom navbar-default navbar">
     <div class="bottom-row">
         <div class="col-sm-12">

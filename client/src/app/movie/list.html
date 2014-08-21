@@ -6,7 +6,7 @@
         Modified</a></div>
     <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
-<div class="item-row" ng-if="!movie.editable" ng-repeat-start="movie in filtered track by movie._id"
+<div class="item-row" ng-repeat="movie in filtered track by movie._id"
      display-state="movie.stats">
     <div class="col-sm-12">
         <div class="row">
@@ -15,14 +15,12 @@
             <div class="col-sm-1">{{movie.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
                 <stats-button model="movie" stats="{{enabledStats}}"></stats-button>
-                <actions-button remove="remove(movie)" model="movie"></actions-button>
+                <actions-button remove="remove(movie)" edit="edit(movie)"></actions-button>
             </div>
         </div>
         <info item="movie"></info>
     </div>
 </div>
-<div ng-include="'movie/edit.html'" ng-repeat-end="" ng-if="movie.editable"></div>
-
 <div class="navbar-fixed-bottom navbar-default navbar">
     <div class="bottom-row">
         <div class="col-sm-12">

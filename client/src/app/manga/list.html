@@ -8,7 +8,7 @@
     <div class="col-sm-1">Url</div>
     <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
-<div class="item-row" ng-if="!manga.editable" ng-repeat-start="manga in filtered track by manga._id"
+<div class="item-row" ng-repeat="manga in filtered track by manga._id"
      display-state="manga.stats">
     <div class="col-sm-12">
         <div class="row">
@@ -21,13 +21,12 @@
             </div>
             <div class="col-sm-3">
                 <stats-button model="manga"></stats-button>
-                <actions-button remove="remove(manga)" model="manga"></actions-button>
+                <actions-button remove="remove(manga)" edit="edit(manga)"></actions-button>
             </div>
         </div>
         <info item="manga"></info>
     </div>
 </div>
-<div ng-include="'manga/edit.html'" ng-if="manga.editable" ng-repeat-end=""></div>
 <div class="navbar-fixed-bottom navbar-default navbar">
     <div class="bottom-row">
         <div class="col-sm-12">

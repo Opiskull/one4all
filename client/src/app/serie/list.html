@@ -9,9 +9,7 @@
         Modified</a></div>
     <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
-<div class="item-row" ng-if="!serie.editable"
-     ng-repeat-start="serie in filtered = filtered track by serie._id"
-     display-state="serie.stats">
+<div class="item-row" ng-repeat="serie in filtered track by serie._id" display-state="serie.stats">
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2">
@@ -26,14 +24,12 @@
             <div class="col-sm-1">{{serie.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
                 <stats-button model="serie"></stats-button>
-                <actions-button remove="remove(serie)" model="serie"></actions-button>
+                <actions-button remove="remove(serie)" edit="edit(serie)"></actions-button>
             </div>
         </div>
         <info item="serie"></info>
     </div>
 </div>
-<div ng-include="'serie/edit.html'" ng-if="serie.editable" ng-repeat-end=""></div>
-
 <div class="navbar-fixed-bottom navbar-default navbar">
     <div class="bottom-row">
         <div class="col-sm-12">

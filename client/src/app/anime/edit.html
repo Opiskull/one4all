@@ -1,23 +1,10 @@
-<div class="item-row">
-    <div class="col-sm-6">
-        <div class="row">
-            <label class="control-label col-sm-2 text-right">title</label>
-
-            <div class="col-sm-4">
-                <search-button default-provider="defaultProvider" item="anime"></search-button>
-            </div>
-            <label class="control-label col-sm-2 text-right">episode</label>
-
-            <div class="col-sm-4">
-                <input class="form-control input-sm" type="number" min="0" ng-model="anime.episode"/>
-            </div>
-        </div>
+<form role="form">
+    <div class="form-group">
+        <label>Title</label>
+        <search-button default-provider="defaultProvider" item="item" placeholder="anime name"></search-button>
     </div>
-    <div class="col-sm-6">
+    <div class="form-group">
+        <label>Episode</label>
+        <input class="form-control input-sm" type="number" min="0" ng-model="item.episode" placeholder="episode"/>
     </div>
-    <div class="row">
-        <div class="col-sm-3 col-sm-offset-9">
-            <save-cancel-button save="update(anime)" cancel="cancel(anime)"></save-cancel-button>
-        </div>
-    </div>
-</div>
+</form>

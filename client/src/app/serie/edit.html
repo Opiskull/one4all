@@ -1,13 +1,16 @@
-<div class="item-row">
-    <div class="col-sm-2">
-        <search-button default-provider="defaultProvider" item="serie"></search-button>
+<form role="form">
+    <div class="form-group">
+        <label>Title</label>
+        <search-button default-provider="defaultProvider" item="item" placeholder="serie name"></search-button>
     </div>
-    <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0" ng-model="serie.season"/>
+    <div class="form-group">
+        <label>Season</label>
+        <input class="form-control input-sm" type="number" min="0"
+               ng-model="item.season" placeholder="season"/>
     </div>
-    <div class="col-sm-3"><input class="form-control input-sm" type="number" min="0" ng-model="serie.episode"/>
+    <div class="form-group">
+        <label>Episode</label>
+        <input class="form-control input-sm" type="number" min="0"
+               ng-model="item.episode" placeholder="episode"/>
     </div>
-    <div class="col-sm-1">{{serie.updatedAt | timeAgo}}</div>
-    <div class="col-sm-3">
-        <save-cancel-button save="update(serie)" cancel="cancel(serie)"></save-cancel-button>
-    </div>
-</div>
+</form>

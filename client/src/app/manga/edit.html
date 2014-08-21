@@ -1,11 +1,16 @@
-<div class="item-row">
-    <div class="col-sm-2">
-        <search-button default-provider="defaultProvider" item="manga"></search-button>
+<form role="form">
+    <div class="form-group">
+        <label>Title</label>
+        <search-button default-provider="defaultProvider" item="item" placeholder="manga name"></search-button>
     </div>
-    <div class="col-sm-5"><input class="form-control input-sm" type="number" min="0" ng-model="manga.chapter"/></div>
-    <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>
-    <div class="col-sm-1"><input class="form-control input-sm" type="url" ng-model="manga.url"/></div>
-    <div class="col-sm-3">
-        <save-cancel-button save="update(manga)" cancel="cancel(manga)"></save-cancel-button>
+    <div class="form-group">
+        <label>Chapter</label>
+        <input class="form-control input-sm" type="number" min="0" ng-model="item.chapter"
+               placeholder="chapter"/>
     </div>
-</div>
+    <div class="form-group">
+        <label>Chapter Url</label>
+        <input class="form-control input-sm" type="url" ng-model="item.url"
+               placeholder="url $$chapter$$ will be replaced with next chapter"/>
+    </div>
+</form>

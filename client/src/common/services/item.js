@@ -1,30 +1,24 @@
-angular.module('14all').factory('itemService', ['dialogService', '$q', function (dialogService, $q) {
-    function removeWithDlg(type, items, item) {
-        var deferred = $q.defer();
-        dialogService.remove(type, item.title).then(function (result) {
-            if (result) {
-                return remove(items, item).then(function () {
-                    deferred.resolve(true);
-                });
-            } else {
-                deferred.resolve(false);
-            }
-        });
-        return deferred.promise;
-    }
-
+angular.module('14all').factory('itemService', [function () {
     function remove(items, item) {
         return item.remove().then(function () {
             items.splice(items.indexOf(item), 1);
         });
     }
 
-    function update(item) {
-        return item.put().then(function (updated) {
-            item.updatedAt = updated.updatedAt;
-            return item;
-        }).catch(function (err) {
-            console.log(err);
+    function updateItems(items,item) {
+        return update(item).then(function(updatedItem){
+            var index =_.findIndex(items,function(tempItem){
+                return tempItem._id == updatedItem._id;
+            });
+            items[index] = updatedItem;
+            return updatedItem;
+        });
+    }
+
+    function update(item){
+        return item.put().then(function(updatedItem){
+            item.updatedAt = updatedItem.updatedAt;
+            return updatedItem;
         });
     }
 
@@ -91,8 +85,8 @@ angular.module('14all').factory('itemService', ['dialogService', '$q', function 
         increase: increase,
         decrease: decrease,
         update: update,
+        updateItems: updateItems,
         remove: remove,
-        removeWithDlg: removeWithDlg,
         showInfo: showInfo,
         setInfo: setInfo,
         incProp: incProp,

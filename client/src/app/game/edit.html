@@ -1,10 +1,6 @@
-<div class="item-row">
-    <div class="col-sm-2">
-        <search-button default-provider="defaultProvider" item="game"></search-button>
+<form role="form">
+    <div class="form-group">
+        <label>Title</label>
+        <search-button default-provider="defaultProvider" item="item" placeholder="game name"></search-button>
     </div>
-    <div class="col-sm-6"></div>
-    <div class="col-sm-1">{{game.updatedAt | timeAgo}}</div>
-    <div class="col-sm-3">
-        <save-cancel-button save="update(game)" cancel="cancel(game)"></save-cancel-button>
-    </div>
-</div>
+</form>
