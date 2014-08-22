@@ -10,4 +10,5 @@ var gameSchema = mongoose.Schema({
 gameSchema.plugin(timestamps);
 gameSchema.plugin(plugins.stats);
 gameSchema.plugin(plugins.info);
+gameSchema.plugin(plugins.rating);
 mongoose.model('Game', gameSchema);

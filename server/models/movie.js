@@ -10,4 +10,5 @@ var movieSchema = mongoose.Schema({
 movieSchema.plugin(timestamps);
 movieSchema.plugin(plugins.stats);
 movieSchema.plugin(plugins.info);
+movieSchema.plugin(plugins.rating);
 mongoose.model('Movie', movieSchema);

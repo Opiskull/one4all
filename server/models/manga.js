@@ -12,4 +12,5 @@ var mangaSchema = mongoose.Schema({
 mangaSchema.plugin(timestamps);
 mangaSchema.plugin(plugins.stats);
 mangaSchema.plugin(plugins.info);
+mangaSchema.plugin(plugins.rating);
 mongoose.model('Manga', mangaSchema);

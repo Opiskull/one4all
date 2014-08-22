@@ -12,4 +12,5 @@ var bookSchema = mongoose.Schema({
 bookSchema.plugin(timestamps);
 bookSchema.plugin(plugins.stats);
 bookSchema.plugin(plugins.info);
+bookSchema.plugin(plugins.rating);
 mongoose.model('Book', bookSchema);

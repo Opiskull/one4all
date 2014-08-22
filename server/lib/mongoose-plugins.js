@@ -38,5 +38,13 @@ function infoPlugin(schema) {
     schema.add(infoSchema);
 }
 
+function ratingPlugin(schema){
+    var ratingSchema = {
+        rating: { type: Number, min: 0, max: 5}
+    };
+    schema.add(ratingSchema);
+}
+
 module.exports.stats = statsPlugin;
 module.exports.info = infoPlugin;
+module.exports.rating = ratingPlugin;

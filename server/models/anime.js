@@ -12,4 +12,5 @@ var animeSchema = mongoose.Schema({
 animeSchema.plugin(timestamps);
 animeSchema.plugin(plugins.stats);
 animeSchema.plugin(plugins.info);
+animeSchema.plugin(plugins.rating);
 mongoose.model('Anime', animeSchema);

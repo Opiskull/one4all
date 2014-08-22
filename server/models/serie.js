@@ -12,4 +12,5 @@ var serieSchema = mongoose.Schema({
 serieSchema.plugin(timestamps);
 serieSchema.plugin(plugins.stats);
 serieSchema.plugin(plugins.info);
+serieSchema.plugin(plugins.rating);
 mongoose.model('Serie', serieSchema);
