@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-var parser = require('./parser.js');
+var parser = require('./mal-parser.js');
 
 var malAnimeSchema = mongoose.Schema({
     id: Number,

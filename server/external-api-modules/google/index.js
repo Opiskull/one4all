@@ -1,14 +1,7 @@
-require('./book.js');
+require('./google-book-model.js');
 
-var lib = require('./lib.js');
-
-function searchBooks(req, res, next) {
-    lib.searchBooks(req.params.search, function (err, result) {
-        next.ifError(err);
-        return res.json(result);
-    });
-}
+var controller = require('./google-controller.js');
 
 module.exports.init = function (server, router) {
-    server.get(router.getSearchRoute('/google/books/search'), searchBooks);
+    server.get(router.getSearchRoute('/google/books/search'), controller.searchBooks);
 };

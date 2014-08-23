@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-var parser = require('./parser.js');
+var parser = require('./tmdb-parser.js');
 
 var tmdbMovieSchema = mongoose.Schema({
     id: Number,

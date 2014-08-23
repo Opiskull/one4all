@@ -1,30 +1,9 @@
-require('./modelMovie.js');
-require('./modelSerie.js');
+require('./tmdb-movie-model.js');
+require('./tmdb-serie-model.js');
 
-var lib = require('./lib.js');
-//var tmdbConfig = {};
-
-function searchMovie(req, res, next) {
-    lib.searchMovie(req.params.search, function (err, result) {
-        next.ifError(err);
-        return res.json(result);
-    });
-}
-
-function searchSerie(req, res, next) {
-    lib.searchSerie(req.params.search, function (err, result) {
-        next.ifError(err);
-        return res.json(result);
-    });
-}
-
-//function getConfiguration() {
-//    lib.getConfig(function (err, result) {
-//        tmdbConfig = result;
-//    });
-//}
+var controller = require('./tmdb-controller');
 
 module.exports.init = function (server, router) {
-    server.get(router.getSearchRoute('/tmdb/serie/search'), searchSerie);
-    server.get(router.getSearchRoute('/tmdb/movie/search'), searchMovie);
+    server.get(router.getSearchRoute('/tmdb/serie/search'), controller.searchSerie);
+    server.get(router.getSearchRoute('/tmdb/movie/search'), controller.searchMovie);
 };

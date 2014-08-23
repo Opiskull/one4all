@@ -16,7 +16,6 @@ function parseBook(output, input) {
             output.isbn_10 = parseISBN10(input.volumeInfo.industryIdentifiers);
         }
     }
-
 }
 
 function parseISBN13(items) {

@@ -13,7 +13,8 @@ var parser = new xml2js.Parser({
     normalizeTags: true
 });
 
-var authConfig = require(require('path').join(require('path').dirname(process.mainModule.filename), 'config', 'config.json')).extapi.mal;
+var authConfig =
+    rootRequire('config/config.json').extapi.mal;
 var config = require('./config.json');
 
 var client = request.defaults(authConfig);

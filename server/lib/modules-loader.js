@@ -29,7 +29,7 @@ function loadModule(server, file){
         server.log.info('module [%s] loaded!', moduleName);
         module.init(server, router);
     } else {
-        server.log.info('module [%s] not loaded!', moduleName);
+        server.log.warn('module [%s] loaded without init!', moduleName);
     }
 }
 
