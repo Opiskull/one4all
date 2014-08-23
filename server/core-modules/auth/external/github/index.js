@@ -3,13 +3,14 @@ var restify = require('restify');
 var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
 
-var config = require('../../config/config.json');
+var config = rootRequire('config/config.json');
 
 var User = mongoose.model('User');
 var AccessToken = mongoose.model('AccessToken');
 
-module.exports.init = function (server, router) {
+var controller = require('./github-controller.js');
 
+module.exports.init = function (server, router) {
     passport.use(new GitHubStrategy({
             clientID: config.auth.github.clientID,
             clientSecret: config.auth.github.clientSecret,
@@ -37,11 +38,7 @@ module.exports.init = function (server, router) {
         }
     ));
 
-    server.get(router.getRoute('/auth/github'), passport.authenticate('github', {session: false}));
+    server.get(router.getRoute('/auth/github'), controller.authenticate);
     server.get(router.getRoute('/auth/github/callback'),
-        passport.authenticate('github', { failureRedirect: '/login', session: false}),
-        function (req, res) {
-            res.header('Location', '/index.html#/login?token=' + req.authInfo.token);
-            res.send(302);
-        });
+        passport.authenticate('github', { failureRedirect: '/login', session: false}), controller.token);
 };

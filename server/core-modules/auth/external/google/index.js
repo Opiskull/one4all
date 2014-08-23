@@ -3,13 +3,14 @@ var restify = require('restify');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
-var config = require('../../config/config.json');
+var config = rootRequire('config/config.json');
 
 var User = mongoose.model('User');
 var AccessToken = mongoose.model('AccessToken');
 
-module.exports.init = function (server, router) {
+var controller = require('./google-controller');
 
+module.exports.init = function (server, router) {
     passport.use(new GoogleStrategy({
             clientID: config.auth.google.clientID,
             clientSecret: config.auth.google.clientSecret,
@@ -34,13 +35,6 @@ module.exports.init = function (server, router) {
             });
         }
     ));
-
-    server.get(router.getRoute('/auth/google'), passport.authenticate('google', {scope: ['https://www.googleapis.com/auth/userinfo.profile',
-        'https://www.googleapis.com/auth/userinfo.email'], session: false}));
-    server.get(router.getRoute('/auth/google/callback'),
-        passport.authenticate('google', { failureRedirect: '/login', session: false}),
-        function (req, res) {
-            res.header('Location', '/index.html#/login?token=' + req.authInfo.token);
-            res.send(302);
-        });
+    server.get(router.getRoute('/auth/google'), controller.authenticate);
+    server.get(router.getRoute('/auth/google/callback'), passport.authenticate('google', { failureRedirect: '/login', session: false}), controller.token);
 };

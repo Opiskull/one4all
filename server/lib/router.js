@@ -1,4 +1,4 @@
-var config = require('../config/config.json');
+var config = rootRequire('config/config.json');
 var passport = require('passport');
 var restify = require('restify');
 

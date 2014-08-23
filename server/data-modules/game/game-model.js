@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-var plugins = require('../lib/mongoose-plugins.js');
+var plugins = rootRequire('lib/mongoose-plugins.js');
 
 var gameSchema = mongoose.Schema({
     title: String,

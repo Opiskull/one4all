@@ -2,15 +2,6 @@ var mongoose = require('mongoose');
 var restify = require('restify');
 var Anime = mongoose.model('Anime');
 
-module.exports.init = function (server, router) {
-    var anime = '/anime';
-    server.get(router.getRoute(anime), router.isAuthenticated, list);
-    server.post(router.getRoute(anime), router.isAuthenticated, create);
-    server.get(router.getRouteId(anime), router.isAuthenticated, load, get);
-    server.del(router.getRouteId(anime), router.isAuthenticated, load, del);
-    server.put(router.getRouteId(anime), router.isAuthenticated, load, update);
-};
-
 function load(req, res, next) {
     if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
         return next(new restify.ResourceNotFoundError("Anime with id " + req.params.id));
@@ -71,3 +62,14 @@ function list(req, res, next) {
         return next();
     });
 }
+
+module.exports = {
+    title: 'Anime',
+    route: '/anime',
+    load: load,
+    get: get,
+    create: create,
+    del: del,
+    update: update,
+    list: list
+};

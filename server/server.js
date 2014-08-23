@@ -1,6 +1,16 @@
+global.__rootdir = __dirname;
+
+global.rootRequire = function(name){
+    return require(__rootdir + '/' + name);
+};
+
+global.coreRequire = function(name){
+    return require(__rootdir + '/core-modules/' + name);
+};
+
 var restify = require('restify'), mongoose = require('mongoose'), path = require('path'), passport = require('passport'), fs = require('fs'), bunyan = require('bunyan');
-var router = require('./lib/router.js');
-var modules = require('./lib/modules.js');
+var router = rootRequire('lib/router.js');
+var modulesLoader = rootRequire('lib/modules-loader.js');
 
 var config = require('./config/config.json'), packageInfo = require('./package.json');
 var logger = bunyan.createLogger({
@@ -62,13 +72,9 @@ server.use(restify.queryParser());
 server.use(restify.bodyParser());
 server.use(passport.initialize());
 
-var modelpath = __dirname + config.models;
-var controllerpath = __dirname + config.controllers;
-var modulespath = __dirname + config.modules;
-
-modules.loadModels(modelpath, server);
-modules.loadControllers(controllerpath, server);
-modules.loadModules(modulespath, server);
+modulesLoader.loadCoreModules(server);
+modulesLoader.loadDataModules(server);
+modulesLoader.loadExternalApiModules(server);
 
 server.listen(config.port, config.host, function () {
     server.log.info('%s listening at %s', server.name, server.url);

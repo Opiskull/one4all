@@ -2,15 +2,6 @@ var mongoose = require('mongoose');
 var restify = require('restify');
 var Manga = mongoose.model('Manga');
 
-module.exports.init = function (server, router) {
-    var manga = '/manga';
-    server.get(router.getRoute(manga), router.isAuthenticated, list);
-    server.post(router.getRoute(manga), router.isAuthenticated, create);
-    server.get(router.getRouteId(manga), router.isAuthenticated, load, get);
-    server.del(router.getRouteId(manga), router.isAuthenticated, load, del);
-    server.put(router.getRouteId(manga), router.isAuthenticated, load, update);
-};
-
 function load(req, res, next) {
     if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
         return next(new restify.ResourceNotFoundError("Manga with id " + req.params.id));
@@ -71,3 +62,14 @@ function list(req, res, next) {
         return next();
     });
 }
+
+module.exports = {
+    title: 'Manga',
+    route: '/manga',
+    load: load,
+    get: get,
+    create: create,
+    del: del,
+    update: update,
+    list: list
+};

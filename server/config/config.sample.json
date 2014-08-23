@@ -2,9 +2,9 @@
     "api_prefix": "/api",
     "port": 3000,
     "host": "localhost",
-    "models": "/models",
-    "modules": "/modules",
-    "controllers": "/controllers",
+    "coreModules": "core-modules",
+    "dataModules": "data-modules",
+    "externalApiModules": "external-api-modules",
     "db": {
         "url": "mongodb://localhost/test",
         "reconnect": true,

@@ -2,15 +2,6 @@ var mongoose = require('mongoose');
 var restify = require('restify');
 var Game = mongoose.model('Game');
 
-module.exports.init = function (server, router) {
-    var game = '/game';
-    server.get(router.getRoute(game), router.isAuthenticated, list);
-    server.post(router.getRoute(game), router.isAuthenticated, create);
-    server.get(router.getRouteId(game), router.isAuthenticated, load, get);
-    server.del(router.getRouteId(game), router.isAuthenticated, load, del);
-    server.put(router.getRouteId(game), router.isAuthenticated, load, update);
-};
-
 function load(req, res, next) {
     if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
         return next(new restify.ResourceNotFoundError("Game with id " + req.params.id));
@@ -70,3 +61,14 @@ function list(req, res, next) {
         return next();
     });
 }
+
+module.exports = {
+    title: 'Game',
+    route: '/game',
+    load: load,
+    get: get,
+    create: create,
+    del: del,
+    update: update,
+    list: list
+};
