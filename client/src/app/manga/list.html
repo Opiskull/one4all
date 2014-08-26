@@ -1,7 +1,9 @@
 <div class="header-row">
     <div class="col-sm-2"><a ng-click="orderBy('title')">Title</a>
     </div>
-    <div class="col-sm-5"><a ng-click="orderBy('chapter')">Chapter</a>
+    <div class="col-sm-3"><a ng-click="orderBy('chapter')">Chapter</a>
+    </div>
+    <div class="col-sm-2"><a ng-click="orderBy('rating')">Rating</a>
     </div>
     <div class="col-sm-1"><a ng-click="orderBy('updatedAt')">Last
         Modified</a></div>
@@ -13,8 +15,11 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2"><a ng-click="showInfo(manga)">{{manga.title}}</a></div>
-            <div class="col-sm-5">
+            <div class="col-sm-3">
                 <up-down-button disabled="manga.stats.finished" item="manga" property="'chapter'"></up-down-button>
+            </div>
+            <div class="col-sm-2">
+                <rating-stars item="manga" property="'rating'"></rating-stars>
             </div>
             <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>
             <div class="col-sm-1"><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.stats.finished">Next Chapter</a>

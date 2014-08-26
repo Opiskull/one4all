@@ -52,6 +52,7 @@ angular.module('14all').factory('filterService', ['settingsService', '$filter', 
     }
 
     function applyFilter(items, pagination) {
+        if(!items) return;
         pagination.totalItems = items.length;
         if (hasKeyword())
             items = filterByKeyword(items);
@@ -83,10 +84,10 @@ angular.module('14all').factory('filterService', ['settingsService', '$filter', 
         };
 
         scope.$on('$destroy', function () {
-            remove();
+            removeFilter();
         });
 
-        var remove = $rootScope.$on('filter', function () {
+        var removeFilter = $rootScope.$on('filter', function () {
             scope.filter();
         });
 

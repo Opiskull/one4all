@@ -1,9 +1,11 @@
 <div class="header-row">
     <div class="col-sm-2"><a ng-click="orderBy('title')">Title</a>
     </div>
-    <div class="col-sm-3"><a ng-click="orderBy('season')">Season</a>
+    <div class="col-sm-2"><a ng-click="orderBy('season')">Season</a>
     </div>
-    <div class="col-sm-3"><a ng-click="orderBy('episode')">Episode</a>
+    <div class="col-sm-2"><a ng-click="orderBy('episode')">Episode</a>
+    </div>
+    <div class="col-sm-2"><a ng-click="orderBy('rating')">Rating</a>
     </div>
     <div class="col-sm-1"><a ng-click="orderBy('updatedAt')">Last
         Modified</a></div>
@@ -15,11 +17,14 @@
             <div class="col-sm-2">
                 <a ng-click="showInfo(serie)">{{serie.title}}</a>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <up-down-button disabled="serie.stats.finished" item="serie" property="'season'"></up-down-button>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <up-down-button disabled="serie.stats.finished" item="serie" property="'episode'"></up-down-button>
+            </div>
+            <div class="col-sm-2">
+                <rating-stars item="serie" property="'rating'"></rating-stars>
             </div>
             <div class="col-sm-1">{{serie.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">

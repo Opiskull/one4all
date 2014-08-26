@@ -1,9 +1,11 @@
 <div class="header-row">
     <div class="col-sm-2"><a ng-click="orderBy('title')">Title</a>
     </div>
-    <div class="col-sm-3"><a ng-click="orderBy('page')">Page</a>
+    <div class="col-sm-2"><a ng-click="orderBy('page')">Page</a>
     </div>
-    <div class="col-sm-3"><a ng-click="orderBy('author')">Author</a>
+    <div class="col-sm-2"><a ng-click="orderBy('author')">Author</a>
+    </div>
+    <div class="col-sm-2"><a ng-click="orderBy('rating')">Rating</a>
     </div>
     <div class="col-sm-1"><a ng-click="orderBy('updatedAt')">Last
         Modified</a></div>
@@ -16,10 +18,13 @@
             <div class="col-sm-2">
                 <a ng-click="showInfo(book)">{{book.title}}</a>
             </div>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <up-down-button disabled="book.stats.finished" item="book" property="'page'"></up-down-button>
             </div>
-            <div class="col-sm-3">{{book.author}}</div>
+            <div class="col-sm-2">{{book.author}}</div>
+            <div class="col-sm-2">
+                <rating-stars item="anime" property="'rating'"></rating-stars>
+            </div>
             <div class="col-sm-1">{{book.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
                 <stats-button model="book"></stats-button>

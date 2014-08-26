@@ -1,7 +1,9 @@
 <div class="header-row">
     <div class="col-sm-2"><a ng-click="orderBy('title')">Title</a>
     </div>
-    <div class="col-sm-6"></div>
+    <div class="col-sm-4"></div>
+    <div class="col-sm-2"><a ng-click="orderBy('rating')">Rating</a>
+    </div>
     <div class="col-sm-1"><a ng-click="orderBy('updatedAt')">Last
         Modified</a></div>
     <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
@@ -12,7 +14,10 @@
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2"><a ng-click="showInfo(game)">{{game.title}}</a></div>
-            <div class="col-sm-6"></div>
+            <div class="col-sm-4"></div>
+            <div class="col-sm-2">
+                <rating-stars item="anime" property="'rating'"></rating-stars>
+            </div>
             <div class="col-sm-1">{{game.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
                 <stats-button model="game"></stats-button>

@@ -2,8 +2,10 @@
     <div class="col-sm-2">
         <a ng-click="orderBy('title')">Title</a>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-4">
         <a ng-click="orderBy('episode')">Episode</a>
+    </div>
+    <div class="col-sm-2"><a ng-click="orderBy('rating')">Rating</a>
     </div>
     <div class="col-sm-1">
         <a ng-click="orderBy('updatedAt')">Last Modified</a>
@@ -19,8 +21,11 @@
             <div class="col-sm-2">
                 <a ng-click="showInfo(anime)">{{anime.title}}</a>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-4">
                 <up-down-button disabled="anime.stats.finished" item="anime" property="'episode'"></up-down-button>
+            </div>
+            <div class="col-sm-2">
+                <rating-stars item="anime" property="'rating'"></rating-stars>
             </div>
             <div class="col-sm-1">{{anime.updatedAt | timeAgo}}</div>
             <div class="col-sm-3 pull-right">
