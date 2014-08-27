@@ -13,10 +13,10 @@ angular.module('one4all').directive('upDownButton', ['itemService', function (it
         link: function ($scope, $element, $attr) {
             $scope.property = $scope.$eval($attr.property);
             $scope.decrease = function () {
-                itemService.decProp($scope.item, $scope.property);
+                itemService.decreaseProperty($scope.item, $scope.property);
             };
             $scope.increase = function () {
-                itemService.incProp($scope.item, $scope.property);
+                itemService.increaseProperty($scope.item, $scope.property);
             };
         }
     };

@@ -1,10 +1,10 @@
-angular.module('providers').factory('googleBooks', ['Restangular', function (restangular) {
-    var searchUrl = 'google/books/search';
-    var detailUrl = 'providers/google/book-detail.html';
+angular.module('providers').factory('malAnime', ['Restangular', function (restangular) {
+    var searchUrl = 'mal/anime/search';
+    var detailUrl = 'providers/mal/mal-anime-detail.html';
     return {
-        title: 'google-books',
-        display: 'Google - Books',
-        category: 'book',
+        title: 'mal-anime',
+        display: 'My Anime List - Anime',
+        category: 'anime',
         detailUrl: detailUrl,
         search: function (keyword) {
             return restangular.one(searchUrl + '?search=' + keyword).getList().then(function (items) {

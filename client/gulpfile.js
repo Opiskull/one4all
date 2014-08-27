@@ -16,6 +16,7 @@ var minifyhtml = require('gulp-minify-html');
 var inject = require('gulp-inject');
 var appendRev = require('./gulp-append-rev.js').appendRev;
 var appendAppInfo = require('./gulp-append-rev.js').appendAppInfo;
+var angularFileSort = require('gulp-angular-filesort');
 var pkg = require('./package.json');
 var gulpif = require('gulp-if');
 var argv = require('yargs').argv;
@@ -33,7 +34,7 @@ var paths = {
     "src": {
         "fonts": 'src/assets/fonts/*.*',
         "img": ['src/*.png', 'src/*.jpg'],
-        "app": 'src/**/*.js',
+        "app": ['src/**/*.js'],
         "template": ['src/app/**/*.html', 'src/common/**/*.html'],
         "css": 'src/assets/main.less',
         "index": 'src/index.html'
@@ -127,7 +128,7 @@ gulp.task('images:watch', function () {
 });
 
 gulp.task('app', function () {
-    return gulp.src(paths.src.app)
+    return gulp.src(paths.src.app).pipe(angularFileSort())
         .pipe(concat(paths.filenames.app))
         .pipe(gulpif(!debug, uglify()))
         .pipe(gulp.dest(paths.build));

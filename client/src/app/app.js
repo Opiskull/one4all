@@ -6,7 +6,7 @@ angular.module('one4all', ['ui.bootstrap',
     /* Modules */
     'manga', 'movie', 'serie', 'anime', 'game', 'book',
     'providers',
-    'dialogs',
+    'dialog',
     'one4all.templates',
     'pasvaz.bindonce'])
     .config(['RestangularProvider', function (RestangularProvider) {

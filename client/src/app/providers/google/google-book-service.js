@@ -1,10 +1,10 @@
-angular.module('providers').factory('tmdbSerie', ['Restangular', function (restangular) {
-    var searchUrl = 'tmdb/serie/search';
-    var detailUrl = 'providers/tmdb/serie-detail.html';
+angular.module('providers').factory('googleBooks', ['Restangular', function (restangular) {
+    var searchUrl = 'google/books/search';
+    var detailUrl = 'providers/google/google-book-detail.html';
     return {
-        title: 'tmdb-serie',
-        display: 'The Movie DB - Serie',
-        category: 'serie',
+        title: 'google-books',
+        display: 'Google - Books',
+        category: 'book',
         detailUrl: detailUrl,
         search: function (keyword) {
             return restangular.one(searchUrl + '?search=' + keyword).getList().then(function (items) {

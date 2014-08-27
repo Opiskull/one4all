@@ -8,22 +8,23 @@
         Modified</a></div>
     <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
-<div class="item-row" ng-repeat="movie in filtered track by movie._id"
-     display-state="movie.stats">
+<div class="item-row" ng-repeat="game in filtered track by game._id"
+     display-state="game.stats">
+
     <div class="col-sm-12">
         <div class="row">
-            <div class="col-sm-2"><a ng-click="showInfo(movie)">{{movie.title}}</a></div>
+            <div class="col-sm-2"><a ng-click="showInfo(game)">{{game.title}}</a></div>
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
-                <rating-stars item="movie" property="'rating'"></rating-stars>
+                <rating-nuts item="game" property="'rating'"></rating-nuts>
             </div>
-            <div class="col-sm-1">{{movie.updatedAt | timeAgo}}</div>
+            <div class="col-sm-1">{{game.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
-                <stats-button model="movie" stats="{{enabledStats}}"></stats-button>
-                <actions-button remove="remove(movie)" edit="edit(movie)"></actions-button>
+                <stats-button model="game"></stats-button>
+                <actions-button remove="remove(game)" edit="edit(game)"></actions-button>
             </div>
         </div>
-        <info item="movie"></info>
+        <info item="game"></info>
     </div>
 </div>
 <bottom-pagination></bottom-pagination>

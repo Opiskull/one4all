@@ -1,4 +1,4 @@
-angular.module('dialogs').
+angular.module('dialog').
     factory('dialogService', ['$modal', function ($modal) {
         var resolveItemParameters = function (templateUrl, headerTitle, defaultProvider) {
             return {
@@ -16,7 +16,7 @@ angular.module('dialogs').
 
         var confirm = function (header, msg) {
             return $modal.open({
-                templateUrl: 'dialogs/dialog-confirm.html',
+                templateUrl: 'dialog/dialog-confirm.html',
                 controller: 'confirmDialogCtrl',
                 resolve: {
                     header: function () {
@@ -32,7 +32,7 @@ angular.module('dialogs').
         var addItem = function (templateUrl, headerTitle, defaultProvider) {
             var resolvedParameters = resolveItemParameters(templateUrl, headerTitle, defaultProvider);
             return $modal.open({
-                templateUrl: 'dialogs/dialog-add-item.html',
+                templateUrl: 'dialog/dialog-add-item.html',
                 controller: 'addDialogCtrl',
                 resolve: resolvedParameters,
                 backdrop: 'static'
@@ -45,7 +45,7 @@ angular.module('dialogs').
                 return item;
             };
             return $modal.open({
-                templateUrl: 'dialogs/dialog-edit-item.html',
+                templateUrl: 'dialog/dialog-edit-item.html',
                 controller: 'editDialogCtrl',
                 resolve: resolvedParameters,
                 backdrop: 'static'

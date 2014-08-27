@@ -2,7 +2,6 @@ angular.module('one4all').directive('displayState', [function () {
     function isValid(state) {
         return (angular.isDefined(state) && state);
     }
-
     return {
         restrict: 'A',
         scope: {

@@ -1,7 +1,7 @@
 angular.module('auth', ['ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/login', {
-            templateUrl: 'auth/login.html',
+            templateUrl: 'auth/auth-login.html',
             controller: ['$scope', 'authService', '$routeParams', function ($scope, authService, $routeParams) {
                 if ($routeParams.token) {
                     authService.login($routeParams.token);
@@ -11,14 +11,14 @@ angular.module('auth', ['ngRoute'])
             }]
         })
             .when('/notauthorized', {
-                templateUrl: 'auth/message.html',
+                templateUrl: 'auth/auth-message.html',
                 controller: ['$scope', 'authService', function ($scope, authService) {
                     $scope.heading = 'Not Authorized';
                     $scope.message = 'You are not authorized to view this page!';
                 }]
             })
             .when('/logout', {
-                templateUrl: 'auth/message.html',
+                templateUrl: 'auth/auth-message.html',
                 controller: ['$scope', 'authService', function ($scope, authService) {
                     $scope.heading = 'Logout';
                     $scope.message = 'Your logout was a success!';
@@ -26,7 +26,7 @@ angular.module('auth', ['ngRoute'])
                 }]
             }).
             otherwise({
-                templateUrl: 'auth/message.html',
+                templateUrl: 'auth/auth-message.html',
                 controller: ['$scope', function ($scope) {
                     $scope.heading = 'Welcome!';
                     $scope.message = 'Welcome to one4all! :)';
