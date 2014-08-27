@@ -56,7 +56,7 @@ function watchFilesAndStartTask(files, task) {
 
 gulp.task('changelog', function () {
     require('conventional-changelog')({
-        repository: 'https://github.com/Opiskull/14all',
+        repository: 'https://github.com/Opiskull/one4all',
         version: require('./package.json').version,
         file: '../CHANGELOG.md'
     }, function (err, log) {

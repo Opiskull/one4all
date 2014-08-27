@@ -1,4 +1,4 @@
-angular.module('14all').factory('itemService', [function () {
+angular.module('one4all').factory('itemService', [function () {
     function remove(items, item) {
         return item.remove().then(function () {
             items.splice(items.indexOf(item), 1);

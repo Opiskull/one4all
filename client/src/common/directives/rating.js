@@ -1,4 +1,4 @@
-angular.module('14all').directive('ratingStars', ['itemService', function (itemService){
+angular.module('one4all').directive('ratingStars', ['itemService', function (itemService){
     var enabledClass = 'nut-enabled';
     var disabledClass = 'nut-disabled';
 

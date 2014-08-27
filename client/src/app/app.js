@@ -1,4 +1,4 @@
-angular.module('14all', ['ui.bootstrap',
+angular.module('one4all', ['ui.bootstrap',
     'ngAnimate',
     'ngSanitize',
     'ngRoute',
@@ -7,7 +7,7 @@ angular.module('14all', ['ui.bootstrap',
     'manga', 'movie', 'serie', 'anime', 'game', 'book',
     'providers',
     'dialogs',
-    '14all.templates',
+    'one4all.templates',
     'pasvaz.bindonce'])
     .config(['RestangularProvider', function (RestangularProvider) {
         RestangularProvider.setRestangularFields({

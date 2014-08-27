@@ -1,7 +1,7 @@
 /**
  * Created by Christian on 28.01.14.
  */
-angular.module('14all').filter('multi', ['$filter', function ($filter) {
+angular.module('one4all').filter('multi', ['$filter', function ($filter) {
 
     function buildOptions(settings) {
         var options = {

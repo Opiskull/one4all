@@ -1,5 +1,5 @@
 // http://blog.kacinskas.eu/blog/2013/06/05/learning-angularjs-and-local-storage
-angular.module('14all').factory("$store", ['$parse', function ($parse) {
+angular.module('one4all').factory("$store", ['$parse', function ($parse) {
     /**
      * Global Vars
      */

@@ -1,4 +1,4 @@
-angular.module('14all')
+angular.module('one4all')
     .config(['$httpProvider', function ($httpProvider) {
         $httpProvider.interceptors.push('loadingHttpInterceptor');
     }])

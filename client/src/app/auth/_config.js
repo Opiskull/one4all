@@ -29,7 +29,7 @@ angular.module('auth', ['ngRoute'])
                 templateUrl: 'auth/message.html',
                 controller: ['$scope', function ($scope) {
                     $scope.heading = 'Welcome!';
-                    $scope.message = 'Welcome to 14all! :)';
+                    $scope.message = 'Welcome to one4all! :)';
                 }]
             });
     }])

@@ -1,4 +1,4 @@
-angular.module('14all').factory('listService', ['settingsService', 'itemService', '$rootScope','dialogService','Restangular', function (settingsService, itemService, $rootScope,dialogService,Restangular) {
+angular.module('one4all').factory('listService', ['settingsService', 'itemService', '$rootScope','dialogService','Restangular', function (settingsService, itemService, $rootScope,dialogService,Restangular) {
     function register(scope, Resource) {
         scope.showInfo = itemService.showInfo;
 

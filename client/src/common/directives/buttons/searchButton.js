@@ -1,4 +1,4 @@
-angular.module('14all').directive('searchButton', ['searchDialogService', 'itemService', function (searchDialogService, itemService) {
+angular.module('one4all').directive('searchButton', ['searchDialogService', 'itemService', function (searchDialogService, itemService) {
     return {
         template: '<div class="input-group"> \
                 <input class="form-control input-sm" type="text" ng-model="item.title" focus-me="item.isnew" placeholder="{{::placeholder}}"/> \

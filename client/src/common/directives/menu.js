@@ -1,4 +1,4 @@
-angular.module('14all').directive('menu', ['$document', function ($document) {
+angular.module('one4all').directive('menu', ['$document', function ($document) {
     return {
         restrict: 'E',
         scope: {

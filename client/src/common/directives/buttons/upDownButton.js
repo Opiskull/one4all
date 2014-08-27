@@ -1,4 +1,4 @@
-angular.module('14all').directive('upDownButton', ['itemService', function (itemService) {
+angular.module('one4all').directive('upDownButton', ['itemService', function (itemService) {
     return {
         template: '<div class="input-group" style="width: 115px"> \
                 <a ng-click="decrease()" class="btn btn-default" ng-disabled="disabled" title="decrease"><i class="glyphicon glyphicon-minus"></i></a> \

@@ -1,4 +1,4 @@
-angular.module('14all').directive('focusMe', ['$timeout', '$parse', function ($timeout, $parse) {
+angular.module('one4all').directive('focusMe', ['$timeout', '$parse', function ($timeout, $parse) {
     return {
         //scope: true,   // optionally create a child scope
         link: function (scope, element, attrs) {

@@ -1,4 +1,4 @@
-angular.module('14all').filter('unsafe', ['$sce', function ($sce) {
+angular.module('one4all').filter('unsafe', ['$sce', function ($sce) {
     return function (val) {
         return $sce.trustAsHtml(val);
     };

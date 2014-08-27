@@ -1,7 +1,7 @@
 /**
  * Created by Christian on 28.01.14.
  */
-angular.module('14all').filter('timeAgo', ['$window', function ($window) {
+angular.module('one4all').filter('timeAgo', ['$window', function ($window) {
     return function (value) {
         return $window.moment(value).fromNow();
     }

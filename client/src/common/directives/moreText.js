@@ -1,4 +1,4 @@
-angular.module('14all').directive('moreText', [function () {
+angular.module('one4all').directive('moreText', [function () {
     return {
         restrict: 'E',
         replace: true,

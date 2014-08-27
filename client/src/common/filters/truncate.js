@@ -1,4 +1,4 @@
-angular.module('14all').filter('truncate', function () {
+angular.module('one4all').filter('truncate', function () {
     return function (text, length, end, open) {
         if (!open) {
             if (text) {

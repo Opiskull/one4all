@@ -1,4 +1,4 @@
-angular.module('14all').factory('settingsService', ['$rootScope', '$store', function ($rootScope, $store) {
+angular.module('one4all').factory('settingsService', ['$rootScope', '$store', function ($rootScope, $store) {
     var defaultStats = {
         finished: false,
         dropped: false,

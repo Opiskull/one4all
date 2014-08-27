@@ -12,7 +12,7 @@
     },
     "log": {
         "requests": false,
-        "file": "14all.log"
+        "file": "one4all.log"
     },
     "auth": {
         "github": {

@@ -1,4 +1,4 @@
-angular.module('14all').factory('filterService', ['settingsService', '$filter', '$rootScope', function (settingsService, $filter, $rootScope) {
+angular.module('one4all').factory('filterService', ['settingsService', '$filter', '$rootScope', function (settingsService, $filter, $rootScope) {
     var settings = settingsService.settings;
 
     function hasKeyword() {

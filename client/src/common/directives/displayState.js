@@ -1,4 +1,4 @@
-angular.module('14all').directive('displayState', [function () {
+angular.module('one4all').directive('displayState', [function () {
     function isValid(state) {
         return (angular.isDefined(state) && state);
     }
