@@ -21,7 +21,7 @@ angular.module('one4all').directive('ratingNuts', ['itemService', function (item
     return {
         restrict: 'E',
         replace: true,
-        template: '<div class="rating-stars">' +
+        template: '<div class="rating-nuts">' +
         '<span class="nut nut-disabled" ng-click="setRating(1)"></span>' +
         '<span class="nut nut-disabled" ng-click="setRating(2)"></span>' +
         '<span class="nut nut-disabled" ng-click="setRating(3)"></span>' +
