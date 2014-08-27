@@ -1,7 +1,7 @@
 angular.module('providers').factory('tmdbMovie', ['Restangular', function (restangular) {
     var searchUrl = 'tmdb/movie/search';
     var detailUrl = 'providers/tmdb/movie-detail.html';
-    var service = {
+    return {
         title: 'tmdb-movie',
         display: 'The Movie DB - Movie',
         category: 'movie',
@@ -14,5 +14,4 @@ angular.module('providers').factory('tmdbMovie', ['Restangular', function (resta
             });
         }
     };
-    return service;
 }]);

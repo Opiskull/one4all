@@ -1,4 +1,4 @@
-angular.module('one4all').directive('statsButton', ['itemService', '$compile', '$parse', function (itemService, $compile, $parse) {
+angular.module('one4all').directive('statsButton', ['itemService', '$compile', function (itemService, $compile) {
     return {
         priority: 1100,
         template: '',

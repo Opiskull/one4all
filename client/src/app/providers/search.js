@@ -7,7 +7,7 @@ angular.module('providers')
             tmdbSerie,
             googleBooks
         ];
-        var service = {
+        return {
             getProvider: function (title) {
                 var provider = {};
                 angular.forEach(providers, function (item) {
@@ -24,5 +24,4 @@ angular.module('providers')
                 return providers;
             }
         };
-        return service;
     }]);

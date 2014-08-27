@@ -49,7 +49,7 @@ function watchFilesAndStartTask(files, task) {
         glob: files,
         emit: 'one',
         emitOnGlob: false
-    }, function (files) {
+    }, function () {
         gulp.start(task);
     });
 }
@@ -88,10 +88,10 @@ gulp.task('index', ['app', 'templates', 'vendor', 'css'], function () {
         .pipe(
         inject(
             gulp.src([
-                    paths.build + paths.filenames.vendor,
-                    paths.build + paths.filenames.app,
-                    paths.build + paths.filenames.css,
-                    paths.build + paths.filenames.template
+                paths.build + paths.filenames.vendor,
+                paths.build + paths.filenames.app,
+                paths.build + paths.filenames.css,
+                paths.build + paths.filenames.template
             ], {read: false}),
             {
                 ignorePath: paths.build, addRootSlash: false

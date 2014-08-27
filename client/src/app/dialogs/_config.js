@@ -1,1 +1,1 @@
-angular.module('dialogs',[]);
+angular.module('dialogs', []);

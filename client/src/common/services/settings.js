@@ -20,5 +20,5 @@ angular.module('one4all').factory('settingsService', ['$rootScope', '$store', fu
     $store.remove('settings');
     var storedSettings = {};
     var settings = angular.extend(defaultSettings, storedSettings);
-    return { settings: settings };
+    return {settings: settings};
 }]);

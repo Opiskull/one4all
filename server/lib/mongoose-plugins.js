@@ -38,9 +38,9 @@ function infoPlugin(schema) {
     schema.add(infoSchema);
 }
 
-function ratingPlugin(schema){
+function ratingPlugin(schema) {
     var ratingSchema = {
-        rating: { type: Number, min: 0, max: 5}
+        rating: {type: Number, min: 0, max: 5}
     };
     schema.add(ratingSchema);
 }

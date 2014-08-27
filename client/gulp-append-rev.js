@@ -28,17 +28,16 @@ var appendRev = function appendRev() {
     });
 };
 
-function getAppInfo(){
-    return "appInfo = { version: '"+pkg.version + "'}";
+function getAppInfo() {
+    return "appInfo = { version: '" + pkg.version + "'}";
 }
 
-var appendAppInfo = function appendVersion(){
-    return map(function(file,cb) {
+var appendAppInfo = function appendVersion() {
+    return map(function (file, cb) {
         var $ = cheerio.load(file.contents);
-        var version =
-                $('head').append('<script type="text/javascript">' + getAppInfo() + '</script>');
-                file.contents = new Buffer($.html());
-                cb(null, file);
+        $('head').append('<script type="text/javascript">' + getAppInfo() + '</script>');
+        file.contents = new Buffer($.html());
+        cb(null, file);
     });
 };
 

@@ -46,7 +46,7 @@ userSchema.statics.findOrCreate = function (profile, callback) {
 };
 
 userSchema.statics.findByAccessToken = function (token, callback) {
-    this.findOne({ accessToken: token }, function (err, user) {
+    this.findOne({accessToken: token}, function (err, user) {
         if (err) {
             return callback(err);
         }

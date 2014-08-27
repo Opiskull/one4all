@@ -35,11 +35,10 @@ angular.module('one4all')
             }
         }
     ])
-    .directive('loading', ['$rootScope', function ($rootScope) {
+    .directive('loading', [function () {
         return {
             restrict: 'E',
-            template:
-                '<div ng-show="loading" class="loading-backdrop"><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>',
+            template: '<div ng-show="loading" class="loading-backdrop"><div class="spinner"><div class="bounce1"></div><div class="bounce2"></div><div class="bounce3"></div></div></div>',
             scope: true,
             link: function (scope, element, attrs) {
             }

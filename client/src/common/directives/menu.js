@@ -18,7 +18,7 @@ angular.module('one4all').directive('menu', ['$document', function ($document) {
                     currentPath = current.$$route.originalPath;
                 }
                 var title = 'Welcome';
-                angular.forEach($scope.items, function (item, key) {
+                angular.forEach($scope.items, function (item) {
                     if (item.strippedPath && item.strippedPath === currentPath) {
                         item.active = true;
                         title = $scope.pageTitle + item.displayTitle;

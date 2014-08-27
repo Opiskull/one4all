@@ -15,7 +15,7 @@ angular.module('one4all', ['ui.bootstrap',
         });
         RestangularProvider.setBaseUrl('/api');
     }])
-    .controller('AppCtrl', ['$scope', 'authService', 'settingsService', '$rootScope','$timeout', function ($scope, authService, settingsService, $rootScope, $timeout) {
+    .controller('AppCtrl', ['$scope', 'authService', 'settingsService', '$rootScope', '$timeout', function ($scope, authService, settingsService, $rootScope, $timeout) {
         $scope.authInfo = authService.authInfo;
         $scope.logout = authService.logout;
         $scope.settings = settingsService.settings;
@@ -30,7 +30,7 @@ angular.module('one4all', ['ui.bootstrap',
         };
 
         $scope.filterItems = function () {
-            $timeout(function(){
+            $timeout(function () {
                 $rootScope.$emit('filter');
             });
         };

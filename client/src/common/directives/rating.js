@@ -1,15 +1,15 @@
-angular.module('one4all').directive('ratingStars', ['itemService', function (itemService){
+angular.module('one4all').directive('ratingStars', ['itemService', function (itemService) {
     var enabledClass = 'nut-enabled';
     var disabledClass = 'nut-disabled';
 
-    function setRating(element,rating){
-        if(angular.isNumber(rating)){
+    function setRating(element, rating) {
+        if (angular.isNumber(rating)) {
             var stars = element.children();
             stars.removeClass(enabledClass);
             stars.addClass(disabledClass);
-            for(var i = 0; i < stars.length; i++){
-                var itemIndex = i +1;
-                if(itemIndex <= rating){
+            for (var i = 0; i < stars.length; i++) {
+                var itemIndex = i + 1;
+                if (itemIndex <= rating) {
                     var starElement = angular.element(stars[i]);
                     starElement.removeClass(disabledClass);
                     starElement.addClass(enabledClass);
@@ -30,15 +30,15 @@ angular.module('one4all').directive('ratingStars', ['itemService', function (ite
         '</div>',
         link: function (scope, element, attrs) {
             scope.property = scope.$eval(attrs.property);
-            scope.setRating = function(value){
-                if(scope.item[scope.property] == value){
+            scope.setRating = function (value) {
+                if (scope.item[scope.property] == value) {
                     value = 0;
                 }
                 scope.item[scope.property] = value;
                 itemService.update(scope.item);
                 setRating(element, value);
             };
-            setRating(element,scope.item[scope.property]);
+            setRating(element, scope.item[scope.property]);
         },
         scope: {
             item: '='

@@ -11,7 +11,7 @@ var accessTokenSchema = mongoose.Schema({
 
 accessTokenSchema.statics.findUserByToken = function (token, callback) {
     var User = mongoose.model('User');
-    this.findOne({ accessToken: token })
+    this.findOne({accessToken: token})
         .exec(function (err, accessToken) {
             if (err) {
                 return callback(err);
@@ -24,7 +24,7 @@ accessTokenSchema.statics.findUserByToken = function (token, callback) {
 };
 
 accessTokenSchema.statics.findByToken = function (token, callback) {
-    this.findOne({ accessToken: token}, function (err, accessToken) {
+    this.findOne({accessToken: token}, function (err, accessToken) {
         if (err) return callback(err);
         if (!accessToken) return callback(null);
         return callback(null, accessToken);

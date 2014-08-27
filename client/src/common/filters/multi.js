@@ -11,7 +11,7 @@ angular.module('one4all').filter('multi', ['$filter', function ($filter) {
                 if (!options.stats) {
                     options.stats = {};
                 }
-                options.stats[statKey] = !!false;
+                options.stats[statKey] = false;
             }
         });
 
@@ -44,10 +44,9 @@ angular.module('one4all').filter('multi', ['$filter', function ($filter) {
     }
 
     return function (input, settings) {
-        var retItems = [];
         var options = buildOptions(settings);
 
-        retItems = $filter('filter')(input, options.keyword);
+        var retItems = $filter('filter')(input, options.keyword);
 
         if (options.stats)
             retItems = $filter('filter')(retItems, matchStats(options));

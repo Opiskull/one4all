@@ -1,14 +1,14 @@
 angular.module('dialogs').
     factory('dialogService', ['$modal', function ($modal) {
-        var resolveItemParameters = function(templateUrl, headerTitle, defaultProvider){
+        var resolveItemParameters = function (templateUrl, headerTitle, defaultProvider) {
             return {
-                defaultProvider: function(){
+                defaultProvider: function () {
                     return defaultProvider;
                 },
-                headerTitle: function(){
+                headerTitle: function () {
                     return headerTitle;
                 },
-                templateUrl: function(){
+                templateUrl: function () {
                     return templateUrl;
                 }
             };
@@ -29,30 +29,30 @@ angular.module('dialogs').
             })
         };
 
-        var addItem = function(templateUrl,headerTitle,defaultProvider){
+        var addItem = function (templateUrl, headerTitle, defaultProvider) {
             var resolvedParameters = resolveItemParameters(templateUrl, headerTitle, defaultProvider);
             return $modal.open({
                 templateUrl: 'dialogs/dialog-add-item.html',
-                controller:'addDialogCtrl',
+                controller: 'addDialogCtrl',
                 resolve: resolvedParameters,
                 backdrop: 'static'
             })
         };
 
-        var editItem = function(templateUrl,headerTitle,defaultProvider,item){
+        var editItem = function (templateUrl, headerTitle, defaultProvider, item) {
             var resolvedParameters = resolveItemParameters(templateUrl, headerTitle, defaultProvider);
-            resolvedParameters.item = function(){
+            resolvedParameters.item = function () {
                 return item;
             };
             return $modal.open({
                 templateUrl: 'dialogs/dialog-edit-item.html',
-                controller:'editDialogCtrl',
+                controller: 'editDialogCtrl',
                 resolve: resolvedParameters,
                 backdrop: 'static'
             })
         };
 
-        return{
+        return {
             confirm: confirm,
             remove: function (type, title) {
                 return confirm('Delete?', "Delete " + type + " '" + title + "'?");

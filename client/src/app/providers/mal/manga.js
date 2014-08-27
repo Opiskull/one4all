@@ -1,7 +1,7 @@
 angular.module('providers').factory('malManga', ['Restangular', function (restangular) {
     var searchUrl = 'mal/manga/search';
     var detailUrl = 'providers/mal/manga-detail.html';
-    var service = {
+    return {
         title: 'mal-manga',
         display: 'My Anime List - Manga',
         category: 'manga',
@@ -14,5 +14,4 @@ angular.module('providers').factory('malManga', ['Restangular', function (restan
             });
         }
     };
-    return service;
 }]);

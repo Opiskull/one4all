@@ -8,7 +8,6 @@ var passport = require('passport');
 var BearerStrategy = require('passport-http-bearer').Strategy;
 
 
-
 var User = mongoose.model('User');
 var AccessToken = mongoose.model('AccessToken');
 
@@ -24,7 +23,7 @@ module.exports.init = function (server, router) {
                 if (!user) {
                     return done(null, false);
                 }
-                return done(null, user, { scope: 'read', token: token});
+                return done(null, user, {scope: 'read', token: token});
             });
         }
     ));

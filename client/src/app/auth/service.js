@@ -63,10 +63,10 @@ angular.module('auth')
         }
 
         function isAuthorized() {
-
+            return true;
         }
 
-        var service = {
+        return {
             login: login,
             authenticate: authenticate,
             getAuthInfo: getAuthInfo,
@@ -74,5 +74,4 @@ angular.module('auth')
             isAuthorized: isAuthorized,
             authInfo: authInfo
         };
-        return service;
     }]);

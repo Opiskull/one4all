@@ -25,7 +25,7 @@ function getRouteId(route, action) {
     return routeId;
 }
 
-function getRouteIdWithAction(route, action, actionid) {
+function getRouteIdWithAction(parent, action, actionid) {
     var parent = getRouteId(parent, action);
     if (actionid) {
         return addAction(parent, actionid);

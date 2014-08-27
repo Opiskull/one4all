@@ -4,7 +4,7 @@ var Movie = mongoose.model('InfoTmdbMovie');
 var request = require('request');
 var async = require('async');
 
-var authConfig = require(require('path').join(require('path').dirname(process.mainModule.filename), 'config', 'config.json')).extapi.themoviedb;
+var authConfig = rootRequire('config/config.json').extapi.themoviedb;
 var config = require('./config.json');
 
 var client = request.defaults({

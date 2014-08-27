@@ -5,15 +5,9 @@ angular.module('one4all').factory('filterService', ['settingsService', '$filter'
         return settings.filters.keyword !== '';
     }
 
-    function hasStats() {
-        return _.some(settings.filters.stats, function(item){
-            return item;
-        });
-    }
-
-    function itemHasStats(item){
-        if(!item.stats) return false;
-        return _.some(item.stats, function(stat){
+    function itemHasStats(item) {
+        if (!item.stats) return false;
+        return _.some(item.stats, function (stat) {
             return stat;
         });
     }
@@ -30,7 +24,7 @@ angular.module('one4all').factory('filterService', ['settingsService', '$filter'
 
     function filterItemByStats(item) {
         var result = false;
-        if(itemHasStats(item)){
+        if (itemHasStats(item)) {
             angular.forEach(settings.filters.stats, function (stat, statKey) {
                 if (stat) {
                     if (item.stats[statKey]) {
@@ -39,7 +33,7 @@ angular.module('one4all').factory('filterService', ['settingsService', '$filter'
                 }
             });
         } else {
-            if(settings.filters.stats.none){
+            if (settings.filters.stats.none) {
                 result = true;
             }
         }
@@ -52,7 +46,7 @@ angular.module('one4all').factory('filterService', ['settingsService', '$filter'
     }
 
     function applyFilter(items, pagination) {
-        if(!items) return;
+        if (!items) return;
         pagination.totalItems = items.length;
         if (hasKeyword())
             items = filterByKeyword(items);
@@ -69,7 +63,7 @@ angular.module('one4all').factory('filterService', ['settingsService', '$filter'
     }
 
     function register(scope, Resource) {
-        scope.pagination = { currentPage: 1, itemsPerPage: 20, maxSize: 5, totalItems: 0};
+        scope.pagination = {currentPage: 1, itemsPerPage: 20, maxSize: 5, totalItems: 0};
 
         scope.filter = function () {
             scope.filtered = applyFilter(scope.items, scope.pagination);
@@ -91,12 +85,12 @@ angular.module('one4all').factory('filterService', ['settingsService', '$filter'
             scope.filter();
         });
 
-        function setItems(items){
+        function setItems(items) {
             scope.items = items;
             scope.filtered = applyFilter(items, scope.pagination);
         }
 
-        if(!Resource.items){
+        if (!Resource.items) {
             Resource.getList().then(function (items) {
                 Resource.items = items;
                 setItems(items);
@@ -106,10 +100,8 @@ angular.module('one4all').factory('filterService', ['settingsService', '$filter'
         }
     }
 
-    var service = {
+    return {
         applyFilter: applyFilter,
         register: register
     };
-
-    return service;
 }]);

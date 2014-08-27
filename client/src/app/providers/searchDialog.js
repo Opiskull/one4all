@@ -59,7 +59,7 @@ angular.module('providers')
                 size: 'lg'
             }).result;
         };
-        return{
+        return {
             search: search
         }
     }]);

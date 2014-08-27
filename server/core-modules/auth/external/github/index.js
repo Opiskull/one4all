@@ -40,5 +40,5 @@ module.exports.init = function (server, router) {
 
     server.get(router.getRoute('/auth/github'), controller.authenticate);
     server.get(router.getRoute('/auth/github/callback'),
-        passport.authenticate('github', { failureRedirect: '/login', session: false}), controller.token);
+        passport.authenticate('github', {failureRedirect: '/login', session: false}), controller.token);
 };

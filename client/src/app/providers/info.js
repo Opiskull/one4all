@@ -4,7 +4,7 @@ angular.module('providers').directive('info', ['searchService', function (search
         template: '<div ng-if="item.open"><div ng-include="detailTemplate" ng-if="info"></div></div>',
         link: function (scope, element, attrs) {
             if (scope.item.info) {
-                var provider = searchService.getProvider(scope.item.info.provider)
+                var provider = searchService.getProvider(scope.item.info.provider);
                 scope.detailTemplate = provider.detailUrl;
                 scope.info = scope.item.info;
             }

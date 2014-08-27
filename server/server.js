@@ -1,10 +1,10 @@
 global.__rootdir = __dirname;
 
-global.rootRequire = function(name){
+global.rootRequire = function (name) {
     return require(__rootdir + '/' + name);
 };
 
-global.coreRequire = function(name){
+global.coreRequire = function (name) {
     return require(__rootdir + '/core-modules/' + name);
 };
 

@@ -12,21 +12,21 @@ function logout(req, res) {
     });
 }
 
-    function authInfo(req, res) {
-        if (req.isAuthenticated()) {
-            var user = require('util')._extend({}, req.user.toObject());
+function authInfo(req, res) {
+    if (req.isAuthenticated()) {
+        var user = require('util')._extend({}, req.user.toObject());
 
-            delete user.roles;
-            delete user.accessToken;
-            delete user.__v;
-            res.json({
-                user: user,
-                roles: req.user.roles
-            });
-        } else {
-            res.json({});
-        }
+        delete user.roles;
+        delete user.accessToken;
+        delete user.__v;
+        res.json({
+            user: user,
+            roles: req.user.roles
+        });
+    } else {
+        res.json({});
     }
+}
 
 module.exports.logout = logout;
 module.exports.authInfo = authInfo;

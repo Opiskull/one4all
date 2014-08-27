@@ -36,5 +36,8 @@ module.exports.init = function (server, router) {
         }
     ));
     server.get(router.getRoute('/auth/google'), controller.authenticate);
-    server.get(router.getRoute('/auth/google/callback'), passport.authenticate('google', { failureRedirect: '/login', session: false}), controller.token);
+    server.get(router.getRoute('/auth/google/callback'), passport.authenticate('google', {
+        failureRedirect: '/login',
+        session: false
+    }), controller.token);
 };
