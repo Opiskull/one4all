@@ -1,4 +1,4 @@
-angular.module('dialogs').controller('addDialogCtrl', ['$scope', '$modalInstance', 'defaultProvider', 'headerTitle', 'templateUrl', function ($scope, $modalInstance, defaultProvider, headerTitle, templateUrl) {
+angular.module('dialog').controller('addDialogCtrl', ['$scope', '$modalInstance', 'defaultProvider', 'headerTitle', 'templateUrl', function ($scope, $modalInstance, defaultProvider, headerTitle, templateUrl) {
     $scope.item = {};
     $scope.defaultProvider = defaultProvider;
     $scope.headerTitle = headerTitle;

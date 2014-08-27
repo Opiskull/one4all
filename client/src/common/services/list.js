@@ -18,7 +18,7 @@ angular.module('one4all').factory('listService', ['settingsService', 'itemServic
 
         scope.edit = function (item) {
             var copiedItem = Restangular.copy(item);
-            dialogService.editItem(scope.title + '/edit.html', scope.title, scope.defaultProvider, copiedItem).result.then(function (result) {
+            dialogService.editItem(scope.title + '/'+scope.title+'-edit.html', scope.title, scope.defaultProvider, copiedItem).result.then(function (result) {
                 if (result) {
                     itemService.updateItems(scope.items, result).then(function () {
                         $rootScope.$emit('filter');
@@ -28,7 +28,7 @@ angular.module('one4all').factory('listService', ['settingsService', 'itemServic
         };
 
         scope.add = function () {
-            dialogService.addItem(scope.title + '/add.html', scope.title, scope.defaultProvider).result.then(function (result) {
+            dialogService.addItem(scope.title + '/'+scope.title+'-add.html', scope.title, scope.defaultProvider).result.then(function (result) {
                 if (result) {
                     Resource.post(result).then(function (addedItem) {
                         scope.items.push(addedItem);

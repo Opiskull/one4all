@@ -19,7 +19,7 @@
                 <up-down-button disabled="manga.stats.finished" item="manga" property="'chapter'"></up-down-button>
             </div>
             <div class="col-sm-2">
-                <rating-stars item="manga" property="'rating'"></rating-stars>
+                <rating-nuts item="manga" property="'rating'"></rating-nuts>
             </div>
             <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>
             <div class="col-sm-1"><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.stats.finished">Next Chapter</a>

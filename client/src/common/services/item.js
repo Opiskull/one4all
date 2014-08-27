@@ -82,14 +82,12 @@ angular.module('one4all').factory('itemService', [function () {
     }
 
     return {
-        increase: increase,
-        decrease: decrease,
         update: update,
         updateItems: updateItems,
         remove: remove,
         showInfo: showInfo,
         setInfo: setInfo,
-        incProp: incProp,
-        decProp: decProp
+        increaseProperty: incProp,
+        decreaseProperty: decProp
     };
 }]);

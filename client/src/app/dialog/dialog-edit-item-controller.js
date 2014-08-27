@@ -1,4 +1,4 @@
-angular.module('dialogs').controller('editDialogCtrl', ['$scope', '$modalInstance', 'item', 'defaultProvider', 'headerTitle', 'templateUrl', function ($scope, $modalInstance, item, defaultProvider, headerTitle, templateUrl) {
+angular.module('dialog').controller('editDialogCtrl', ['$scope', '$modalInstance', 'item', 'defaultProvider', 'headerTitle', 'templateUrl', function ($scope, $modalInstance, item, defaultProvider, headerTitle, templateUrl) {
     $scope.item = item;
     $scope.defaultProvider = defaultProvider;
     $scope.headerTitle = headerTitle;
