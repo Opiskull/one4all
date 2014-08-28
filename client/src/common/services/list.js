@@ -21,13 +21,13 @@ angular.module('one4all').factory('listService', ['settingsService', 'itemServic
                 defaultProvider: scope.defaultProvider,
                 headerTitle: scope.title,
                 templateUrl: scope.title + '/'+scope.title+'-'+type+'.html',
-                item: Restangular.copy(item),
                 searchInfoCallback: scope.searchInfoCallback
             };
         }
 
         scope.edit = function (item) {
             var dialogParameters = createDialogParameters('edit');
+            dialogParameters.item= Restangular.copy(item);
 
             dialogService.editItem(dialogParameters).result.then(function (result) {
                 if (result) {
