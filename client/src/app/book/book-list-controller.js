@@ -4,4 +4,8 @@ angular.module('book')
         listService.register($scope, bookResource);
         $scope.defaultProvider = 'google-books';
         $scope.title = 'book';
+        $scope.searchInfoCallback = function(result){
+            if(result.info.authors)
+                result.item.author = result.info.authors[0];
+        }
     }]);

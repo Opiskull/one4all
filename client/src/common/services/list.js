@@ -16,9 +16,20 @@ angular.module('one4all').factory('listService', ['settingsService', 'itemServic
 
         };
 
+        function createDialogParameters(type){
+            return {
+                defaultProvider: scope.defaultProvider,
+                headerTitle: scope.title,
+                templateUrl: scope.title + '/'+scope.title+'-'+type+'.html',
+                item: Restangular.copy(item),
+                searchInfoCallback: scope.searchInfoCallback
+            };
+        }
+
         scope.edit = function (item) {
-            var copiedItem = Restangular.copy(item);
-            dialogService.editItem(scope.title + '/'+scope.title+'-edit.html', scope.title, scope.defaultProvider, copiedItem).result.then(function (result) {
+            var dialogParameters = createDialogParameters('edit');
+
+            dialogService.editItem(dialogParameters).result.then(function (result) {
                 if (result) {
                     itemService.updateItems(scope.items, result).then(function () {
                         $rootScope.$emit('filter');
@@ -28,7 +39,9 @@ angular.module('one4all').factory('listService', ['settingsService', 'itemServic
         };
 
         scope.add = function () {
-            dialogService.addItem(scope.title + '/'+scope.title+'-add.html', scope.title, scope.defaultProvider).result.then(function (result) {
+            var dialogParameters = createDialogParameters('add');
+
+            dialogService.addItem(dialogParameters).result.then(function (result) {
                 if (result) {
                     Resource.post(result).then(function (addedItem) {
                         scope.items.push(addedItem);
