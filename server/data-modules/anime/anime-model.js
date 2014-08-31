@@ -11,4 +11,5 @@ animeSchema.plugin(plugins.timestamps);
 animeSchema.plugin(plugins.stats);
 animeSchema.plugin(plugins.info);
 animeSchema.plugin(plugins.rating);
+animeSchema.plugin(plugins.tags);
 mongoose.model('Anime', animeSchema);

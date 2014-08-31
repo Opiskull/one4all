@@ -10,4 +10,5 @@ movieSchema.plugin(plugins.timestamps);
 movieSchema.plugin(plugins.stats);
 movieSchema.plugin(plugins.info);
 movieSchema.plugin(plugins.rating);
+movieSchema.plugin(plugins.tags);
 mongoose.model('Movie', movieSchema);

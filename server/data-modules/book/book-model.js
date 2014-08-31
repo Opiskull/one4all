@@ -12,4 +12,5 @@ bookSchema.plugin(plugins.timestamps);
 bookSchema.plugin(plugins.stats);
 bookSchema.plugin(plugins.info);
 bookSchema.plugin(plugins.rating);
+bookSchema.plugin(plugins.tags);
 mongoose.model('Book', bookSchema);
