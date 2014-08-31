@@ -2,6 +2,7 @@ angular.module('one4all', ['ui.bootstrap',
     'ngAnimate',
     'ngSanitize',
     'ngRoute',
+    'ngTagsInput',
     'auth',
     /* Modules */
     'manga', 'movie', 'serie', 'anime', 'game', 'book',
