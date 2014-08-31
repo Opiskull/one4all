@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
-var timestamps = require('mongoose-timestamp');
 var plugins = rootRequire('lib/mongoose-plugins.js');
-
 
 var animeSchema = mongoose.Schema({
     title: String,
@@ -9,7 +7,7 @@ var animeSchema = mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
-animeSchema.plugin(timestamps);
+animeSchema.plugin(plugins.timestamps);
 animeSchema.plugin(plugins.stats);
 animeSchema.plugin(plugins.info);
 animeSchema.plugin(plugins.rating);

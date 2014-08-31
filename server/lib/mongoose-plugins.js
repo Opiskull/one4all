@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 
 
@@ -45,6 +46,15 @@ function ratingPlugin(schema) {
     schema.add(ratingSchema);
 }
 
+function tagsPlugin(schema){
+    var tagsSchema = {
+        tags: [{text: String}]
+    };
+    schema.add(tagsSchema);
+}
+
 module.exports.stats = statsPlugin;
 module.exports.info = infoPlugin;
 module.exports.rating = ratingPlugin;
+module.exports.tags = tagsPlugin;
+module.exports.timestamps = timestamps;

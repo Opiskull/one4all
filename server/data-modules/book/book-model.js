@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var timestamps = require('mongoose-timestamp');
 var plugins = rootRequire('lib/mongoose-plugins.js');
 
 var bookSchema = mongoose.Schema({
@@ -9,7 +8,7 @@ var bookSchema = mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
-bookSchema.plugin(timestamps);
+bookSchema.plugin(plugins.timestamps);
 bookSchema.plugin(plugins.stats);
 bookSchema.plugin(plugins.info);
 bookSchema.plugin(plugins.rating);

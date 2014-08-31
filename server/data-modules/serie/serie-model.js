@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var timestamps = require('mongoose-timestamp');
 var plugins = rootRequire('lib/mongoose-plugins.js');
 
 var serieSchema = mongoose.Schema({
@@ -9,7 +8,7 @@ var serieSchema = mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
-serieSchema.plugin(timestamps);
+serieSchema.plugin(plugins.timestamps);
 serieSchema.plugin(plugins.stats);
 serieSchema.plugin(plugins.info);
 serieSchema.plugin(plugins.rating);
