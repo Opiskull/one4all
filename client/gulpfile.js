@@ -21,7 +21,7 @@ var pkg = require('./package.json');
 var gulpif = require('gulp-if');
 var argv = require('yargs').argv;
 
-var debug = argv.debug;
+var release = argv.release;
 
 var paths = {
     "filenames": {
@@ -76,7 +76,7 @@ gulp.task('build', ['clean'], function () {
 });
 
 gulp.task('watch', function () {
-    gulp.start('fonts:watch', 'images:watch', 'app:watch', 'templates:watch', 'vendor:watch', 'css:watch', 'index:watch');
+    gulp.start('watch:fonts', 'watch:images', 'watch:app', 'watch:templates', 'watch:vendor', 'watch:css', 'watch:index');
 });
 
 gulp.task('clean', function () {
@@ -104,47 +104,26 @@ gulp.task('index', ['app', 'templates', 'vendor', 'css'], function () {
         .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('index:watch', function () {
-    watchFilesAndStartTask(paths.src.index, 'index');
-});
-
 gulp.task('fonts', function () {
     return gulp.src(paths.src.fonts)
         .pipe(gulp.dest('build/fonts'));
 });
 
-gulp.task('fonts:watch', function () {
-    watchFilesAndStartTask(paths.src.fonts, 'fonts');
-});
-
 gulp.task('images', function () {
     return gulp.src(paths.src.img)
-        //.pipe(rename(paths.filenames.img))
         .pipe(gulp.dest(paths.build));
-});
-
-gulp.task('images:watch', function () {
-    watchFilesAndStartTask(paths.src.img, 'images');
 });
 
 gulp.task('app', function () {
     return gulp.src(paths.src.app).pipe(angularFileSort())
         .pipe(concat(paths.filenames.app))
-        .pipe(gulpif(!debug, uglify()))
+        .pipe(gulpif(release, uglify()))
         .pipe(gulp.dest(paths.build));
-});
-
-gulp.task('app:watch', function () {
-    watchFilesAndStartTask(paths.src.app, 'app');
-});
-
-gulp.task('templates:watch', function () {
-    watchFilesAndStartTask(paths.src.template, 'templates');
 });
 
 gulp.task('templates', function () {
     return gulp.src(paths.src.template)
-        .pipe(gulpif(!debug, minifyhtml({
+        .pipe(gulpif(release, minifyhtml({
             empty: true,
             spare: true,
             quotes: true
@@ -153,20 +132,16 @@ gulp.task('templates', function () {
             moduleName: paths.templatemodule
         }))
         .pipe(concat(paths.filenames.template))
-        .pipe(gulpif(!debug, uglify()))
+        .pipe(gulpif(release, uglify()))
         .pipe(gulp.dest(paths.build));
 });
 
 gulp.task('vendor', function () {
     return gulp.src(mainBowerFiles())
         .pipe(concat(paths.filenames.vendor))
-        .pipe(gulpif(!debug, uglify()))
+        .pipe(gulpif(release, uglify()))
         .pipe(gulp.dest(paths.build))
         .on('error', gutil.log);
-});
-
-gulp.task('vendor:watch', function () {
-    watchFilesAndStartTask('bower_components/**/*.js', 'vendor');
 });
 
 gulp.task('css', function () {
@@ -176,7 +151,30 @@ gulp.task('css', function () {
         .pipe(gulp.dest(paths.build));
 });
 
-gulp.task('css:watch', function () {
+gulp.task('watch:fonts', function () {
+    watchFilesAndStartTask(paths.src.fonts, 'fonts');
+});
+
+gulp.task('watch:images', function () {
+    watchFilesAndStartTask(paths.src.img, 'images');
+});
+
+gulp.task('watch:app', function () {
+    watchFilesAndStartTask(paths.src.app, 'app');
+});
+
+gulp.task('watch:templates', function () {
+    watchFilesAndStartTask(paths.src.template, 'templates');
+});
+
+gulp.task('watch:vendor', function () {
+    watchFilesAndStartTask('bower_components/**/*.js', 'vendor');
+});
+
+gulp.task('watch:css', function () {
     watchFilesAndStartTask('src/assets/**/*.less', 'css');
 });
 
+gulp.task('watch:index', function () {
+    watchFilesAndStartTask(paths.src.index, 'index');
+});
