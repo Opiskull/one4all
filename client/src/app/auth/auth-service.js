@@ -1,5 +1,5 @@
 angular.module('auth')
-    .factory('authService', ['Restangular', '$location', '$store', function (Restangular, $location, $store) {
+    .factory('authService', ['Restangular', '$location', '$localStorage', function (Restangular, $location, $localStorage) {
         var authInfoDefault = {
             isLoggedIn: false,
             user: {},
@@ -28,7 +28,7 @@ angular.module('auth')
          * @returns {*}
          */
         function authenticate() {
-            Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + $store.get('access_token')});
+            Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + $localStorage.access_token});
             return getAuthInfo();
         }
 
@@ -37,7 +37,7 @@ angular.module('auth')
          * @param access_token
          */
         function setToken(access_token) {
-            $store.set('access_token', access_token);
+            $localStorage.access_token = access_token;
             authenticate();
         }
 
@@ -55,7 +55,7 @@ angular.module('auth')
          */
         function logout() {
             Restangular.oneUrl('auth/logout').post().then(function (data) {
-                $store.remove('access_token');
+                delete $localStorage.access_token;
                 angular.extend(authInfo, authInfoDefault);
                 Restangular.setDefaultHeaders({'Authorization': ''});
                 $location.url('/');

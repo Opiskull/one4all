@@ -1,4 +1,4 @@
-angular.module('auth', ['ngRoute'])
+angular.module('auth', ['ngRoute','ngStorage'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/login', {
             templateUrl: 'auth/auth-login.html',

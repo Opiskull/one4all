@@ -1,24 +1,51 @@
-angular.module('one4all').factory('settingsService', ['$rootScope', '$store', function ($rootScope, $store) {
-    var defaultStats = {
-        finished: false,
-        dropped: false,
-        paused: false
+angular.module('one4all').factory('settingsService', ['$rootScope', '$localStorage', function ($rootScope, $localStorage) {
+    var settings = {};
+
+    function loadStoredSettings(){
+        var storedSettings = $localStorage.settings;
+        if(storedSettings) {
+            angular.copy(storedSettings,settings);
+        }
+    }
+
+    function loadDefaultSettings(){
+        var defaultSettings = {
+            filters: {
+                stats: {
+                    finished: false,
+                    dropped: false,
+                    paused: false
+                },
+                exclude: true,
+                keyword: ''
+            },
+            orderBy: {
+                predicate: 'title',
+                reverse: false
+            }
+        };
+        angular.copy(defaultSettings,settings);
+    }
+
+    function saveClientSettings(){
+        $localStorage.settings = settings;
+    }
+
+    function deleteClientSettings(){
+        delete $localStorage.settings;
+    }
+
+    function resetClientSettings(){
+        loadDefaultSettings();
+        $rootScope.$emit('filter');
+    }
+
+    loadDefaultSettings();
+    loadStoredSettings();
+    return {
+        settings: settings,
+        saveClientSettings: saveClientSettings,
+        deleteClientSettings: deleteClientSettings,
+        resetClientSettings: resetClientSettings
     };
-    var defaultOrderBy = {
-        predicate: 'title',
-        reverse: false
-    };
-    var defaultSettings = {
-        filters: {
-            stats: defaultStats,
-            exclude: true,
-            keyword: ''
-        },
-        orderBy: defaultOrderBy
-    };
-    // FIX SETTINGS
-    $store.remove('settings');
-    var storedSettings = {};
-    var settings = angular.extend(defaultSettings, storedSettings);
-    return {settings: settings};
 }]);

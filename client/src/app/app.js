@@ -3,6 +3,7 @@ angular.module('one4all', ['ui.bootstrap',
     'ngSanitize',
     'ngRoute',
     'ngTagsInput',
+    'ngStorage',
     'auth',
     /* Modules */
     'manga', 'movie', 'serie', 'anime', 'game', 'book',
@@ -21,27 +22,10 @@ angular.module('one4all', ['ui.bootstrap',
         $scope.logout = authService.logout;
         $scope.settings = settingsService.settings;
         $scope.orderBy = $scope.settings.orderBy;
-        $scope.keyword = '';
+
         $scope.appInfo = appInfo;
 
         $scope.focus = {search: true};
-
-        $scope.clearKeyword = function () {
-            $scope.keyword = '';
-        };
-
-        $scope.filterItems = function () {
-            $timeout(function () {
-                $rootScope.$emit('filter');
-            });
-        };
-
-        $scope.$watch('keyword', _.debounce(function (newValue) {
-            $scope.$apply(function () {
-                settingsService.settings.filters.keyword = newValue;
-                $scope.filterItems();
-            });
-        }, 250));
 
         $scope.$on("$routeChangeStart", function (event, next, current) {
             $scope.focus.search = false;
