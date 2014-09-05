@@ -1,0 +1,21 @@
+<div ng-cloak class="filters" collapse="display">
+    <div class="btn-group">
+        <label class="btn btn-primary" ng-model="settings.filters.exclude" btn-radio="true" ng-click="filterItems()">Exclude</label>
+        <label class="btn btn-primary" ng-model="settings.filters.exclude" btn-radio="false" ng-click="filterItems()">Include</label>
+    </div>
+    <div class="btn-group">
+        <label class="btn btn-default" ng-model="settings.filters.stats.paused" btn-checkbox ng-click="filterItems()">paused</label>
+        <label class="btn btn-default" ng-model="settings.filters.stats.dropped" btn-checkbox ng-click="filterItems()">dropped</label>
+        <label class="btn btn-default" ng-model="settings.filters.stats.finished" btn-checkbox ng-click="filterItems()">finished</label>
+        <label class="btn btn-default" ng-model="settings.filters.stats.none" btn-checkbox ng-click="filterItems()">none</label>
+    </div>
+    <div class="btn-group">
+        <label class="btn btn-default" ng-click="selectAllStats()">select all</label>
+        <label class="btn btn-default" ng-click="deselectAllStats()">deselect all</label>
+    </div>
+    <div class="btn-group pull-right">
+        <label class="btn btn-default" ng-click="resetClientSettings()">reset filter</label>
+        <label class="btn btn-primary" ng-click="saveClientSettings()">save filter on client</label>
+        <label class="btn btn-default" ng-click="deleteClientSettings()">delete filter on client</label>
+    </div>
+</div>

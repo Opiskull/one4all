@@ -45,14 +45,7 @@
                 <li>
                     <form class="navbar-form navbar-right" role="search">
                         <div class="form-group">
-                            <div class="input-group search-box">
-                                <input type="search" class="form-control" placeholder="Search" ng-model="keyword"
-                                       focus-me="focus.search" ng-blur="focus.search=false">
-                                <span class="input-group-btn" ng-if="keyword !== ''">
-                                    <button class="btn btn-default" type="button" ng-click="clearKeyword()"><i
-                                            class="glyphicon glyphicon-remove"></i></button>
-                                </span>
-                            </div>
+                            <search-box focus="focus.search"></search-box>
                         </div>
                     </form>
                 </li>
@@ -69,27 +62,7 @@
         </nav>
     </div>
 </header>
-<div ng-cloak class="filters" collapse="!collapsed.filter">
-    <div class="btn-group">
-        <label class="btn btn-primary" ng-model="settings.filters.exclude" btn-radio="true" ng-click="filterItems()">Exclude</label>
-        <label class="btn btn-primary" ng-model="settings.filters.exclude" btn-radio="false" ng-click="filterItems()">Include</label>
-    </div>
-    <div class="btn-group">
-        <label class="btn btn-default" ng-model="settings.filters.stats.paused" btn-checkbox ng-click="filterItems()">paused</label>
-        <label class="btn btn-default" ng-model="settings.filters.stats.dropped" btn-checkbox ng-click="filterItems()">dropped</label>
-        <label class="btn btn-default" ng-model="settings.filters.stats.finished" btn-checkbox ng-click="filterItems()">finished</label>
-        <label class="btn btn-default" ng-model="settings.filters.stats.none" btn-checkbox
-               ng-click="filterItems()">none</label>
-    </div>
-    <div class="btn-group">
-        <label class="btn btn-default"
-               ng-click="settings.filters.stats.paused=true;settings.filters.stats.dropped=true;settings.filters.stats.finished=true;settings.filters.stats.none=true;filterItems()">select
-            all</label>
-        <label class="btn btn-default"
-               ng-click="settings.filters.stats.paused=false;settings.filters.stats.dropped=false;settings.filters.stats.finished=false;settings.filters.stats.none=false;filterItems()">deselect
-            all</label>
-    </div>
-</div>
+<filter-bar display="!collapsed.filter"></filter-bar>
 <div ng-cloak class="container-fluid">
     <div ng-view class="view-animation"></div>
 </div>
