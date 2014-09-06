@@ -18,7 +18,7 @@
                     class="glyphicon glyphicon-th-large"></i></button>
         </div>
         <nav collapse="collapsed.nav" class="navbar-collapse collapse navbar-responsive-collapse" role="navigation">
-            <menu page-title="'Peerzone '">
+            <menu page-title="'Peerzone '" ng-if="authInfo.isLoggedIn">
                 <menu-item path="#/anime" display-title="Anime"></menu-item>
                 <menu-item path="#/book" display-title="Book"></menu-item>
                 <menu-item path="#/game" display-title="Game"></menu-item>
@@ -30,11 +30,8 @@
                 <menu-item path="https://github.com/Opiskull/one4all/blob/master/CHANGELOG.md" display-title="Changelog"
                            target="_blank"></menu-item>
             </menu>
-            <ul class="nav navbar-nav navbar-right">
-                <li class="dropdown" ng-if="!authInfo.isLoggedIn">
-                    <a ng-href="#/login" title="login"><i class="glyphicon glyphicon-log-in"></i> login</a>
-                </li>
-                <li class="dropdown" ng-if="authInfo.isLoggedIn">
+            <ul class="nav navbar-nav navbar-right" ng-if="authInfo.isLoggedIn">
+                <li class="dropdown">
                     <a class="dropdown-toggle">{{authInfo.user.username}}</a>
                     <ul class="dropdown-menu">
                         <li>
@@ -60,6 +57,11 @@
                                target="_blank">Last Commit: <span class="bold pull-right">{{::appInfo.lastCommit|truncate:7 }}</span></a></li>
                         <li><a>Last Build: <span class="bold pull-right">{{appInfo.buildTime | timeAgo}}</span></a></li>
                     </ul>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right" ng-if="!authInfo.isLoggedIn">
+                <li class="dropdown">
+                    <a ng-href="#/login" title="login"><i class="glyphicon glyphicon-log-in"></i> login</a>
                 </li>
             </ul>
         </nav>

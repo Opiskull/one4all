@@ -9,10 +9,11 @@ angular.module('auth')
         var authInfo = {};
 
         /**
-         * returns the authinfo from the user
+         * sets the bearer header for authorization
          * @returns {*}
          */
-        function getAuthInfo() {
+        function authenticateWithServer() {
+            Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + $localStorage.accessToken});
             return Restangular.oneUrl('auth/info').get().then(function (response) {
                 angular.extend(authInfo, authInfoDefault);
                 authInfo.user = response.user;
@@ -24,38 +25,21 @@ angular.module('auth')
         }
 
         /**
-         * sets the bearer header for authorization
-         * @returns {*}
+         * sets the accessToken for the login
+         * @param accessToken
          */
-        function authenticate() {
-            Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + $localStorage.access_token});
-            return getAuthInfo();
-        }
-
-        /**
-         * stores the token on the client side
-         * @param access_token
-         */
-        function setToken(access_token) {
-            $localStorage.access_token = access_token;
-            authenticate();
-        }
-
-        /**
-         * sets the access_token for the login
-         * @param access_token
-         */
-        function login(access_token) {
-            setToken(access_token);
+        function login(accessToken) {
+            $localStorage.accessToken = accessToken;
+            authenticateWithServer();
             $location.url('/');
         }
 
         /**
-         * logout will remove the access_token from the client
+         * logout will remove the accessToken from the client
          */
         function logout() {
-            Restangular.oneUrl('auth/logout').post().then(function (data) {
-                delete $localStorage.access_token;
+            return Restangular.oneUrl('auth/logout').post().then(function (data) {
+                delete $localStorage.accessToken;
                 angular.extend(authInfo, authInfoDefault);
                 Restangular.setDefaultHeaders({'Authorization': ''});
                 $location.url('/');
@@ -68,8 +52,7 @@ angular.module('auth')
 
         return {
             login: login,
-            authenticate: authenticate,
-            getAuthInfo: getAuthInfo,
+            authenticateWithServer: authenticateWithServer,
             logout: logout,
             isAuthorized: isAuthorized,
             authInfo: authInfo
