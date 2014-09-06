@@ -10,7 +10,7 @@
     <div class="col-sm-1">Url</div>
     <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
-<div class="item-row" ng-repeat="manga in filtered track by manga._id"
+<div class="item-row" ng-repeat="manga in filtered track by manga.id"
      display-state="manga.stats">
     <div class="col-sm-12">
         <div class="row">

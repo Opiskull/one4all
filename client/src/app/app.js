@@ -12,9 +12,9 @@ angular.module('one4all', ['ui.bootstrap',
     'one4all.templates',
     'pasvaz.bindonce'])
     .config(['RestangularProvider', function (RestangularProvider) {
-        RestangularProvider.setRestangularFields({
-            id: "_id"
-        });
+        //RestangularProvider.setRestangularFields({
+        //    id: "_id"
+        //});
         RestangularProvider.setBaseUrl('/api');
     }])
     .controller('AppCtrl', ['$scope', 'authService', 'settingsService', '$rootScope', '$timeout', function ($scope, authService, settingsService, $rootScope, $timeout) {

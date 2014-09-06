@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
+var hidden = require('mongoose-hidden')();
 var Schema = mongoose.Schema;
-
 
 function statsPlugin(schema) {
     var statsSchema = {
@@ -58,3 +58,4 @@ module.exports.info = infoPlugin;
 module.exports.rating = ratingPlugin;
 module.exports.tags = tagsPlugin;
 module.exports.timestamps = timestamps;
+module.exports.hidden = hidden;

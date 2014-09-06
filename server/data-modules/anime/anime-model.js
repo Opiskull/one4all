@@ -12,4 +12,5 @@ animeSchema.plugin(plugins.stats);
 animeSchema.plugin(plugins.info);
 animeSchema.plugin(plugins.rating);
 animeSchema.plugin(plugins.tags);
+animeSchema.plugin(plugins.hidden);
 mongoose.model('Anime', animeSchema);

@@ -8,7 +8,7 @@ angular.module('one4all').factory('itemService', [function () {
     function updateItems(items, item) {
         return update(item).then(function (updatedItem) {
             var index = _.findIndex(items, function (tempItem) {
-                return tempItem._id == updatedItem._id;
+                return tempItem.id == updatedItem.id;
             });
             items[index] = updatedItem;
             return updatedItem;

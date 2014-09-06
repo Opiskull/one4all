@@ -13,4 +13,5 @@ serieSchema.plugin(plugins.stats);
 serieSchema.plugin(plugins.info);
 serieSchema.plugin(plugins.rating);
 serieSchema.plugin(plugins.tags);
+serieSchema.plugin(plugins.hidden);
 mongoose.model('Serie', serieSchema);
