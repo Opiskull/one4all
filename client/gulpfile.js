@@ -33,7 +33,7 @@ var paths = {
     },
     "src": {
         "fonts": 'src/assets/fonts/*.*',
-        "img": ['src/*.png', 'src/*.jpg'],
+        "img": ['src/assets/images/*.png', 'src/assets/images/*.jpg'],
         "app": ['src/**/*.js'],
         "template": ['src/app/**/*.html', 'src/common/**/*.html'],
         "css": 'src/assets/main.less',
@@ -111,7 +111,7 @@ gulp.task('fonts', function () {
 
 gulp.task('images', function () {
     return gulp.src(paths.src.img)
-        .pipe(gulp.dest(paths.build));
+        .pipe(gulp.dest(paths.build + "/images/"));
 });
 
 gulp.task('app', function () {

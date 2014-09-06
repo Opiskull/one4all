@@ -7,7 +7,7 @@ angular.module('providers').directive('infoImage', [function () {
             if (scope.info.img) {
                 scope.src = scope.info.img;
             } else {
-                scope.src = "no_image.jpg";
+                scope.src = "images/no-image.jpg";
             }
         },
         scope: {

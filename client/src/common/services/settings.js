@@ -9,13 +9,15 @@ angular.module('one4all').factory('settingsService', ['$rootScope', '$localStora
     }
 
     function loadDefaultSettings(){
+        var defaultStats ={
+            finished: false,
+            dropped: false,
+            paused: false,
+            none: false
+        };
         var defaultSettings = {
             filters: {
-                stats: {
-                    finished: false,
-                    dropped: false,
-                    paused: false
-                },
+                stats: defaultStats,
                 exclude: true,
                 keyword: ''
             },
