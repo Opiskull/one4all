@@ -2,9 +2,15 @@ var cheerio = require('cheerio');
 var map = require('event-stream').map;
 var Buffer = require('buffer').Buffer;
 var pkg = require('./package.json');
+var git = require('nodegit');
+var path = require('path');
+
+
+var buildTime = Date.now();
 
 var appendRev = function appendRev() {
-    var appendString = "?rev=" + Date.now();
+    buildTime = Date.now();
+    var appendString = "?rev=" + buildTime;
 
     function transform(filename) {
         return filename + appendString;
@@ -28,16 +34,35 @@ var appendRev = function appendRev() {
     });
 };
 
-function getAppInfo() {
-    return "appInfo = { version: '" + pkg.version + "'}";
+function getAppInfo(callback) {
+    getLastCommit(function(err,commit){
+        if(err) throw err;
+        var appInfo = { version: pkg.version, lastCommit: commit.sha(), buildTime: buildTime};
+        callback(null,"appInfo = JSON.parse('"+JSON.stringify(appInfo)+"');");
+    });
+}
+
+function getLastCommit(callback){
+    git.Repo.open(path.resolve(__dirname, '../.git'),function(openRepoErr,repo){
+        if(openRepoErr) throw openRepoErr;
+        git.Reference.oidForName(repo, 'HEAD', function(oidForNameErr, head){
+            if(oidForNameErr) throw oidForNameErr;
+            repo.getCommit(head, function(getCommitErr, commit){
+                if(getCommitErr) throw getCommitErr;
+                callback(null,commit);
+            });
+        })
+    });
 }
 
 var appendAppInfo = function appendVersion() {
     return map(function (file, cb) {
         var $ = cheerio.load(file.contents);
-        $('head').append('<script type="text/javascript">' + getAppInfo() + '</script>');
-        file.contents = new Buffer($.html());
-        cb(null, file);
+        getAppInfo(function(err, appInfo){
+            $('body').append('<script type="text/javascript">' + appInfo + '</script>');
+            file.contents = new Buffer($.html());
+            cb(null, file);
+        });
     });
 };
 
