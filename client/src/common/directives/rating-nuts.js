@@ -40,13 +40,7 @@ angular.module('one4all').directive('ratingNuts', ['itemService', function (item
     return {
         restrict: 'E',
         replace: true,
-        template: '<div class="rating-nuts">' +
-        '<span class="nut nut-disabled" ng-click="setRating(1)" value="1"></span>' +
-        '<span class="nut nut-disabled" ng-click="setRating(2)" value="2"></span>' +
-        '<span class="nut nut-disabled" ng-click="setRating(3)" value="3"></span>' +
-        '<span class="nut nut-disabled" ng-click="setRating(4)" value="4"></span>' +
-        '<span class="nut nut-disabled" ng-click="setRating(5)" value="5"></span>' +
-        '</div>',
+        templateUrl: 'directives/rating-nuts.html',
         link: function (scope, element, attrs) {
             var nuts = element.children();
             nuts.on('mouseenter',function(){

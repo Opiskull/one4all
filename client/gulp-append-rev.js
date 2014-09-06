@@ -7,7 +7,6 @@ var path = require('path');
 
 
 var buildTime = Date.now();
-
 var appendRev = function appendRev() {
     buildTime = Date.now();
     var appendString = "?rev=" + buildTime;

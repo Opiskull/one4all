@@ -1,9 +1,6 @@
 angular.module('one4all').directive('actionsButton', [function () {
     return {
-        template: '<div class="btn-group pull-right"> \
-                <a class="btn btn-default" ng-click="edit()" title="edit"><i class="glyphicon glyphicon-pencil"></i></a>\
-                <a class="btn btn-default" ng-click="remove()" title="delete"><i class="glyphicon glyphicon-trash"></i></a>\
-            </div>',
+        templateUrl: 'directives/buttons/actions-button.html' ,
         restrict: 'E',
         scope: {
             edit: '&edit',

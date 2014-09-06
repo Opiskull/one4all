@@ -20,6 +20,9 @@ var angularFileSort = require('gulp-angular-filesort');
 var pkg = require('./package.json');
 var gulpif = require('gulp-if');
 var argv = require('yargs').argv;
+var header = require('gulp-header');
+var cssmin = require('gulp-minify-css');
+var path = require('path');
 
 var release = argv.release;
 
@@ -115,7 +118,8 @@ gulp.task('images', function () {
 });
 
 gulp.task('app', function () {
-    return gulp.src(paths.src.app).pipe(angularFileSort())
+    return gulp.src(paths.src.app)
+        .pipe(angularFileSort())
         .pipe(concat(paths.filenames.app))
         .pipe(gulpif(release, uglify()))
         .pipe(gulp.dest(paths.build));
@@ -129,10 +133,12 @@ gulp.task('templates', function () {
             quotes: true
         })))
         .pipe(html2js({
-            moduleName: paths.templatemodule
+            moduleName: paths.templatemodule,
+            declareModule: false
         }))
         .pipe(concat(paths.filenames.template))
         .pipe(gulpif(release, uglify()))
+        .pipe(header("angular.module('<%= moduleName %>',[]);\n",{moduleName: paths.templatemodule}))
         .pipe(gulp.dest(paths.build));
 });
 
@@ -147,6 +153,7 @@ gulp.task('vendor', function () {
 gulp.task('css', function () {
     return gulp.src(paths.src.css)
         .pipe(less())
+        .pipe(gulpif(release,cssmin()))
         .pipe(rename(paths.filenames.css))
         .pipe(gulp.dest(paths.build));
 });

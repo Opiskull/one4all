@@ -1,13 +1,6 @@
 angular.module('one4all').directive('searchButton', ['searchDialogService', 'itemService', function (searchDialogService, itemService) {
     return {
-        template: '<div class="input-group"> \
-                <input class="form-control input-sm" type="text" ng-model="item.title" focus-me="true" placeholder="{{::placeholder}}"/> \
-                <span class="input-group-btn"> \
-                    <button class="btn btn-default btn-sm" type="button" ng-click="search(item)"> \
-                        <span class="glyphicon glyphicon-transfer"></span> \
-                    </button> \
-                </span> \
-            </div>',
+        templateUrl: 'directives/buttons/search-button.html' ,
         restrict: 'E',
         scope: {
             defaultProvider: '=',

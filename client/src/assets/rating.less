@@ -6,23 +6,24 @@
 }
 
 .nut {
+  background: url('images/nut-sprite.png') no-repeat top left;
   height: 24px;
   width: 24px;
-  margin: 1px;
+  margin: -1px;
   display: inline-block;
   cursor: pointer;
 }
 
-.nut-disabled {
-  background-image: url("images/nut-disabled.png");
+.nut.nut-disabled {
+  background-position: 0px 0px;
   opacity: 0.5;
 }
 
-.nut-enabled {
-  background-image: url("images/nut-enabled.png");
+.nut.nut-enabled {
+  background-position: 0px -24px;
 }
 
-.nut-hover {
-  background-image: url("images/nut-enabled.png");
+.nut.nut-hover {
+  background-position: 0px -24px;
   opacity: 0.75;
 }
