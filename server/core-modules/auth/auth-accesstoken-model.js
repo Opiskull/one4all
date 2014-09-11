@@ -24,11 +24,7 @@ accessTokenSchema.statics.findUserByToken = function (token, callback) {
 };
 
 accessTokenSchema.statics.findByToken = function (token, callback) {
-    this.findOne({accessToken: token}, function (err, accessToken) {
-        if (err) return callback(err);
-        if (!accessToken) return callback(null);
-        return callback(null, accessToken);
-    });
+    this.findOne({accessToken: token}, callback);
 };
 
 accessTokenSchema.statics.removeWithToken = function (token, callback) {
@@ -40,14 +36,6 @@ accessTokenSchema.statics.removeWithToken = function (token, callback) {
 };
 
 var AccessToken = mongoose.model('AccessToken', accessTokenSchema);
-
-
-//var item = new AccessToken();
-//item.accessToken = "ya29.1.AADtN_UIT16NE4W0qlOnNq6DkN-GkDj5kWIlsK9sNUeq7ML3iHIYWB4DRHqsXc0";
-//item.user = new mongoose.Types.ObjectId('53b5ae3f427f220cfcef34fe');
-//item.save(function(err,doc){
-//
-//});
 
 exports.schema = accessTokenSchema;
 exports.model = AccessToken;
