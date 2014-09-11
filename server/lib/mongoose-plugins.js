@@ -5,12 +5,7 @@ var Schema = mongoose.Schema;
 
 function statsPlugin(schema) {
     var statsSchema = {
-        stats: {
-            finished: Boolean,
-            dropped: Boolean,
-            paused: Boolean,
-            owned: Boolean
-        }
+        state: {type: String,enum:["","finished","dropped","paused","owned"]}
     };
     schema.add(statsSchema);
 }

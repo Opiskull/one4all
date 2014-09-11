@@ -9,8 +9,7 @@
     <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
 <div class="item-row" ng-repeat="game in filtered track by game.id"
-     display-state="game.stats">
-
+     display-state="game.state">
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2"><a ng-click="showInfo(game)">{{game.title}}</a></div>

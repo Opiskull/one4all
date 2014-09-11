@@ -11,17 +11,17 @@
         Modified</a></div>
     <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
-<div class="item-row" ng-repeat="serie in filtered track by serie.id" display-state="serie.stats">
+<div class="item-row" ng-repeat="serie in filtered track by serie.id" display-state="serie.state">
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2">
                 <a ng-click="showInfo(serie)">{{serie.title}}</a>
             </div>
             <div class="col-sm-2">
-                <up-down-button disabled="serie.stats.finished" item="serie" property="'season'"></up-down-button>
+                <up-down-button disabled="serie.state == 'finished'" item="serie" property="'season'"></up-down-button>
             </div>
             <div class="col-sm-2">
-                <up-down-button disabled="serie.stats.finished" item="serie" property="'episode'"></up-down-button>
+                <up-down-button disabled="serie.state == 'finished'" item="serie" property="'episode'"></up-down-button>
             </div>
             <div class="col-sm-2">
                 <rating-nuts item="serie" property="'rating'"></rating-nuts>

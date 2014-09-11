@@ -15,14 +15,14 @@
     </div>
 </div>
 <div class="item-row" ng-repeat="anime in filtered track by anime.id"
-     display-state="anime.stats">
+     display-state="anime.state">
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2">
                 <a ng-click="showInfo(anime)">{{anime.title}}</a>
             </div>
             <div class="col-sm-4">
-                <up-down-button disabled="anime.stats.finished" item="anime" property="'episode'"></up-down-button>
+                <up-down-button disabled="anime.state == 'finished'" item="anime" property="'episode'"></up-down-button>
             </div>
             <div class="col-sm-2">
                 <rating-nuts item="anime" property="'rating'"></rating-nuts>

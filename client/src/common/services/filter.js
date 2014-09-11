@@ -5,11 +5,8 @@ angular.module('one4all').factory('filterService', ['settingsService', '$filter'
         return settings.filters.keyword !== '';
     }
 
-    function itemHasStats(item) {
-        if (!item.stats) return false;
-        return _.some(item.stats, function (stat) {
-            return stat;
-        });
+    function itemHasState(item) {
+        return item.state && item.state != '';
     }
 
     function filterByKeyword(items) {
@@ -24,10 +21,10 @@ angular.module('one4all').factory('filterService', ['settingsService', '$filter'
 
     function filterItemByStats(item) {
         var result = false;
-        if (itemHasStats(item)) {
+        if (itemHasState(item)) {
             angular.forEach(settings.filters.stats, function (stat, statKey) {
                 if (stat) {
-                    if (item.stats[statKey]) {
+                    if (item.state === statKey) {
                         result = true;
                     }
                 }

@@ -12,14 +12,14 @@
     <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
 </div>
 <div class="item-row" ng-repeat="book in filtered track by book.id"
-     display-state="book.stats">
+     display-state="book.state">
     <div class="col-sm-12">
         <div class="row">
             <div class="col-sm-2">
                 <a ng-click="showInfo(book)">{{book.title}}</a>
             </div>
             <div class="col-sm-2">
-                <up-down-button disabled="book.stats.finished" item="book" property="'page'"></up-down-button>
+                <up-down-button disabled="book.state == 'finished'" item="book" property="'page'"></up-down-button>
             </div>
             <div class="col-sm-2">{{book.author}}</div>
             <div class="col-sm-2">
