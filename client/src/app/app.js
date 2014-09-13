@@ -5,6 +5,7 @@ angular.module('one4all', ['ui.bootstrap',
     'ngTagsInput',
     'ngStorage',
     'auth',
+    'core',
     /* Modules */
     'manga', 'movie', 'serie', 'anime', 'game', 'book',
     'providers',
