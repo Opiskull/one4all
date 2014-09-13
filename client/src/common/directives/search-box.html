@@ -1,5 +1,6 @@
 <div class="input-group search-box">
-    <input type="search" class="form-control" placeholder="Search" ng-model="keyword" focus-me="focus" ng-blur="focus=false">
+    <input type="search" class="form-control" placeholder="Search" ng-model="keyword" focus-me="focus"
+           ng-blur="focus=false" ng-change="keywordChanged()">
     <span class="input-group-btn" ng-if="keyword !== ''">
         <button class="btn btn-default" type="button" ng-click="emptyKeyword()">
             <i class="glyphicon glyphicon-remove"></i>

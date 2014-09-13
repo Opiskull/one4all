@@ -11,10 +11,10 @@
         <a ng-click="orderBy('updatedAt')" class="order-by">Last Modified</a>
     </div>
     <div class="col-sm-3">
-        <span class="badge pull-right">{{items.length}}</span>
+        <span class="badge pull-right">{{pagination.filteredItemsCount}}</span>
     </div>
 </div>
-<div class="item-row" ng-repeat="anime in filtered track by anime.id"
+<div class="item-row" ng-repeat="anime in pagination.pageItems track by anime.id"
      display-state="anime.state">
     <div class="col-sm-12">
         <div class="row">

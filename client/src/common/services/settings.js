@@ -1,15 +1,15 @@
 angular.module('one4all').factory('settingsService', ['$rootScope', '$localStorage', function ($rootScope, $localStorage) {
     var settings = {};
 
-    function loadStoredSettings(){
+    function loadStoredSettings() {
         var storedSettings = $localStorage.settings;
-        if(storedSettings) {
-            angular.copy(storedSettings,settings);
+        if (storedSettings) {
+            angular.copy(storedSettings, settings);
         }
     }
 
-    function loadDefaultSettings(){
-        var defaultStats ={
+    function loadDefaultSettings() {
+        var defaultStats = {
             finished: false,
             dropped: false,
             paused: false,
@@ -26,18 +26,18 @@ angular.module('one4all').factory('settingsService', ['$rootScope', '$localStora
                 reverse: false
             }
         };
-        angular.copy(defaultSettings,settings);
+        angular.copy(defaultSettings, settings);
     }
 
-    function saveClientSettings(){
+    function saveClientSettings() {
         $localStorage.settings = settings;
     }
 
-    function deleteClientSettings(){
+    function deleteClientSettings() {
         delete $localStorage.settings;
     }
 
-    function resetClientSettings(){
+    function resetClientSettings() {
         loadDefaultSettings();
         $rootScope.$emit('filter');
     }

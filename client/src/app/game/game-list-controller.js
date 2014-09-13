@@ -1,7 +1,6 @@
 angular.module('game')
-    .controller('GameListCtrl', ['$scope', 'gameResource', 'filterService', 'listService', function ($scope, Games, filterService, listService) {
-        filterService.register($scope, Games);
-        listService.register($scope, Games);
+    .controller('GameListCtrl', ['$scope', '$controller', 'gameResource', function ($scope, $controller, Games) {
+        $controller('BaseListCtrl', {$scope: $scope, Resource: Games});
         $scope.defaultProvider = '';
         $scope.title = 'game';
     }]);

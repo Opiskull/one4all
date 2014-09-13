@@ -1,9 +1,9 @@
-angular.module('dialog').controller('addDialogCtrl', ['$scope', '$modalInstance','dialogParameters', function ($scope, $modalInstance, dialogParameters) {
+angular.module('dialog').controller('addDialogCtrl', ['$scope', '$modalInstance', 'dialogContext', function ($scope, $modalInstance, dialogContext) {
     $scope.item = {};
-    $scope.defaultProvider = dialogParameters.defaultProvider;
-    $scope.headerTitle = dialogParameters.headerTitle;
-    $scope.templateUrl = dialogParameters.templateUrl;
-    $scope.searchInfoCallback = dialogParameters.searchInfoCallback;
+    $scope.defaultProvider = dialogContext.defaultProvider;
+    $scope.headerTitle = dialogContext.headerTitle;
+    $scope.templateUrl = dialogContext.templateUrl;
+    $scope.searchInfoCallback = dialogContext.searchInfoCallback;
 
     $scope.save = function () {
         $modalInstance.close($scope.item);

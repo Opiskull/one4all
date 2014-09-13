@@ -15,26 +15,26 @@ angular.module('dialog').
             })
         };
 
-        var addItem = function (dialogParameters) {
+        var addItem = function (dialogContext) {
             return $modal.open({
                 templateUrl: 'dialog/dialog-add-item.html',
                 controller: 'addDialogCtrl',
                 resolve: {
-                    dialogParameters: function () {
-                        return dialogParameters;
+                    dialogContext: function () {
+                        return dialogContext;
                     }
                 },
                 backdrop: 'static'
             })
         };
 
-        var editItem = function (dialogParameters) {
+        var editItem = function (dialogContext) {
             return $modal.open({
                 templateUrl: 'dialog/dialog-edit-item.html',
                 controller: 'editDialogCtrl',
                 resolve: {
-                    dialogParameters: function () {
-                        return dialogParameters;
+                    dialogContext: function () {
+                        return dialogContext;
                     }
                 },
                 backdrop: 'static'
@@ -42,6 +42,9 @@ angular.module('dialog').
         };
 
         return {
+            createDialogContext: function () {
+
+            },
             confirm: confirm,
             remove: function (type, title) {
                 return confirm('Delete?', "Delete " + type + " '" + title + "'?");

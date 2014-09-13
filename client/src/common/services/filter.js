@@ -1,4 +1,4 @@
-angular.module('one4all').factory('filterService', ['settingsService', '$filter', '$rootScope', function (settingsService, $filter, $rootScope) {
+angular.module('one4all').factory('filterService', ['settingsService', '$rootScope', '$q', function (settingsService, $rootScope, $q) {
     var settings = settingsService.settings;
 
     function hasKeyword() {
@@ -42,63 +42,60 @@ angular.module('one4all').factory('filterService', ['settingsService', '$filter'
         return settings.orderBy.reverse ? items.reverse() : items;
     }
 
-    function applyFilter(items, pagination) {
+    function applyFilter(pagination) {
+        var items = pagination.totalItems;
         if (!items) return;
-        pagination.totalItems = items.length;
+        pagination.totalItemsCount = items.length;
         if (hasKeyword())
             items = filterByKeyword(items);
         items = filterByStats(items);
         items = orderItems(items);
-        return applyPagination(items, pagination);
+        pagination.filteredItems = items;
+        pagination.filteredItemsCount = items.length;
+        applyPagination(pagination);
     }
 
-    function applyPagination(items, pagination) {
-        pagination.filteredItems = items.length;
+    function applyPagination(pagination) {
         var startIndex = (pagination.currentPage - 1) * pagination.itemsPerPage;
         var endIndex = startIndex + pagination.itemsPerPage;
-        return items.slice(startIndex, endIndex);
+        pagination.pageItems = pagination.filteredItems.slice(startIndex, endIndex);
+        pagination.pageItemsCount = pagination.pageItems.length;
     }
 
-    function register(scope, Resource) {
-        scope.pagination = {currentPage: 1, itemsPerPage: 20, maxSize: 5, totalItems: 0};
-
-        scope.filter = function () {
-            scope.filtered = applyFilter(scope.items, scope.pagination);
-        };
-
-        scope.orderBy = function (property) {
-            if (settings.orderBy.predicate == property) {
-                settings.orderBy.reverse = !settings.orderBy.reverse;
-            }
-            settings.orderBy.predicate = property;
-            scope.filter();
-        };
-
-        scope.$on('$destroy', function () {
-            removeFilter();
-        });
-
-        var removeFilter = $rootScope.$on('filter', function () {
-            scope.filter();
-        });
-
-        function setItems(items) {
-            scope.items = items;
-            scope.filtered = applyFilter(items, scope.pagination);
+    function orderBy(property) {
+        if (settings.orderBy.predicate == property) {
+            settings.orderBy.reverse = !settings.orderBy.reverse;
         }
+        settings.orderBy.predicate = property;
+        forceFilter();
+    }
 
-        if (!Resource.items) {
-            Resource.getList().then(function (items) {
-                Resource.items = items;
-                setItems(items);
+    function forceFilter() {
+        $rootScope.$emit('filter');
+    }
+
+    function loadItems(pagination, resource) {
+        var deferred = $q.defer();
+        var promise = deferred.promise;
+        if (!resource.items) {
+            resource.getList().then(function (items) {
+                resource.items = items;
+                pagination.totalItems = items;
+                applyFilter(pagination);
+                deferred.resolve(pagination);
             });
         } else {
-            setItems(Resource.items);
+            pagination.totalItems = resource.items;
+            applyFilter(pagination);
+            deferred.resolve(pagination);
         }
+        return promise;
     }
 
     return {
         applyFilter: applyFilter,
-        register: register
+        orderBy: orderBy,
+        forceFilter: forceFilter,
+        loadItems: loadItems
     };
 }]);

@@ -2,9 +2,9 @@
     <div class="bottom-row">
         <div class="col-sm-12">
             <add-button add="add()"></add-button>
-            <pagination total-items="pagination.filteredItems" ng-model="pagination.currentPage"
+            <pagination total-items="pagination.filteredItemsCount" ng-model="pagination.currentPage"
                         items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
-                        class="pull-right" boundary-links="true" ng-change="filter()"
+                        class="pull-right" boundary-links="true" ng-change="changePage()"
                         previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
             </pagination>
         </div>

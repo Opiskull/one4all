@@ -1,4 +1,4 @@
-angular.module('one4all').directive('filterBar', ['$rootScope','$timeout','settingsService',function ($rootScope,$timeout,settingsService) {
+angular.module('one4all').directive('filterBar', ['$rootScope', '$timeout', 'settingsService', function ($rootScope, $timeout, settingsService) {
     return {
         restrict: 'EA',
         templateUrl: 'directives/filter-bar.html',
@@ -7,8 +7,8 @@ angular.module('one4all').directive('filterBar', ['$rootScope','$timeout','setti
         },
         link: function ($scope, $element, $attr) {
 
-            function setStats(value){
-                angular.forEach(settingsService.settings.filters.stats,function(stat,statName){
+            function setStats(value) {
+                angular.forEach(settingsService.settings.filters.stats, function (stat, statName) {
                     settingsService.settings.filters.stats[statName] = value;
                 });
             }
@@ -21,25 +21,25 @@ angular.module('one4all').directive('filterBar', ['$rootScope','$timeout','setti
                 });
             };
 
-            $scope.deleteClientSettings = function(){
+            $scope.deleteClientSettings = function () {
                 settingsService.deleteClientSettings();
             };
 
-            $scope.saveClientSettings = function(){
+            $scope.saveClientSettings = function () {
                 settingsService.saveClientSettings();
             };
 
-            $scope.resetClientSettings = function(){
+            $scope.resetClientSettings = function () {
                 settingsService.resetClientSettings();
                 $scope.settings = settingsService.settings;
             };
 
-            $scope.selectAllStats = function(){
+            $scope.selectAllStats = function () {
                 setStats(true);
                 $scope.filterItems();
             };
 
-            $scope.deselectAllStats = function(){
+            $scope.deselectAllStats = function () {
                 setStats(false);
                 $scope.filterItems();
             };

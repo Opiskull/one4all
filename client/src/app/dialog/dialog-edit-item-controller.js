@@ -1,9 +1,9 @@
-angular.module('dialog').controller('editDialogCtrl', ['$scope', '$modalInstance', 'dialogParameters', function ($scope, $modalInstance, dialogParameters) {
-    $scope.item = dialogParameters.item;
-    $scope.defaultProvider = dialogParameters.defaultProvider;
-    $scope.headerTitle = dialogParameters.headerTitle;
-    $scope.templateUrl = dialogParameters.templateUrl;
-    $scope.searchInfoCallback = dialogParameters.searchInfoCallback;
+angular.module('dialog').controller('editDialogCtrl', ['$scope', '$modalInstance', 'dialogContext', function ($scope, $modalInstance, dialogContext) {
+    $scope.item = dialogContext.item;
+    $scope.defaultProvider = dialogContext.defaultProvider;
+    $scope.headerTitle = dialogContext.headerTitle;
+    $scope.templateUrl = dialogContext.templateUrl;
+    $scope.searchInfoCallback = dialogContext.searchInfoCallback;
 
     $scope.save = function () {
         $modalInstance.close($scope.item);

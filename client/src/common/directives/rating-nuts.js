@@ -3,7 +3,7 @@ angular.module('one4all').directive('ratingNuts', ['itemService', function (item
     var disabledClass = 'nut-disabled';
     var hoverClass = 'nut-hover';
 
-    function resetRating(nuts){
+    function resetRating(nuts) {
         nuts.removeClass(hoverClass);
         nuts.removeClass(enabledClass);
         nuts.addClass(disabledClass);
@@ -23,7 +23,7 @@ angular.module('one4all').directive('ratingNuts', ['itemService', function (item
         }
     }
 
-    function setHoverRating(nuts, rating){
+    function setHoverRating(nuts, rating) {
         if (angular.isNumber(rating)) {
             resetRating(nuts);
             for (var i = 0; i < nuts.length; i++) {
@@ -43,10 +43,10 @@ angular.module('one4all').directive('ratingNuts', ['itemService', function (item
         templateUrl: 'directives/rating-nuts.html',
         link: function (scope, element, attrs) {
             var nuts = element.children();
-            nuts.on('mouseenter',function(){
+            nuts.on('mouseenter', function () {
                 setHoverRating(nuts, parseInt(angular.element(this).attr('value')));
             });
-            element.on('mouseleave',function(){
+            element.on('mouseleave', function () {
                 setHoverRating(nuts, 0);
                 setRating(nuts, scope.item[scope.property]);
             });

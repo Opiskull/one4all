@@ -1,4 +1,4 @@
-angular.module('serie', ['ngRoute', 'restangular'])
+angular.module('serie', ['core', 'ngRoute', 'restangular'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/serie', {
             templateUrl: 'serie/serie-list.html',

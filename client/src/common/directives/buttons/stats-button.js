@@ -23,7 +23,7 @@ angular.module('one4all').directive('statsButton', ['itemService', '$compile', f
             $element.append(group);
 
             function setState(state) {
-                if(state === $scope.item.state){
+                if (state === $scope.item.state) {
                     $scope.item.state = '';
                 } else {
                     $scope.item.state = state;
@@ -31,7 +31,7 @@ angular.module('one4all').directive('statsButton', ['itemService', '$compile', f
             }
 
             function setViewToState(state) {
-                if(state == undefined) return;
+                if (state == undefined) return;
                 var allStats = $element.find('a');
                 allStats.removeClass('active');
                 angular.forEach(allStats, function (element) {
@@ -47,7 +47,7 @@ angular.module('one4all').directive('statsButton', ['itemService', '$compile', f
 
             $scope.setState = function (state) {
                 setState(state);
-                itemService.update($scope.item).then(function(item){
+                itemService.update($scope.item).then(function (item) {
                     setViewToState(item.state);
                 });
             };

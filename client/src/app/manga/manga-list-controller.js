@@ -1,7 +1,6 @@
 angular.module('manga')
-    .controller('MangaListCtrl', ['$scope', 'mangaResource', 'filterService', 'listService', function ($scope, Mangas, filterService, listService) {
-        filterService.register($scope, Mangas);
-        listService.register($scope, Mangas);
+    .controller('MangaListCtrl', ['$scope', '$controller', 'mangaResource', function ($scope, $controller, Mangas) {
+        $controller('BaseListCtrl', {$scope: $scope, Resource: Mangas});
         $scope.defaultProvider = 'mal-manga';
         $scope.title = 'manga';
 

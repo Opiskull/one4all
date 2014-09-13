@@ -45,14 +45,16 @@
                         </div>
                     </form>
                 </li>
-                <li ng-class="{ active : collapsed.filter}"><a title="filters" ng-click="collapsed.filter = !collapsed.filter"><i
+                <li ng-class="{ active : collapsed.filter}"><a title="filters"
+                                                               ng-click="collapsed.filter = !collapsed.filter"><i
                         class="glyphicon glyphicon-filter"></i></a></li>
                 <li class="dropdown">
                     <a class="dropdown-toggle" title="settings"><i class="glyphicon glyphicon-cog"></i></a>
                     <ul class="dropdown-menu">
                         <li><a>Package Version: <span class="bold pull-right">{{::appInfo.version}}</span></a></li>
                         <li><a ng-href="https://github.com/Opiskull/one4all/commit/{{::appInfo.lastCommit}}"
-                               target="_blank">Last Commit: <span class="bold pull-right">{{::appInfo.lastCommit|truncate:7 }}</span></a></li>
+                               target="_blank">Last Commit: <span class="bold pull-right">{{::appInfo.lastCommit|truncate:7 }}</span></a>
+                        </li>
                         <li><a>Last Build: <span class="bold pull-right">{{appInfo.buildTime | timeAgo}}</span></a></li>
                     </ul>
                 </li>

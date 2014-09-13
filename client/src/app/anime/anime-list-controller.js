@@ -1,7 +1,6 @@
 angular.module('anime')
-    .controller('AnimeListCtrl', ['$scope', 'animeResource', 'filterService', 'listService', function ($scope, Animes, filterService, listService) {
-        filterService.register($scope, Animes);
-        listService.register($scope, Animes);
+    .controller('AnimeListCtrl', ['$scope', '$controller', 'animeResource', function ($scope, $controller, Animes) {
+        $controller('BaseListCtrl', {$scope: $scope, Resource: Animes});
         $scope.defaultProvider = 'mal-anime';
         $scope.title = 'anime';
     }]);

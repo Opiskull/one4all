@@ -9,9 +9,9 @@
     </div>
     <div class="col-sm-1"><a ng-click="orderBy('updatedAt')" class="order-by">Last
         Modified</a></div>
-    <div class="col-sm-3"><span class="badge pull-right">{{items.length}}</span></div>
+    <div class="col-sm-3"><span class="badge pull-right">{{pagination.filteredItemsCount}}</span></div>
 </div>
-<div class="item-row" ng-repeat="book in filtered track by book.id"
+<div class="item-row" ng-repeat="book in pagination.pageItems track by book.id"
      display-state="book.state">
     <div class="col-sm-12">
         <div class="row">
