@@ -1,36 +1,138 @@
-.ng-enter {
-  .fadeIn;
+.animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
 
-.ng-enter.ng-enter-active {
-  .fadeInComplete;
+.animated.infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
 }
 
-.fadeIn {
-  -webkit-transition: 0.5s linear all;
-  transition: 0.5s linear all;
-  opacity: 0;
+.animated.hinge {
+  -webkit-animation-duration: 2s;
+  animation-duration: 2s;
 }
 
-.fadeInComplete {
-  opacity: 1;
+@-webkit-keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
 }
 
-.ng-leave {
-  .fadeOut;
-}
-
-.ng-leave.ng-leave-active {
-  .fadeOutComplete;
+@keyframes fadeOut {
+  0% {opacity: 1;}
+  100% {opacity: 0;}
 }
 
 .fadeOut {
-  -webkit-transition: 0.5s linear all;
-  transition: 0.5s linear all;
-  opacity: 1;
+  -webkit-animation-name: fadeOut;
+  animation-name: fadeOut;
 }
 
-.fadeOutComplete {
-  opacity: 0;
-  display: none;
+@-webkit-keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
 }
+
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+@-webkit-keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+@keyframes fadeOutUp {
+  0% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+
+.fadeOutUp {
+  -webkit-animation-name: fadeOutUp;
+  animation-name: fadeOutUp;
+}
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  100% {
+    opacity: 1;
+    -webkit-transform: none;
+    transform: none;
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+.view-animation.ng-enter{
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+}
+
+//.info-animation.ng-hide-add{
+//  -webkit-animation: fadeOutUp 0.2s;
+//  animation: fadeOutUp 0.2s;
+//}
+//
+//.info-animation.ng-hide-remove{
+//  -webkit-animation: fadeInDown 0.8s;
+//  animation: fadeInDown 0.8s;
+//}
+
+.info-animation.ng-enter{
+  -webkit-animation: fadeInDown 0.8s;
+  animation: fadeInDown 0.8s;
+}
+
+.info-animation.ng-leave{
+  -webkit-animation: fadeOutUp 0.2s;
+  animation: fadeOutUp 0.2s;
+}
+
+//.view-animation.ng-leave{
+//  -webkit-animation: fadeOut 1s;
+//  animation: fadeOut 1s;
+//}

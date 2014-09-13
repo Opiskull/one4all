@@ -1,7 +1,7 @@
 angular.module('providers').directive('info', ['searchService', function (searchService) {
     return {
         restrict: 'E',
-        template: '<div ng-show="item.open"><div ng-include="detailTemplate" ng-if="item.info"></div><tags items="item.tags"></tags></div>',
+        template: '<div ng-if="item.open" class="info-animation"><div ng-include="detailTemplate" ng-if="item.info"></div><tags items="item.tags"></tags></div>',
         link: function (scope, element, attrs) {
             attrs.$observe('item.info', function () {
                 if (scope.item.info) {
