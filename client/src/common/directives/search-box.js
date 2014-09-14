@@ -9,19 +9,18 @@ angular.module('one4all').directive('searchBox', ['$rootScope', '$timeout', 'set
             $scope.keyword = '';
             $scope.emptyKeyword = function () {
                 $scope.keyword = '';
+                $scope.keywordChanged();
             };
-            $scope.keywordChanged = function () {
-                _.debounce(function (newValue) {
-                    $scope.$apply(function () {
-                        if (settingsService.settings.filters.keyword !== newValue) {
-                            settingsService.settings.filters.keyword = newValue;
-                            $timeout(function () {
-                                $rootScope.$emit('filter');
-                            });
-                        }
-                    });
-                }, 250);
-            };
+            $scope.keywordChanged = _.debounce(function () {
+                $scope.$apply(function () {
+                    if (settingsService.settings.filters.keyword !== $scope.keyword) {
+                        settingsService.settings.filters.keyword = $scope.keyword;
+                        $timeout(function () {
+                            $rootScope.$emit('filter');
+                        });
+                    }
+                });
+            }, 250);
         }
     };
 }]);

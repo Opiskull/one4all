@@ -12,10 +12,11 @@ angular.module('one4all', ['ui.bootstrap',
     'dialog',
     'one4all.templates',
     'pasvaz.bindonce'])
-    .config(['RestangularProvider', function (RestangularProvider) {
+    .config(['RestangularProvider','$compileProvider', function (RestangularProvider,$compileProvider) {
+        $compileProvider.debugInfoEnabled(true);
         RestangularProvider.setBaseUrl('/api');
     }])
-    .controller('AppCtrl', ['$scope', 'authService', 'settingsService', '$rootScope', '$timeout', function ($scope, authService, settingsService, $rootScope, $timeout) {
+    .controller('AppCtrl', ['$scope', 'authService', 'settingsService', function ($scope, authService, settingsService) {
         $scope.authInfo = authService.authInfo;
         $scope.logout = authService.logout;
         $scope.settings = settingsService.settings;

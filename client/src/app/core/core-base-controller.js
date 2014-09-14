@@ -43,6 +43,7 @@ angular.module('core')
 
         $scope.add = function () {
             var context = createDialogContext();
+            context.item = {};
             listService.add(context);
         };
 
