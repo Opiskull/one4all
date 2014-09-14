@@ -49,6 +49,7 @@ var server = restify.createServer({
                         };
                     }
                 }
+                logger.error(body);
             } else if (Buffer.isBuffer(body)) {
                 body = body.toString('base64');
             }
