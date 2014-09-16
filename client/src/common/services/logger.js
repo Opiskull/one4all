@@ -24,6 +24,9 @@ angular.module('one4all').factory('logger', ['$log','growl', function ($log,grow
                 case 401:
                     msg = handle401Error(response.data);
                     break;
+                case 502:
+                    msg = 'Server is down. Your changes will not be saved!';
+                    break;
             }
         }
         logError(response.data,msg);
