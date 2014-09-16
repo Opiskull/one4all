@@ -1,8 +1,16 @@
-angular.module('one4all').factory('itemService', [function () {
+angular.module('one4all').factory('itemService', ["$log",function ($log) {
+
+    function writeErrorResponseInLog(response){
+        if(response.data){
+            $log.error(response.data);
+        }
+    }
+
     function remove(items, item) {
-        return item.remove().then(function () {
-            items.splice(items.indexOf(item), 1);
-        });
+        return item.remove()
+            .then(function () {
+                items.splice(items.indexOf(item), 1);
+            },writeErrorResponseInLog);
     }
 
     function updateItems(items, item) {
@@ -16,10 +24,11 @@ angular.module('one4all').factory('itemService', [function () {
     }
 
     function update(item) {
-        return item.put().then(function (updatedItem) {
-            item.updatedAt = updatedItem.updatedAt;
-            return updatedItem;
-        });
+        return item.put()
+            .then(function (updatedItem) {
+                item.updatedAt = updatedItem.updatedAt;
+                return updatedItem;
+            },writeErrorResponseInLog);
     }
 
     function validateNumber(value) {
