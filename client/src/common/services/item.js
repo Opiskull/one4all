@@ -1,16 +1,10 @@
-angular.module('one4all').factory('itemService', ["$log",function ($log) {
-
-    function writeErrorResponseInLog(response){
-        if(response.data){
-            $log.error(response.data);
-        }
-    }
+angular.module('one4all').factory('itemService', ["logger",function (logger) {
 
     function remove(items, item) {
         return item.remove()
             .then(function () {
                 items.splice(items.indexOf(item), 1);
-            },writeErrorResponseInLog);
+            },logger.handleRestErrorResponse);
     }
 
     function updateItems(items, item) {
@@ -28,7 +22,7 @@ angular.module('one4all').factory('itemService', ["$log",function ($log) {
             .then(function (updatedItem) {
                 item.updatedAt = updatedItem.updatedAt;
                 return updatedItem;
-            },writeErrorResponseInLog);
+            },logger.handleRestErrorResponse);
     }
 
     function validateNumber(value) {

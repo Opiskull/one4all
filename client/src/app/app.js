@@ -11,10 +11,15 @@ angular.module('one4all', ['ui.bootstrap',
     'providers',
     'dialog',
     'one4all.templates',
-    'pasvaz.bindonce'])
-    .config(['RestangularProvider','$compileProvider', function (RestangularProvider,$compileProvider) {
+    'pasvaz.bindonce',
+    'angular-growl'])
+    .config(['RestangularProvider','$compileProvider','growlProvider', function (RestangularProvider,$compileProvider,growlProvider) {
         $compileProvider.debugInfoEnabled(true);
         RestangularProvider.setBaseUrl('/api');
+        growlProvider.globalPosition('bottom-right');
+        growlProvider.globalDisableIcons(true);
+        growlProvider.globalDisableCountDown(true);
+        growlProvider.globalTimeToLive({success: 2000, error: -1, warning: 3000, info: 4000});
     }])
     .controller('AppCtrl', ['$scope', 'authService', 'settingsService', function ($scope, authService, settingsService) {
         $scope.authInfo = authService.authInfo;

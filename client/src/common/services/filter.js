@@ -1,4 +1,4 @@
-angular.module('one4all').factory('filterService', ['settingsService', '$rootScope', '$q','$log', function (settingsService, $rootScope, $q, $log) {
+angular.module('one4all').factory('filterService', ['settingsService', '$rootScope', '$q','logger', function (settingsService, $rootScope, $q, logger) {
     var settings = settingsService.settings;
 
     function hasKeyword() {
@@ -83,10 +83,7 @@ angular.module('one4all').factory('filterService', ['settingsService', '$rootSco
                 pagination.totalItems = items;
                 applyFilter(pagination);
                 deferred.resolve(pagination);
-            },function(errorResponse){
-                if(errorResponse.data)
-                    $log.error(errorResponse.data);
-            });
+            },logger.handleRestErrorResponse);
         } else {
             pagination.totalItems = resource.items;
             applyFilter(pagination);

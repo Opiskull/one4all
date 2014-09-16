@@ -1,9 +1,9 @@
-angular.module('one4all').factory('listService', ["$log",'settingsService', 'itemService', '$rootScope', 'dialogService', function ($log, settingsService, itemService, $rootScope, dialogService) {
+angular.module('one4all').factory('listService', ["logger",'settingsService', 'itemService', '$rootScope', 'dialogService', function (logger, settingsService, itemService, $rootScope, dialogService) {
 
 
     function remove(context) {
-        return dialogService.remove(context.moduleTitle, context.item.title).result.then(function (result) {
-            if (result) {
+        return dialogService.remove(context.moduleTitle, context.item.title).result.then(function (item) {
+            if (item) {
                 itemService.remove(context.items, context.item).then(function () {
                     $rootScope.$emit('filter');
                 });
@@ -12,9 +12,9 @@ angular.module('one4all').factory('listService', ["$log",'settingsService', 'ite
     }
 
     function edit(context) {
-        return dialogService.editItem(context).result.then(function (result) {
-            if (result) {
-                itemService.updateItems(context.items, result).then(function () {
+        return dialogService.editItem(context).result.then(function (item) {
+            if (item) {
+                itemService.updateItems(context.items, item).then(function () {
                     $rootScope.$emit('filter');
                 });
             }
@@ -23,17 +23,15 @@ angular.module('one4all').factory('listService', ["$log",'settingsService', 'ite
 
     function add(context) {
         return dialogService.addItem(context).result
-            .then(function (result) {
-            if (result) {
-                context.resource.post(result)
+            .then(function (item) {
+            if (item) {
+                context.resource.post(item)
                     .then(function (addedItem) {
                         context.items.push(addedItem);
+                        context.item = addedItem;
+                        logger.successMessageFromContext(context);
                         $rootScope.$emit('filter');
-                    },function(errorResponse){
-                        if(errorResponse.data){
-                            $log.error(errorResponse.data);
-                        }
-                    });
+                    },logger.handleRestErrorResponse);
             }
         });
     }
