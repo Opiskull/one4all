@@ -1,12 +1,8 @@
 angular.module('one4all').factory('logger', ['$log','growl', function ($log,growl) {
 
     function handle400Error(data){
-        if(data.name === 'ValidationError'){
-            var msgs = [data.message];
-            angular.forEach(data.errors, function(item){
-                msgs.push(item.message);
-            });
-            return msgs.join('<br>');
+        if(data.code === 'ValidationError'){
+            return data.message.split('\n').join('<br>');
         }
         return "Bad Request";
     }

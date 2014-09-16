@@ -8,9 +8,14 @@ global.coreRequire = function (name) {
     return require(__rootdir + '/core-modules/' + name);
 };
 
+global.libRequire = function(name){
+    return require(__rootdir + '/lib/' +name);
+};
+
 var restify = require('restify'), mongoose = require('mongoose'), path = require('path'), passport = require('passport'), fs = require('fs'), bunyan = require('bunyan'), util = require('util');
-var router = rootRequire('lib/router.js');
-var modulesLoader = rootRequire('lib/modules-loader.js');
+var router = libRequire('router.js');
+var errorHelper = libRequire('error-helper.js');
+var modulesLoader = libRequire('modules-loader.js');
 
 var config = require('./config/config.json'), packageInfo = require('./package.json');
 var logger = bunyan.createLogger({
@@ -33,30 +38,7 @@ var server = restify.createServer({
     version: packageInfo.version,
     log: logger,
     formatters: {
-        'application/json': function formatMongoose(req, res, body) {
-            if (body instanceof Error) {
-                if(body.name === 'ValidationError') {
-                    res.statusCode = 400;
-                } else {
-                    // snoop for RestError or HttpError, but don't rely on
-                    // instanceof
-                    res.statusCode = body.statusCode || 500;
-                    if (body.body) {
-                        body = body.body;
-                    } else {
-                        body = {
-                            message: body.message
-                        };
-                    }
-                }
-                logger.error(body);
-            } else if (Buffer.isBuffer(body)) {
-                body = body.toString('base64');
-            }
-            var data = JSON.stringify(body);
-            res.setHeader('Content-Length', Buffer.byteLength(data));
-            return (data);
-        }
+        'application/json': errorHelper.jsonErrorResponse
     }
 });
 
