@@ -5,6 +5,7 @@ var Schema = mongoose.Schema;
 
 function statsPlugin(schema) {
     var statsSchema = {
+        // empty for backward compatiblity
         state: {type: String,enum:["","finished","dropped","paused","owned"]}
     };
     schema.add(statsSchema);

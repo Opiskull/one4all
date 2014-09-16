@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 var plugins = rootRequire('lib/mongoose-plugins.js');
 
 var movieSchema = mongoose.Schema({
-    title: String,
+    title: {type: String, required: true},
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 

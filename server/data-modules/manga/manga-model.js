@@ -2,8 +2,8 @@ var mongoose = require('mongoose');
 var plugins = rootRequire('lib/mongoose-plugins.js');
 
 var mangaSchema = mongoose.Schema({
-    title: String,
-    chapter: Number,
+    title: {type: String, required: true},
+    chapter: {type: Number, min: 0, default: 0},
     url: String,
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
