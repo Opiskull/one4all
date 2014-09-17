@@ -1,1 +1,4 @@
---reporter nyan
+--reporter spec
+--recursive
+-c
+test
