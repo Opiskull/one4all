@@ -8,7 +8,6 @@ var accessTokenSchema = mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
-
 accessTokenSchema.statics.findUserByToken = function (token, callback) {
     var User = mongoose.model('User');
     this.findOne({accessToken: token})
