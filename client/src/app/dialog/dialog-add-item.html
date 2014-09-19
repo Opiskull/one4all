@@ -1,7 +1,13 @@
 <div class="modal-header dialog-header-confirm"><h4 class="modal-title">Add {{headerTitle}}</h4></div>
-<div class="modal-body">
-    <div ng-include="templateUrl"></div>
-</div>
-<div class="modal-footer">
-    <save-cancel-button save="save()" cancel="cancel()"></save-cancel-button>
-</div>
+<form role="form" name="itemform" novalidate>
+    <div class="modal-body">
+        <div ng-include="templateUrl"></div>
+    </div>
+    <div class="modal-footer">
+        <div class="btn-group pull-right">
+            <a class="btn btn-default" ng-click="save()" title="save" ng-disabled="itemform.$invalid"><i class="glyphicon glyphicon-floppy-disk"></i> Save</a>
+            <a class="btn btn-default" ng-click="cancel()" title="cancel"><i class="glyphicon glyphicon-floppy-remove"></i>
+                Cancel</a>
+        </div>
+    </div>
+</form>
