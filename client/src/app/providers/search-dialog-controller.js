@@ -6,6 +6,10 @@ angular.module('providers')
         $scope.keyword = initialtitle;
         $scope.currentProvider = searchService.getProvider(initialprovider);
         $scope.providers = searchService.getProviders();
+        $scope.dropdown = {
+            provideropen: false,
+            titleopen:false
+        };
 
         $scope.search = function (keywords) {
             var encodedKeywords = encodeURIComponent(keywords);
@@ -14,20 +18,30 @@ angular.module('providers')
             });
         };
 
-        $scope.selectProvider = function (provider) {
+        $scope.selectProvider = function (provider,$event) {
             $scope.currentProvider = provider;
             $scope.infos = [];
             $scope.selectedInfo = {};
             $scope.selectedTitle = '';
+            dropdownFix($event);
+            $scope.dropdown.provideropen = false;
         };
+
+        function dropdownFix($event){
+            // this is a fix for the dropdown to close on click
+            $event.preventDefault();
+            $event.stopPropagation();
+        }
 
         $scope.selectInfo = function (info) {
             $scope.selectedInfo = info;
             $scope.selectedTitle = info.title;
         };
 
-        $scope.selectTitle = function (title) {
+        $scope.selectTitle = function (title,$event) {
             $scope.selectedTitle = title;
+            dropdownFix($event);
+            $scope.dropdown.titleopen = false;
         };
 
         $scope.ok = function () {

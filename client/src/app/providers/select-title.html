@@ -1,19 +1,22 @@
-<div>
-    <h3 ng-if="!selectedInfo.id">
-        <span class="glyphicon glyphicon-ok select-info" ng-click="selectInfo(info)"></span>
+<div class="select-title">
+    <div class="btn btn-default select-title-button" ng-if="!selectedInfo.id" ng-click="selectInfo(info)">
+        <span class="glyphicon glyphicon-unchecked"></span>
         {{info.title}}
-    </h3>
+    </div>
 
-    <h3 class="dropdown" ng-if="selectedInfo.id==info.id">
-        <div class="dropdown-toggle">
-            <span class="glyphicon glyphicon-remove select-info" ng-click="selectInfo({})"></span>
+    <div class="btn-group" dropdown ng-if="selectedInfo.id==info.id" is-open="dropdown.titleopen">
+        <button type="button" class="btn btn-default select-title-button" ng-click="selectInfo({})">
+            <span class="glyphicon glyphicon-check"></span>
             {{selectedTitle}}
-        </div>
-        <ul class="dropdown-menu">
-            <li><a ng-click="selectTitle(info.title)">{{info.title}}</a></li>
+        </button>
+        <button class="btn btn-default select-title-button dropdown-toggle" ng-if="info.titles.length > 0">
+            <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" role="menu">
+            <li><a ng-click="selectTitle(info.title,$event)">{{info.title}}</a></li>
             <li ng-repeat="title in ::info.titles">
-                <a ng-click="selectTitle(title.title)">{{::title.title}}</a>
+                <a ng-click="selectTitle(title.title,$event)">{{::title.title}}</a>
             </li>
         </ul>
-    </h3>
+    </div>
 </div>
