@@ -2,8 +2,9 @@ var mongoose = require('mongoose');
 var User = require('../core-modules/user/user-model.js').model;
 var AccessToken = require('../core-modules/auth/auth-accesstoken-model.js').model;
 var testData = require('./test-data.js');
+var config = require('./config.json');
 
-mongoose.connect('mongodb://localhost/test');
+mongoose.connect(config.mongourl);
 
 function getOrCreateUser(callback) {
     User.findOne({username: 'TestUser'}, function (err, user) {
@@ -56,7 +57,7 @@ module.exports.requestHelper = function(url, token){
     if(!token)
         token = global.token;
 
-    return superagent.get('http://localhost:3000/' + url)
+    return superagent.get(config.url + url)
         .set('Authorization','Bearer ' + token)
         .set('Accept','application/json');
 };
