@@ -52,7 +52,7 @@ angular.module('core')
         };
 
         var removeFilter = $rootScope.$on('filter', function () {
-            $scope.pagination.filtered = filterService.applyFilter($scope.pagination);
+            $scope.pagination.filtered = filterService.filterItems($scope.pagination);
         });
 
         $scope.$on('$destroy', function () {
