@@ -1,3 +1,4 @@
+[![Stories in Ready](https://badge.waffle.io/Opiskull/one4all.png?label=ready&title=Ready)](https://waffle.io/Opiskull/one4all)
 one4all
 =====
    
