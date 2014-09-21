@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 
+var usedTagSchema = mongoose.Schema({text: String, count: Number},{_id:false});
+
 var userSchema = mongoose.Schema({
     username: String,
     email: String,
@@ -20,7 +22,7 @@ var userSchema = mongoose.Schema({
         ]
     },
     roles: [String],
-    usedTags: [{text: String, count: Number}]
+    usedTags: [usedTagSchema]
 });
 
 userSchema.statics.findOrCreate = function (profile, callback) {

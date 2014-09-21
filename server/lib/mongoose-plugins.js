@@ -45,19 +45,12 @@ function ratingPlugin(schema) {
 }
 
 function tagsPlugin(schema){
+    var tagSchema = new mongoose.Schema({text: { type:String }},{_id: false});
+    tagSchema.set('toJSON', {virtuals: false});
     var tagsSchema = {
-        tags: [{text: String}]
+        tags: [tagSchema]
     };
     schema.add(tagsSchema);
-    //schema.methods.addToUserTags = function(){
-    //    //var self = this;
-    //    //self.model('User').findOne({_id: self.user}, function(err,user){
-    //    //    user.usedTags = _.sortBy(_.union(user.usedTags, self.tags),'text');
-    //    //    user.save(function(err){
-    //    //
-    //    //    });
-    //    //});
-    //}
 }
 
 module.exports.stats = statsPlugin;

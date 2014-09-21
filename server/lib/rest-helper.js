@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var restify = require('restify');
+var tagsHelper = require('./tags-helper.js');
 
 
 function load(Model){
@@ -54,11 +55,14 @@ function del(Model){
 
 function update(Model){
     return function (req, res, next) {
+        var tagsContext = tagsHelper.createTagsContextFromRequest(req);
         require('util')._extend(req.model, req.body);
         req.model.save(function (err, item) {
             if (err)
                 return next(err);
             res.json(item);
+            if(tagsContext.changed)
+                tagsHelper.execute(tagsContext);
             return next();
         });
     }
