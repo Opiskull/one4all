@@ -19,7 +19,8 @@ var userSchema = mongoose.Schema({
             }
         ]
     },
-    roles: [String]
+    roles: [String],
+    usedTags: [{text: String, count: Number}]
 });
 
 userSchema.statics.findOrCreate = function (profile, callback) {

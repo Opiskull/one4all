@@ -2,6 +2,8 @@ var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 var hidden = require('mongoose-hidden')();
 var Schema = mongoose.Schema;
+var User = mongoose.model('User');
+var _ = require('lodash');
 
 function statsPlugin(schema) {
     var statsSchema = {
@@ -47,6 +49,15 @@ function tagsPlugin(schema){
         tags: [{text: String}]
     };
     schema.add(tagsSchema);
+    //schema.methods.addToUserTags = function(){
+    //    //var self = this;
+    //    //self.model('User').findOne({_id: self.user}, function(err,user){
+    //    //    user.usedTags = _.sortBy(_.union(user.usedTags, self.tags),'text');
+    //    //    user.save(function(err){
+    //    //
+    //    //    });
+    //    //});
+    //}
 }
 
 module.exports.stats = statsPlugin;

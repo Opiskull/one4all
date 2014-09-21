@@ -4,6 +4,7 @@
   "dependencies": {
     "async": "^0.9.0",
     "bunyan": "^0.22.3",
+    "lodash": "^2.4.1",
     "mongoose": "^3.8.8",
     "mongoose-hidden": "^0.4.1",
     "mongoose-timestamp": "^0.1.1",
