@@ -1,75 +1,14 @@
 var mongoose = require('mongoose');
-var restify = require('restify');
 var Anime = mongoose.model('Anime');
-
-function load(req, res, next) {
-    if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
-        return next(new restify.ResourceNotFoundError("Anime with id " + req.params.id));
-    }
-    Anime.findOne({'_id': new mongoose.Types.ObjectId(req.params.id)}, function (err, anime) {
-        if (err)
-            return next(err);
-        if (!anime)
-            return next(new restify.ResourceNotFoundError("Anime with id " + req.params.id));
-        req.model = anime;
-        return next();
-    });
-}
-
-function get(req, res, next) {
-    if (req.model) {
-        res.json(req.model);
-    }
-    return next();
-}
-
-function create(req, res, next) {
-    var anime = new Anime(req.params);
-    anime.user = req.user._id;
-    anime.save(function (err) {
-            if (err)
-                return next(err);
-            res.json(anime);
-            return next();
-        }
-    );
-}
-
-function del(req, res, next) {
-    req.model.remove(function (err) {
-        if (err)
-            return next(err);
-        res.send();
-        return next();
-    });
-}
-
-function update(req, res, next) {
-    require('util')._extend(req.model, req.body);
-    req.model.save(function (err, anime) {
-        if (err)
-            return next(err);
-        res.json(anime);
-        return next();
-    });
-}
-
-function list(req, res, next) {
-    Anime.find({user: new mongoose.Types.ObjectId(req.user.id)}, function (err, animes) {
-        if (err)
-            return next(err);
-        res.json(animes);
-        return next();
-    });
-}
+var restHelper = libRequire('rest-helper.js');
 
 module.exports = {
     title: 'Anime',
     route: '/anime',
-    load: load,
-    get: get,
-    create: create,
-    del: del,
-    update: update,
-    list: list
+    load: restHelper.load(Anime),
+    get: restHelper.get(Anime),
+    create: restHelper.create(Anime),
+    del: restHelper.del(Anime),
+    update: restHelper.update(Anime),
+    list: restHelper.list(Anime)
 };
