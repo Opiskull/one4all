@@ -1,13 +1,14 @@
+/** @global */
 global.__rootdir = __dirname;
-
+/** @global */
 global.rootRequire = function (name) {
     return require(__rootdir + '/' + name);
 };
-
+/** @global */
 global.coreRequire = function (name) {
     return require(__rootdir + '/core-modules/' + name);
 };
-
+/** @global */
 global.libRequire = function(name){
     return require(__rootdir + '/lib/' +name);
 };

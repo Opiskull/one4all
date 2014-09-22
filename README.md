@@ -1,28 +1,30 @@
 one4all
 =====
-   
-Technologies:
+
+[![Stories in Ready](https://badge.waffle.io/Opiskull/one4all.png?label=ready&title=Ready)](https://waffle.io/Opiskull/one4all)
+
+
+# Technologies
 * Nodejs
 * Angularjs
 * MongoDB
 
-# Contribution
-[![Stories in Ready](https://badge.waffle.io/Opiskull/one4all.png?label=ready&title=Ready)](https://waffle.io/Opiskull/one4all)
+# Installation
 
-# installation
+1. Install MongoDB and NodeJS
+2. Run ```npm install``` in the client and server folders
+3. Copy config.sample.json to config.json and modify it for your environment
+4. In the client directory run ```gulp build```
+5. Run the server with ```node server.js```
 
-  to install run ```npm install``` in the client and server folders
-  after that build the client. the files for the client will be served from the build folder
-  before you run the server copy the config.sample.json file in the folder config to config.json and change it to your settings
+## Client
 
-# client
+  build client in debug with ```gulp build```
+  build client with minified and obfuscated with ```gulp build --release```
+  build client and watch for filechanges with ```gulp```
 
-  to build the client run ```gulp build```
-  to build the client in release mode run ```gulp build --release```
-  to rebuild the client on filechanges run ```gulp```
+## Server
 
-# server
-
-  to test the server run ```mocha```
-  to start the server run ```node server.js```
-  to start the server with human readable log run ```node server.js | bunyan```
+  test server with ```mocha```
+  run server with ```node server.js```
+  run server with human readable log ```node server.js | bunyan```

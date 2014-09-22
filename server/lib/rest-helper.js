@@ -2,7 +2,11 @@ var mongoose = require('mongoose');
 var restify = require('restify');
 var tagsHelper = require('./tags-helper.js');
 
-
+/**
+ * Load a model into req.model with the id from req.params.id
+ * @param {mongoose.model} Model
+ * @returns {Function} (req,res,next)
+ */
 function load(Model){
     return function(req,res,next) {
         if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
@@ -18,7 +22,11 @@ function load(Model){
         });
     }
 }
-
+/**
+ * Get the req.model
+ * @param {mongoose.model} Model
+ * @returns {Function} (req,res,next)
+ */
 function get(Model){
     return function (req, res, next) {
         if (req.model) {
@@ -28,6 +36,11 @@ function get(Model){
     }
 }
 
+/**
+ * Create a new instance from the req.params
+ * @param {mongoose.model} Model
+ * @returns {Function} (req,res,next)
+ */
 function create(Model){
     return function(req,res,next) {
         var item = new Model(req.params);
@@ -41,7 +54,11 @@ function create(Model){
         );
     };
 }
-
+/**
+ * Delete the model in req.model
+ * @param {mongoose.model} Model
+ * @returns {Function} (req,res,next)
+ */
 function del(Model){
     return function (req, res, next) {
         req.model.remove(function (err) {
@@ -52,7 +69,11 @@ function del(Model){
         });
     }
 }
-
+/**
+ * Update the model in req.model with the req.body
+ * @param {mongoose.model} Model
+ * @returns {Function}
+ */
 function update(Model){
     return function (req, res, next) {
         var tagsContext = tagsHelper.createTagsContextFromRequest(req);
@@ -67,7 +88,11 @@ function update(Model){
         });
     }
 }
-
+/**
+ * List all models for this user
+ * @param {mongoose.model} Model
+ * @returns {Function}
+ */
 function list(Model) {
     return function (req, res, next) {
         Model.find({user: new mongoose.Types.ObjectId(req.user.id)}, function (err, items) {
