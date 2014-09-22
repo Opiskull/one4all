@@ -4,7 +4,6 @@ var timestamps = require('mongoose-timestamp');
 var accessTokenSchema = mongoose.Schema({
     lastLogin: {type: Date, default: Date.now},
     accessToken: String,
-    refreshToken: String,
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
