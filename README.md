@@ -19,12 +19,12 @@ one4all
 
 ## Client
 
-  build client in debug with ```gulp build```
-  build client with minified and obfuscated with ```gulp build --release```
-  build client and watch for filechanges with ```gulp```
+  build client in debug with ```gulp build```  
+  build client with minified and obfuscated with ```gulp build --release```  
+  build client and watch for filechanges with ```gulp```  
 
 ## Server
 
-  test server with ```mocha```
-  run server with ```node server.js```
-  run server with human readable log ```node server.js | bunyan```
+  test server with ```mocha```  
+  run server with ```node server.js```  
+  run server with human readable log ```node server.js | bunyan```  
