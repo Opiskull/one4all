@@ -24,7 +24,8 @@ function getOrCreateToken(userId,callback) {
     AccessToken.findOne({user: userId}, function (err, token) {
         if (err) return callback(err);
         if (token) return callback(null, token.accessToken);
-        token = new AccessToken(testData.TestToken);
+        token = new AccessToken();
+        token.accessToken = testData.TestToken.accessToken;
         token.user = userId;
         token.save(function (err, token) {
             if (err) return callback(err);
