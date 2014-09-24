@@ -1,14 +1,65 @@
 <!doctype html>
 <title>Site Maintenance</title>
 <style>
-    body { text-align: center; padding: 150px; }
+    body { text-align: center; padding: 150px; overflow: hidden; }
     h1 { font-size: 50px; color: #ff8400; }
     body { font-size: 20px; font-family: 'Gloria Hallelujah', cursive; color: #333; }
     article { display: block; text-align: left; width: 650px; margin: 0 auto; }
     a { color: #dc8100; text-decoration: none; }
     a:hover { color: #333; text-decoration: none; }
+    .squirrel-running{
+        position: absolute;
+        bottom: 0px;
+    }
+    .squirrel { background: url('images/squirrel-running.png') no-repeat top left;
+        width: 587px;
+        height: 300px;
+    }
+    .squirrel.run0 { background-position: 0px 0px;  }
+    .squirrel.run1 { background-position: -587px 0px;  }
+    .squirrel.run2 { background-position: -1174px 0px;  }
+
+    .squirrel-head { background: url('images/squirrel-head.png') no-repeat top left; width: 317px; height: 375px;  }
+    .squirrel-head.head0 { background-position: 0px 0px;  }
+    .squirrel-head.head1 { background-position: -317px 0px;  }
+
+    .squirrel-animate {
+        -webkit-animation: runn 10s infinite;
+        animation: runn 10s infinite;
+    }
+
+    @keyframes runn {
+        0% { left: 110%; transform: scaleX(1);}
+        49% { left: -50%;transform: scaleX(1);}
+        50% {left: -50%; transform: scaleX(-1);}
+        99% {left: 110%; transform: scaleX(-1);}
+        100% { left: 110%; transform: scaleX(1);}
+    }
+
+    @-webkit-keyframes runn {
+        0% { left: 110%; -webkit-transform: scaleX(1);}
+        49% { left: -50%; -webkit-transform: scaleX(1);}
+        50% {left: -50%; -webkit-transform: scaleX(-1);}
+        99% {left: 110%; -webkit-transform: scaleX(-1);}
+        100% { left: 110%; -webkit-transform: scaleX(1);}
+     }
 </style>
 <link href='http://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script type="text/javascript">
+    (function ($) {
+        $(document).ready(function(){
+            var item = $('.squirrel');
+            var current = 0;
+            setInterval(function(){
+                current +=1;
+                current = current % 3;
+                item.removeClass('run0 run1 run2');
+                item.addClass("run" + current);
+            },150);
+        });
+    }(jQuery));
+</script>
 <article>
     <div>
         <h1>We&rsquo;ll be back soon!</h1>
@@ -16,6 +67,9 @@
             <p>Our squirrel is gone searching for his nuts.</p>
             <p>We hope it will be back soon...</p>
             <p>&mdash; The Team from peerzone</p>
+        </div>
+        <div class="squirrel-running squirrel-animate">
+            <div class="squirrel"></div>
         </div>
     </div>
 </article>
