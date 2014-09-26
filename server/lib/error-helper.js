@@ -6,7 +6,7 @@ function getValidationErrorMessage(body){
     return msgs.join('\n');
 }
 
-module.exports.jsonErrorResponse = function (req, res, body) {
+function jsonErrorResponse(req, res, body) {
     if (body instanceof Error) {
         if(body.name === 'ValidationError') {
             res.statusCode = 400;
@@ -33,4 +33,8 @@ module.exports.jsonErrorResponse = function (req, res, body) {
     var data = JSON.stringify(body);
     res.setHeader('Content-Length', Buffer.byteLength(data));
     return (data);
+}
+
+module.exports.formatter = {
+    'application/json': jsonErrorResponse
 };

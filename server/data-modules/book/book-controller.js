@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Book = mongoose.model('Book');
-var restHelper = libRequire('rest-helper.js');
+var restHelper = requireLib('rest-helper.js');
 
 module.exports = {
     title: 'Book',

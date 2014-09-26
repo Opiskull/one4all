@@ -3,7 +3,7 @@ var restify = require('restify');
 var passport = require('passport');
 var GitHubStrategy = require('passport-github').Strategy;
 
-var config = rootRequire('config/config.json');
+var config = requireConfig('auth/github.json');
 
 var User = mongoose.model('User');
 var AccessToken = mongoose.model('AccessToken');
@@ -12,8 +12,8 @@ var controller = require('./github-controller.js');
 
 module.exports.init = function (server, router) {
     passport.use(new GitHubStrategy({
-            clientID: config.auth.github.clientID,
-            clientSecret: config.auth.github.clientSecret,
+            clientID: config.clientID,
+            clientSecret: config.clientSecret,
             callbackURL: "https://peerzone.net/api/auth/github/callback"
         },
         function (accessToken, refreshToken, profile, done) {

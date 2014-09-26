@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var plugins = rootRequire('lib/mongoose-plugins.js');
+var plugins = requireLib('mongoose-plugins.js');
 
 var bookSchema = mongoose.Schema({
     title: {type: String, required: true},

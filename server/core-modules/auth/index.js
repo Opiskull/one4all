@@ -1,12 +1,10 @@
-coreRequire('user');
+requireCore('user');
 require('./auth-accesstoken-model.js');
-
 
 var mongoose = require('mongoose');
 var restify = require('restify');
 var passport = require('passport');
 var BearerStrategy = require('passport-http-bearer').Strategy;
-
 
 var User = mongoose.model('User');
 var AccessToken = mongoose.model('AccessToken');

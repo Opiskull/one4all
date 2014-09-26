@@ -13,8 +13,8 @@ var parser = new xml2js.Parser({
     normalizeTags: true
 });
 
-var authConfig = rootRequire('config/config.json').extapi.mal;
-var config = require('./config.json');
+var authConfig = requireConfig('external/mal.json');
+var routes = require('./routes.json');
 
 var client = request.defaults(authConfig);
 
@@ -59,7 +59,7 @@ function parseXmlToJson(options, cb) {
 }
 
 function searchAnime(search, cb) {
-    var paras = createRequestParameters(config.AnimeSearchUrl, search);
+    var paras = createRequestParameters(routes.AnimeSearchUrl, search);
     parseXmlToJson(paras, function (err, result) {
         if (err) return cb(err);
         parseResult(result, Anime, cb);
@@ -67,7 +67,7 @@ function searchAnime(search, cb) {
 }
 
 function searchManga(search, cb) {
-    var paras = createRequestParameters(config.MangaSearchUrl, search);
+    var paras = createRequestParameters(routes.MangaSearchUrl, search);
     parseXmlToJson(paras, function (err, result) {
         if (err) return cb(err);
         parseResult(result, Manga, cb);

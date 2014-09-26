@@ -4,8 +4,8 @@ var Movie = mongoose.model('InfoTmdbMovie');
 var request = require('request');
 var async = require('async');
 
-var authConfig = rootRequire('config/config.json').extapi.themoviedb;
-var config = require('./config.json');
+var authConfig = requireConfig('external/tmdb.json');
+var routes = require('./routes.json');
 
 var client = request.defaults({
     json: true
@@ -22,7 +22,7 @@ function createDefaultParameters(url) {
 
 function createPosterPath(info) {
     if (info.poster_path && info.poster_path != null) {
-        info.poster_path = config.ImageBaseUrl + config.ImagePosterSize + info.poster_path;
+        info.poster_path = routes.ImageBaseUrl + routes.ImagePosterSize + info.poster_path;
     }
 }
 
@@ -50,7 +50,7 @@ function findItemInfoWithId(type, getItem) {
 }
 
 function getConfig(cb) {
-    var parameters = createDefaultParameters(config.ConfigurationUrl);
+    var parameters = createDefaultParameters(routes.ConfigurationUrl);
     createRequest(parameters, function (err, result) {
         if (err) return cb(err);
         cb(null, result);
@@ -58,7 +58,7 @@ function getConfig(cb) {
 }
 
 function getMovie(id, cb) {
-    var parameters = createDefaultParameters(config.MovieByIdUrl + id);
+    var parameters = createDefaultParameters(routes.MovieByIdUrl + id);
     parameters.qs.append_to_response = 'alternative_titles';
     createRequest(parameters, function (err, result) {
         if (err) return cb(err);
@@ -67,7 +67,7 @@ function getMovie(id, cb) {
 }
 
 function getSerie(id, cb) {
-    var parameters = createDefaultParameters(config.SerieByIdUrl + id);
+    var parameters = createDefaultParameters(routes.SerieByIdUrl + id);
     createRequest(parameters, function (err, result) {
         if (err) return cb(err);
         cb(null, result);
@@ -75,7 +75,7 @@ function getSerie(id, cb) {
 }
 
 function searchMovie(search, cb) {
-    var parameters = createDefaultParameters(config.MovieSearchUrl);
+    var parameters = createDefaultParameters(routes.MovieSearchUrl);
     parameters.qs.query = search;
     createRequest(parameters, function (err, result) {
         if (err) return cb(err);
@@ -87,7 +87,7 @@ function searchMovie(search, cb) {
 }
 
 function searchSerie(search, cb) {
-    var parameters = createDefaultParameters(config.SerieSearchUrl);
+    var parameters = createDefaultParameters(routes.SerieSearchUrl);
     parameters.qs.query = search;
     createRequest(parameters, function (err, result) {
         if (err) return cb(err);

@@ -1,4 +1,4 @@
-var config = rootRequire('config/config.json');
+var config = requireConfig('config.json');
 var passport = require('passport');
 var restify = require('restify');
 
@@ -6,7 +6,7 @@ var restify = require('restify');
 var authenticate = passport.authenticate('bearer', {session: false});
 
 function getRoute(route) {
-    return config.api_prefix + route;
+    return config.apiPrefix + route;
 }
 
 function getRouteAction(route, action) {
@@ -33,8 +33,17 @@ function getRouteIdWithAction(parent, action, actionid) {
     return parent;
 }
 
+var isAuthenticated = [
+    authenticate,
+    function (req, res, next) {
+        if (req.isAuthenticated()) {
+            next();
+        }
+        return next(new restify.InvalidCredentialsError());
+    }
+];
+
 exports.getSearchRoute = function (route) {
-    //return getRouteAction(route,":search");,
     return getRoute(route);
 };
 
@@ -44,23 +53,14 @@ exports.getRouteId = getRouteId;
 
 exports.getRouteIdWithAction = getRouteIdWithAction;
 
-// TODO check for partial info load
-//exports.getInfoId = function(parentRoute){
-//    return getRouteIdWithAction(parentRoute,'infos',':infoid');
-//};
-//
-//exports.getInfo = function(parentRoute){
-//    return getRouteIdWithAction(parentRoute,'infos');
-//};
-
 exports.authenticate = authenticate;
 
-exports.isAuthenticated = [
-    authenticate,
-    function (req, res, next) {
-        if (req.isAuthenticated()) {
-            next();
-        }
-        return next(new restify.InvalidCredentialsError());
-    }
-];
+exports.isAuthenticated = isAuthenticated;
+
+exports.registerDataController = function (server, controller) {
+    server.get(getRoute(controller.route), isAuthenticated, controller.list);
+    server.post(getRoute(controller.route), isAuthenticated, controller.create);
+    server.get(getRouteId(controller.route), isAuthenticated, controller.load, controller.get);
+    server.del(getRouteId(controller.route), isAuthenticated, controller.load, controller.del);
+    server.put(getRouteId(controller.route), isAuthenticated, controller.load, controller.update);
+};

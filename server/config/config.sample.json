@@ -1,10 +1,7 @@
 {
-    "api_prefix": "/api",
+  "apiPrefix": "/api",
     "port": 3000,
     "host": "localhost",
-    "coreModules": "core-modules",
-    "dataModules": "data-modules",
-    "externalApiModules": "external-api-modules",
     "db": {
         "url": "mongodb://localhost/test",
         "reconnect": true,
@@ -13,28 +10,5 @@
     "log": {
         "requests": false,
         "file": "one4all.log"
-    },
-    "auth": {
-        "github": {
-            "clientID": "",
-            "clientSecret": ""
-        },
-        "google": {
-            "clientID": "",
-            "clientSecret": ""
-        }
-    },
-    "extapi": {
-        "mal": {
-            "auth": {
-                "user": "",
-                "pass": ""
-            }
-        },
-        "themoviedb": {
-            "auth": {
-                "api_key": ""
-            }
-        }
     }
 }

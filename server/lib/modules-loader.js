@@ -1,11 +1,11 @@
-var router = require('./router.js');
+var router = require('./route-builder.js');
 var fs = require('fs');
 var pathUtil = require('path');
-var config = rootRequire('config/config.json');
+var config = requireConfig('config.json');
 
-var corePath = pathUtil.join(__rootdir, config.coreModules);
-var dataPath = pathUtil.join(__rootdir, config.dataModules);
-var externalApiPath = pathUtil.join(__rootdir, config.externalApiModules);
+var corePath = pathUtil.join(__rootdir, 'core-modules');
+var dataPath = pathUtil.join(__rootdir, 'data-modules');
+var externalApiPath = pathUtil.join(__rootdir, 'external-api-modules');
 
 function loadCoreModules(server) {
     server.log.info('loading core modules [%s]', corePath);

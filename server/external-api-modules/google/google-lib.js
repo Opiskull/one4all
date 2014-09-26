@@ -1,7 +1,5 @@
 var mongoose = require('mongoose');
-
-//var authConfig = require(require('path').join(require('path').dirname(process.mainModule.filename), 'config', 'config.json')).extapi.mal;
-var config = require('./config.json');
+var routes = require('./routes.json');
 var request = require('request');
 var googleBook = mongoose.model('InfoGoogleBook');
 var async = require('async');
@@ -14,7 +12,7 @@ function createRequestParameters(url, search) {
     return {
         qs: {
             q: search,
-            fields: config.BooksFields
+            fields: routes.BooksFields
         },
         url: url
     };
@@ -28,7 +26,7 @@ function createRequest(options, cb) {
 }
 
 function searchBooks(search, cb) {
-    var paras = createRequestParameters(config.BooksSearchUrl, search);
+    var paras = createRequestParameters(routes.BooksSearchUrl, search);
     createRequest(paras, function (err, result) {
         if (err) return cb(err);
 
