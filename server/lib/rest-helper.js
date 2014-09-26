@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var restify = require('restify');
-var tagsHelper = require('./tags-helper.js');
+var changesList = require('./changes-list.js');
 
 /**
  * Load a model into req.model with the id from req.params.id
@@ -43,8 +43,9 @@ function get(Model){
  */
 function create(Model){
     return function(req,res,next) {
-        var item = new Model(req.params);
+        var item = new Model(req.body);
         item.user = req.user._id;
+        item.changes = changesList.createChangesFromRequest(req);
         item.save(function (err) {
                 if (err)
                     return next(err);
@@ -61,6 +62,7 @@ function create(Model){
  */
 function del(Model){
     return function (req, res, next) {
+        req.model.changes = changesList.createChangesFromRequest(req);
         req.model.remove(function (err) {
             if (err)
                 return next(err);
@@ -76,14 +78,14 @@ function del(Model){
  */
 function update(Model){
     return function (req, res, next) {
-        var tagsContext = tagsHelper.createTagsContextFromRequest(req);
+        req.model.changes = changesList.createChangesFromRequest(req);
         require('util')._extend(req.model, req.body);
         req.model.save(function (err, item) {
             if (err)
                 return next(err);
             res.json(item);
-            if(tagsContext.changed)
-                tagsHelper.execute(tagsContext);
+            //if(tagsContext.changed)
+            //    tagsHelper.execute(tagsContext);
             return next();
         });
     }

@@ -14,4 +14,5 @@ bookSchema.plugin(plugins.info);
 bookSchema.plugin(plugins.rating);
 bookSchema.plugin(plugins.tags);
 bookSchema.plugin(plugins.hidden);
+bookSchema.plugin(plugins.changes);
 mongoose.model('Book', bookSchema);

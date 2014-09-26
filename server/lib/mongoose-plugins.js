@@ -3,7 +3,8 @@ var timestamps = require('mongoose-timestamp');
 var hidden = require('mongoose-hidden')();
 var Schema = mongoose.Schema;
 var User = mongoose.model('User');
-var _ = require('lodash');
+var lodash = require('lodash');
+var changesList = require('./changes-list.js');
 
 function statsPlugin(schema) {
     var statsSchema = {
@@ -45,12 +46,20 @@ function ratingPlugin(schema) {
 }
 
 function tagsPlugin(schema){
-    var tagSchema = new mongoose.Schema({text: { type:String }},{_id: false});
+    var tagSchema = new mongoose.Schema({
+        text: { type:String, lowercase: true, trim: true}
+    },{_id: false});
     tagSchema.set('toJSON', {virtuals: false});
     var tagsSchema = {
         tags: [tagSchema]
     };
     schema.add(tagsSchema);
+}
+
+function changesPlugin(schema){
+    schema.post('save', function(doc){
+        changesList.execute(doc.changes);
+    });
 }
 
 module.exports.stats = statsPlugin;
@@ -59,3 +68,4 @@ module.exports.rating = ratingPlugin;
 module.exports.tags = tagsPlugin;
 module.exports.timestamps = timestamps;
 module.exports.hidden = hidden;
+module.exports.changes = changesPlugin;

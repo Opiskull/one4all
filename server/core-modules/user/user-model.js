@@ -1,7 +1,13 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
 
-var usedTagSchema = mongoose.Schema({text: String, count: Number},{_id:false});
+var usedTagSchema = mongoose.Schema({
+    text: {type: String, lowercase: true, trim: true},
+    count: Number
+    }, {
+        _id: false
+    }
+);
 
 var userSchema = mongoose.Schema({
     username: String,

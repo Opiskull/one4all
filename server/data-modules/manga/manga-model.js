@@ -14,4 +14,5 @@ mangaSchema.plugin(plugins.info);
 mangaSchema.plugin(plugins.rating);
 mangaSchema.plugin(plugins.tags);
 mangaSchema.plugin(plugins.hidden);
+mangaSchema.plugin(plugins.changes);
 mongoose.model('Manga', mangaSchema);

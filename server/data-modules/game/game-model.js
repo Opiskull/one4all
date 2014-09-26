@@ -12,4 +12,5 @@ gameSchema.plugin(plugins.info);
 gameSchema.plugin(plugins.rating);
 gameSchema.plugin(plugins.tags);
 gameSchema.plugin(plugins.hidden);
+gameSchema.plugin(plugins.changes);
 mongoose.model('Game', gameSchema);

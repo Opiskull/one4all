@@ -1,18 +1,18 @@
 var lodash = require('lodash');
 
-function createTagsContextFromRequest(req){
-    return createTagsChangeContext(req.body.tags, req.model.tags, req.user);
-}
-
 function without(tag1, tag2){
     return tag1.filter(function(tag){
         return tag2.indexOf(tag) === -1;
     });
 }
 
-function createTagsChangeContext(newItemTags, oldItemTags, user){
-    var oldTags = lodash.pluck(oldItemTags, 'text');
-    var newTags = lodash.pluck(newItemTags, 'text');
+function createTagsChange(oldItem, newItem , user){
+    var oldTags = [];
+    if(oldItem && oldItem.tags)
+        oldTags = lodash.pluck(oldItem.tags, 'text');
+    var newTags = [];
+    if(newItem && newItem.tags)
+        newTags = lodash.pluck(newItem.tags, 'text');
     var removedTags = without(oldTags, newTags);
     var addedTags = without(newTags, oldTags);
     var changed = false;
@@ -35,6 +35,9 @@ function addTags(usedTags, addedTags){
             usedTags.push(usedTag);
             usedTag = lodash.find(usedTags,{'text':tag});
         }
+        if(!usedTag.count){
+            usedTag.count = 0;
+        }
         usedTag.count +=1;
     });
 }
@@ -51,17 +54,13 @@ function removeTags(usedTags, removedTags){
     });
 }
 
-function execute(context){
-    if(context.changed){
-        addTags(context.user.usedTags, context.added);
-        removeTags(context.user.usedTags, context.removed);
-        context.user.save();
-    }
+function executeTagsChange(context) {
+    addTags(context.user.usedTags, context.added);
+    removeTags(context.user.usedTags, context.removed);
+    context.user.save();
 }
 
 module.exports = {
-    createTagsContextFromRequest : createTagsContextFromRequest,
-    addTags: addTags,
-    removeTags: removeTags,
-    execute: execute
+    create : createTagsChange,
+    execute: executeTagsChange
 };
