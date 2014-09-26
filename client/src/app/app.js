@@ -13,7 +13,7 @@ angular.module('one4all', ['ui.bootstrap',
     'one4all.templates',
     'pasvaz.bindonce',
     'angular-growl'])
-    .config(['RestangularProvider','$compileProvider','growlProvider', function (RestangularProvider,$compileProvider,growlProvider) {
+    .config(['RestangularProvider','$compileProvider','growlProvider','tagsInputConfigProvider', function (RestangularProvider,$compileProvider,growlProvider, tagsInputConfigProvider) {
         $compileProvider.debugInfoEnabled(true);
         RestangularProvider.setBaseUrl('/api');
         growlProvider.globalPosition('bottom-right');
