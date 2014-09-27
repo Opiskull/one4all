@@ -69,3 +69,12 @@ module.exports.tags = tagsPlugin;
 module.exports.timestamps = timestamps;
 module.exports.hidden = hidden;
 module.exports.changes = changesPlugin;
+module.exports.dataModules = function (schema) {
+    schema.plugin(timestamps);
+    schema.plugin(statsPlugin);
+    schema.plugin(infoPlugin);
+    schema.plugin(ratingPlugin);
+    schema.plugin(tagsPlugin);
+    schema.plugin(hidden);
+    schema.plugin(changesPlugin);
+};

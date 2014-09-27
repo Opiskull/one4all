@@ -8,11 +8,5 @@ var bookSchema = mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
-bookSchema.plugin(plugins.timestamps);
-bookSchema.plugin(plugins.stats);
-bookSchema.plugin(plugins.info);
-bookSchema.plugin(plugins.rating);
-bookSchema.plugin(plugins.tags);
-bookSchema.plugin(plugins.hidden);
-bookSchema.plugin(plugins.changes);
+bookSchema.plugin(plugins.dataModules);
 mongoose.model('Book', bookSchema);

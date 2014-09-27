@@ -6,11 +6,5 @@ var movieSchema = mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
-movieSchema.plugin(plugins.timestamps);
-movieSchema.plugin(plugins.stats);
-movieSchema.plugin(plugins.info);
-movieSchema.plugin(plugins.rating);
-movieSchema.plugin(plugins.tags);
-movieSchema.plugin(plugins.hidden);
-movieSchema.plugin(plugins.changes);
+movieSchema.plugin(plugins.dataModules);
 mongoose.model('Movie', movieSchema);

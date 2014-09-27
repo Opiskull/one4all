@@ -8,11 +8,5 @@ var mangaSchema = mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
-mangaSchema.plugin(plugins.timestamps);
-mangaSchema.plugin(plugins.stats);
-mangaSchema.plugin(plugins.info);
-mangaSchema.plugin(plugins.rating);
-mangaSchema.plugin(plugins.tags);
-mangaSchema.plugin(plugins.hidden);
-mangaSchema.plugin(plugins.changes);
+mangaSchema.plugin(plugins.dataModules);
 mongoose.model('Manga', mangaSchema);

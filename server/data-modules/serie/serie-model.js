@@ -8,11 +8,5 @@ var serieSchema = mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
-serieSchema.plugin(plugins.timestamps);
-serieSchema.plugin(plugins.stats);
-serieSchema.plugin(plugins.info);
-serieSchema.plugin(plugins.rating);
-serieSchema.plugin(plugins.tags);
-serieSchema.plugin(plugins.hidden);
-serieSchema.plugin(plugins.changes);
+serieSchema.plugin(plugins.dataModules);
 mongoose.model('Serie', serieSchema);

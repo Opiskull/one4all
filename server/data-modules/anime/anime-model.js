@@ -7,11 +7,5 @@ var animeSchema = mongoose.Schema({
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
-animeSchema.plugin(plugins.timestamps);
-animeSchema.plugin(plugins.stats);
-animeSchema.plugin(plugins.info);
-animeSchema.plugin(plugins.rating);
-animeSchema.plugin(plugins.tags);
-animeSchema.plugin(plugins.hidden);
-animeSchema.plugin(plugins.changes);
+animeSchema.plugin(plugins.dataModules);
 mongoose.model('Anime', animeSchema);
