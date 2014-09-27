@@ -1,25 +1,65 @@
 <!doctype html>
 <title>Site Maintenance</title>
 <style>
-    body { text-align: center; padding: 150px; overflow: hidden; }
-    h1 { font-size: 50px; color: #ff8400; }
-    body { font-size: 20px; font-family: 'Gloria Hallelujah', cursive; color: #333; }
-    article { display: block; text-align: left; width: 650px; margin: 0 auto; }
-    a { color: #dc8100; text-decoration: none; }
-    a:hover { color: #333; text-decoration: none; }
+    body {
+        text-align: center;
+        padding: 150px;
+        overflow: hidden;
+    }
+
+    h1 {
+        font-size: 50px;
+        color: #ff8400;
+    }
+
+    body {
+        font-size: 20px;
+        font-family: 'Gloria Hallelujah', cursive;
+        color: #333;
+    }
+
+    article {
+        display: block;
+        text-align: left;
+        width: 650px;
+        margin: 0 auto;
+    }
+
+    a {
+        color: #dc8100;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #333;
+        text-decoration: none;
+    }
 
     .squirrel-wrapper {
         position: absolute;
         bottom: 0px;
     }
-    .squirrel { background: url('maintenance-images/squirrel-running.png') no-repeat top left;
+
+    .squirrel {
+        background: url('maintenance-images/squirrel-running.png') no-repeat top left;
         width: 587px;
         height: 300px;
         position: relative;
     }
-    .squirrel-head { background: url('maintenance-images/squirrel-head.png') no-repeat top left; width: 317px; height: 375px;  }
-    .squirrel-head.head0 { background-position: 0px 0px;  }
-    .squirrel-head.head1 { background-position: -317px 0px;  }
+
+    .squirrel-head {
+        background: url('maintenance-images/squirrel-head.png') no-repeat top left;
+        width: 317px;
+        height: 375px;
+    }
+
+    .squirrel-head.head0 {
+        background-position: 0px 0px;
+    }
+
+    .squirrel-head.head1 {
+        background-position: -317px 0px;
+    }
 
     .squirrel-move {
         -webkit-animation: sq-move 10s infinite;
@@ -53,125 +93,96 @@
     }
 
     @keyframes sq-run-0 {
-        0% {
+        0%, 33% {
             opacity: 1
         }
-        33% {
-            opacity: 1
-        }
-        34% {
-            opacity: 0
-        }
-        100% {
+        34%, 100% {
             opacity: 0
         }
     }
 
     @keyframes sq-run-1 {
-        0% {
+        0%, 33%, 67%, 100% {
             opacity: 0
         }
-        33% {
-            opacity: 0
-        }
-        34% {
+        34%, 66% {
             opacity: 1
-        }
-        66% {
-            opacity: 1
-        }
-        67% {
-            opacity: 0
-        }
-        100% {
-            opacity: 0
         }
     }
 
     @keyframes sq-run-2 {
-        0% {
+        0%, 66% {
             opacity: 0
         }
-        66% {
-            opacity: 0
-        }
-        67% {
-            opacity: 1
-        }
-        100% {
+        67%, 100% {
             opacity: 1
         }
     }
 
     @-webkit-keyframes sq-run-0 {
-        0% {
+        0%, 33% {
             opacity: 1
         }
-        33% {
-            opacity: 1
-        }
-        34% {
-            opacity: 0
-        }
-        100% {
+        34%, 100% {
             opacity: 0
         }
     }
 
     @-webkit-keyframes sq-run-1 {
-        0% {
+        0%, 33%, 67%, 100% {
             opacity: 0
         }
-        33% {
-            opacity: 0
-        }
-        34% {
+        34%, 66% {
             opacity: 1
-        }
-        66% {
-            opacity: 1
-        }
-        67% {
-            opacity: 0
-        }
-        100% {
-            opacity: 0
         }
     }
 
     @-webkit-keyframes sq-run-2 {
-        0% {
+        0%, 66% {
             opacity: 0
         }
-        66% {
-            opacity: 0
-        }
-        67% {
-            opacity: 1
-        }
-        100% {
+        67%, 100% {
             opacity: 1
         }
     }
 
     @keyframes sq-move {
-        0% { left: 110%; transform: scaleX(1);}
+        0%, 100% {
+            left: 110%;
+            transform: scaleX(1);
+        }
         49% {
             left: -50%;
             transform: scaleX(1);
         }
-        50% {left: -50%; transform: scaleX(-1);}
-        99% {left: 110%; transform: scaleX(-1);}
-        100% { left: 110%; transform: scaleX(1);}
+        50% {
+            left: -50%;
+            transform: scaleX(-1);
+        }
+        99% {
+            left: 110%;
+            transform: scaleX(-1);
+        }
     }
 
     @-webkit-keyframes sq-move {
-        0% { left: 110%; -webkit-transform: scaleX(1);}
-        49% { left: -50%; -webkit-transform: scaleX(1);}
-        50% {left: -50%; -webkit-transform: scaleX(-1);}
-        99% {left: 110%; -webkit-transform: scaleX(-1);}
-        100% { left: 110%; -webkit-transform: scaleX(1);}
-     }
+        0%, 100% {
+            left: 110%;
+            transform: scaleX(1);
+        }
+        49% {
+            left: -50%;
+            transform: scaleX(1);
+        }
+        50% {
+            left: -50%;
+            transform: scaleX(-1);
+        }
+        99% {
+            left: 110%;
+            transform: scaleX(-1);
+        }
+    }
 </style>
 <link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
 <script type="text/javascript">
@@ -179,9 +190,12 @@
 <article>
     <div>
         <h1>We&rsquo;ll be back soon!</h1>
+
         <div>
             <p>Our squirrel is gone searching for his nuts.</p>
+
             <p>We hope it will be back soon...</p>
+
             <p>&mdash; The Team from peerzone</p>
         </div>
         <div class="squirrel-wrapper squirrel-move">
