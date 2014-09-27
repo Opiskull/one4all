@@ -7,36 +7,165 @@
     article { display: block; text-align: left; width: 650px; margin: 0 auto; }
     a { color: #dc8100; text-decoration: none; }
     a:hover { color: #333; text-decoration: none; }
-    .squirrel-running{
+
+    .squirrel-wrapper {
         position: absolute;
         bottom: 0px;
     }
     .squirrel { background: url('maintenance-images/squirrel-running.png') no-repeat top left;
         width: 587px;
         height: 300px;
+        position: relative;
     }
-    .squirrel.run0 { background-position: 0px 0px;  }
-    .squirrel.run1 { background-position: -587px 0px;  }
-    .squirrel.run2 { background-position: -1174px 0px;  }
-
     .squirrel-head { background: url('maintenance-images/squirrel-head.png') no-repeat top left; width: 317px; height: 375px;  }
     .squirrel-head.head0 { background-position: 0px 0px;  }
     .squirrel-head.head1 { background-position: -317px 0px;  }
 
-    .squirrel-animate {
-        -webkit-animation: runn 10s infinite;
-        animation: runn 10s infinite;
+    .squirrel-move {
+        -webkit-animation: sq-move 10s infinite;
+        animation: sq-move 10s infinite;
     }
 
-    @keyframes runn {
+    .squirrel.squirrel-run-0 {
+        background-position: 0px 0px;
+        top: 0;
+        left: 0;
+        position: absolute;
+        -webkit-animation: sq-run-0 0.450s infinite;
+        animation: sq-run-0 0.450s infinite;
+    }
+
+    .squirrel.squirrel-run-1 {
+        background-position: -587px 0px;
+        top: 0;
+        left: 0;
+        position: absolute;
+        -webkit-animation: sq-run-1 0.450s infinite;
+        animation: sq-run-1 0.450s infinite;
+    }
+
+    .squirrel.squirrel-run-2 {
+        background-position: -1174px 0px;
+        top: 0;
+        left: 0;
+        -webkit-animation: sq-run-2 0.450s infinite;
+        animation: sq-run-2 0.450s infinite;
+    }
+
+    @keyframes sq-run-0 {
+        0% {
+            opacity: 1
+        }
+        33% {
+            opacity: 1
+        }
+        34% {
+            opacity: 0
+        }
+        100% {
+            opacity: 0
+        }
+    }
+
+    @keyframes sq-run-1 {
+        0% {
+            opacity: 0
+        }
+        33% {
+            opacity: 0
+        }
+        34% {
+            opacity: 1
+        }
+        66% {
+            opacity: 1
+        }
+        67% {
+            opacity: 0
+        }
+        100% {
+            opacity: 0
+        }
+    }
+
+    @keyframes sq-run-2 {
+        0% {
+            opacity: 0
+        }
+        66% {
+            opacity: 0
+        }
+        67% {
+            opacity: 1
+        }
+        100% {
+            opacity: 1
+        }
+    }
+
+    @-webkit-keyframes sq-run-0 {
+        0% {
+            opacity: 1
+        }
+        33% {
+            opacity: 1
+        }
+        34% {
+            opacity: 0
+        }
+        100% {
+            opacity: 0
+        }
+    }
+
+    @-webkit-keyframes sq-run-1 {
+        0% {
+            opacity: 0
+        }
+        33% {
+            opacity: 0
+        }
+        34% {
+            opacity: 1
+        }
+        66% {
+            opacity: 1
+        }
+        67% {
+            opacity: 0
+        }
+        100% {
+            opacity: 0
+        }
+    }
+
+    @-webkit-keyframes sq-run-2 {
+        0% {
+            opacity: 0
+        }
+        66% {
+            opacity: 0
+        }
+        67% {
+            opacity: 1
+        }
+        100% {
+            opacity: 1
+        }
+    }
+
+    @keyframes sq-move {
         0% { left: 110%; transform: scaleX(1);}
-        49% { left: -50%;transform: scaleX(1);}
+        49% {
+            left: -50%;
+            transform: scaleX(1);
+        }
         50% {left: -50%; transform: scaleX(-1);}
         99% {left: 110%; transform: scaleX(-1);}
         100% { left: 110%; transform: scaleX(1);}
     }
 
-    @-webkit-keyframes runn {
+    @-webkit-keyframes sq-move {
         0% { left: 110%; -webkit-transform: scaleX(1);}
         49% { left: -50%; -webkit-transform: scaleX(1);}
         50% {left: -50%; -webkit-transform: scaleX(-1);}
@@ -45,20 +174,7 @@
      }
 </style>
 <link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script type="text/javascript">
-    (function ($) {
-        $(document).ready(function(){
-            var item = $('.squirrel');
-            var current = 0;
-            setInterval(function(){
-                current +=1;
-                current = current % 3;
-                item.removeClass('run0 run1 run2');
-                item.addClass("run" + current);
-            },150);
-        });
-    }(jQuery));
 </script>
 <article>
     <div>
@@ -68,8 +184,10 @@
             <p>We hope it will be back soon...</p>
             <p>&mdash; The Team from peerzone</p>
         </div>
-        <div class="squirrel-running squirrel-animate">
-            <div class="squirrel"></div>
+        <div class="squirrel-wrapper squirrel-move">
+            <div class="squirrel squirrel-run-0"></div>
+            <div class="squirrel squirrel-run-1"></div>
+            <div class="squirrel squirrel-run-2"></div>
         </div>
     </div>
 </article>
