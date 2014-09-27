@@ -38,7 +38,9 @@ modulesLoader.loadCoreModules(server);
 modulesLoader.loadDataModules(server);
 modulesLoader.loadExternalApiModules(server);
 
-server.listen(config.port, config.host, function () {
+var port = process.argv[2] || config.port;
+
+server.listen(port, config.host, function () {
     server.log.info('%s listening at %s', server.name, server.url);
 });
 
@@ -46,3 +48,4 @@ server.get(/\/?.*/, restify.serveStatic({
     directory: require('path').resolve('../client/build'),
     default: 'index.html'
 }));
+

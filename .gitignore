@@ -15,7 +15,10 @@ node_modules
 bower_components
 npm-debug.log
 
-server/config/*
-!server/config/*.sample.json
-!server/config/*/*.sample.json
+#/server/config/*
+#!/**/*.sample.json
+
+/server/config/**/*.json
+!/server/config/**/*.sample.json
+
 client/build/
