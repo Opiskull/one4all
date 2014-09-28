@@ -20,12 +20,25 @@ one4all
 
 ## Client
 
-  build client in debug with ```gulp build```  
-  build client with minified and obfuscated with ```gulp build --release```  
-  build client and watch for filechanges with ```gulp```  
+### Development
+
+```gulp``` watches files for changes
+
+### Release
+
+```gulp build --release``` build once in release mode
 
 ## Server
 
-  test server with ```mocha```  
-  run server with ```node server.js```  
-  run server with human readable log ```node server.js | bunyan```  
+### Development
+
+```gulp``` watches files for changes
+
+### Release
+
+```node server.js 3000``` the port(3000) is optional and can be omitted    
+```node server.js | bunyan``` with readable logger
+
+### Test
+
+```mocha```
