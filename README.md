@@ -12,11 +12,12 @@ one4all
 # Installation
 
 1. Install MongoDB and NodeJS
-2. Run ```npm install``` in the client and server folders
+2. Run ```npm install``` in the **client** and **server** folders
 3. Run ```npm install bower gulp bunyan mocha -g```
 4. Copy config.sample.json to config.json and modify it for your environment
-5. In the client directory run ```gulp build```
-6. Run the server with ```node server.js```
+5. Run ```bower install``` for bower dependencies in the **client** folder
+6. In the client directory run ```gulp build```
+7. Run the server with ```node server.js```
 
 ## Client
 
