@@ -33,12 +33,12 @@ one4all
 ### Development
 
 ```gulp``` watches files for changes
-```mocha -g "create TestUser"``` create a TestUser
+```mocha -g "create TestUser"``` create a TestUser  
 After the testuser was created open ```localhost:3000``` in the **browser** and type ```localStorage.setItem("ngStorage-accessToken",'"testuseraccesstoken"')``` in the console
 
 ### Release
 
-```node server.js 3000``` the port(3000) is optional and can be omitted
+```node server.js 3000``` the port(3000) is optional and can be omitted  
 ```node server.js | bunyan``` with readable logger
 
 ### Test
