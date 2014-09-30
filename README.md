@@ -12,11 +12,12 @@ one4all
 # Installation
 
 1. Install MongoDB and NodeJS
-2. Run ```npm install``` in the client and server folders
+2. Run ```npm install``` in the **client** and **server** folders
 3. Run ```npm install bower gulp bunyan mocha -g```
 4. Copy config.sample.json to config.json and modify it for your environment
-5. In the client directory run ```gulp build```
-6. Run the server with ```node server.js```
+5. Run ```bower install``` for bower dependencies in the **client** folder
+6. In the client directory run ```gulp build```
+7. Run the server with ```node server.js```
 
 ## Client
 
@@ -33,12 +34,12 @@ one4all
 ### Development
 
 ```gulp``` watches files for changes
-```mocha -g "create TestUser"``` create a TestUser
+```mocha -g "create TestUser"``` create a TestUser  
 After the testuser was created open ```localhost:3000``` in the **browser** and type ```localStorage.setItem("ngStorage-accessToken",'"testuseraccesstoken"')``` in the console
 
 ### Release
 
-```node server.js 3000``` the port(3000) is optional and can be omitted
+```node server.js 3000``` the port(3000) is optional and can be omitted  
 ```node server.js | bunyan``` with readable logger
 
 ### Test
