@@ -14,6 +14,10 @@
         <label class="btn btn-default" ng-click="selectAllStats()">select all</label>
         <label class="btn btn-default" ng-click="deselectAllStats()">deselect all</label>
     </div>
+    <tags-input ng-model="settings.filters.tags" add-from-autocomplete-only="true" on-tag-added="filterItems()"
+                on-tag-removed="filterItems()">
+        <auto-complete source="getUserTags($query)"></auto-complete>
+    </tags-input>
     <div class="btn-group pull-right">
         <label class="btn btn-default" ng-click="resetClientSettings()">reset filter</label>
         <label class="btn btn-primary" ng-click="saveClientSettings()">save filter on client</label>

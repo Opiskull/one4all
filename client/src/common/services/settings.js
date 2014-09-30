@@ -19,7 +19,8 @@ angular.module('one4all').factory('settingsService', ['$rootScope', '$localStora
             filters: {
                 stats: defaultStats,
                 exclude: true,
-                keyword: ''
+                keyword: '',
+                tags: []
             },
             orderBy: {
                 predicate: 'title',

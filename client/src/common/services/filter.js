@@ -6,7 +6,7 @@ angular.module('one4all').factory('filterService', ['settingsService', '$rootSco
     }
 
     function hasTags(){
-        return settings.filters.tags && settings.filters.tags > 0;
+        return settings.filters.tags && settings.filters.tags.length > 0;
     }
 
     function itemHasState(item) {
@@ -14,7 +14,7 @@ angular.module('one4all').factory('filterService', ['settingsService', '$rootSco
     }
 
     function itemHasTags(item){
-        return item.tags && item.tags > 0;
+        return item.tags && item.tags.length > 0;
     }
 
     function filterItemsWithTags(items){
@@ -25,7 +25,7 @@ angular.module('one4all').factory('filterService', ['settingsService', '$rootSco
         var result = false;
         if(itemHasTags(item)) {
             _.each(settings.filters.tags, function (tag) {
-                if(_.contains(item.tags,tag)) result = true;
+                if (_.find(item.tags, {'text': tag.text})) result = true;
             });
         }
         return settings.filters.exclude ? !result : result;
