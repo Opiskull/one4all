@@ -17,7 +17,6 @@ function authInfo(req, res) {
         var user = require('util')._extend({}, req.user.toObject());
 
         delete user.roles;
-        delete user.accessToken;
         delete user.__v;
         res.json({
             user: user,
