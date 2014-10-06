@@ -4,5 +4,7 @@
 </div>
 <div class="form-group">
     <label>Tags</label>
-    <tags-input ng-model="item.tags" on-tag-added="onTagAdded($tag)"></tags-input>
+    <tags-input ng-model="item.tags" on-tag-added="onTagAdded($tag)">
+        <auto-complete source="getUserTags($query)"></auto-complete>
+    </tags-input>
 </div>

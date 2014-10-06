@@ -1,5 +1,6 @@
 angular.module('core')
-    .controller('BaseListCtrl', ['$scope', 'itemService', 'filterService', '$rootScope', 'Resource', 'listService', function ($scope, itemService, filterService, $rootScope, Resource, listService) {
+    .controller('BaseListCtrl', ['$scope', 'itemService', 'filterService', '$rootScope', 'Resource', 'listService',
+        function ($scope, itemService, filterService, $rootScope, Resource, listService) {
         $scope.defaultProvider = '';
         $scope.title = '';
 

@@ -1,9 +1,7 @@
-angular.module('one4all').factory('tagsService', ['$q', 'authService', function ($q, authService) {
+angular.module('one4all').factory('tagsService', ['$q', 'Restangular', function ($q, Restangular) {
     return {
         getUserTags: function (query) {
-            var deferred = $q.defer();
-            deferred.resolve(authService.authInfo.user.usedTags);
-            return deferred.promise;
+            return Restangular.all('user/used-tags').getList({q: query});
         }
     }
 }]);

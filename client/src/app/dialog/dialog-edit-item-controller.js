@@ -1,4 +1,4 @@
-angular.module('dialog').controller('editDialogCtrl', ['$scope', '$modalInstance', 'dialogContext', function ($scope, $modalInstance, dialogContext) {
+angular.module('dialog').controller('editDialogCtrl', ['$scope', '$modalInstance', 'dialogContext', 'tagsService', function ($scope, $modalInstance, dialogContext, tagsService) {
     $scope.item = dialogContext.item;
     $scope.defaultProvider = dialogContext.defaultProvider;
     $scope.headerTitle = dialogContext.headerTitle;
@@ -6,6 +6,10 @@ angular.module('dialog').controller('editDialogCtrl', ['$scope', '$modalInstance
     $scope.searchInfoCallback = dialogContext.searchInfoCallback;
     $scope.onTagAdded = function(tag){
         tag.text = tag.text.toLowerCase();
+    };
+
+    $scope.getUserTags = function (query) {
+        return tagsService.getUserTags(query);
     };
 
     $scope.save = function () {
