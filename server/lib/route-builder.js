@@ -37,7 +37,7 @@ var isAuthenticated = [
     authenticate,
     function (req, res, next) {
         if (req.isAuthenticated()) {
-            next();
+            return next();
         }
         return next(new restify.InvalidCredentialsError());
     }

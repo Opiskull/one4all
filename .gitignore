@@ -17,7 +17,7 @@ npm-debug.log
 
 #/server/config/*
 #!/**/*.sample.json
-/.idea/
+.idea/
 
 /server/config/**/*.json
 !/server/config/**/*.sample.json

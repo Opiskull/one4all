@@ -32,9 +32,9 @@ function infoPlugin(schema) {
     schema.set('toJSON', {
         virtuals: true
     });
-    schema.set('toObject', {
-        virtuals: true
-    });
+    //schema.set('toObject', {
+    //    virtuals: true
+    //});
     schema.add(infoSchema);
 }
 
@@ -75,6 +75,6 @@ module.exports.dataModules = function (schema) {
     schema.plugin(infoPlugin);
     schema.plugin(ratingPlugin);
     schema.plugin(tagsPlugin);
-    schema.plugin(hidden);
+    //schema.plugin(hidden);
     schema.plugin(changesPlugin);
 };
