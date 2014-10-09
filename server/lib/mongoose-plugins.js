@@ -1,6 +1,5 @@
 var mongoose = require('mongoose');
 var timestamps = require('mongoose-timestamp');
-var hidden = require('mongoose-hidden')();
 var Schema = mongoose.Schema;
 var User = mongoose.model('User');
 var lodash = require('lodash');
@@ -29,12 +28,6 @@ function infoPlugin(schema) {
         }
         return info;
     });
-    schema.set('toJSON', {
-        virtuals: true
-    });
-    //schema.set('toObject', {
-    //    virtuals: true
-    //});
     schema.add(infoSchema);
 }
 
@@ -49,7 +42,6 @@ function tagsPlugin(schema){
     var tagSchema = new mongoose.Schema({
         text: { type:String, lowercase: true, trim: true}
     },{_id: false});
-    tagSchema.set('toJSON', {virtuals: false});
     var tagsSchema = {
         tags: [tagSchema]
     };
@@ -60,6 +52,20 @@ function changesPlugin(schema){
     schema.post('save', function(doc){
         changesList.execute(doc.changes);
     });
+    schema.post('remove', function (doc) {
+        changesList.execute(doc.changes);
+    });
+}
+
+function hiddenPlugin(schema) {
+    schema.set('toJSON', {
+        transform: function (doc, ret, options) {
+            ret.id = ret._id;
+            delete ret._id;
+            delete ret.__v;
+            return ret;
+        }
+    });
 }
 
 module.exports.stats = statsPlugin;
@@ -67,14 +73,15 @@ module.exports.info = infoPlugin;
 module.exports.rating = ratingPlugin;
 module.exports.tags = tagsPlugin;
 module.exports.timestamps = timestamps;
-module.exports.hidden = hidden;
+module.exports.hidden = hiddenPlugin;
 module.exports.changes = changesPlugin;
 module.exports.dataModules = function (schema) {
+    schema.set('toJSON', {virtuals: true});
     schema.plugin(timestamps);
     schema.plugin(statsPlugin);
     schema.plugin(infoPlugin);
     schema.plugin(ratingPlugin);
     schema.plugin(tagsPlugin);
-    //schema.plugin(hidden);
+    schema.plugin(hiddenPlugin);
     schema.plugin(changesPlugin);
 };

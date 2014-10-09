@@ -5,6 +5,7 @@ var modulesLoader = requireLib('modules-loader.js');
 var logger = requireLib('logger.js');
 var database = requireLib('database.js');
 
+
 var config = requireConfig('config.json'), packageInfo = requireRoot('package.json');
 
 
@@ -40,6 +41,15 @@ modulesLoader.loadExternalApiModules(server);
 
 var port = process.argv[2] || config.port;
 
+var io = require('engine.io').listen(3333);
+
+io.on('connection', function (socket) {
+    socket.emit('news', {hello: 'world'});
+    socket.on('message', function (data) {
+
+    });
+});
+
 server.listen(port, config.host, function () {
     server.log.info('%s listening at %s', server.name, server.url);
 });
@@ -48,4 +58,7 @@ server.get(/\/?.*/, restify.serveStatic({
     directory: require('path').resolve('../client/build'),
     default: 'index.html'
 }));
+
+
+
 
