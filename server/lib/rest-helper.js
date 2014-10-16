@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var restify = require('restify');
-var eventManager = require('./event-manager.js');
+var events = requireCore('events');
 
 /**
  * Load a model into req.model with the id from req.params.id
@@ -12,13 +12,13 @@ function load(Model){
         if (!req.params.id.match(/^[0-9a-fA-F]{24}$/)) {
             return next(new restify.ResourceNotFoundError(Model.modelName + " with id " + req.params.id));
         }
-        eventManager.emit(['item', 'load', 'before'], req.params.id);
+        events.emit(['item', 'load', 'before'], req.params.id);
         Model.findOne({'_id': new mongoose.Types.ObjectId(req.params.id)}, function (err, item) {
             if (err)
                 return next(err);
             if (!item)
                 return next(new restify.ResourceNotFoundError(Model.modelName + " with id " + req.params.id));
-            eventManager.emit(['item', 'load', 'after']);
+            events.emit(['item', 'load', 'after']);
             req.model = item;
             return next();
         });
@@ -31,9 +31,9 @@ function load(Model){
  */
 function get(Model){
     return function (req, res, next) {
-        eventManager.emit(['item', 'get', 'before'], req);
+        events.emit(['item', 'get', 'before'], req);
         if (req.model) {
-            eventManager.emit(['item', 'get', 'after']);
+            events.emit(['item', 'get', 'after']);
             res.json(req.model);
         }
         return next();
@@ -49,11 +49,11 @@ function create(Model){
     return function(req,res,next) {
         var item = new Model(req.body);
         item.user = req.user._id;
-        eventManager.emit(['item', 'create', 'before'], req, item);
+        events.emit(['item', 'create', 'before'], req, item);
         item.save(function (err, createdItem) {
                 if (err)
                     return next(err);
-                eventManager.emit(['item', 'create', 'after'], createdItem);
+                events.emit(['item', 'create', 'after'], createdItem);
                 res.json(item);
                 return next();
             }
@@ -67,11 +67,11 @@ function create(Model){
  */
 function del(Model){
     return function (req, res, next) {
-        eventManager.emit(['item', 'delete', 'before'], req, req.model);
+        events.emit(['item', 'delete', 'before'], req, req.model);
         req.model.remove(function (err) {
             if (err)
                 return next(err);
-            eventManager.emit(['item', 'delete', 'after'], req.model);
+            events.emit(['item', 'delete', 'after'], req.model);
             res.send();
             return next();
         });
@@ -84,12 +84,12 @@ function del(Model){
  */
 function update(Model){
     return function (req, res, next) {
-        eventManager.emit(['item', 'update', 'before'], req, req.model);
+        events.emit(['item', 'update', 'before'], req, req.model);
         require('util')._extend(req.model, req.body);
         req.model.save(function (err, item) {
             if (err)
                 return next(err);
-            eventManager.emit(['item', 'update', 'after'], item);
+            events.emit(['item', 'update', 'after'], item);
             res.json(item);
             return next();
         });
@@ -102,11 +102,11 @@ function update(Model){
  */
 function list(Model) {
     return function (req, res, next) {
-        eventManager.emit(['item', 'list', 'before']);
+        events.emit(['item', 'list', 'before']);
         Model.find({user: new mongoose.Types.ObjectId(req.user.id)}, function (err, items) {
             if (err)
                 return next(err);
-            eventManager.emit(['item', 'list', 'after'], items);
+            events.emit(['item', 'list', 'after'], items);
             res.json(items);
             return next();
         });

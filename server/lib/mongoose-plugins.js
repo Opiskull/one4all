@@ -3,7 +3,7 @@ var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 var User = mongoose.model('User');
 var lodash = require('lodash');
-var changesList = require('./changes-list.js');
+var events = requireCore('events');
 
 function statsPlugin(schema) {
     var statsSchema = {
@@ -50,10 +50,10 @@ function tagsPlugin(schema){
 
 function changesPlugin(schema){
     schema.post('save', function(doc){
-        changesList.execute(doc.changes);
+        events.emit(['item', 'saved'], doc);
     });
     schema.post('remove', function (doc) {
-        changesList.execute(doc.changes);
+        events.emit(['item', 'removed'], doc);
     });
 }
 

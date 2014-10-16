@@ -1,1 +1,0 @@
-requireLib('changes-list.js');
