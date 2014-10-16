@@ -55,6 +55,7 @@ function removeTags(usedTags, removedTags){
 }
 
 function executeTagsChange(context) {
+    if (!context.user) throw "User not defined!";
     addTags(context.user.usedTags, context.added);
     removeTags(context.user.usedTags, context.removed);
     context.user.save();
