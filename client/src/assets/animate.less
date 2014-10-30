@@ -112,14 +112,25 @@
   animation: fadeIn 1s;
 }
 
-.info-animation.ng-enter{
-  -webkit-animation: fadeInDown 0.8s;
-  animation: fadeInDown 0.8s;
+.info-animation {
+  max-height: 500px;
+  overflow: hidden;
 }
 
-.info-animation.ng-leave{
-  -webkit-animation: fadeOutUp 0.2s;
-  animation: fadeOutUp 0.2s;
+.info-animation.ng-hide {
+  transition: max-height 1s ease-out;
+  max-height: 0px;
+  -webkit-transition: max-height 1s ease-out;
+}
+
+.info-animation.ng-hide-remove.ng-hide-remove-active {
+  -webkit-transition: max-height 1s ease-out;
+  transition: max-height 1s ease-out;
+}
+
+.info-animation.ng-hide-add.ng-hide-add-active {
+  -webkit-transition: max-height 0.5s ease-out;
+  transition: max-height 0.5s ease-out;
 }
 
 .item-row.ng-enter{
