@@ -28,7 +28,7 @@ module.exports.init = function (server, router, path) {
     ));
     server.post(router.getRoute('/auth/logout'), router.isAuthenticated, controller.logout);
     server.get(router.getRoute('/auth/info'), router.isAuthenticated, controller.authInfo);
-    moduleLoader.loadModulesFromDirectory(path, 'external', function (module, moduleName) {
+    moduleLoader.loadModulesFromDirectory(path, 'modules', function (module, moduleName) {
         module.init(server, router);
     });
 };
