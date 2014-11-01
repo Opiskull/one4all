@@ -2,7 +2,7 @@ module.exports = function (dirname) {
     global.__rootdir = dirname;
 
     global.requireRoot = function (name) {
-        return require(__rootdir + '/' + name);
+        return require(__rootdir + '/../' + name);
     };
 
     global.requireCore = function (name) {
@@ -24,7 +24,7 @@ module.exports = function (dirname) {
         }
 
         function getConfigPath(name) {
-            return __rootdir + '/config/' + name;
+            return __rootdir + '/../config/' + name;
         }
 
         var fs = require('fs'), util = require('util');

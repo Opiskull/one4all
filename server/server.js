@@ -1,4 +1,4 @@
-require('./lib/globals.js')(__dirname);
+require('./src/lib/globals.js')(__dirname + "/src");
 var restify = require('restify'), mongoose = require('mongoose'), passport = require('passport');
 var errorHelper = requireLib('error-helper.js');
 var modulesLoader = requireLib('modules-loader.js');
