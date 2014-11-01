@@ -25,6 +25,7 @@ server.pre(function (req, res, next) {
 
 server.on('uncaughtException', function (req, res, route, err) {
     req.log.error(err);
+    req.log.error(req);
     res.send(new restify.InternalError('Internal server error'));
 });
 
@@ -35,9 +36,7 @@ server.use(passport.initialize());
 
 database.connect();
 
-modulesLoader.loadCoreModules(server);
-modulesLoader.loadDataModules(server);
-modulesLoader.loadExternalApiModules(server);
+modulesLoader.loadServerModules(server);
 
 var port = process.argv[2] || config.port;
 

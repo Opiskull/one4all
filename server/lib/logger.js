@@ -2,6 +2,15 @@ var bunyan = require('bunyan');
 var config = requireConfig('config.json');
 var packageInfo = requireRoot('package.json');
 
+
+bunyan.stdSerializers.module = function (module) {
+    return {
+        file: module.file,
+        moduleName: module.moduleName,
+        parentName: module.parentName
+    }
+};
+
 module.exports = bunyan.createLogger({
     name: packageInfo.name,
     streams: [
