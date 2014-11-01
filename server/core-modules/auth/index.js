@@ -12,7 +12,7 @@ var AccessToken = mongoose.model('AccessToken');
 var controller = require('./auth-controller.js');
 var moduleLoader = requireLib('modules-loader.js');
 
-module.exports.init = function (server, router, path) {
+module.exports.init = function (server, router) {
     passport.use(new BearerStrategy(
         function (token, done) {
             AccessToken.findUserByToken(token, function (err, user) {
@@ -28,7 +28,7 @@ module.exports.init = function (server, router, path) {
     ));
     server.post(router.getRoute('/auth/logout'), router.isAuthenticated, controller.logout);
     server.get(router.getRoute('/auth/info'), router.isAuthenticated, controller.authInfo);
-    moduleLoader.loadModulesFromDirectory(path, 'modules', function (module, moduleName) {
+    moduleLoader.loadModulesFromDirectory(__dirname, 'auth-modules', function (module, moduleName) {
         module.init(server, router);
     });
 };

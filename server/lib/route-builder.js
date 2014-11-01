@@ -3,7 +3,16 @@ var passport = require('passport');
 var restify = require('restify');
 
 
-var authenticate = passport.authenticate('bearer', {session: false});
+var authenticate = function (req, res, next) {
+    passport.authenticate('bearer', {session: false}, function (err, user, info) {
+        if (err) return next(err);
+        if (user) {
+            req.user = user;
+            return next();
+        }
+        return next(new restify.InvalidCredentialsError());
+    })(req, res, next);
+};
 
 function getRoute(route) {
     return config.apiPrefix + route;

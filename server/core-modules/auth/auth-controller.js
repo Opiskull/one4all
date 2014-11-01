@@ -4,7 +4,7 @@ var AccessToken = mongoose.model('AccessToken');
 function logout(req, res) {
     AccessToken.removeWithToken(req.authInfo.token, function (err) {
         if (err) {
-            res.json(err);
+            return res.json(err);
         }
         req.logout();
         res.header('Location', '/index.html');
