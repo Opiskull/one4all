@@ -3,7 +3,7 @@ var timestamps = require('mongoose-timestamp');
 var Schema = mongoose.Schema;
 var User = mongoose.model('User');
 var lodash = require('lodash');
-var events = requireCore('events');
+var events = requireCore('event');
 
 function statsPlugin(schema) {
     var statsSchema = {

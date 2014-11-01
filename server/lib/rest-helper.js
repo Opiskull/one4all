@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var restify = require('restify');
-var events = requireCore('events');
+var events = requireCore('event');
 
 /**
  * Load a model into req.model with the id from req.params.id
