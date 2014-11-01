@@ -9,64 +9,7 @@
 </head>
 <body>
 <loading></loading>
-<header ng-cloak class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <a class="navbar-brand" href="#"><img src="images/site.png" height="44" width="44"/></a>
-            <button class="navbar-toggle" ng-init="collapsed.nav = true" ng-click="collapsed.nav = !collapsed.nav"><i
-                    class="glyphicon glyphicon-th-large"></i></button>
-        </div>
-        <nav collapse="collapsed.nav" class="navbar-collapse collapse navbar-responsive-collapse" role="navigation">
-            <menu page-title="'Peerzone '" ng-if="authInfo.isLoggedIn">
-                <menu-item path="#/anime" display-title="Anime"></menu-item>
-                <menu-item path="#/book" display-title="Book"></menu-item>
-                <menu-item path="#/game" display-title="Game"></menu-item>
-                <menu-item path="#/manga" display-title="Manga"></menu-item>
-                <menu-item path="#/movie" display-title="Movie"></menu-item>
-                <menu-item path="#/serie" display-title="Serie"></menu-item>
-                <menu-item path="https://github.com/Opiskull/one4all/issues" display-title="Issues"
-                           target="_blank"></menu-item>
-                <menu-item path="https://github.com/Opiskull/one4all/blob/master/CHANGELOG.md" display-title="Changelog"
-                           target="_blank"></menu-item>
-            </menu>
-            <ul class="nav navbar-nav navbar-right" ng-if="authInfo.isLoggedIn">
-                <li class="dropdown">
-                    <a class="dropdown-toggle">{{authInfo.user.username}}</a>
-                    <ul class="dropdown-menu">
-                        <li>
-                            <a ng-href="#/logout" title="logout"><i class="glyphicon glyphicon-log-out"></i> logout</a>
-                        </li>
-                    </ul>
-                </li>
-                <li>
-                    <form class="navbar-form navbar-right" role="search">
-                        <div class="form-group">
-                            <search-box focus="focus.search"></search-box>
-                        </div>
-                    </form>
-                </li>
-                <li ng-class="{ active : collapsed.filter}"><a title="filters"
-                                                               ng-click="collapsed.filter = !collapsed.filter"><i
-                        class="glyphicon glyphicon-filter"></i></a></li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" title="settings"><i class="glyphicon glyphicon-cog"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a>Package Version: <span class="bold pull-right">{{::appInfo.version}}</span></a></li>
-                        <li><a ng-href="https://github.com/Opiskull/one4all/commit/{{::appInfo.lastCommit}}"
-                               target="_blank">Last Commit: <span class="bold pull-right">{{::appInfo.lastCommit|truncate:7 }}</span></a>
-                        </li>
-                        <li><a>Last Build: <span class="bold pull-right">{{appInfo.buildTime | timeAgo}}</span></a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right" ng-if="!authInfo.isLoggedIn">
-                <li class="dropdown">
-                    <a ng-href="#/login" title="login"><i class="glyphicon glyphicon-log-in"></i> login</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
-</header>
+<nav-bar></nav-bar>
 <filter-bar display="!collapsed.filter"></filter-bar>
 <div ng-cloak class="container-fluid">
     <div ng-view class="view-animation"></div>

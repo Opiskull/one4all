@@ -1,6 +1,6 @@
-angular.module('one4all').directive('searchButton', ['searchDialogService', 'itemService', function (searchDialogService, itemService) {
+angular.module('one4all').directive('searchButton', [function () {
     return {
-        templateUrl: 'directives/buttons/search-button.html',
+        templateUrl: 'directives/search-button/search-button.html',
         restrict: 'E',
         scope: {
             defaultProvider: '=',
@@ -9,6 +9,8 @@ angular.module('one4all').directive('searchButton', ['searchDialogService', 'ite
         },
         link: function ($scope, $element, $attr) {
             $scope.placeholder = $attr.placeholder || '';
+        },
+        controller: ['$scope', 'searchDialogService', 'itemService', function ($scope, searchDialogService, itemService) {
             $scope.search = function (item) {
                 searchDialogService.search(item.title, $scope.defaultProvider).then(function (result) {
                     item.title = result.title;
@@ -19,7 +21,6 @@ angular.module('one4all').directive('searchButton', ['searchDialogService', 'ite
                     itemService.setInfo(item, result.info);
                 });
             };
-
-        }
+        }]
     };
 }]);

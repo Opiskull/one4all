@@ -1,11 +1,14 @@
 angular.module('one4all').directive('searchBox', ['$rootScope', '$timeout', 'settingsService', function ($rootScope, $timeout, settingsService) {
     return {
         restrict: 'EA',
-        templateUrl: 'directives/search-box.html',
+        templateUrl: 'directives/search-box/search-box.html',
         scope: {
             focus: '='
         },
         link: function ($scope, $element, $attr) {
+
+        },
+        controller: ['$scope', '$rootScope', '$timeout', 'settingsService', function ($scope, $rootScope, $timeout, settingsService) {
             $scope.keyword = '';
             $scope.emptyKeyword = function () {
                 $scope.keyword = '';
@@ -21,6 +24,6 @@ angular.module('one4all').directive('searchBox', ['$rootScope', '$timeout', 'set
                     }
                 });
             }, 250);
-        }
+        }]
     };
 }]);

@@ -39,10 +39,11 @@ angular.module('one4all').directive('ratingNuts', ['itemService', function (item
 
     return {
         restrict: 'E',
-        replace: true,
         templateUrl: 'directives/rating-nuts.html',
+        //replace: true,
         link: function (scope, element, attrs) {
-            var nuts = element.children();
+            //var nuts = element.children();
+            var nuts = angular.element(element.find('div')[0]).children();
             nuts.on('mouseenter', function () {
                 setHoverRating(nuts, parseInt(angular.element(this).attr('value')));
             });

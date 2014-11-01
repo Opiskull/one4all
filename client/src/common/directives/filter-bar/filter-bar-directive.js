@@ -1,12 +1,13 @@
 angular.module('one4all').directive('filterBar', ['$rootScope', '$timeout', 'settingsService', 'tagsService', function ($rootScope, $timeout, settingsService, tagsService) {
     return {
         restrict: 'EA',
-        templateUrl: 'directives/filter-bar.html',
+        templateUrl: 'directives/filter-bar/filter-bar.html',
         scope: {
             display: '='
         },
         link: function ($scope, $element, $attr) {
-
+        },
+        controller: ['$scope', '$rootScope', '$timeout', 'settingsService', 'tagsService', function ($scope, $rootScope, $timeout, settingsService, tagsService) {
             function setStats(value) {
                 angular.forEach(settingsService.settings.filters.stats, function (stat, statName) {
                     settingsService.settings.filters.stats[statName] = value;
@@ -47,6 +48,6 @@ angular.module('one4all').directive('filterBar', ['$rootScope', '$timeout', 'set
             $scope.getUserTags = function (query) {
                 return tagsService.getUserTags(query);
             }
-        }
+        }]
     };
 }]);

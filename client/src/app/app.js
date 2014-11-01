@@ -22,22 +22,6 @@ angular.module('one4all', ['ui.bootstrap',
         growlProvider.globalTimeToLive({success: 2000, error: -1, warning: 3000, info: 4000});
     }])
     .controller('AppCtrl', ['$scope', 'authService', 'settingsService', function ($scope, authService, settingsService) {
-        $scope.authInfo = authService.authInfo;
-        $scope.logout = authService.logout;
-        $scope.settings = settingsService.settings;
-        $scope.orderBy = $scope.settings.orderBy;
-
-        $scope.appInfo = appInfo;
-
-        $scope.focus = {search: true};
-
-        $scope.$on("$routeChangeStart", function (event, next, current) {
-            $scope.focus.search = false;
-        });
-
-        $scope.$on("$routeChangeSuccess", function (event, next, current) {
-            $scope.focus.search = true;
-        });
     }]);
 
 
