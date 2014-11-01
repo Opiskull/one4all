@@ -8,7 +8,7 @@ var events = requireCore('event');
 function statsPlugin(schema) {
     var statsSchema = {
         // empty for backward compatiblity
-        state: {type: String,enum:["","finished","dropped","paused","owned"]}
+        state: {type: String, enum: ["", "finished", "dropped", "paused", "watching"]}
     };
     schema.add(statsSchema);
 }

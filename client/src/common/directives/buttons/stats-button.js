@@ -7,7 +7,7 @@ angular.module('one4all').directive('statsButton', ['itemService', '$compile', f
             item: '=model'
         },
         link: function ($scope, $element, $attr) {
-            var defaultStats = ['finished', 'dropped', 'paused'];
+            var defaultStats = ['finished', 'dropped', 'paused', 'watching'];
             var enabledStats = $scope.$eval($attr.stats);
             if (!enabledStats) {
                 enabledStats = defaultStats;
@@ -19,6 +19,8 @@ angular.module('one4all').directive('statsButton', ['itemService', '$compile', f
                 group.append('<a class="btn btn-default" title="paused" ng-click="setState(\'paused\')"><i class="glyphicon glyphicon-pause"></i></a>');
             if (statEnabled('dropped'))
                 group.append('<a class="btn btn-default" title="dropped" ng-click="setState(\'dropped\')"><i class="glyphicon glyphicon-ban-circle"></i></a>');
+            if (statEnabled('watching'))
+                group.append('<a class="btn btn-default" title="watching" ng-click="setState(\'watching\')"><i class="glyphicon glyphicon-play"></i></a>');
             $compile(group)($scope);
             $element.append(group);
 

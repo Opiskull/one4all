@@ -10,6 +10,7 @@ angular.module('one4all').directive('displayState', [function () {
                     $element.toggleClass('finished', state === 'finished');
                     $element.toggleClass('dropped', state === 'dropped');
                     $element.toggleClass('paused', state === 'paused');
+                    $element.toggleClass('watching', state === 'watching');
                 }
             });
         }
