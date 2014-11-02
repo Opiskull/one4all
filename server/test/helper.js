@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
-var User = require('../core-modules/user/user-model.js').model;
-var AccessToken = require('../core-modules/auth/auth-accesstoken-model.js').model;
+var User = require('../src/core-modules/user/user-model.js').model;
+var AccessToken = require('../src/core-modules/auth/auth-accesstoken-model.js').model;
 var testData = require('./test-data.js');
 var config = require('./config.json');
 
