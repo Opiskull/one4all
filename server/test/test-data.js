@@ -13,3 +13,9 @@ module.exports.TestToken = {
     token: 'testuseraccesstoken',
     user : ''
 };
+
+module.exports.TestAnime = {
+    tags: [],
+    title: "TestAnime",
+    episode: 123
+};

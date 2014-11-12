@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
-var User = require('../src/core-modules/user/user-model.js').model;
-var AccessToken = require('../src/core-modules/auth/auth-accesstoken-model.js').model;
-var testData = require('./test-data.js');
+var User = mongoose.model('User');
+var AccessToken = mongoose.model('AccessToken');
+
 var config = require('./config.json');
+var superagent = require('superagent');
 
 mongoose.connect(config.mongourl);
 
@@ -10,7 +11,7 @@ function getOrCreateUser(callback) {
     User.findOne({username: 'TestUser'}, function (err, user) {
         if (err) return callback(err);
         if (user) return callback(null, user._id);
-        user = new User(testData.TestUser);
+        user = new User(TestData.TestUser);
         user.save(function (err, user) {
             if (err) return callback(err);
             if (user) {
@@ -20,12 +21,12 @@ function getOrCreateUser(callback) {
     });
 }
 
-function getOrCreateToken(userId,callback) {
+function getOrCreateToken(userId, callback) {
     AccessToken.findOne({user: userId}, function (err, accessToken) {
         if (err) return callback(err);
         if (accessToken) return callback(null, accessToken.token);
         accessToken = new AccessToken();
-        accessToken.token = testData.TestToken.token;
+        accessToken.token = TestData.TestToken.token;
         accessToken.user = userId;
         accessToken.save(function (err, token) {
             if (err) return callback(err);
@@ -34,27 +35,32 @@ function getOrCreateToken(userId,callback) {
     });
 }
 
-function getToken(callback){
-    getOrCreateUser(function(err, userId){
-        if(err) return callback(err);
-        getOrCreateToken(userId,function(err,token){
-            if(err) return callback(err);
-            callback(null,token);
+function getToken(callback) {
+    getOrCreateUser(function (err, userId) {
+        if (err) return callback(err);
+        getOrCreateToken(userId, function (err, token) {
+            if (err) return callback(err);
+            callback(null, token);
         });
     });
 }
 
-var superagent = require('superagent');
-module.exports.requestHelper = function(url, token){
-    if(!token)
+function setToken(request, token) {
+    if (!token)
         token = global.token;
+    return request.set('Authorization', 'Bearer ' + token)
+        .set('Accept', 'application/json');
+}
 
-    return superagent.get(config.url + url)
-        .set('Authorization','Bearer ' + token)
-        .set('Accept','application/json');
+module.exports.GETRequest = function (url, token) {
+    var request = superagent.get(config.url + url);
+    return setToken(request, token);
 };
 
-module.exports.TestData = testData;
+module.exports.POSTRequest = function (url, data) {
+    var request = superagent.post(config.url + url);
+    return setToken(request).send(data);
+};
 
 module.exports.AccessToken = AccessToken;
 
@@ -76,4 +82,8 @@ module.exports.setGlobalUser = function (done) {
             done();
         });
     });
+};
+
+module.exports.getModel = function (model) {
+    return mongoose.model(model);
 };

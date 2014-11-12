@@ -1,13 +1,11 @@
-var superagent = require('superagent');
-var expect = require('chai').expect;
-var helper = require('../helper.js');
-var accessToken = helper.AccessToken;
+var helper = require('../../helper.js');
+var accessToken = helper.getModel('AccessToken');
 
 describe('api', function(){
     before("clean AccessTokens", function (done) {
         console.log("clean AccessTokens");
-        // ignore error
         accessToken.collection.drop(function (err) {
+            // ignore error
             done();
         });
     });
@@ -22,7 +20,7 @@ describe('api', function(){
         });
 
         it('login without token failed', function(done){
-            helper.requestHelper("api/auth/info",'wrongtoken')
+            helper.GETRequest("api/auth/info", 'wrongtoken')
                 .end(function(e,res){
                     expect(e).to.equal(null);
                     expect(res.body.user).to.be.undefined;
@@ -31,20 +29,20 @@ describe('api', function(){
         });
 
         it('user should be TestUser', function(done){
-            helper.requestHelper("api/auth/info")
+            helper.GETRequest("api/auth/info")
                 .end(function(e,res){
                     expect(e).to.equal(null);
-                    expect(res.body.user).to.not.be.undefined;
-                    expect(res.body.user.username).to.be.equal(helper.TestData.TestUser.username);
+                    expect(res.body).to.have.property('user');
+                    expect(res.body.user._id).to.have.string(global.userId);
                     done()
                 })
         });
 
         it('user should have admin role', function(done){
-            helper.requestHelper("api/auth/info")
+            helper.GETRequest("api/auth/info")
                 .end(function(err,res){
                     expect(err).to.equal(null);
-                    expect(res.body.roles).to.include.members(helper.TestData.TestUser.roles);
+                    expect(res.body.roles).to.include.members(TestData.TestUser.roles);
                     done()
                 });
         });
