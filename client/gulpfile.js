@@ -48,12 +48,8 @@ var paths = {
     "templatemodule": pkg.name + ".templates"
 };
 
-function watchFilesAndStartTask(files, task) {
-    watch({
-        glob: files,
-        emit: 'one',
-        emitOnGlob: false
-    }, function () {
+function watchFilesAndStartTask(filesGlob, task) {
+    watch(filesGlob, function (files) {
         gulp.start(task);
     });
 }
