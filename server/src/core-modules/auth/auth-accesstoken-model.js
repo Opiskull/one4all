@@ -3,26 +3,26 @@ var timestamps = require('mongoose-timestamp');
 
 var accessTokenSchema = mongoose.Schema({
     lastLogin: {type: Date, default: Date.now},
-    accessToken: String,
+    token: String,
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 });
 
 accessTokenSchema.statics.findUserByToken = function (token, callback) {
     var User = mongoose.model('User');
-    this.findOne({accessToken: token})
-        .exec(function (err, accessToken) {
+    this.findOne({token: token})
+        .exec(function (err, userToken) {
             if (err) {
                 return callback(err);
             }
-            if (!accessToken) {
+            if (!userToken) {
                 return callback(null);
             }
-            return User.findOne({_id: accessToken.user}, callback);
+            return User.findOne({_id: userToken.user}, callback);
         });
 };
 
 accessTokenSchema.statics.findByToken = function (token, callback) {
-    this.findOne({accessToken: token}, callback);
+    this.findOne({token: token}, callback);
 };
 
 accessTokenSchema.statics.removeWithToken = function (token, callback) {

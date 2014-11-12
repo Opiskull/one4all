@@ -26,7 +26,7 @@ module.exports.init = function (server, router) {
                     return done(null, false);
                 }
                 // Remove refreshToken not used
-                var token = {accessToken: accessToken, user: user._id};
+                var token = {token: accessToken, user: user._id};
                 AccessToken.create(token, function (err, aToken) {
                     if (err) {
                         return done(err);

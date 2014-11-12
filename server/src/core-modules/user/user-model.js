@@ -55,7 +55,7 @@ userSchema.statics.findOrCreate = function (profile, callback) {
 };
 
 userSchema.statics.findByAccessToken = function (token, callback) {
-    this.findOne({accessToken: token}).exec(callback);
+    this.findOne({token: token}).exec(callback);
 };
 
 userSchema.plugin(timestamps);
