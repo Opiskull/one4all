@@ -8,6 +8,7 @@ var authenticate = function (req, res, next) {
         if (err) return next(err);
         if (user) {
             req.user = user;
+            req.authInfo = info;
             return next();
         }
         return next(new restify.InvalidCredentialsError());

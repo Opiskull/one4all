@@ -25,6 +25,7 @@ server.pre(function (req, res, next) {
 
 server.on('uncaughtException', function (req, res, route, err) {
     req.log.error(err);
+    req.log.error(route);
     req.log.error(req);
     res.send(new restify.InternalError('Internal server error'));
 });
@@ -39,15 +40,6 @@ database.connect();
 modulesLoader.loadServerModules(server);
 
 var port = process.argv[2] || config.port;
-
-var io = require('engine.io').listen(3333);
-
-io.on('connection', function (socket) {
-    socket.emit('news', {hello: 'world'});
-    socket.on('message', function (data) {
-
-    });
-});
 
 server.listen(port, config.host, function () {
     server.log.info('%s listening at %s', server.name, server.url);
