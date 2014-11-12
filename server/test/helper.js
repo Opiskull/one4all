@@ -21,15 +21,15 @@ function getOrCreateUser(callback) {
 }
 
 function getOrCreateToken(userId,callback) {
-    AccessToken.findOne({user: userId}, function (err, token) {
+    AccessToken.findOne({user: userId}, function (err, accessToken) {
         if (err) return callback(err);
-        if (token) return callback(null, token.accessToken);
-        token = new AccessToken();
-        token.accessToken = testData.TestToken.accessToken;
-        token.user = userId;
-        token.save(function (err, token) {
+        if (accessToken) return callback(null, accessToken.token);
+        accessToken = new AccessToken();
+        accessToken.token = testData.TestToken.token;
+        accessToken.user = userId;
+        accessToken.save(function (err, token) {
             if (err) return callback(err);
-            if (token) callback(null, token.accessToken);
+            if (token) callback(null, token.token);
         });
     });
 }
@@ -44,15 +44,6 @@ function getToken(callback){
     });
 }
 
-before(function(done) {
-    getToken(function (err, token) {
-        if (err) done(err);
-        global.token = token;
-        done();
-    });
-});
-
-
 var superagent = require('superagent');
 module.exports.requestHelper = function(url, token){
     if(!token)
@@ -64,3 +55,25 @@ module.exports.requestHelper = function(url, token){
 };
 
 module.exports.TestData = testData;
+
+module.exports.AccessToken = AccessToken;
+
+module.exports.setGlobalToken = function (done) {
+    getToken(function (err, token) {
+        if (err) done(err);
+        global.token = token;
+        done();
+    });
+};
+
+module.exports.setGlobalUser = function (done) {
+    getOrCreateUser(function (err, userId) {
+        if (err) done(err);
+        global.userId = userId;
+        getOrCreateToken(userId, function (err, token) {
+            if (err) return done(err);
+            global.token = token;
+            done();
+        });
+    });
+};

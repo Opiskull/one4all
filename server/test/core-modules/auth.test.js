@@ -1,11 +1,23 @@
 var superagent = require('superagent');
 var expect = require('chai').expect;
 var helper = require('../helper.js');
+var accessToken = helper.AccessToken;
 
 describe('api', function(){
+    before("clean AccessTokens", function (done) {
+        console.log("clean AccessTokens");
+        // ignore error
+        accessToken.collection.drop(function (err) {
+            done();
+        });
+    });
     describe('auth', function(){
+        before("setGlobalToken", function (done) {
+            helper.setGlobalUser(done);
+        });
+
         it('create TestUser',function(done){
-            expect(true).to.be.equal(true, "User Created!")
+            expect(true).to.be.equal(true, "User created!")
             done()
         });
 

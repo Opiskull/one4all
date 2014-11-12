@@ -10,6 +10,6 @@ module.exports.TestUser = {
 };
 
 module.exports.TestToken = {
-    accessToken : 'testuseraccesstoken',
+    token: 'testuseraccesstoken',
     user : ''
 };
