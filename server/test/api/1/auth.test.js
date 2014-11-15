@@ -1,5 +1,4 @@
-var helper = require('../../helper.js');
-var accessToken = helper.getModel('AccessToken');
+var accessToken = ModelHelper.get('AccessToken');
 
 describe('api', function(){
     before("clean AccessTokens", function (done) {
@@ -11,7 +10,7 @@ describe('api', function(){
     });
     describe('auth', function(){
         before("setGlobalToken", function (done) {
-            helper.setGlobalUser(done);
+            AuthHelper.setGlobalUser(done);
         });
 
         it('create TestUser',function(done){
@@ -20,7 +19,7 @@ describe('api', function(){
         });
 
         it('login without token failed', function(done){
-            helper.GETRequest("api/auth/info", 'wrongtoken')
+            RequestHelper.get("api/auth/info", 'wrongtoken')
                 .end(function(e,res){
                     expect(e).to.equal(null);
                     expect(res.body.user).to.be.undefined;
@@ -29,20 +28,20 @@ describe('api', function(){
         });
 
         it('user should be TestUser', function(done){
-            helper.GETRequest("api/auth/info")
+            RequestHelper.get("api/auth/info")
                 .end(function(e,res){
                     expect(e).to.equal(null);
                     expect(res.body).to.have.property('user');
-                    expect(res.body.user._id).to.have.string(global.userId);
+                    expect(res.body.user._id).to.have.string(TestDataHelper.UserId);
                     done()
                 })
         });
 
         it('user should have admin role', function(done){
-            helper.GETRequest("api/auth/info")
+            RequestHelper.get("api/auth/info")
                 .end(function(err,res){
                     expect(err).to.equal(null);
-                    expect(res.body.roles).to.include.members(TestData.TestUser.roles);
+                    expect(res.body.roles).to.include.members(TestDataHelper.User.roles);
                     done()
                 });
         });

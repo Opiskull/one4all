@@ -1,4 +1,4 @@
-module.exports.TestUser = {
+var user = {
     username: 'TestUser',
     email: 'testuser@peerzone.net',
     profile: {
@@ -9,13 +9,21 @@ module.exports.TestUser = {
     roles: ['admin']
 };
 
-module.exports.TestToken = {
+var token = {
     token: 'testuseraccesstoken',
     user : ''
 };
 
-module.exports.TestAnime = {
+var anime = {
     tags: [],
     title: "TestAnime",
     episode: 123
+};
+
+module.exports = {
+    User: user,
+    Token: token,
+    Anime: anime,
+    UserToken: '',
+    UserId: ''
 };
