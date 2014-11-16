@@ -3,7 +3,6 @@ var Book = mongoose.model('Book');
 var restHelper = requireLib('rest-helper.js');
 
 module.exports = {
-    title: 'Book',
     route: '/book',
     load: restHelper.load(Book),
     get: restHelper.get(Book),

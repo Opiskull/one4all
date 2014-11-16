@@ -103,7 +103,7 @@ function update(Model){
 function list(Model) {
     return function (req, res, next) {
         events.emit(['item', 'list', 'before']);
-        Model.find({user: new mongoose.Types.ObjectId(req.user.id)}, function (err, items) {
+        Model.findByUserId(req.user.id, function (err, items) {
             if (err)
                 return next(err);
             events.emit(['item', 'list', 'after'], items);

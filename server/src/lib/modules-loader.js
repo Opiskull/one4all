@@ -32,6 +32,18 @@ function loadModule(file, parentName, initModule) {
     }
 }
 
+function loadModuleWithoutParent(file, initModule) {
+    var module = require(file);
+    var moduleName = getModuleName(file);
+    var moduleLogInfo = createModuleLogInfo(file, moduleName);
+    if (module.init) {
+        logger.info(moduleLogInfo, '[%s] loaded!', moduleName);
+        initModule(module, moduleName);
+    } else {
+        logger.warn(moduleLogInfo, '[%s] not loaded!', moduleName);
+    }
+}
+
 function isModule(path) {
     return fs.existsSync(path + '/index.js');
 }
@@ -70,7 +82,7 @@ function loadServerModules(server) {
     var dataPath = pathUtil.join(__rootdir, 'data-modules');
     var externalApiPath = pathUtil.join(__rootdir, 'external-api-modules');
     loadModulesFromPath(corePath, initModuleWithServerAndRouter(server));
-    loadModulesFromPath(dataPath, initModuleWithServerAndRouter(server));
+    loadModuleWithoutParent(dataPath, initModuleWithServerAndRouter(server));
     loadModulesFromPath(externalApiPath, initModuleWithServerAndRouter(server));
     logger.info("[server-modules] end");
 }

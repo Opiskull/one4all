@@ -70,6 +70,12 @@ function hiddenPlugin(schema) {
     });
 }
 
+function modelExtensionsPlugin(schema) {
+    schema.statics.findByUserId = function (userId, cb) {
+        return this.find({user: new mongoose.Types.ObjectId(userId)}, cb);
+    }
+}
+
 module.exports.stats = statsPlugin;
 module.exports.info = infoPlugin;
 module.exports.rating = ratingPlugin;
@@ -86,4 +92,5 @@ module.exports.dataModules = function (schema) {
     schema.plugin(tagsPlugin);
     schema.plugin(hiddenPlugin);
     schema.plugin(changesPlugin);
+    schema.plugin(modelExtensionsPlugin);
 };

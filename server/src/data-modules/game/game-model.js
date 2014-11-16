@@ -7,4 +7,9 @@ var gameSchema = mongoose.Schema({
 });
 
 gameSchema.plugin(plugins.dataModules);
-mongoose.model('Game', gameSchema);
+var model = mongoose.model('Game', gameSchema);
+
+module.exports = {
+    Schema: gameSchema,
+    Model: model
+};

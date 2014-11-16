@@ -1,13 +1,11 @@
 require('./src/lib/globals.js')(__dirname + "/src");
-var restify = require('restify'), mongoose = require('mongoose'), passport = require('passport');
+var restify = require('restify'), passport = require('passport');
 var errorHelper = requireLib('error-helper.js');
 var modulesLoader = requireLib('modules-loader.js');
 var logger = requireLib('logger.js');
 var database = requireLib('database.js');
 
-
 var config = requireConfig('config.json'), packageInfo = requireRoot('package.json');
-
 
 var server = restify.createServer({
     name: packageInfo.name,
@@ -49,7 +47,3 @@ server.get(/\/?.*/, restify.serveStatic({
     directory: require('path').resolve('../client/build'),
     default: 'index.html'
 }));
-
-
-
-

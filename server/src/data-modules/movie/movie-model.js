@@ -7,4 +7,9 @@ var movieSchema = mongoose.Schema({
 });
 
 movieSchema.plugin(plugins.dataModules);
-mongoose.model('Movie', movieSchema);
+var model = mongoose.model('Movie', movieSchema);
+
+module.exports = {
+    Schema: movieSchema,
+    Model: model
+};

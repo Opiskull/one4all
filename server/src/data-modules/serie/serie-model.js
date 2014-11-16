@@ -9,4 +9,9 @@ var serieSchema = mongoose.Schema({
 });
 
 serieSchema.plugin(plugins.dataModules);
-mongoose.model('Serie', serieSchema);
+var model = mongoose.model('Serie', serieSchema);
+
+module.exports = {
+    Schema: serieSchema,
+    Model: model
+};

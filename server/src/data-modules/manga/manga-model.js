@@ -9,4 +9,9 @@ var mangaSchema = mongoose.Schema({
 });
 
 mangaSchema.plugin(plugins.dataModules);
-mongoose.model('Manga', mangaSchema);
+var model = mongoose.model('Manga', mangaSchema);
+
+module.exports = {
+    Schema: mangaSchema,
+    Model: model
+};

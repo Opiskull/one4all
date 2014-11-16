@@ -8,4 +8,9 @@ var animeSchema = mongoose.Schema({
 });
 
 animeSchema.plugin(plugins.dataModules);
-mongoose.model('Anime', animeSchema);
+var model = mongoose.model('Anime', animeSchema);
+
+module.exports = {
+    Schema: animeSchema,
+    Model: model
+};
