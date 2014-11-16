@@ -1,3 +1,13 @@
+var getRandomString = function (length) {
+    var chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    var result = '';
+    if (!length) {
+        length = 10 + Math.floor(Math.random() * 10)
+    }
+    for (var i = length; i > 0; --i) result += chars[Math.round(Math.random() * (chars.length - 1))];
+    return result;
+};
+
 var user = {
     username: 'TestUser',
     email: 'testuser@peerzone.net',
@@ -16,7 +26,7 @@ var token = {
 
 var anime = {
     tags: [],
-    title: "TestAnime",
+    title: getRandomString(),
     episode: 123
 };
 
@@ -25,5 +35,6 @@ module.exports = {
     Token: token,
     Anime: anime,
     UserToken: '',
-    UserId: ''
+    UserId: '',
+    getRandomString: getRandomString
 };

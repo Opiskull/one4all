@@ -1,23 +1,14 @@
 var accessToken = ModelHelper.get('AccessToken');
 
 describe('api', function(){
-    before("clean AccessTokens", function (done) {
-        console.log("clean AccessTokens");
-        accessToken.collection.drop(function (err) {
-            // ignore error
-            done();
-        });
-    });
     describe('auth', function(){
         before("setGlobalToken", function (done) {
             AuthHelper.setGlobalUser(done);
         });
-
         it('create TestUser',function(done){
             expect(true).to.be.equal(true, "User created!")
             done()
         });
-
         it('login without token failed', function(done){
             RequestHelper.get("api/auth/info", 'wrongtoken')
                 .end(function(e,res){
@@ -26,7 +17,6 @@ describe('api', function(){
                     done()
                 })
         });
-
         it('user should be TestUser', function(done){
             RequestHelper.get("api/auth/info")
                 .end(function(e,res){
@@ -36,7 +26,6 @@ describe('api', function(){
                     done()
                 })
         });
-
         it('user should have admin role', function(done){
             RequestHelper.get("api/auth/info")
                 .end(function(err,res){
