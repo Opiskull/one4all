@@ -8,6 +8,15 @@ var getRandomString = function (length) {
     return result;
 };
 
+var getRandomNumber = function (count) {
+    return Math.round(Math.random() * count);
+};
+
+var getRandomState = function () {
+    var stats = ["", "finished", "dropped", "paused", "watching"];
+    return stats[Math.round(Math.random() * stats.length)];
+};
+
 var user = {
     username: 'TestUser',
     email: 'testuser@peerzone.net',
@@ -27,7 +36,9 @@ var token = {
 var anime = {
     tags: [],
     title: getRandomString(),
-    episode: 123
+    episode: getRandomNumber(9999),
+    rating: getRandomNumber(5),
+    state: getRandomState()
 };
 
 module.exports = {
