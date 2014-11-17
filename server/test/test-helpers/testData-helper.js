@@ -12,8 +12,10 @@ var getRandomNumber = function (count) {
     return Math.round(Math.random() * count);
 };
 
-var getRandomState = function () {
-    var stats = ["", "finished", "dropped", "paused", "watching"];
+var getRandomState = function (stats) {
+    if (!stats) {
+        stats = ["", "finished", "dropped", "paused", "watching"];
+    }
     return stats[Math.round(Math.random() * stats.length)];
 };
 
@@ -41,10 +43,29 @@ var anime = {
     state: getRandomState()
 };
 
+var book = {
+    tags: [],
+    title: getRandomString(),
+    page: getRandomNumber(9999),
+    rating: getRandomNumber(5),
+    author: getRandomString(20),
+    state: getRandomState()
+};
+
+var game = {
+    tags: [],
+    title: getRandomString(),
+    rating: getRandomNumber(5),
+    author: getRandomString(20),
+    state: getRandomState()
+};
+
 module.exports = {
     User: user,
     Token: token,
     Anime: anime,
+    Book: book,
+    Game: game,
     UserToken: '',
     UserId: '',
     getRandomString: getRandomString

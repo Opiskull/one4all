@@ -1,5 +1,7 @@
 requireCore('user');
 require(__rootdir + '/data-modules/anime');
+require(__rootdir + '/data-modules/book');
+require(__rootdir + '/data-modules/game');
 requireCore('auth');
 
 var mongoose = require('mongoose');
