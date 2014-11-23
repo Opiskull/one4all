@@ -1,5 +1,5 @@
-angular.module('dialog').controller('addDialogCtrl', ['$scope', '$modalInstance', 'dialogContext', 'tagsService', function ($scope, $modalInstance, dialogContext, tagsService) {
-    $scope.item = {};
+angular.module('dialog').controller('itemDialogCtrl', ['$scope', '$modalInstance', 'dialogContext', 'tagsService', function ($scope, $modalInstance, dialogContext, tagsService) {
+    $scope.item = dialogContext.item;
     $scope.defaultProvider = dialogContext.defaultProvider;
     $scope.headerTitle = dialogContext.headerTitle;
     $scope.templateUrl = dialogContext.templateUrl;
