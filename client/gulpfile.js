@@ -49,8 +49,10 @@ var paths = {
 };
 
 function watchFilesAndStartTask(filesGlob, task) {
-    watch(filesGlob, function (files) {
-        gulp.start(task);
+    console.log(filesGlob);
+    console.log(task);
+    watch(filesGlob, function (files, cb) {
+        gulp.start(task, cb);
     });
 }
 
