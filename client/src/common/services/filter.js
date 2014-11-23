@@ -1,4 +1,4 @@
-angular.module('one4all').factory('filterService', ['settingsService', '$rootScope', '$q','logger', function (settingsService, $rootScope, $q, logger) {
+angular.module('one4all').factory('filterService', ['settingsService', '$rootScope', '$q', 'logger', 'itemCacheService', 'paginationCacheService', '$timeout', function (settingsService, $rootScope, $q, logger, itemCache, paginationCache, $timeout) {
     var settings = settingsService.settings;
 
     function hasKeyword() {
@@ -64,8 +64,9 @@ angular.module('one4all').factory('filterService', ['settingsService', '$rootSco
         return settings.orderBy.reverse ? items.reverse() : items;
     }
 
-    function filterItems(pagination) {
-        var items = pagination.totalItems;
+    function filterItems(resource) {
+        var items = itemCache.getItems(resource);
+        var pagination = paginationCache.get(resource);
         if (!items) return;
         pagination.totalItemsCount = items.length;
         if (hasKeyword())
@@ -95,31 +96,14 @@ angular.module('one4all').factory('filterService', ['settingsService', '$rootSco
     }
 
     function forceFilter() {
-        $rootScope.$emit('filter');
-    }
-
-    function loadItems(pagination, resource) {
-        var deferred = $q.defer();
-        var promise = deferred.promise;
-        if (!resource.items) {
-            resource.getList().then(function (items) {
-                resource.items = items;
-                pagination.totalItems = items;
-                filterItems(pagination);
-                deferred.resolve(pagination);
-            },logger.handleRestErrorResponse);
-        } else {
-            pagination.totalItems = resource.items;
-            filterItems(pagination);
-            deferred.resolve(pagination);
-        }
-        return promise;
+        $timeout(function () {
+            $rootScope.$emit('filter');
+        });
     }
 
     return {
         filterItems: filterItems,
         orderBy: orderBy,
-        forceFilter: forceFilter,
-        loadItems: loadItems
+        forceFilter: forceFilter
     };
 }]);

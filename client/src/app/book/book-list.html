@@ -19,19 +19,20 @@
                 <a ng-click="showInfo(book)">{{book.title}}</a>
             </div>
             <div class="col-sm-2">
-                <up-down-button disabled="book.state == 'finished'" item="book" property="'page'"></up-down-button>
+                <up-down-button disabled="book.state == 'finished'" item="book" property="'page'"
+                                update="update(book)"></up-down-button>
             </div>
             <div class="col-sm-2">{{book.author}}</div>
             <div class="col-sm-2">
-                <rating-nuts item="book" property="'rating'"></rating-nuts>
+                <rating-nuts item="book" property="'rating'" update="update(book)"></rating-nuts>
             </div>
             <div class="col-sm-1">{{book.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
-                <stats-button model="book"></stats-button>
+                <stats-button model="book" update="update(book)"></stats-button>
                 <actions-button remove="remove(book)" edit="edit(book)"></actions-button>
             </div>
         </div>
         <info item="book"></info>
     </div>
 </div>
-<bottom-pagination></bottom-pagination>
+<bottom-navigation add="add()" resource="{{resourceName}}"></bottom-navigation>

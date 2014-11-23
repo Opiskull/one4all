@@ -5,20 +5,20 @@ angular.module('one4all').directive('searchButton', [function () {
         scope: {
             defaultProvider: '=',
             item: '=',
-            infoCallback: '='
+            infoCallback: '&'
         },
         link: function ($scope, $element, $attr) {
             $scope.placeholder = $attr.placeholder || '';
         },
         controller: ['$scope', 'searchDialogService', 'itemService', function ($scope, searchDialogService, itemService) {
             $scope.search = function (item) {
-                searchDialogService.search(item.title, $scope.defaultProvider).then(function (result) {
-                    item.title = result.title;
-                    if (angular.isFunction($scope.infoCallback)) {
-                        result.item = item;
-                        $scope.infoCallback(result);
-                    }
-                    itemService.setInfo(item, result.info);
+                searchDialogService.search(item.title, $scope.defaultProvider).then(function (info) {
+                    item.title = info.title;
+                    itemService.setInfo(item, info.info);
+                    $scope.infoCallback({
+                        info: info,
+                        item: item
+                    });
                 });
             };
         }]

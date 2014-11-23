@@ -1,4 +1,4 @@
-angular.module('anime', ['core', 'ngRoute', 'restangular'])
+angular.module('data.anime', ['core', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/anime', {
             templateUrl: 'anime/anime-list.html',

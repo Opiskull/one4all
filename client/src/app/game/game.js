@@ -1,4 +1,4 @@
-angular.module('game', ['core', 'ngRoute', 'restangular'])
+angular.module('data.game', ['core', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/game', {
             templateUrl: 'game/game-list.html',

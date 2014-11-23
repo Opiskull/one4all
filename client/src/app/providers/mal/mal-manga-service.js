@@ -1,4 +1,4 @@
-angular.module('providers').factory('malManga', ['Restangular', function (restangular) {
+angular.module('providers').factory('malManga', ['searchApiService', function (searchApiService) {
     var searchUrl = 'mal/manga/search';
     var detailUrl = 'providers/mal/mal-manga-detail.html';
     return {
@@ -6,12 +6,6 @@ angular.module('providers').factory('malManga', ['Restangular', function (restan
         display: 'My Anime List - Manga',
         category: 'manga',
         detailUrl: detailUrl,
-        search: function (keyword) {
-            return restangular.one(searchUrl + '?search=' + keyword).getList().then(function (items) {
-                return restangular.stripRestangular(items);
-            }, function () {
-
-            });
-        }
+        search: searchApiService.searchRequest(searchUrl)
     };
 }]);

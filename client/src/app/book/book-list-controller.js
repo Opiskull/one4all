@@ -1,10 +1,9 @@
-angular.module('book')
-    .controller('BookListCtrl', ['$scope', '$controller', 'bookResource', function ($scope, $controller, bookResource) {
-        $controller('BaseListCtrl', {$scope: $scope, Resource: bookResource});
+angular.module('data.book')
+    .controller('BookListCtrl', ['$scope', '$controller', function ($scope, $controller) {
+        $controller('BaseListCtrl', {$scope: $scope, resourceName: 'book'});
         $scope.defaultProvider = 'google-books';
-        $scope.title = 'book';
-        $scope.searchInfoCallback = function (result) {
-            if (result.info.authors)
-                result.item.author = result.info.authors[0];
+        $scope.searchInfoCallback = function (info, item) {
+            if (info.info.authors)
+                item.author = info.info.authors[0];
         }
     }]);

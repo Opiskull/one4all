@@ -1,7 +1,7 @@
 <div class="form-group" ng-class="{'has-error': itemform.title.$invalid}">
     <label>Title</label>
     <search-button default-provider="defaultProvider" item="item" placeholder="book name"
-                   info-callback="searchInfoCallback"></search-button>
+                   info-callback="searchInfoCallback(info,item)"></search-button>
 </div>
 <div class="form-group" ng-class="{'has-error': itemform.page.$invalid}">
     <label>Page</label>

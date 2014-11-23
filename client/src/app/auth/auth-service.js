@@ -1,5 +1,5 @@
 angular.module('auth')
-    .factory('authService', ['Restangular', '$location', '$localStorage', function (Restangular, $location, $localStorage) {
+    .factory('authService', ['apiService', '$location', '$localStorage', '$http', function (apiService, $location, $localStorage, $http) {
         var authInfoDefault = {
             isLoggedIn: false,
             user: {},
@@ -13,13 +13,13 @@ angular.module('auth')
          * @returns {*}
          */
         function authenticateWithServer() {
-            Restangular.setDefaultHeaders({'Authorization': 'Bearer ' + $localStorage.accessToken});
-            return Restangular.oneUrl('auth/info').get().then(function (response) {
+            $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.accessToken;
+            return apiService.get('auth/info').success(function (response) {
                 angular.extend(authInfo, authInfoDefault);
                 authInfo.user = response.user;
                 authInfo.roles = response.roles;
                 authInfo.isLoggedIn = true;
-            }, function () {
+            }).error(function (response) {
                 angular.extend(authInfo, authInfoDefault);
             });
         }
@@ -38,10 +38,10 @@ angular.module('auth')
          * logout will remove the accessToken from the client
          */
         function logout() {
-            return Restangular.oneUrl('auth/logout').post().then(function (data) {
+            return apiService.post('auth/logout').success(function (response) {
                 delete $localStorage.accessToken;
                 angular.extend(authInfo, authInfoDefault);
-                Restangular.setDefaultHeaders({'Authorization': ''});
+                $http.defaults.headers.common.Authorization = '';
                 $location.url('/');
             });
         }

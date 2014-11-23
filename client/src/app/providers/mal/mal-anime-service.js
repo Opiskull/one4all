@@ -1,4 +1,4 @@
-angular.module('providers').factory('malAnime', ['Restangular', function (restangular) {
+angular.module('providers').factory('malAnime', ['searchApiService', function (searchApiService) {
     var searchUrl = 'mal/anime/search';
     var detailUrl = 'providers/mal/mal-anime-detail.html';
     return {
@@ -6,12 +6,6 @@ angular.module('providers').factory('malAnime', ['Restangular', function (restan
         display: 'My Anime List - Anime',
         category: 'anime',
         detailUrl: detailUrl,
-        search: function (keyword) {
-            return restangular.one(searchUrl + '?search=' + keyword).getList().then(function (items) {
-                return restangular.stripRestangular(items);
-            }, function () {
-
-            });
-        }
+        search: searchApiService.searchRequest(searchUrl)
     };
 }]);

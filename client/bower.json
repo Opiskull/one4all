@@ -17,7 +17,6 @@
   "dependencies": {
     "angular": "~1.3",
     "angular-route": "~1.3",
-    "restangular": "^1.4.0",
     "angular-bootstrap": "^0.11.2",
     "angular-animate": "~1.3",
     "angular-sanitize": "~1.3",
@@ -26,7 +25,8 @@
     "ng-tags-input": "~2.1.0",
     "ngstorage": "~0.3.0",
     "bootstrap-less": "3.2.0",
-    "angular-growl-v2": "~0.7.0"
+    "angular-growl-v2": "~0.7.0",
+    "lodash": "~2.4.1"
   },
   "overrides": {
     "bootstrap-less": {
@@ -35,9 +35,9 @@
     "ng-tags-input": {
       "main": "**.js"
     },
-      "angular-growl-v2":{
-          "main":"build/**.js"
-      }
+    "angular-growl-v2": {
+      "main": "build/**.js"
+    }
   },
   "resolutions": {
     "angular": "~1.3"

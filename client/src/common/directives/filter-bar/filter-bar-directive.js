@@ -1,4 +1,4 @@
-angular.module('one4all').directive('filterBar', ['$rootScope', '$timeout', 'settingsService', 'tagsService', function ($rootScope, $timeout, settingsService, tagsService) {
+angular.module('one4all').directive('filterBar', [function () {
     return {
         restrict: 'EA',
         templateUrl: 'directives/filter-bar/filter-bar.html',

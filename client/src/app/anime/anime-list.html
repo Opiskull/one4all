@@ -22,18 +22,19 @@
                 <a ng-click="showInfo(anime)">{{anime.title}}</a>
             </div>
             <div class="col-sm-4">
-                <up-down-button disabled="anime.state == 'finished'" item="anime" property="'episode'"></up-down-button>
+                <up-down-button disabled="anime.state == 'finished'" item="anime" property="'episode'"
+                                update="update(anime)"></up-down-button>
             </div>
             <div class="col-sm-2">
-                <rating-nuts item="anime" property="'rating'"></rating-nuts>
+                <rating-nuts item="anime" update="update(anime)" property="'rating'"></rating-nuts>
             </div>
             <div class="col-sm-1">{{anime.updatedAt | timeAgo}}</div>
             <div class="col-sm-3 pull-right">
-                <stats-button model="anime" stats="enabledStats"></stats-button>
+                <stats-button model="anime" stats="enabledStats" update="update(anime)"></stats-button>
                 <actions-button remove="remove(anime)" edit="edit(anime)"></actions-button>
             </div>
         </div>
         <info item="anime"></info>
     </div>
 </div>
-<bottom-pagination></bottom-pagination>
+<bottom-navigation add="add()" resource="{{resourceName}}"></bottom-navigation>

@@ -15,15 +15,15 @@
             <div class="col-sm-2"><a ng-click="showInfo(game)">{{game.title}}</a></div>
             <div class="col-sm-4"></div>
             <div class="col-sm-2">
-                <rating-nuts item="game" property="'rating'"></rating-nuts>
+                <rating-nuts item="game" property="'rating'" update="update(game)"></rating-nuts>
             </div>
             <div class="col-sm-1">{{game.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
-                <stats-button model="game"></stats-button>
+                <stats-button model="game" update="update(game)"></stats-button>
                 <actions-button remove="remove(game)" edit="edit(game)"></actions-button>
             </div>
         </div>
         <info item="game"></info>
     </div>
 </div>
-<bottom-pagination></bottom-pagination>
+<bottom-navigation add="add()" resource="{{resourceName}}"></bottom-navigation>

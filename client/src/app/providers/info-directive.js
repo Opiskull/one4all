@@ -1,16 +1,18 @@
 angular.module('providers').directive('info', ['searchService', function (searchService) {
     return {
         restrict: 'E',
-        template: '<div ng-show="item.open" class="info-animation"><div ng-include="detailTemplate" ng-if="item.info"></div><tags items="item.tags"></tags></div>',
+        templateUrl: 'providers/info.html',
         link: function (scope, element, attrs) {
-            attrs.$observe('item.info', function () {
-                if (scope.item.info) {
-                    var provider = searchService.getProvider(scope.item.info.provider);
-                    scope.detailTemplate = provider.detailUrl;
-                    scope.info = scope.item.info;
+        },
+        controller: ['$scope', 'searchService', function ($scope, searchService) {
+            $scope.$watch('item.info', function (newInfo) {
+                if (newInfo) {
+                    var provider = searchService.getProvider(newInfo.provider);
+                    $scope.detailTemplate = provider.detailUrl;
+                    $scope.info = newInfo;
                 }
             });
-        },
+        }],
         scope: {
             item: '='
         }

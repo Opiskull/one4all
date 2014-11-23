@@ -1,6 +1,5 @@
-angular.module('game')
-    .controller('GameListCtrl', ['$scope', '$controller', 'gameResource', function ($scope, $controller, Games) {
-        $controller('BaseListCtrl', {$scope: $scope, Resource: Games});
+angular.module('data.game')
+    .controller('GameListCtrl', ['$scope', '$controller', function ($scope, $controller) {
+        $controller('BaseListCtrl', {$scope: $scope, resourceName: 'game'});
         $scope.defaultProvider = '';
-        $scope.title = 'game';
     }]);

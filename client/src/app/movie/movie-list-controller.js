@@ -1,7 +1,6 @@
-angular.module('movie')
-    .controller('MovieListCtrl', ['$scope', '$controller', 'movieResource', function ($scope, $controller, Movies) {
-        $controller('BaseListCtrl', {$scope: $scope, Resource: Movies});
+angular.module('data.movie')
+    .controller('MovieListCtrl', ['$scope', '$controller', function ($scope, $controller) {
+        $controller('BaseListCtrl', {$scope: $scope, resourceName: 'movie'});
         $scope.defaultProvider = 'tmdb-movie';
         $scope.enabledStats = ['finished'];
-        $scope.title = 'movie';
     }]);

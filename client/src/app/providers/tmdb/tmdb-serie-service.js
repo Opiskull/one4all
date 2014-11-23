@@ -1,4 +1,4 @@
-angular.module('providers').factory('tmdbSerie', ['Restangular', function (restangular) {
+angular.module('providers').factory('tmdbSerie', ['searchApiService', function (searchApiService) {
     var searchUrl = 'tmdb/serie/search';
     var detailUrl = 'providers/tmdb/tmdb-serie-detail.html';
     return {
@@ -6,12 +6,6 @@ angular.module('providers').factory('tmdbSerie', ['Restangular', function (resta
         display: 'The Movie DB - Serie',
         category: 'serie',
         detailUrl: detailUrl,
-        search: function (keyword) {
-            return restangular.one(searchUrl + '?search=' + keyword).getList().then(function (items) {
-                return restangular.stripRestangular(items);
-            }, function () {
-
-            });
-        }
+        search: searchApiService.searchRequest(searchUrl)
     };
 }]);

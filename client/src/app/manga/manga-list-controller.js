@@ -1,8 +1,7 @@
-angular.module('manga')
-    .controller('MangaListCtrl', ['$scope', '$controller', 'mangaResource', function ($scope, $controller, Mangas) {
-        $controller('BaseListCtrl', {$scope: $scope, Resource: Mangas});
+angular.module('data.manga')
+    .controller('MangaListCtrl', ['$scope', '$controller', function ($scope, $controller) {
+        $controller('BaseListCtrl', {$scope: $scope, resourceName: 'manga'});
         $scope.defaultProvider = 'mal-manga';
-        $scope.title = 'manga';
 
         $scope.getNextChapterUrl = function (manga) {
             if (manga.finished)

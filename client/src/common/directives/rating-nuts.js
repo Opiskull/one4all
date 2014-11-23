@@ -57,13 +57,14 @@ angular.module('one4all').directive('ratingNuts', ['itemService', function (item
                     value = 0;
                 }
                 scope.item[scope.property] = value;
-                itemService.update(scope.item);
+                scope.update();
                 setRating(nuts, value);
             };
             setRating(nuts, scope.item[scope.property]);
         },
         scope: {
-            item: '='
+            item: '=',
+            update: '&'
         }
     };
 }]);

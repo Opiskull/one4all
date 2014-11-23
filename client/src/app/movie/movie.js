@@ -1,4 +1,4 @@
-angular.module('movie', ['core', 'ngRoute', 'restangular'])
+angular.module('data.movie', ['core', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/movie', {
             templateUrl: 'movie/movie-list.html',

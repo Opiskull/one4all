@@ -18,21 +18,23 @@
                 <a ng-click="showInfo(serie)">{{serie.title}}</a>
             </div>
             <div class="col-sm-2">
-                <up-down-button disabled="serie.state == 'finished'" item="serie" property="'season'"></up-down-button>
+                <up-down-button disabled="serie.state == 'finished'" item="serie" property="'season'"
+                                update="update(serie)"></up-down-button>
             </div>
             <div class="col-sm-2">
-                <up-down-button disabled="serie.state == 'finished'" item="serie" property="'episode'"></up-down-button>
+                <up-down-button disabled="serie.state == 'finished'" item="serie" property="'episode'"
+                                update="update(serie)"></up-down-button>
             </div>
             <div class="col-sm-2">
-                <rating-nuts item="serie" property="'rating'"></rating-nuts>
+                <rating-nuts item="serie" property="'rating'" update="update(serie)"></rating-nuts>
             </div>
             <div class="col-sm-1">{{serie.updatedAt | timeAgo}}</div>
             <div class="col-sm-3">
-                <stats-button model="serie"></stats-button>
+                <stats-button model="serie" update="update(serie)"></stats-button>
                 <actions-button remove="remove(serie)" edit="edit(serie)"></actions-button>
             </div>
         </div>
         <info item="serie"></info>
     </div>
 </div>
-<bottom-pagination></bottom-pagination>
+<bottom-navigation add="add()" resource="{{resourceName}}"></bottom-navigation>

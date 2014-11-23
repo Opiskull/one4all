@@ -1,26 +1,26 @@
-angular.module('one4all').directive('statsButton', ['itemService', '$compile', function (itemService, $compile) {
+angular.module('one4all').directive('statsButton', ['$compile', function ($compile) {
     return {
         priority: 1100,
         template: '',
         restrict: 'E',
         scope: {
-            item: '=model'
+            item: '=model',
+            update: '&'
         },
         link: function ($scope, $element, $attr) {
             var defaultStats = ['finished', 'dropped', 'paused', 'watching'];
-            var enabledStats = $scope.$eval($attr.stats);
-            if (!enabledStats) {
-                enabledStats = defaultStats;
-            }
+            var enabledStats = $scope.$eval($attr.stats) || defaultStats;
+            var stats = [
+                {title: 'finished', icon: 'glyphicon-ok'},
+                {title: 'paused', icon: 'glyphicon-pause'},
+                {title: 'dropped', icon: 'glyphicon-ban-circle'},
+                {title: 'watching', icon: 'glyphicon-play'}
+            ];
             var group = angular.element('<div class="btn-group"></div>');
-            if (statEnabled('finished'))
-                group.append('<a class="btn btn-default" title="finished" ng-click="setState(\'finished\')"><i class="glyphicon glyphicon-ok"></i></a>');
-            if (statEnabled('paused'))
-                group.append('<a class="btn btn-default" title="paused" ng-click="setState(\'paused\')"><i class="glyphicon glyphicon-pause"></i></a>');
-            if (statEnabled('dropped'))
-                group.append('<a class="btn btn-default" title="dropped" ng-click="setState(\'dropped\')"><i class="glyphicon glyphicon-ban-circle"></i></a>');
-            if (statEnabled('watching'))
-                group.append('<a class="btn btn-default" title="watching" ng-click="setState(\'watching\')"><i class="glyphicon glyphicon-play"></i></a>');
+            angular.forEach(stats, function (stat) {
+                if (statEnabled(stat.title))
+                    group.append('<a class="btn btn-default" title="' + stat.title + '" ng-click="setState(\'' + stat.title + '\')"><i class="glyphicon ' + stat.icon + '"></i></a>');
+            });
             $compile(group)($scope);
             $element.append(group);
 
@@ -49,7 +49,7 @@ angular.module('one4all').directive('statsButton', ['itemService', '$compile', f
 
             $scope.setState = function (state) {
                 setState(state);
-                itemService.update($scope.item).then(function (item) {
+                $scope.update().success(function (item) {
                     setViewToState(item.state);
                 });
             };

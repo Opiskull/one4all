@@ -1,7 +1,7 @@
-angular.module('one4all').factory('tagsService', ['$q', 'Restangular', function ($q, Restangular) {
+angular.module('one4all').factory('tagsService', ['$q', 'apiService', function ($q, apiService) {
     return {
         getUserTags: function (query) {
-            return Restangular.all('user/used-tags').getList({q: query});
+            return apiService.get('user/used-tags?q=' + query);
         }
     }
 }]);

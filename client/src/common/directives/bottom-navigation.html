@@ -3,7 +3,7 @@
         <div class="col-sm-12">
             <button ng-click="add()" class="btn btn-primary"><i class="glyphicon glyphicon-plus"></i> Add {{::title}}</button>
             <pagination total-items="pagination.filteredItemsCount" ng-model="pagination.currentPage"
-                        items-per-page="pagination.itemsPerPage" max-size="pagination.maxSize"
+                        items-per-page="pagination.itemsPerPage" max-size="pagination.maxSizeCount"
                         class="pull-right" boundary-links="true" ng-change="changePage()"
                         previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
             </pagination>

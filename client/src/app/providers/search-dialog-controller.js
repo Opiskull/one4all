@@ -12,8 +12,7 @@ angular.module('providers')
         };
 
         $scope.search = function (keywords) {
-            var encodedKeywords = encodeURIComponent(keywords);
-            return $scope.currentProvider.search(encodedKeywords).then(function (items) {
+            return $scope.currentProvider.search(keywords).success(function (items) {
                 $scope.infos = items;
             });
         };

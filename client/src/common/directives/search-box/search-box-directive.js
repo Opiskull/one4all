@@ -1,4 +1,4 @@
-angular.module('one4all').directive('searchBox', ['$rootScope', '$timeout', 'settingsService', function ($rootScope, $timeout, settingsService) {
+angular.module('one4all').directive('searchBox', [function () {
     return {
         restrict: 'EA',
         templateUrl: 'directives/search-box/search-box.html',

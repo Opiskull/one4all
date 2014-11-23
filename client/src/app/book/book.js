@@ -1,4 +1,4 @@
-angular.module('book', ['core', 'ngRoute', 'restangular'])
+angular.module('data.book', ['core', 'ngRoute'])
     .config(['$routeProvider', function ($routeProvider) {
         $routeProvider.when('/book', {
             templateUrl: 'book/book-list.html',

@@ -1,6 +1,5 @@
-angular.module('anime')
-    .controller('AnimeListCtrl', ['$scope', '$controller', 'animeResource', function ($scope, $controller, Animes) {
-        $controller('BaseListCtrl', {$scope: $scope, Resource: Animes});
-        $scope.defaultProvider = 'mal-anime';
-        $scope.title = 'anime';
+angular.module('data.anime')
+    .controller('AnimeListCtrl', ['$scope', '$controller', function ($scope, $controller) {
+        $controller('BaseListCtrl', {$scope: $scope, resourceName: 'anime'});
+        $scope.defaultProvider = 'mal-anime'
     }]);

@@ -1,7 +1,7 @@
-angular.module('one4all').directive('navBar', [function ($rootScope) {
+angular.module('one4all').directive('topNavigation', [function () {
     return {
         restrict: 'E',
-        templateUrl: 'directives/nav-bar/nav-bar.html',
+        templateUrl: 'directives/top-navigation/top-navigation.html',
         link: function (scope, element, attrs) {
         },
         controller: ['$scope', 'appInfoService', 'authService', 'settingsService', function ($scope, appInfoService, authService, settingsService) {

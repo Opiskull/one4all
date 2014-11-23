@@ -1,70 +1,5 @@
 angular.module('one4all').factory('itemService', ["logger",function (logger) {
 
-    function remove(items, item) {
-        return item.remove()
-            .then(function () {
-                items.splice(items.indexOf(item), 1);
-            },logger.handleRestErrorResponse);
-    }
-
-    function updateItems(items, item) {
-        return update(item).then(function (updatedItem) {
-            var index = _.findIndex(items, function (tempItem) {
-                return tempItem.id == updatedItem.id;
-            });
-            items[index] = updatedItem;
-            return updatedItem;
-        });
-    }
-
-    function update(item) {
-        return item.put()
-            .then(function (updatedItem) {
-                item.updatedAt = updatedItem.updatedAt;
-                return updatedItem;
-            },logger.handleRestErrorResponse);
-    }
-
-    function validateNumber(value) {
-        if (angular.isNumber(value)) {
-            return value;
-        } else {
-            return 0;
-        }
-    }
-
-    function increase(value) {
-        value = validateNumber(value);
-        value += 1;
-        return value;
-    }
-
-    function decrease(value) {
-        value = validateNumber(value);
-        if (value <= 0) {
-            value = 0;
-        }
-        else {
-            value -= 1;
-        }
-        return value;
-    }
-
-    function incProp(item, property) {
-        var value = item[property];
-        item[property] = increase(value);
-        if (value !== item[property])
-            return update(item);
-    }
-
-    function decProp(item, property) {
-        var value = item[property];
-        item[property] = decrease(value);
-        if (value !== item[property]) {
-            return update(item);
-        }
-    }
-
     function showInfo(item) {
         item.open = !item.open;
     }
@@ -85,12 +20,7 @@ angular.module('one4all').factory('itemService', ["logger",function (logger) {
     }
 
     return {
-        update: update,
-        updateItems: updateItems,
-        remove: remove,
         showInfo: showInfo,
-        setInfo: setInfo,
-        increaseProperty: incProp,
-        decreaseProperty: decProp
+        setInfo: setInfo
     };
 }]);

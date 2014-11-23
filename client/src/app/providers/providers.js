@@ -1,1 +1,1 @@
-angular.module('providers', ['restangular']);
+angular.module('providers', ['core']);

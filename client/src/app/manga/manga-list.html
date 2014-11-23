@@ -16,20 +16,21 @@
         <div class="row">
             <div class="col-sm-2"><a ng-click="showInfo(manga)">{{manga.title}}</a></div>
             <div class="col-sm-3">
-                <up-down-button disabled="manga.state == 'finished'" item="manga" property="'chapter'"></up-down-button>
+                <up-down-button disabled="manga.state == 'finished'" item="manga" property="'chapter'"
+                                update="update(manga)"></up-down-button>
             </div>
             <div class="col-sm-2">
-                <rating-nuts item="manga" property="'rating'"></rating-nuts>
+                <rating-nuts item="manga" property="'rating'" update="update(manga)"></rating-nuts>
             </div>
             <div class="col-sm-1">{{manga.updatedAt | timeAgo}}</div>
             <div class="col-sm-1"><a href="{{getNextChapterUrl(manga)}}" ng-if="!manga.stats.finished">Next Chapter</a>
             </div>
             <div class="col-sm-3">
-                <stats-button model="manga"></stats-button>
+                <stats-button model="manga" update="update(manga)"></stats-button>
                 <actions-button remove="remove(manga)" edit="edit(manga)"></actions-button>
             </div>
         </div>
         <info item="manga"></info>
     </div>
 </div>
-<bottom-pagination></bottom-pagination>
+<bottom-navigation add="add()" resource="{{resourceName}}"></bottom-navigation>
