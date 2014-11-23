@@ -1,6 +1,8 @@
 angular.module('core').factory('itemCacheService', ['apiService', '$cacheFactory', function (apiService, $cacheFactory) {
 
-    var itemCache = $cacheFactory('item-cache');
+    //var itemCache = $cacheFactory('item-cache');
+
+    var itemCache = {};
 
     function getId(item) {
         if (angular.isObject(item)) {
@@ -18,9 +20,10 @@ angular.module('core').factory('itemCacheService', ['apiService', '$cacheFactory
     }
 
     function getItems(key) {
-        var items = itemCache.get(key);
+        var items = itemCache[key];
         if (!items) {
-            items = itemCache.put(key, []);
+            items = [];
+            itemCache[key] = items;
         }
         return items;
     }
@@ -47,7 +50,12 @@ angular.module('core').factory('itemCacheService', ['apiService', '$cacheFactory
         return _.find(items, {'id': getId(item)});
     }
 
+    function getCache() {
+        return itemCache;
+    }
+
     return {
+        getCache: getCache,
         setItems: setItems,
         updateItem: updateItem,
         createItem: createItem,

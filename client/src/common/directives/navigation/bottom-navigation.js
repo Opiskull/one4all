@@ -1,7 +1,7 @@
-angular.module('one4all').directive('bottomNavigation', ['$rootScope', 'filterService', function ($rootScope, filterService) {
+angular.module('one4all').directive('bottomNavigation', ['$rootScope', 'filterService', '$routeParams', function ($rootScope, filterService, $routeParams) {
     return {
         restrict: 'E',
-        templateUrl: 'directives/bottom-navigation.html',
+        templateUrl: 'directives/navigation/bottom-navigation.html',
         link: function (scope, element, attrs) {
         },
         scope: {
@@ -15,7 +15,11 @@ angular.module('one4all').directive('bottomNavigation', ['$rootScope', 'filterSe
             };
 
             var delFilter = $rootScope.$on('filter', function () {
-                filterService.filterItems($scope.resource);
+                if ($routeParams.searchId) {
+                    filterService.filterAllResourcesById($routeParams.searchId);
+                } else {
+                    filterService.filterItems($scope.resource);
+                }
             });
 
             $scope.$on('$destroy', function () {

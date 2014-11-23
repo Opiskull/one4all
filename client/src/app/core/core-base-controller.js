@@ -1,6 +1,6 @@
 angular.module('core')
-    .controller('BaseListCtrl', ['$scope', 'itemService', 'filterService', '$rootScope', 'resourceName', 'itemDialogService', 'objectFactory',
-        function ($scope, itemService, filterService, $rootScope, resourceName, itemDialogService, objectFactory) {
+    .controller('BaseListCtrl', ['$scope', 'itemService', 'filterService', '$rootScope', 'resourceName', 'itemDialogService', 'objectFactory', '$routeParams',
+        function ($scope, itemService, filterService, $rootScope, resourceName, itemDialogService, objectFactory, $routeParams) {
 
             var repository = objectFactory.createItemRepository(resourceName);
             var pagination = objectFactory.createPagination(resourceName);
@@ -40,6 +40,10 @@ angular.module('core')
         $scope.orderBy = function (property) {
             filterService.orderBy(property);
         };
+
+            if ($routeParams.searchId) {
+                filterService.filterAllResourcesById($routeParams.searchId);
+            }
 
             $scope.pagination = pagination;
     }]);

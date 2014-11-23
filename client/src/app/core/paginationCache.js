@@ -1,11 +1,11 @@
 angular.module('core').factory('paginationCacheService', ['apiService', '$cacheFactory', function (apiService, $cacheFactory) {
 
-    var paginationCache = $cacheFactory('pagination');
+    var paginationCache = {};
 
     function get(resource) {
-        var pagination = paginationCache.get(resource);
+        var pagination = paginationCache[resource];
         if (!pagination) {
-            pagination = paginationCache.put(resource, {
+            pagination = {
                 currentPage: 1,
                 itemsPerPage: 25,
                 maxSizeCount: 5,
@@ -15,12 +15,18 @@ angular.module('core').factory('paginationCacheService', ['apiService', '$cacheF
                 filteredItemsCount: 0,
                 pageItems: [],
                 pageItemsCount: 0
-            });
+            };
+            paginationCache[resource] = pagination;
         }
         return pagination;
     }
 
+    function getCache() {
+        return paginationCache;
+    }
+
     return {
+        getCache: getCache,
         get: get
     };
 }]);

@@ -7,11 +7,10 @@ angular.module('one4all', ['ui.bootstrap',
     'auth',
     'core',
     /* Modules */
-    'data.manga', 'data.movie', 'data.serie', 'data.anime', 'data.game', 'data.book',
+    'data.manga', 'data.movie', 'data.serie', 'data.anime', 'data.game', 'data.book', 'data.all',
     'providers',
     'dialog',
     'one4all.templates',
-    //'pasvaz.bindonce',
     'angular-growl'])
     .config(['$compileProvider', 'growlProvider', 'tagsInputConfigProvider', function ($compileProvider, growlProvider, tagsInputConfigProvider) {
         $compileProvider.debugInfoEnabled(true);
@@ -20,10 +19,12 @@ angular.module('one4all', ['ui.bootstrap',
         growlProvider.globalDisableCountDown(true);
         growlProvider.globalTimeToLive({success: 2000, error: -1, warning: 3000, info: 4000});
     }])
-    .controller('AppCtrl', ['itemCacheService', 'resourceApiService', '$rootScope', function (itemCacheService, resourceApiService, $rootScope) {
+    .controller('AppCtrl', ['itemCacheService', 'paginationCacheService', 'resourceApiService', '$rootScope', function (itemCacheService, paginationCacheService, resourceApiService, $rootScope) {
         resourceApiService.getAllRequest('all').success(function (response) {
             angular.forEach(response, function (moduleItems, moduleKey) {
                 itemCacheService.setItems(moduleKey, moduleItems);
+                var pagination = paginationCacheService.get(moduleKey);
+                pagination.totalItems = moduleItems;
             });
             $rootScope.$emit('filter');
         });

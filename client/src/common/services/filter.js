@@ -64,7 +64,7 @@ angular.module('one4all').factory('filterService', ['settingsService', '$rootSco
         return settings.orderBy.reverse ? items.reverse() : items;
     }
 
-    function filterItems(resource) {
+    function filterResourceItems(resource) {
         var items = itemCache.getItems(resource);
         var pagination = paginationCache.get(resource);
         if (!items) return;
@@ -101,8 +101,31 @@ angular.module('one4all').factory('filterService', ['settingsService', '$rootSco
         });
     }
 
+    function filterAllResources() {
+        var cache = paginationCache.getCache();
+        _.each(Object.keys(cache), function (resource) {
+            filterResourceItems(resource);
+        });
+    }
+
+    function filterAllResourcesById(id) {
+        var cache = paginationCache.getCache();
+        _.each(Object.keys(cache), function (resource) {
+            var items = itemCache.getItems(resource);
+            var pagination = paginationCache.get(resource);
+            var item = _.find(items, {id: id});
+            items = [];
+            if (item) items.push(item);
+            pagination.filteredItems = items;
+            pagination.filteredItemsCount = items.length;
+            calcPagination(pagination);
+        });
+    }
+
     return {
-        filterItems: filterItems,
+        filterItems: filterResourceItems,
+        filterAllResources: filterAllResources,
+        filterAllResourcesById: filterAllResourcesById,
         orderBy: orderBy,
         forceFilter: forceFilter
     };
