@@ -19,9 +19,9 @@
                            target="_blank"></menu-item>
             </menu>
             <ul class="nav navbar-nav navbar-right" ng-if="authInfo.isLoggedIn">
-                <li class="dropdown">
-                    <a class="dropdown-toggle">{{authInfo.user.username}}</a>
-                    <ul class="dropdown-menu">
+                <li class="dropdown" dropdown>
+                    <a class="dropdown-toggle" dropdown-toggle>{{authInfo.user.username}}</a>
+                    <ul class="dropdown-menu" role="menu">
                         <li>
                             <a ng-href="#/logout" title="logout"><i class="glyphicon glyphicon-log-out"></i> logout</a>
                         </li>
@@ -39,8 +39,10 @@
                         <i class="glyphicon glyphicon-filter"></i>
                     </a>
                 </li>
-                <li class="dropdown">
-                    <a class="dropdown-toggle" title="settings"><i class="glyphicon glyphicon-cog"></i></a>
+                <li class="dropdown" dropdown>
+                    <a class="dropdown-toggle" title="settings" dropdown-toggle>
+                        <i class="glyphicon glyphicon-cog"></i>
+                    </a>
                     <ul class="dropdown-menu">
                         <li><a>Package Version: <span class="bold pull-right">{{::appInfo.version}}</span></a></li>
                         <li><a ng-href="https://github.com/Opiskull/one4all/commit/{{::appInfo.lastCommit}}"
