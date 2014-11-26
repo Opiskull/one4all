@@ -33,7 +33,7 @@ module.exports.init = function (server, router) {
                     if (err) {
                         return done(err);
                     }
-                    return done(null, user, {token: aToken.accessToken});
+                    return done(null, user, {token: aToken.token});
                 });
             });
         }
