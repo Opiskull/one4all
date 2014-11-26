@@ -26,13 +26,6 @@ angular.module('auth', ['ngRoute', 'ngStorage'])
                 }]
             }).
             otherwise('/all');
-        //otherwise({
-        //    templateUrl: 'auth/auth-message.html',
-        //    controller: ['$scope', function ($scope) {
-        //        $scope.heading = 'Welcome!';
-        //        $scope.message = 'Welcome to one4all! :)';
-        //    }]
-        //});
     }])
     .run(['$rootScope', 'authService', '$location', function ($rootScope, authService, $location) {
         authService.authenticateWithServer().then(function () {

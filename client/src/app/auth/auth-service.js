@@ -16,9 +16,13 @@ angular.module('auth')
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.accessToken;
             return apiService.get('auth/info').success(function (response) {
                 angular.extend(authInfo, authInfoDefault);
-                authInfo.user = response.user;
-                authInfo.roles = response.roles;
-                authInfo.isLoggedIn = true;
+                if (response.user) {
+                    authInfo.user = response.user;
+                    authInfo.roles = response.roles;
+                    authInfo.isLoggedIn = true;
+                } else {
+
+                }
             }).error(function (response) {
                 angular.extend(authInfo, authInfoDefault);
             });

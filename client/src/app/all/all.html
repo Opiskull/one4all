@@ -1,7 +1,13 @@
-<div ng-repeat="module in modules()" ng-if="pCache[module].filteredItems.length > 0">
-    <h2><a ng-href="#/{{module}}">{{module}}</a></h2>
-
-    <div ng-repeat="item in pCache[module].filteredItems track by item.id">
-        <a ng-href="#/{{module}}/{{item.id}}">{{item.title}}</a>
+<div class="panel panel-default col-lg-2 col-md-3 col-sm-4 col-xs-12" ng-repeat="module in modules()"
+     ng-if="pCache[module].filteredItems.length > 0">
+    <div class="panel-heading">
+        <h2>
+            <a ng-href="#/{{module}}">{{module}}</a>
+        </h2>
     </div>
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="item in pCache[module].filteredItems track by item.id">
+            <a ng-href="#/{{module}}/{{item.id}}">{{item.title}} <span ng-if="item.season>0">{{item.season}}</span></a>
+        </li>
+    </ul>
 </div>
