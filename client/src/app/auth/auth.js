@@ -28,7 +28,7 @@ angular.module('auth', ['ngRoute', 'ngStorage'])
             otherwise('/all');
     }])
     .run(['$rootScope', 'authService', '$location', function ($rootScope, authService, $location) {
-        authService.authenticateWithServer().then(function () {
+        authService.authenticateWithServer().success(function () {
             $rootScope.$on("$routeChangeStart", function (event, next, current) {
                 if ((next.$$route) && (next.$$route.authRequired)) {
                     if (!authService.authInfo.isLoggedIn) {
@@ -37,5 +37,7 @@ angular.module('auth', ['ngRoute', 'ngStorage'])
                     }
                 }
             });
+        }).error(function () {
+            $location.path("/login");
         });
     }]);
