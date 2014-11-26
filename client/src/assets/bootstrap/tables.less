@@ -2,13 +2,21 @@
 // Tables
 // --------------------------------------------------
 
+
 table {
   background-color: @table-bg;
 }
 
+caption {
+  padding-top: @table-cell-padding;
+  padding-bottom: @table-cell-padding;
+  color: @text-muted;
+  text-align: left;
+}
 th {
   text-align: left;
 }
+
 
 // Baseline styles
 
@@ -57,6 +65,7 @@ th {
   }
 }
 
+
 // Condensed table w/ half padding
 
 .table-condensed {
@@ -102,10 +111,7 @@ th {
 
 .table-striped {
   > tbody > tr:nth-child(odd) {
-    > td,
-    > th {
-      background-color: @table-bg-accent;
-    }
+    background-color: @table-bg-accent;
   }
 }
 
@@ -115,10 +121,7 @@ th {
 
 .table-hover {
   > tbody > tr:hover {
-    > td,
-    > th {
-      background-color: @table-bg-hover;
-    }
+    background-color: @table-bg-hover;
   }
 }
 
@@ -131,7 +134,6 @@ table col[class*="col-"] {
   float: none;
   display: table-column;
 }
-
 table {
   td,
   th {
@@ -162,14 +164,15 @@ table {
 // will display normally.
 
 .table-responsive {
+  overflow-x: auto;
+  min-height: 0.01%; // Workaround for IE9 bug (see https://github.com/twbs/bootstrap/issues/14837)
+
   @media screen and (max-width: @screen-xs-max) {
     width: 100%;
     margin-bottom: (@line-height-computed * 0.75);
     overflow-y: hidden;
-    overflow-x: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     border: 1px solid @table-border-color;
-    -webkit-overflow-scrolling: touch;
 
     // Tighten up spacing
     > .table {

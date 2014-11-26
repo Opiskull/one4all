@@ -1,8 +1,11 @@
+
 //
 // Load core variables and mixins
 // --------------------------------------------------
+
 @import "variables.less";
 @import "mixins.less";
+
 
 //
 // Buttons
@@ -23,6 +26,10 @@
   &:active,
   &.active {
     .box-shadow(inset 0 3px 5px rgba(0, 0, 0, .125));
+  }
+
+  .badge {
+    text-shadow: none;
   }
 }
 
@@ -88,6 +95,7 @@
   .btn-styles(@btn-danger-bg);
 }
 
+
 //
 // Images
 // --------------------------------------------------
@@ -96,6 +104,7 @@
 .img-thumbnail {
   .box-shadow(0 1px 2px rgba(0, 0, 0, .075));
 }
+
 
 //
 // Dropdowns
@@ -106,13 +115,13 @@
   #gradient > .vertical(@start-color: @dropdown-link-hover-bg; @end-color: darken(@dropdown-link-hover-bg, 5%));
   background-color: darken(@dropdown-link-hover-bg, 5%);
 }
-
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {
   #gradient > .vertical(@start-color: @dropdown-link-active-bg; @end-color: darken(@dropdown-link-active-bg, 5%));
   background-color: darken(@dropdown-link-active-bg, 5%);
 }
+
 
 //
 // Navbar
@@ -126,12 +135,12 @@
   @shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 5px rgba(0, 0, 0, .075);
   .box-shadow(@shadow);
 
+  .navbar-nav > .open > a,
   .navbar-nav > .active > a {
-    #gradient > .vertical(@start-color: darken(@navbar-default-bg, 5%); @end-color: darken(@navbar-default-bg, 2%));
+    #gradient > .vertical(@start-color: darken(@navbar-default-link-active-bg, 5%); @end-color: darken(@navbar-default-link-active-bg, 2%));
     .box-shadow(inset 0 3px 9px rgba(0, 0, 0, .075));
   }
 }
-
 .navbar-brand,
 .navbar-nav > li > a {
   text-shadow: 0 1px 0 rgba(255, 255, 255, .25);
@@ -142,8 +151,9 @@
   #gradient > .vertical(@start-color: lighten(@navbar-inverse-bg, 10%); @end-color: @navbar-inverse-bg);
   .reset-filter(); // Remove gradient in IE<10 to fix bug where dropdowns don't get triggered
 
+  .navbar-nav > .open > a,
   .navbar-nav > .active > a {
-    #gradient > .vertical(@start-color: @navbar-inverse-bg; @end-color: lighten(@navbar-inverse-bg, 2.5%));
+    #gradient > .vertical(@start-color: @navbar-inverse-link-active-bg; @end-color: lighten(@navbar-inverse-link-active-bg, 2.5%));
     .box-shadow(inset 0 3px 9px rgba(0, 0, 0, .25));
   }
 
@@ -159,6 +169,19 @@
 .navbar-fixed-bottom {
   border-radius: 0;
 }
+
+// Fix active state of dropdown items in collapsed mode
+@media (max-width: @grid-float-breakpoint-max) {
+  .navbar .navbar-nav .open .dropdown-menu > .active > a {
+    &,
+    &:hover,
+    &:focus {
+      color: #fff;
+      #gradient > .vertical(@start-color: @dropdown-link-active-bg; @end-color: darken(@dropdown-link-active-bg, 5%));
+    }
+  }
+}
+
 
 //
 // Alerts
@@ -193,6 +216,7 @@
 .alert-danger {
   .alert-styles(@alert-danger-bg);
 }
+
 
 //
 // Progress bars
@@ -243,13 +267,16 @@
   border-radius: @border-radius-base;
   .box-shadow(0 1px 2px rgba(0, 0, 0, .075));
 }
-
 .list-group-item.active,
 .list-group-item.active:hover,
 .list-group-item.active:focus {
   text-shadow: 0 -1px 0 darken(@list-group-active-bg, 10%);
   #gradient > .vertical(@start-color: @list-group-active-bg; @end-color: darken(@list-group-active-bg, 7.5%));
   border-color: darken(@list-group-active-border, 7.5%);
+
+  .badge {
+    text-shadow: none;
+  }
 }
 
 //
@@ -290,6 +317,7 @@
 .panel-danger > .panel-heading {
   .panel-heading-styles(@panel-danger-heading-bg);
 }
+
 
 //
 // Wells

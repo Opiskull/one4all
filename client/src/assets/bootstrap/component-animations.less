@@ -17,9 +17,11 @@
 
 .collapse {
   display: none;
+  visibility: hidden;
 
   &.in {
     display: block;
+    visibility: visible;
   }
   tr&.in {
     display: table-row;
@@ -33,5 +35,7 @@
   position: relative;
   height: 0;
   overflow: hidden;
-  .transition(height .35s ease);
+  .transition-property(~"height, visibility");
+  .transition-duration(.35s);
+  .transition-timing-function(ease);
 }
