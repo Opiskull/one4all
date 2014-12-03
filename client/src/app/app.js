@@ -11,7 +11,7 @@ angular.module('one4all', ['ui.bootstrap',
     'providers',
     'dialog',
     'one4all.templates',
-    'angular-growl'])
+    'angular-growl', 'ngMaterial'])
     .config(['$compileProvider', 'growlProvider', 'tagsInputConfigProvider', function ($compileProvider, growlProvider, tagsInputConfigProvider) {
         $compileProvider.debugInfoEnabled(true);
         growlProvider.globalPosition('bottom-right');

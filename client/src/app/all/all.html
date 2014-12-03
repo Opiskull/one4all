@@ -1,15 +1,20 @@
-<div class="col-lg-2 col-md-3 col-sm-4 col-xs-12" style="margin:5px;" ng-repeat="module in modules()"
-     ng-if="pCache[module].filteredItems.length > 0">
-    <div class="panel panel-default" style="margin:5px">
-        <div class="panel-heading">
-            <h2>
-                <a ng-href="#/{{module}}">{{module}}</a>
-            </h2>
-        </div>
-        <ul class="list-group">
-            <li class="list-group-item" ng-repeat="item in pCache[module].filteredItems track by item.id">
-                <a ng-href="#/{{module}}/{{item.id}}">{{item.title}} <span ng-if="item.season>0">{{item.season}}</span></a>
-            </li>
-        </ul>
-    </div>
+<div flex layout-fill>
+    <md-content style="height:700px;flex-wrap: wrap" layout="row" layout-sm="column">
+        <section ng-repeat="module in modules()" flex flex-sm="25" flex-gt-sm>
+            <md-subheader class="md-primary">
+                <!--<md-toolbar><a ng-href="#/{{module}}">{{module}}</a></md-toolbar>-->
+                <md-toolbar><h2>{{module}}</h2></md-toolbar>
+            </md-subheader>
+            <md-list>
+                <md-item ng-repeat="item in pCache[module].filteredItems track by item.id">
+                    <md-item-content>
+                        <div class="md-tile-content">
+                            <a ng-href="#/{{module}}/{{item.id}}">{{item.title}} <span ng-if="item.season>0">{{item.season}}</span></a>
+                        </div>
+                    </md-item-content>
+                    <md-divider ng-if="!$last"></md-divider>
+                </md-item>
+            </md-list>
+        </section>
+    </md-content>
 </div>
